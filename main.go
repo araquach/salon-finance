@@ -16,11 +16,43 @@ var (
 	tplIndex *template.Template
 )
 
-type IncomeData struct {
-	gorm.Model
-	Column1 	string
-	Column2 	string
+type BankData struct {
+	ID					int
+	TransDate			string
+	TransType			string
+	AccountNumber		int
+	TransDescription 	string
+	DebitAmount			float32
+	CreditAmount		float32
+	Balance				float32
+	Category			string
 }
+
+type JakataTaking struct {
+	ID				int
+	MonthYear		string
+	FLServices		float32
+	FLProducts		float32
+	Services		float32
+	Products		float32
+}
+
+type PKTakings struct {
+	ID				int
+	MonthYear		string
+	FLServices		float32
+	FLProducts		float32
+	Services		float32
+	Products		float32
+}
+
+type BaseTakings struct {
+	ID				int
+	MonthYear		string
+	Services		float32
+	Products		float32
+}
+
 
 func dbConn() (db *gorm.DB) {
 	dbhost     := os.Getenv("DB_HOST")
@@ -59,7 +91,7 @@ func main() {
 
 	db := dbConn()
 
-	db.AutoMigrate(&IncomeData{})
+	db.AutoMigrate(&BankData{}, &JakataTaking{}, &PKTakings{}, &BaseTakings{})
 
 	db.LogMode(true)
 
