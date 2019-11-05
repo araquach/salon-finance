@@ -16,6 +16,12 @@ var (
 	tplIndex *template.Template
 )
 
+type IncomeData struct {
+	gorm.Model
+	Column1 	string
+	Column2 	string
+}
+
 func dbConn() (db *gorm.DB) {
 	dbhost     := os.Getenv("DB_HOST")
 	dbport     := os.Getenv("DB_PORT")
@@ -50,6 +56,14 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	var err error
+
+	db := dbConn()
+
+	db.AutoMigrate(&IncomeData{})
+
+	db.LogMode(true)
+
+	db.Close()
 
 	port := os.Getenv("PORT")
 	if port == "" {
