@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
@@ -28,7 +29,7 @@ type BankData struct {
 	Category			string
 }
 
-type JakataTaking struct {
+type JakataTakings struct {
 	ID				int
 	MonthYear		string
 	FLServices		float32
@@ -86,12 +87,72 @@ func index(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func apiBankData(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	db := dbConn()
+	bd := []BankData{}
+	db.Find(&bd)
+	db.Close()
+
+	json, err := json.Marshal(bd)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
+}
+
+func apiJakata(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	db := dbConn()
+	jak := []JakataTakings{}
+	db.Find(&jak)
+	db.Close()
+
+	json, err := json.Marshal(jak)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
+}
+
+func apiPK(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	db := dbConn()
+	pk := []PKTakings{}
+	db.Find(&pk)
+	db.Close()
+
+	json, err := json.Marshal(pk)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
+}
+
+func apiBase(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	db := dbConn()
+	base := []BaseTakings{}
+	db.Find(&base)
+	db.Close()
+
+	json, err := json.Marshal(base)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
+}
+
 func main() {
 	var err error
 
 	db := dbConn()
 
-	db.AutoMigrate(&BankData{}, &JakataTaking{}, &PKTakings{}, &BaseTakings{})
+	db.AutoMigrate(&BankData{}, &JakataTakings{}, &PKTakings{}, &BaseTakings{})
 
 	db.LogMode(true)
 
@@ -110,6 +171,11 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/", index).Methods("GET")
+	r.HandleFunc("/api/bankdata", apiBankData).Methods("GET")
+	r.HandleFunc("/api/jakata", apiJakata).Methods("GET")
+	r.HandleFunc("/api/pk", apiPK).Methods("GET")
+	r.HandleFunc("/api/base", apiBase).Methods("GET")
+
 
 	// Styles
 	assetHandler := http.FileServer(http.Dir("./dist/"))
