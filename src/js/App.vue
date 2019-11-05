@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <TestComponent/>
-        <SecondComponent/>
+        <BankComponent/>
     </div>
 </template>

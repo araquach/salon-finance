@@ -1,6 +1,6 @@
 <template>
     <h1 class="title is-1">
-        This is The Test Component
+        The Bank
     </h1>
 </template>
 
