@@ -1,5 +1,7 @@
 <template>
     <div class="container">
-        <BankComponent/>
+        <BaseComponent/>
+        <JakComponent/>
+        <PkComponent/>
     </div>
 </template>
