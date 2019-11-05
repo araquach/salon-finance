@@ -18,40 +18,40 @@ var (
 )
 
 type BankData struct {
-	ID					int
-	TransDate			string
-	TransType			string
-	AccountNumber		int
-	TransDescription 	string
-	DebitAmount			float32
-	CreditAmount		float32
-	Balance				float32
-	Category			string
+	ID					int		`json:"id"`
+	TransDate			string	`json:"trans_date"`
+	TransType			string	`json:"trans_type"`
+	AccountNumber		int		`json:"account_number"`
+	TransDescription 	string	`json:"trans_description"`
+	DebitAmount			float32	`json:"debit_amount"`
+	CreditAmount		float32	`json:"credit_amount"`
+	Balance				float32	`json:"balance"`
+	Category			string	`json:"category"`
 }
 
 type JakataTakings struct {
-	ID				int
-	MonthYear		string
-	FLServices		float32
-	FLProducts		float32
-	Services		float32
-	Products		float32
+	ID				int			`json:"id"`
+	MonthYear		string		`json:"month_year"`
+	FLServices		float32		`json:"fl_services"`
+	FLProducts		float32		`json:"fl_products"`
+	Services		float32		`json:"services"`
+	Products		float32		`json:"products"`
 }
 
 type PKTakings struct {
-	ID				int
-	MonthYear		string
-	FLServices		float32
-	FLProducts		float32
-	Services		float32
-	Products		float32
+	ID				int			`json:"id"`
+	MonthYear		string		`json:"month_year"`
+	FLServices		float32		`json:"fl_services"`
+	FLProducts		float32		`json:"fl_products"`
+	Services		float32		`json:"services"`
+	Products		float32		`json:"products"`
 }
 
 type BaseTakings struct {
-	ID				int
-	MonthYear		string
-	Services		float32
-	Products		float32
+	ID				int			`json:"id"`
+	MonthYear		string		`json:"month_year"`
+	Services		float32		`json:"services"`
+	Products		float32		`json:"products"`
 }
 
 
