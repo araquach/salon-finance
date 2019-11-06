@@ -1,9 +1,8 @@
 <template>
     <div class="container">
-        <BaseComponent :bf="bf"/>
+        <BaseComponent :bf.number="bf"/>
         <JakComponent :jf="jf"/>
         <PkComponent :pf="pf"/>
-        <totalsComponant/>
     </div>
 </template>
 

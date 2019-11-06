@@ -12,7 +12,7 @@
             </tr>
             <tr v-for="(bf, index) in bf">
                 <td>{{bf.month_year | moment("MMMM")}}</td>
-                <td>{{bf.products | number}}</td>
+                <td>{{bf.products}}</td>
                 <td>{{bf.services}}</td>
                 <td>{{total}}</td>
             </tr>
@@ -25,7 +25,9 @@
         props: ['bf'],
 
         data() {
-            
+            return {
+
+            }
         },
 
         computed: {

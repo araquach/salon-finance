@@ -1868,7 +1868,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1931,7 +1930,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['bf'],
-  data: function data() {},
+  data: function data() {
+    return {};
+  },
   computed: {
     total: function total() {
       return this.bf.products + this.bf.services;
@@ -15550,9 +15551,7 @@ var render = function() {
       _vm._v(" "),
       _c("JakComponent", { attrs: { jf: _vm.jf } }),
       _vm._v(" "),
-      _c("PkComponent", { attrs: { pf: _vm.pf } }),
-      _vm._v(" "),
-      _c("totalsComponant")
+      _c("PkComponent", { attrs: { pf: _vm.pf } })
     ],
     1
   )
@@ -15594,7 +15593,7 @@ var render = function() {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(_vm._f("moment")(bf.month_year, "MMMM")))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm._f("number")(bf.products)))]),
+            _c("td", [_vm._v(_vm._s(bf.products))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(bf.services))]),
             _vm._v(" "),
