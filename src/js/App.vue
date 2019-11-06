@@ -1,8 +1,6 @@
 <template>
     <div class="container">
-        <BaseComponent :bf.number="bf"/>
-        <JakComponent :jf="jf"/>
-        <PkComponent :pf="pf"/>
+        <TakingsComponent :t="t"/>
     </div>
 </template>
 
@@ -10,24 +8,12 @@
     export default {
         data() {
             return {
-                bf: [],
-                jf: [],
-                pf: []
+                t: []
             }
         },
 
         created() {
-            axios.get('/api/base').then(response => this.bf = response.data)
-                .catch(error => {
-                    console.log(error)
-                }),
-
-            axios.get('/api/jakata').then(response => this.jf = response.data)
-                .catch(error => {
-                    console.log(error)
-                }),
-
-            axios.get('/api/jakata').then(response => this.pf = response.data)
+            axios.get('/api/takings').then(response => this.t = response.data)
                 .catch(error => {
                     console.log(error)
                 })

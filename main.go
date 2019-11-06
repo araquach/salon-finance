@@ -30,27 +30,12 @@ type BankData struct {
 	Category			string	`json:"category"`
 }
 
-type JakataTakings struct {
+type Takings struct {
 	ID				int			`json:"id"`
+	Salon			string		`json:"salon"`
 	MonthYear		time.Time	`json:"month_year"`
 	FLServices		float32		`json:"fl_services"`
 	FLProducts		float32		`json:"fl_products"`
-	Services		float32		`json:"services"`
-	Products		float32		`json:"products"`
-}
-
-type PKTakings struct {
-	ID				int			`json:"id"`
-	MonthYear		time.Time	`json:"month_year"`
-	FLServices		float32		`json:"fl_services"`
-	FLProducts		float32		`json:"fl_products"`
-	Services		float32		`json:"services"`
-	Products		float32		`json:"products"`
-}
-
-type BaseTakings struct {
-	ID				int			`json:"id"`
-	MonthYear		time.Time	`json:"month_year"`
 	Services		float32		`json:"services"`
 	Products		float32		`json:"products"`
 }
@@ -102,45 +87,15 @@ func apiBankData(w http.ResponseWriter, r *http.Request) {
 	w.Write(json)
 }
 
-func apiJakata(w http.ResponseWriter, r *http.Request) {
+func apiTakings(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	db := dbConn()
-	jak := []JakataTakings{}
-	db.Find(&jak)
+	t := []Takings{}
+	db.Order("month_year").Find(&t)
 	db.Close()
 
-	json, err := json.Marshal(jak)
-	if err != nil {
-		log.Println(err)
-	}
-	w.Write(json)
-}
-
-func apiPK(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
-	db := dbConn()
-	pk := []PKTakings{}
-	db.Find(&pk)
-	db.Close()
-
-	json, err := json.Marshal(pk)
-	if err != nil {
-		log.Println(err)
-	}
-	w.Write(json)
-}
-
-func apiBase(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
-	db := dbConn()
-	base := []BaseTakings{}
-	db.Find(&base)
-	db.Close()
-
-	json, err := json.Marshal(base)
+	json, err := json.Marshal(t)
 	if err != nil {
 		log.Println(err)
 	}
@@ -152,7 +107,7 @@ func main() {
 
 	db := dbConn()
 
-	db.AutoMigrate(&BankData{}, &JakataTakings{}, &PKTakings{}, &BaseTakings{})
+	db.AutoMigrate(&BankData{}, &Takings{})
 
 	db.LogMode(true)
 
@@ -172,9 +127,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", index).Methods("GET")
 	r.HandleFunc("/api/bankdata", apiBankData).Methods("GET")
-	r.HandleFunc("/api/jakata", apiJakata).Methods("GET")
-	r.HandleFunc("/api/pk", apiPK).Methods("GET")
-	r.HandleFunc("/api/base", apiBase).Methods("GET")
+	r.HandleFunc("/api/takings", apiTakings).Methods("GET")
 
 
 	// Styles
