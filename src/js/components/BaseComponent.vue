@@ -1,18 +1,20 @@
 <template>
-    <div>
-        <h1 class="title is-1">
+    <div class="section">
+        <h2 class="title is-3">
             Base Turnover
-        </h1>
+        </h2>
         <table class="table">
             <tr>
                 <th>Month</th>
                 <th>Services</th>
                 <th>Products</th>
+                <th>Total</th>
             </tr>
-            <tr v-for="(bf, index) in baseFigures">
-                <td>{{bf.month_year}}</td>
-                <td>{{bf.products}}</td>
+            <tr v-for="(bf, index) in bf">
+                <td>{{bf.month_year | moment("MMMM")}}</td>
+                <td>{{bf.products | number}}</td>
                 <td>{{bf.services}}</td>
+                <td>{{total}}</td>
             </tr>
         </table>
     </div>
@@ -20,17 +22,16 @@
 
 <script>
     export default {
+        props: ['bf'],
+
         data() {
-            return {
-                baseFigures: []
-            }
+            
         },
 
-        created() {
-            axios.get('/api/base').then(response => this.baseFigures = response.data)
-                .catch(error => {
-                    console.log(error)
-                })
+        computed: {
+            total() {
+                return this.bf.products + this.bf.services
+            }
         }
     }
 </script>

@@ -7,6 +7,7 @@ import PkComponent from './components/PkComponent'
 import Buefy from 'buefy'
 
 Vue.use(Buefy)
+Vue.use(require('vue-moment'))
 
 Vue.component('BaseComponent', BaseComponent)
 Vue.component('JakComponent', JakComponent)

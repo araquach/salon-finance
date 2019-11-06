@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 var (
@@ -19,7 +20,7 @@ var (
 
 type BankData struct {
 	ID					int		`json:"id"`
-	TransDate			string	`json:"trans_date"`
+	TransDate		time.Time	`json:"trans_date"`
 	TransType			string	`json:"trans_type"`
 	AccountNumber		int		`json:"account_number"`
 	TransDescription 	string	`json:"trans_description"`
@@ -31,7 +32,7 @@ type BankData struct {
 
 type JakataTakings struct {
 	ID				int			`json:"id"`
-	MonthYear		string		`json:"month_year"`
+	MonthYear		time.Time	`json:"month_year"`
 	FLServices		float32		`json:"fl_services"`
 	FLProducts		float32		`json:"fl_products"`
 	Services		float32		`json:"services"`
@@ -40,7 +41,7 @@ type JakataTakings struct {
 
 type PKTakings struct {
 	ID				int			`json:"id"`
-	MonthYear		string		`json:"month_year"`
+	MonthYear		time.Time	`json:"month_year"`
 	FLServices		float32		`json:"fl_services"`
 	FLProducts		float32		`json:"fl_products"`
 	Services		float32		`json:"services"`
@@ -49,11 +50,10 @@ type PKTakings struct {
 
 type BaseTakings struct {
 	ID				int			`json:"id"`
-	MonthYear		string		`json:"month_year"`
+	MonthYear		time.Time	`json:"month_year"`
 	Services		float32		`json:"services"`
 	Products		float32		`json:"products"`
 }
-
 
 func dbConn() (db *gorm.DB) {
 	dbhost     := os.Getenv("DB_HOST")

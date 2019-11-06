@@ -1,36 +1,30 @@
 <template>
-    <div>
-        <h1 class="title is-1">
+    <div class="section">
+        <h2 class="title is-3">
             PK Turnover
-        </h1>
+        </h2>
         <table class="table">
             <tr>
                 <th>Month</th>
                 <th>Services</th>
                 <th>Products</th>
+                <th>FL Services</th>
+                <th>FL Products</th>
+                <th>Total</th>
             </tr>
-            <tr v-for="(pk, index) in pkFigures">
-                <td>{{pk.month_year}}</td>
-                <td>{{pk.products}}</td>
-                <td>{{pk.services}}</td>
+            <tr v-for="(pf, index) in pf">
+                <td>{{pf.month_year | moment("MMMM")}}</td>
+                <td>{{pf.services}}</td>
+                <td>{{pf.products}}</td>
+                <td>{{pf.fl_services}}</td>
+                <td>{{pf.fl_products}}</td>
+                <td></td>
             </tr>
         </table>
     </div>
 </template>
-
 <script>
     export default {
-        data() {
-            return {
-                pkFigures: []
-            }
-        },
-
-        created() {
-            axios.get('/api/pk').then(response => this.pkFigures = response.data)
-                .catch(error => {
-                    console.log(error)
-                })
-        }
+        props: ['pf']
     }
 </script>
