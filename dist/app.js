@@ -1910,10 +1910,11 @@ __webpack_require__.r(__webpack_exports__);
       t: []
     };
   },
+  filter: {},
   computed: {
     total: function total() {
       return this.t.reduce(function (sum, val) {
-        return sum + val.services;
+        return sum + val.total;
       }, 0).toFixed(2);
     }
   },
