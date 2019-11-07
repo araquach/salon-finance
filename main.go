@@ -38,6 +38,7 @@ type Takings struct {
 	FLProducts		float32		`json:"fl_products"`
 	Services		float32		`json:"services"`
 	Products		float32		`json:"products"`
+	Total			float32		`json:"total"`
 }
 
 func dbConn() (db *gorm.DB) {

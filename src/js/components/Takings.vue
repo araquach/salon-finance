@@ -20,13 +20,31 @@
                 <td>{{t.products}}</td>
                 <td>{{t.fl_services}}</td>
                 <td>{{t.fl_products}}</td>
-                <td></td>
+                <td><strong>{{t.total}}</strong></td>
             </tr>
         </table>
+        <p class="is-size-3">Total: &pound;{{total}}</p>
     </div>
 </template>
 <script>
     export default {
-        props: ['t']
+        data() {
+            return {
+                t: [],
+            }
+        },
+
+        computed: {
+            total() {
+                return this.t.reduce((sum, val) => sum + val.services, 0).toFixed(2);
+            }
+        },
+
+        created() {
+            axios.get('/api/takings').then(response => this.t = response.data)
+                .catch(error => {
+                    console.log(error)
+                })
+        }
     }
 </script>
