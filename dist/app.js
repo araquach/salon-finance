@@ -15764,7 +15764,7 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _vm._l(_vm.costs, function(cost, index) {
-          return _c("IndCost", { attrs: { c: cost } })
+          return _c("IndCost", { key: cost.id, attrs: { c: cost } })
         })
       ],
       2
@@ -15820,12 +15820,14 @@ var render = function() {
     _c("td", [_vm._v(_vm._s(_vm.c.debit_amount))]),
     _vm._v(" "),
     !_vm.catagory
-      ? _c("td", [
+      ? _c("td", { attrs: { catagory: _vm.catagory } }, [
           _c("button", { staticClass: "button is-small is-primary" }, [
             _vm._v("Select")
           ])
         ])
-      : _c("td", [_vm._v(_vm._s(_vm.category))])
+      : _c("td", { attrs: { catagory: _vm.catagory } }, [
+          _vm._v(_vm._s(_vm.category))
+        ])
   ])
 }
 var staticRenderFns = []

@@ -11,7 +11,7 @@
                 <th>Category</th>
             </tr>
 
-            <IndCost v-for="(cost, index) in costs" :c="cost"/>
+            <IndCost v-for="(cost, index) in costs" v-bind:key="cost.id" :c="cost"/>
 
         </table>
     </div>
