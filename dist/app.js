@@ -15922,7 +15922,7 @@ var render = function() {
       _vm._v("\n        Total Salon Turnover\n    ")
     ]),
     _vm._v(" "),
-    _c("table", { staticClass: "table is-size-3" }, [
+    _c("table", { staticClass: "table is-size-4" }, [
       _vm._m(0),
       _vm._v(" "),
       _c("tr", [

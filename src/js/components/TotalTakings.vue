@@ -3,7 +3,7 @@
         <h2 class="title is-3">
             Total Salon Turnover
         </h2>
-        <table class="table is-size-3">
+        <table class="table is-size-4">
             <tr>
                 <th>Services</th>
                 <th>Products</th>

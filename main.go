@@ -88,12 +88,11 @@ func apiBankData(w http.ResponseWriter, r *http.Request) {
 	w.Write(json)
 }
 
-
-
 func apiTakings(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	db := dbConn()
 	t := []Takings{}
+
 	params := mux.Vars(r)
 	salon := params["salon"]
 
@@ -103,6 +102,24 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 		db.Where("salon = ?", salon).Find(&t)
 		db.Close()
 	}
+
+	json, err := json.Marshal(t)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
+}
+
+func apiMonthlyTakings(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	db := dbConn()
+	t := []Takings{}
+
+	params := mux.Vars(r)
+	month := params["month_year"]
+
+	db.Where("month_year = ?", month).Find(&t)
+	db.Close()
 
 	json, err := json.Marshal(t)
 	if err != nil {
@@ -137,6 +154,7 @@ func main() {
 	r.HandleFunc("/", index).Methods("GET")
 	r.HandleFunc("/api/bankdata", apiBankData).Methods("GET")
 	r.HandleFunc("/api/takings/{salon}", apiTakings).Methods("GET")
+	r.HandleFunc("/api/monthly/{month_year}", apiMonthlyTakings).Methods("GET")
 
 
 	// Styles
