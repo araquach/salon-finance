@@ -1,11 +1,10 @@
 <template>
     <div class="section">
         <h2 class="title is-3">
-            Salon Turnover
+            Base Turnover
         </h2>
         <table class="table">
             <tr>
-                <th>Salon</th>
                 <th>Month</th>
                 <th>Services</th>
                 <th>Products</th>
@@ -14,7 +13,6 @@
                 <th>Total</th>
             </tr>
             <tr v-for="(t, index) in t">
-                <td>{{t.salon}}</td>
                 <td>{{t.month_year | moment("MMMM")}}</td>
                 <td>{{t.services}}</td>
                 <td>{{t.products}}</td>
@@ -30,12 +28,8 @@
     export default {
         data() {
             return {
-                t: [],
+                t: []
             }
-        },
-
-        filter: {
-
         },
 
         computed: {
@@ -45,7 +39,7 @@
         },
 
         created() {
-            axios.get('/api/takings/Jakata').then(response => this.t = response.data)
+            axios.get('/api/takings/Base').then(response => this.t = response.data)
                 .catch(error => {
                     console.log(error)
                 })

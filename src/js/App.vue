@@ -1,6 +1,9 @@
 <template>
     <div class="container">
-        <Takings />
+        <TotalTakings/>
+        <JakTakings/>
+        <PkTakings/>
+        <BaseTakings/>
     </div>
 </template>
 

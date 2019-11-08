@@ -96,8 +96,13 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 	t := []Takings{}
 	params := mux.Vars(r)
 	salon := params["salon"]
-	db.Where("salon = ?", salon).Find(&t)
-	db.Close()
+
+	if (salon == "All") {
+		db.Find(&t)
+	} else {
+		db.Where("salon = ?", salon).Find(&t)
+		db.Close()
+	}
 
 	json, err := json.Marshal(t)
 	if err != nil {
