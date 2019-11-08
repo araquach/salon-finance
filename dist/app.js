@@ -1921,7 +1921,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get('/api/takings').then(function (response) {
+    axios.get('/api/takings/Jakata').then(function (response) {
       return _this.t = response.data;
     })["catch"](function (error) {
       console.log(error);

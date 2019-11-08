@@ -45,7 +45,7 @@
         },
 
         created() {
-            axios.get('/api/takings').then(response => this.t = response.data)
+            axios.get('/api/takings/Jakata').then(response => this.t = response.data)
                 .catch(error => {
                     console.log(error)
                 })

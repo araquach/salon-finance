@@ -88,12 +88,15 @@ func apiBankData(w http.ResponseWriter, r *http.Request) {
 	w.Write(json)
 }
 
+
+
 func apiTakings(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-
 	db := dbConn()
 	t := []Takings{}
-	db.Order("month_year").Find(&t)
+	params := mux.Vars(r)
+	salon := params["salon"]
+	db.Where("salon = ?", salon).Find(&t)
 	db.Close()
 
 	json, err := json.Marshal(t)
@@ -128,7 +131,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", index).Methods("GET")
 	r.HandleFunc("/api/bankdata", apiBankData).Methods("GET")
-	r.HandleFunc("/api/takings", apiTakings).Methods("GET")
+	r.HandleFunc("/api/takings/{salon}", apiTakings).Methods("GET")
 
 
 	// Styles
