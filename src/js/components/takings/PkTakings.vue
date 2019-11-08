@@ -32,10 +32,6 @@
             }
         },
 
-        filter: {
-
-        },
-
         computed: {
             total() {
                 return this.t.reduce((sum, val) => sum + val.total, 0).toFixed(2);
