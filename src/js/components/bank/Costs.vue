@@ -1,6 +1,7 @@
 <template>
     <div class="section">
         <h1 class="title is-3">Costs</h1>
+        <p class="is-size-3">Total Costs: {{total}}</p>
 
         <table class="table">
             <tr>
@@ -22,6 +23,12 @@
         data() {
             return {
                 costs: []
+            }
+        },
+
+        computed: {
+            total() {
+                return this.costs.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2);
             }
         },
 

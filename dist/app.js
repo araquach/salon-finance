@@ -1899,11 +1899,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       costs: []
     };
+  },
+  computed: {
+    total: function total() {
+      return this.costs.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    }
   },
   created: function created() {
     var _this = this;
@@ -1938,13 +1946,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['c'],
   data: function data() {
     return {
       catagory: ''
     };
-  }
+  },
+  methods: {
+    addCatagory: function addCatagory() {
+      this.catagory = "Bank Charge";
+      axios.put('/api/bankdata', {
+        category: "stock"
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(err);
+      });
+    }
+  },
+  created: function created() {}
 });
 
 /***/ }),
@@ -15757,6 +15780,10 @@ var render = function() {
   return _c("div", { staticClass: "section" }, [
     _c("h1", { staticClass: "title is-3" }, [_vm._v("Costs")]),
     _vm._v(" "),
+    _c("p", { staticClass: "is-size-3" }, [
+      _vm._v("Total Costs: " + _vm._s(_vm.total))
+    ]),
+    _vm._v(" "),
     _c(
       "table",
       { staticClass: "table" },
@@ -15817,16 +15844,21 @@ var render = function() {
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.c.trans_description))]),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.c.debit_amount))]),
+    _c("td", [_vm._v(_vm._s(_vm.c.debit_amount.toFixed(2)))]),
     _vm._v(" "),
     !_vm.catagory
       ? _c("td", { attrs: { catagory: _vm.catagory } }, [
-          _c("button", { staticClass: "button is-small is-primary" }, [
-            _vm._v("Select")
-          ])
+          _c(
+            "button",
+            {
+              staticClass: "button is-small is-primary",
+              on: { click: _vm.addCatagory }
+            },
+            [_vm._v("Select")]
+          )
         ])
       : _c("td", { attrs: { catagory: _vm.catagory } }, [
-          _vm._v(_vm._s(_vm.category))
+          _vm._v(_vm._s(_vm.catagory))
         ])
   ])
 }

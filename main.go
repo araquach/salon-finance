@@ -88,6 +88,14 @@ func apiBankData(w http.ResponseWriter, r *http.Request) {
 	w.Write(json)
 }
 
+func apiAddCatagory(w http.ResponseWriter, r *http.Request) {
+	var bankData BankData
+	json.NewDecoder(r.Body).Decode(&bankData)
+	db := dbConn()
+	db.Save(&bankData)
+	db.Close()
+}
+
 func apiTakings(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	db := dbConn()
@@ -153,6 +161,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", index).Methods("GET")
 	r.HandleFunc("/api/bankdata", apiBankData).Methods("GET")
+	r.HandleFunc("/api/bankdata", apiAddCatagory).Methods("PUT")
 	r.HandleFunc("/api/takings/{salon}", apiTakings).Methods("GET")
 	r.HandleFunc("/api/monthly/{month_year}", apiMonthlyTakings).Methods("GET")
 
