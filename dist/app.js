@@ -1952,14 +1952,13 @@ __webpack_require__.r(__webpack_exports__);
   props: ['c'],
   data: function data() {
     return {
-      catagory: ''
+      category: ''
     };
   },
   methods: {
-    addCatagory: function addCatagory() {
-      this.catagory = "Bank Charge";
-      axios.put('/api/bankdata', {
-        category: "stock"
+    addCategory: function addCategory() {
+      axios.put('/api/bankdata/' + this.category.id, {
+        category: "Bank Charge"
       }).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
@@ -15753,7 +15752,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [_c("Costs")], 1)
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [_c("TotalTakings"), _vm._v(" "), _c("Costs")],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -15846,19 +15850,19 @@ var render = function() {
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.c.debit_amount.toFixed(2)))]),
     _vm._v(" "),
-    !_vm.catagory
-      ? _c("td", { attrs: { catagory: _vm.catagory } }, [
+    !_vm.category
+      ? _c("td", { attrs: { catagory: _vm.category } }, [
           _c(
             "button",
             {
               staticClass: "button is-small is-primary",
-              on: { click: _vm.addCatagory }
+              on: { click: _vm.addCategory }
             },
             [_vm._v("Select")]
           )
         ])
-      : _c("td", { attrs: { catagory: _vm.catagory } }, [
-          _vm._v(_vm._s(_vm.catagory))
+      : _c("td", { attrs: { catagory: _vm.category } }, [
+          _vm._v(_vm._s(_vm.category))
         ])
   ])
 }
@@ -33526,8 +33530,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/imac-work/GoSites/salon-finance/src/js/app.js */"./src/js/app.js");
-module.exports = __webpack_require__(/*! /Users/imac-work/GoSites/salon-finance/src/app.scss */"./src/app.scss");
+__webpack_require__(/*! /Users/adam-home/GoSites/salon-finance/src/js/app.js */"./src/js/app.js");
+module.exports = __webpack_require__(/*! /Users/adam-home/GoSites/salon-finance/src/app.scss */"./src/app.scss");
 
 
 /***/ })

@@ -4,10 +4,10 @@
         <td>{{c.account_number}}</td>
         <td>{{c.trans_description}}</td>
         <td>{{c.debit_amount.toFixed(2)}}</td>
-        <td :catagory="catagory" v-if="!catagory">
-            <button @click="addCatagory" class="button is-small is-primary">Select</button>
+        <td :catagory="category" v-if="!category">
+            <button @click="addCategory" class="button is-small is-primary">Select</button>
         </td>
-        <td :catagory="catagory" v-else >{{catagory}}</td>
+        <td :catagory="category" v-else >{{category}}</td>
     </tr>
 </template>
 
@@ -17,22 +17,20 @@
 
         data() {
             return {
-                catagory: ''
+                category: ''
             }
         },
 
         methods: {
-            addCatagory() {
-                this.catagory = "Bank Charge"
-
-                axios.put('/api/bankdata', {
-                    category: "stock"
+            addCategory() {
+                axios.put('/api/bankdata/' + this.category.id, {
+                    category: "Bank Charge"
                 })
                     .then(response => {
-                        console.log(response);
+                        console.log(response)
                     })
                     .catch(error => {
-                        console.log(err);
+                        console.log(err)
                     })
             }
         },

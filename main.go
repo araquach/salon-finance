@@ -161,7 +161,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", index).Methods("GET")
 	r.HandleFunc("/api/bankdata", apiBankData).Methods("GET")
-	r.HandleFunc("/api/bankdata", apiAddCatagory).Methods("PUT")
+	r.HandleFunc("/api/bankdata/{id}", apiAddCatagory).Methods("PUT")
 	r.HandleFunc("/api/takings/{salon}", apiTakings).Methods("GET")
 	r.HandleFunc("/api/monthly/{month_year}", apiMonthlyTakings).Methods("GET")
 

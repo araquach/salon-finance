@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-<!--        <TotalTakings/>-->
+        <TotalTakings/>
 <!--        <JakTakings/>-->
 <!--        <PkTakings/>-->
 <!--        <BaseTakings/>-->
