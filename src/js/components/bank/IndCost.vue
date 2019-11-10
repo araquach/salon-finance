@@ -26,7 +26,6 @@
 
         methods: {
             addCategory() {
-
                 axios.put('/api/bankdata/' + this.c.id, {
                     category: this.category
                 })
@@ -37,11 +36,6 @@
                         console.log(err)
                     })
             }
-        },
-
-        created() {
-
         }
-
     }
 </script>

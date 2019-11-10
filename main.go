@@ -95,7 +95,7 @@ func apiAddCatagory(w http.ResponseWriter, r *http.Request) {
 	id := params["id"]
 	json.NewDecoder(r.Body).Decode(&bankData)
 	db := dbConn()
-	db.Model(&bankData).Where("id =" + id).Update("category", "Green stuff")
+	db.Model(&bankData).Where("id =" + id).Update("category", bankData.Category)
 	db.Close()
 }
 
