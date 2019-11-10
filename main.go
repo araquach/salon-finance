@@ -90,9 +90,12 @@ func apiBankData(w http.ResponseWriter, r *http.Request) {
 
 func apiAddCatagory(w http.ResponseWriter, r *http.Request) {
 	var bankData BankData
+
+	params := mux.Vars(r)
+	id := params["id"]
 	json.NewDecoder(r.Body).Decode(&bankData)
 	db := dbConn()
-	db.Save(&bankData)
+	db.Model(&bankData).Where("id =" + id).Update("category", "Green stuff")
 	db.Close()
 }
 

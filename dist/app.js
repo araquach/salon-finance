@@ -1948,6 +1948,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['c'],
   data: function data() {
@@ -1957,10 +1960,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addCategory: function addCategory() {
-      axios.put('/api/bankdata/' + this.category.id, {
-        category: "Bank Charge"
+      var _this = this;
+
+      axios.put('/api/bankdata/' + this.c.id, {
+        category: this.category
       }).then(function (response) {
-        console.log(response);
+        console.log(_this.category);
       })["catch"](function (error) {
         console.log(err);
       });
@@ -15850,20 +15855,42 @@ var render = function() {
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.c.debit_amount.toFixed(2)))]),
     _vm._v(" "),
-    !_vm.category
-      ? _c("td", { attrs: { catagory: _vm.category } }, [
-          _c(
-            "button",
-            {
-              staticClass: "button is-small is-primary",
-              on: { click: _vm.addCategory }
-            },
-            [_vm._v("Select")]
-          )
-        ])
-      : _c("td", { attrs: { catagory: _vm.category } }, [
-          _vm._v(_vm._s(_vm.category))
-        ])
+    _c("td", [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.category,
+            expression: "category"
+          }
+        ],
+        staticClass: "input",
+        attrs: { type: "text" },
+        domProps: { value: _vm.category },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.category = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "button is-small is-primary",
+          on: { click: _vm.addCategory }
+        },
+        [_vm._v("Add Catagory")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("td", [_vm._v(_vm._s(_vm.c.category))])
   ])
 }
 var staticRenderFns = []
