@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import App from './App.vue'
 import TotalTakings from './components/takings/TotalTakings'
 import JakTakings from './components/takings/JakTakings'
@@ -9,6 +10,7 @@ import IndCost from './components/bank/IndCost'
 
 import Buefy from 'buefy'
 
+Vue.use(VueRouter)
 Vue.use(Buefy)
 Vue.use(require('vue-moment'))
 

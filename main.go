@@ -75,7 +75,6 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 func apiBankData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-
 	db := dbConn()
 	bd := []BankData{}
 	db.Where("debit_amount != 0").Find(&bd)
@@ -88,9 +87,25 @@ func apiBankData(w http.ResponseWriter, r *http.Request) {
 	w.Write(json)
 }
 
-func apiAddCatagory(w http.ResponseWriter, r *http.Request) {
-	var bankData BankData
+func apiCostsCategory(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	db := dbConn()
+	c := []BankData{}
+	params := mux.Vars(r)
+	category := params["category"]
 
+	db.Where("category = ?", category).Find(&c)
+	db.Close()
+
+	json, err := json.Marshal(c)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
+}
+
+func apiAddCategory(w http.ResponseWriter, r *http.Request) {
+	var bankData BankData
 	params := mux.Vars(r)
 	id := params["id"]
 	json.NewDecoder(r.Body).Decode(&bankData)
@@ -164,10 +179,10 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", index).Methods("GET")
 	r.HandleFunc("/api/bankdata", apiBankData).Methods("GET")
-	r.HandleFunc("/api/bankdata/{id}", apiAddCatagory).Methods("PUT")
+	r.HandleFunc("/api/bankdata/{id}", apiAddCategory).Methods("PUT")
 	r.HandleFunc("/api/takings/{salon}", apiTakings).Methods("GET")
 	r.HandleFunc("/api/monthly/{month_year}", apiMonthlyTakings).Methods("GET")
-
+	r.HandleFunc("/api/costscategory/{category}", apiCostsCategory).Methods("GET")
 
 	// Styles
 	assetHandler := http.FileServer(http.Dir("./dist/"))
