@@ -19,13 +19,12 @@
                 <b-dropdown-item @click="addCategory" aria-role="listitem" value="Tax">TAX</b-dropdown-item>
                 <b-dropdown-item @click="addCategory" aria-role="listitem" value="Building">Building</b-dropdown-item>
                 <b-dropdown-item @click="addCategory" aria-role="listitem" value="Marketing">Marketing</b-dropdown-item>
-                <b-dropdown-item @click="addCategory" aria-role="listitem" value="Stock">Stock</b-dropdown-item>
                 <b-dropdown-item @click="addCategory" aria-role="listitem" value="Condements">Condements</b-dropdown-item>
                 <b-dropdown-item @click="addCategory" aria-role="listitem" value="Bank">Bank</b-dropdown-item>
                 <b-dropdown-item @click="addCategory" aria-role="listitem" value="Utilities">Utilities</b-dropdown-item>
                 <b-dropdown-item @click="addCategory" aria-role="listitem" value="Loans">Loans</b-dropdown-item>
-                <b-dropdown-item @click="addCategory" aria-role="listitem" value="Staff expences">Staff Expenses</b-dropdown-item>
-                <b-dropdown-item @click="addCategory" aria-role="listitem" value="Misc Purchase">Misc Purchases</b-dropdown-item>
+                <b-dropdown-item @click="addCategory" aria-role="listitem" value="Staff">Staff Expenses</b-dropdown-item>
+                <b-dropdown-item @click="addCategory" aria-role="listitem" value="Misc">Misc Purchases</b-dropdown-item>
                 <b-dropdown-item @click="addCategory" aria-role="listitem" value="Other">Other</b-dropdown-item>
 
             </b-dropdown>

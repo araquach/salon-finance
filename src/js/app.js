@@ -5,7 +5,8 @@ import TotalTakings from './components/takings/TotalTakings'
 import JakTakings from './components/takings/JakTakings'
 import PkTakings from './components/takings/PkTakings'
 import BaseTakings from './components/takings/BaseTakings'
-import Costs from './components/bank/Costs'
+import CostInput from './components/bank/CostInput'
+import CostTotals from './components/bank/CostTotals'
 import IndCost from './components/bank/IndCost'
 
 import Buefy from 'buefy'
@@ -18,7 +19,8 @@ Vue.component('TotalTakings', TotalTakings)
 Vue.component('JakTakings', JakTakings)
 Vue.component('PkTakings', PkTakings)
 Vue.component('BaseTakings', BaseTakings)
-Vue.component('Costs', Costs)
+Vue.component('CostInput', CostInput)
+Vue.component('CostTotals', CostTotals)
 Vue.component('IndCost', IndCost)
 
 window.axios = require('axios')

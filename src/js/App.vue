@@ -1,10 +1,11 @@
 <template>
     <div class="container">
-        <TotalTakings/>
+<!--        <TotalTakings/>-->
 <!--        <JakTakings/>-->
 <!--        <PkTakings/>-->
 <!--        <BaseTakings/>-->
-        <Costs/>
+<!--        <CostInput/>-->
+        <CostTotals/>
     </div>
 </template>
 

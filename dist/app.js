@@ -1868,21 +1868,19 @@ module.exports = function isBuffer (obj) {
 //
 //
 //
+//
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/Costs.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/Costs.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostInput.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostInput.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
 //
 //
 //
@@ -1926,6 +1924,294 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      costs: [],
+      wages: [],
+      freelance: [],
+      drawings: [],
+      stock: [],
+      vat: [],
+      tax: [],
+      building: [],
+      marketing: [],
+      condements: [],
+      bank: [],
+      utilities: [],
+      loans: [],
+      staff: [],
+      misc: [],
+      other: []
+    };
+  },
+  computed: {
+    total: function total() {
+      return this.costs.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    wagesTotal: function wagesTotal() {
+      return this.wages.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    freelanceTotal: function freelanceTotal() {
+      return this.freelance.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    drawingsTotal: function drawingsTotal() {
+      return this.drawings.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    stockTotal: function stockTotal() {
+      return this.stock.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    vatTotal: function vatTotal() {
+      return this.vat.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    taxTotal: function taxTotal() {
+      return this.tax.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    buildingTotal: function buildingTotal() {
+      return this.building.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    marketingTotal: function marketingTotal() {
+      return this.marketing.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    condementsTotal: function condementsTotal() {
+      return this.condements.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    bankTotal: function bankTotal() {
+      return this.bank.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    utilitiesTotal: function utilitiesTotal() {
+      return this.utilities.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    loansTotal: function loansTotal() {
+      return this.loans.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    staffExpensesTotal: function staffExpensesTotal() {
+      return this.staff.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    miscTotal: function miscTotal() {
+      return this.misc.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    },
+    otherTotal: function otherTotal() {
+      return this.other.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0).toFixed(2);
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/bankdata').then(function (response) {
+      return _this.costs = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Stock').then(function (response) {
+      return _this.stock = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Wages').then(function (response) {
+      return _this.wages = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Freelance').then(function (response) {
+      return _this.freelance = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Drawings').then(function (response) {
+      return _this.drawings = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/VAT').then(function (response) {
+      return _this.vat = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Tax').then(function (response) {
+      return _this.tax = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Building').then(function (response) {
+      return _this.building = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Marketing').then(function (response) {
+      return _this.marketing = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Condements').then(function (response) {
+      return _this.condements = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Bank').then(function (response) {
+      return _this.bank = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Utilities').then(function (response) {
+      return _this.utilities = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Loans').then(function (response) {
+      return _this.loans = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Staff').then(function (response) {
+      return _this.staff = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Misc').then(function (response) {
+      return _this.misc = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/costscategory/Other').then(function (response) {
+      return _this.other = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/IndCost.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/IndCost.vue?vue&type=script&lang=js& ***!
@@ -1935,7 +2221,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -15781,12 +16066,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [_c("TotalTakings"), _vm._v(" "), _c("Costs")],
-    1
-  )
+  return _c("div", { staticClass: "container" }, [_c("CostTotals")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -15795,10 +16075,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/Costs.vue?vue&type=template&id=477ea4bf&":
-/*!*******************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/Costs.vue?vue&type=template&id=477ea4bf& ***!
-  \*******************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostInput.vue?vue&type=template&id=5ab44314&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostInput.vue?vue&type=template&id=5ab44314& ***!
+  \***********************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15811,10 +16091,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "section" }, [
-    _c("h1", { staticClass: "title is-3" }, [_vm._v("Costs")]),
-    _vm._v(" "),
-    _c("p", { staticClass: "is-size-3" }, [
-      _vm._v("Total Costs: " + _vm._s(_vm.total))
+    _c("h1", { staticClass: "title is-4 has-text-primary" }, [
+      _vm._v("Cost Input")
     ]),
     _vm._v(" "),
     _c(
@@ -15845,7 +16123,172 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Amount")]),
       _vm._v(" "),
+      _c("th", [_vm._v("Select")]),
+      _vm._v(" "),
       _c("th", [_vm._v("Category")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "section" }, [
+    _c("h1", { staticClass: "title is-4 has-text-primary" }, [_vm._v("Costs")]),
+    _vm._v(" "),
+    _c("table", { staticClass: "table" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Wages")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.wagesTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Freelance")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.freelanceTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Drawings")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.drawingsTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Stock")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.stockTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("VAT")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.vatTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("TAX")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.taxTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Building")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.buildingTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Marketing")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.marketingTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Condements")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.condementsTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Bank")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.bankTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Utilities")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.utilitiesTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Loans")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.loansTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Staff Expenses")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.staffExpensesTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Misc")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.miscTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Other")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.otherTotal))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("%")])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Category")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Amount")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Percent")])
     ])
   }
 ]
@@ -15985,15 +16428,6 @@ var render = function() {
             _c(
               "b-dropdown-item",
               {
-                attrs: { "aria-role": "listitem", value: "Stock" },
-                on: { click: _vm.addCategory }
-              },
-              [_vm._v("Stock")]
-            ),
-            _vm._v(" "),
-            _c(
-              "b-dropdown-item",
-              {
                 attrs: { "aria-role": "listitem", value: "Condements" },
                 on: { click: _vm.addCategory }
               },
@@ -16030,7 +16464,7 @@ var render = function() {
             _c(
               "b-dropdown-item",
               {
-                attrs: { "aria-role": "listitem", value: "Staff expences" },
+                attrs: { "aria-role": "listitem", value: "Staff" },
                 on: { click: _vm.addCategory }
               },
               [_vm._v("Staff Expenses")]
@@ -16039,7 +16473,7 @@ var render = function() {
             _c(
               "b-dropdown-item",
               {
-                attrs: { "aria-role": "listitem", value: "Misc Purchase" },
+                attrs: { "aria-role": "listitem", value: "Misc" },
                 on: { click: _vm.addCategory }
               },
               [_vm._v("Misc Purchases")]
@@ -36174,9 +36608,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_takings_JakTakings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/takings/JakTakings */ "./src/js/components/takings/JakTakings.vue");
 /* harmony import */ var _components_takings_PkTakings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/takings/PkTakings */ "./src/js/components/takings/PkTakings.vue");
 /* harmony import */ var _components_takings_BaseTakings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/takings/BaseTakings */ "./src/js/components/takings/BaseTakings.vue");
-/* harmony import */ var _components_bank_Costs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/bank/Costs */ "./src/js/components/bank/Costs.vue");
-/* harmony import */ var _components_bank_IndCost__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/bank/IndCost */ "./src/js/components/bank/IndCost.vue");
-/* harmony import */ var buefy__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! buefy */ "./node_modules/buefy/dist/esm/index.js");
+/* harmony import */ var _components_bank_CostInput__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/bank/CostInput */ "./src/js/components/bank/CostInput.vue");
+/* harmony import */ var _components_bank_CostTotals__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/bank/CostTotals */ "./src/js/components/bank/CostTotals.vue");
+/* harmony import */ var _components_bank_IndCost__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/bank/IndCost */ "./src/js/components/bank/IndCost.vue");
+/* harmony import */ var buefy__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! buefy */ "./node_modules/buefy/dist/esm/index.js");
+
 
 
 
@@ -36188,14 +36624,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(buefy__WEBPACK_IMPORTED_MODULE_9__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(buefy__WEBPACK_IMPORTED_MODULE_10__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vue-moment.js"));
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('TotalTakings', _components_takings_TotalTakings__WEBPACK_IMPORTED_MODULE_3__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('JakTakings', _components_takings_JakTakings__WEBPACK_IMPORTED_MODULE_4__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('PkTakings', _components_takings_PkTakings__WEBPACK_IMPORTED_MODULE_5__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('BaseTakings', _components_takings_BaseTakings__WEBPACK_IMPORTED_MODULE_6__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Costs', _components_bank_Costs__WEBPACK_IMPORTED_MODULE_7__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('IndCost', _components_bank_IndCost__WEBPACK_IMPORTED_MODULE_8__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('CostInput', _components_bank_CostInput__WEBPACK_IMPORTED_MODULE_7__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('CostTotals', _components_bank_CostTotals__WEBPACK_IMPORTED_MODULE_8__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('IndCost', _components_bank_IndCost__WEBPACK_IMPORTED_MODULE_9__["default"]);
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
@@ -36206,17 +36643,17 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 
 /***/ }),
 
-/***/ "./src/js/components/bank/Costs.vue":
-/*!******************************************!*\
-  !*** ./src/js/components/bank/Costs.vue ***!
-  \******************************************/
+/***/ "./src/js/components/bank/CostInput.vue":
+/*!**********************************************!*\
+  !*** ./src/js/components/bank/CostInput.vue ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Costs_vue_vue_type_template_id_477ea4bf___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Costs.vue?vue&type=template&id=477ea4bf& */ "./src/js/components/bank/Costs.vue?vue&type=template&id=477ea4bf&");
-/* harmony import */ var _Costs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Costs.vue?vue&type=script&lang=js& */ "./src/js/components/bank/Costs.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CostInput_vue_vue_type_template_id_5ab44314___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CostInput.vue?vue&type=template&id=5ab44314& */ "./src/js/components/bank/CostInput.vue?vue&type=template&id=5ab44314&");
+/* harmony import */ var _CostInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CostInput.vue?vue&type=script&lang=js& */ "./src/js/components/bank/CostInput.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -36226,9 +36663,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Costs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Costs_vue_vue_type_template_id_477ea4bf___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Costs_vue_vue_type_template_id_477ea4bf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CostInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CostInput_vue_vue_type_template_id_5ab44314___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CostInput_vue_vue_type_template_id_5ab44314___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -36238,38 +36675,107 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "src/js/components/bank/Costs.vue"
+component.options.__file = "src/js/components/bank/CostInput.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./src/js/components/bank/Costs.vue?vue&type=script&lang=js&":
-/*!*******************************************************************!*\
-  !*** ./src/js/components/bank/Costs.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************/
+/***/ "./src/js/components/bank/CostInput.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./src/js/components/bank/CostInput.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Costs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Costs.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/Costs.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Costs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CostInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CostInput.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostInput.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CostInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./src/js/components/bank/Costs.vue?vue&type=template&id=477ea4bf&":
-/*!*************************************************************************!*\
-  !*** ./src/js/components/bank/Costs.vue?vue&type=template&id=477ea4bf& ***!
-  \*************************************************************************/
+/***/ "./src/js/components/bank/CostInput.vue?vue&type=template&id=5ab44314&":
+/*!*****************************************************************************!*\
+  !*** ./src/js/components/bank/CostInput.vue?vue&type=template&id=5ab44314& ***!
+  \*****************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Costs_vue_vue_type_template_id_477ea4bf___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Costs.vue?vue&type=template&id=477ea4bf& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/Costs.vue?vue&type=template&id=477ea4bf&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Costs_vue_vue_type_template_id_477ea4bf___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostInput_vue_vue_type_template_id_5ab44314___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CostInput.vue?vue&type=template&id=5ab44314& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostInput.vue?vue&type=template&id=5ab44314&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostInput_vue_vue_type_template_id_5ab44314___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Costs_vue_vue_type_template_id_477ea4bf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostInput_vue_vue_type_template_id_5ab44314___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./src/js/components/bank/CostTotals.vue":
+/*!***********************************************!*\
+  !*** ./src/js/components/bank/CostTotals.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CostTotals.vue?vue&type=template&id=090f2a33& */ "./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33&");
+/* harmony import */ var _CostTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CostTotals.vue?vue&type=script&lang=js& */ "./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CostTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/js/components/bank/CostTotals.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CostTotals.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33&":
+/*!******************************************************************************!*\
+  !*** ./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CostTotals.vue?vue&type=template&id=090f2a33& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
