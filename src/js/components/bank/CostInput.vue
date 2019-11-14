@@ -24,7 +24,11 @@
 </template>
 
 <script>
+    import IndCost from "./IndCost"
+
     export default {
+        components: {IndCost},
+
         data() {
             return {
                 search: '',
