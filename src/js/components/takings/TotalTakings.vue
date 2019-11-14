@@ -1,9 +1,9 @@
 <template>
     <div class="section">
-        <h2 class="title is-3">
+        <h2 class="title is-4">
             Total Salon Turnover
         </h2>
-        <table class="table is-size-4">
+        <table class="table is-size-5">
             <tr>
                 <th>Services</th>
                 <th>Products</th>
@@ -16,7 +16,7 @@
                 <td>{{productTotal}}</td>
                 <td>{{flServiceTotal}}</td>
                 <td>{{flProductTotal}}</td>
-                <td>{{grandTotal}}</td>
+                <td><strong>{{grandTotal}}</strong></td>
             </tr>
         </table>
     </div>

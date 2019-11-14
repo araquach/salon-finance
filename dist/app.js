@@ -1855,9 +1855,11 @@ module.exports = function isBuffer (obj) {
 /*!*********************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/App.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -1869,6 +1871,48 @@ module.exports = function isBuffer (obj) {
 //
 //
 //
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      takings: [],
+      costs: []
+    };
+  },
+  computed: {
+    grandTotal: function grandTotal() {
+      return this.takings.reduce(function (sum, val) {
+        return sum + val.total;
+      }, 0);
+    },
+    totalCosts: function totalCosts() {
+      return this.costs.reduce(function (sum, val) {
+        return sum + val.debit_amount;
+      }, 0);
+    },
+    pl: function pl() {
+      return "£" + (this.grandTotal - this.totalCosts).toFixed(2);
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/takings/All').then(function (response) {
+      return _this.takings = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/bankdata').then(function (response) {
+      return _this.costs = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }
+});
 
 /***/ }),
 
@@ -2021,6 +2065,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2042,6 +2090,11 @@ __webpack_require__.r(__webpack_exports__);
       other: []
     };
   },
+  filters: {
+    toCurrency: function toCurrency(amount) {
+      return "£" + Number(amount).toLocaleString();
+    }
+  },
   computed: {
     total: function total() {
       return this.costs.reduce(function (sum, val) {
@@ -2053,75 +2106,120 @@ __webpack_require__.r(__webpack_exports__);
         return sum + val.debit_amount;
       }, 0).toFixed(2);
     },
+    wagesPercent: function wagesPercent() {
+      return (parseInt(this.wagesTotal) / parseInt(this.total) * 100).toFixed(1);
+    },
     freelanceTotal: function freelanceTotal() {
       return this.freelance.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
+    },
+    freelancePercent: function freelancePercent() {
+      return (parseInt(this.freelanceTotal) / parseInt(this.total) * 100).toFixed(1);
     },
     drawingsTotal: function drawingsTotal() {
       return this.drawings.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
     },
+    drawingsPercent: function drawingsPercent() {
+      return (parseInt(this.drawingsTotal) / parseInt(this.total) * 100).toFixed(1);
+    },
     stockTotal: function stockTotal() {
       return this.stock.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
+    },
+    stockPercent: function stockPercent() {
+      return (parseInt(this.stockTotal) / parseInt(this.total) * 100).toFixed(1);
     },
     vatTotal: function vatTotal() {
       return this.vat.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
     },
+    vatPercent: function vatPercent() {
+      return (parseInt(this.vatTotal) / parseInt(this.total) * 100).toFixed(1);
+    },
     taxTotal: function taxTotal() {
       return this.tax.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
+    },
+    taxPercent: function taxPercent() {
+      return (parseInt(this.taxTotal) / parseInt(this.total) * 100).toFixed(1);
     },
     buildingTotal: function buildingTotal() {
       return this.building.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
     },
+    buildingPercent: function buildingPercent() {
+      return (parseInt(this.buildingTotal) / parseInt(this.total) * 100).toFixed(1);
+    },
     marketingTotal: function marketingTotal() {
       return this.marketing.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
+    },
+    marketingPercent: function marketingPercent() {
+      return (parseInt(this.marketingTotal) / parseInt(this.total) * 100).toFixed(1);
     },
     condementsTotal: function condementsTotal() {
       return this.condements.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
     },
+    condementsPercent: function condementsPercent() {
+      return (parseInt(this.condementsTotal) / parseInt(this.total) * 100).toFixed(1);
+    },
     bankTotal: function bankTotal() {
       return this.bank.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
+    },
+    bankPercent: function bankPercent() {
+      return (parseInt(this.bankTotal) / parseInt(this.total) * 100).toFixed(1);
     },
     utilitiesTotal: function utilitiesTotal() {
       return this.utilities.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
     },
+    utilitiesPercent: function utilitiesPercent() {
+      return (parseInt(this.utilitiesTotal) / parseInt(this.total) * 100).toFixed(1);
+    },
     loansTotal: function loansTotal() {
       return this.loans.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
     },
-    staffExpensesTotal: function staffExpensesTotal() {
+    loansPercent: function loansPercent() {
+      return (parseInt(this.loansTotal) / parseInt(this.total) * 100).toFixed(1);
+    },
+    staffTotal: function staffTotal() {
       return this.staff.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
+    },
+    staffPercent: function staffPercent() {
+      return (parseInt(this.staffTotal) / parseInt(this.total) * 100).toFixed(1);
     },
     miscTotal: function miscTotal() {
       return this.misc.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
     },
+    miscPercent: function miscPercent() {
+      return (parseInt(this.miscTotal) / parseInt(this.total) * 100).toFixed(1);
+    },
     otherTotal: function otherTotal() {
       return this.other.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
+    },
+    otherPercent: function otherPercent() {
+      return (parseInt(this.otherTotal) / parseInt(this.total) * 100).toFixed(1);
     }
   },
   created: function created() {
@@ -16066,9 +16164,39 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [_c("CostTotals")], 1)
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("CostTotals"),
+      _vm._v(" "),
+      _c("TotalTakings"),
+      _vm._v(" "),
+      _c("p", { staticClass: "is-size-3 has-text-danger" }, [
+        _vm._v("Profit/loss: " + _vm._s(_vm.pl))
+      ])
+    ],
+    1
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "section" }, [
+      _c("h1", { staticClass: "title is-3 has-text-primary" }, [
+        _vm._v("Salon Profit/loss")
+      ]),
+      _vm._v(" "),
+      _c("h1", { staticClass: "subtitle has-text-primary" }, [
+        _vm._v("July/Aug/Sept/Oct")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -16157,123 +16285,131 @@ var render = function() {
       _vm._m(0),
       _vm._v(" "),
       _c("tr", [
-        _c("th", [_vm._v("Wages")]),
+        _c("th", [_vm._v("Wages (Excluding Izzy)")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.wagesTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.wagesTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.wagesPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("Freelance")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.freelanceTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.freelanceTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.freelancePercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
-        _c("th", [_vm._v("Drawings")]),
+        _c("th", [_vm._v("Drawings (inc Izzy's wage)")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.drawingsTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.drawingsTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.drawingsPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("Stock")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.stockTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.stockTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.stockPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("VAT")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.vatTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.vatTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.vatPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("TAX")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.taxTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.taxTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.taxPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("Building")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.buildingTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.buildingTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.buildingPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("Marketing")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.marketingTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.marketingTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.marketingPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("Condements")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.condementsTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.condementsTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.condementsPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
-        _c("th", [_vm._v("Bank")]),
+        _c("th", [_vm._v("Bank (Inc PDQ costs)")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.bankTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.bankTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.bankPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("Utilities")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.utilitiesTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.utilitiesTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.utilitiesPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("Loans")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.loansTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.loansTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.loansPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("Staff Expenses")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.staffExpensesTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.staffTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.staffPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("Misc")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.miscTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.miscTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.miscPercent))])
       ]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("Other")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.otherTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.otherTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v("%")])
+        _c("td", [_vm._v(_vm._s(_vm.otherPercent))])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("th", [_vm._v("Grand Total")]),
+        _vm._v(" "),
+        _c("td", [
+          _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.total)))])
+        ])
       ])
     ])
   ])
@@ -16750,11 +16886,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "section" }, [
-    _c("h2", { staticClass: "title is-3" }, [
+    _c("h2", { staticClass: "title is-4" }, [
       _vm._v("\n        Total Salon Turnover\n    ")
     ]),
     _vm._v(" "),
-    _c("table", { staticClass: "table is-size-4" }, [
+    _c("table", { staticClass: "table is-size-5" }, [
       _vm._m(0),
       _vm._v(" "),
       _c("tr", [
@@ -16766,7 +16902,7 @@ var render = function() {
         _vm._v(" "),
         _c("td", [_vm._v(_vm._s(_vm.flProductTotal))]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.grandTotal))])
+        _c("td", [_c("strong", [_vm._v(_vm._s(_vm.grandTotal))])])
       ])
     ])
   ])
@@ -36567,9 +36703,7 @@ component.options.__file = "src/js/App.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib??ref--4-0!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/App.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -37133,8 +37267,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/adam-macbook/GoSites/salon-finance/src/js/app.js */"./src/js/app.js");
-module.exports = __webpack_require__(/*! /Users/adam-macbook/GoSites/salon-finance/src/app.scss */"./src/app.scss");
+__webpack_require__(/*! /Users/adam-home/GoSites/salon-finance/src/js/app.js */"./src/js/app.js");
+module.exports = __webpack_require__(/*! /Users/adam-home/GoSites/salon-finance/src/app.scss */"./src/app.scss");
 
 
 /***/ })

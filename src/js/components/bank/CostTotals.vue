@@ -8,79 +8,83 @@
                 <th>Percent</th>
             </tr>
             <tr>
-                <th>Wages</th>
-                <td>{{wagesTotal}}</td>
-                <td>%</td>
+                <th>Wages (Excluding Izzy)</th>
+                <td>{{wagesTotal | toCurrency}}</td>
+                <td>{{wagesPercent}}</td>
             </tr>
             <tr>
                 <th>Freelance</th>
-                <td>{{freelanceTotal}}</td>
-                <td>%</td>
+                <td>{{freelanceTotal | toCurrency}}</td>
+                <td>{{freelancePercent}}</td>
             </tr>
             <tr>
-                <th>Drawings</th>
-                <td>{{drawingsTotal}}</td>
-                <td>%</td>
+                <th>Drawings (inc Izzy's wage)</th>
+                <td>{{drawingsTotal | toCurrency}}</td>
+                <td>{{drawingsPercent}}</td>
             </tr>
             <tr>
                 <th>Stock</th>
-                <td>{{stockTotal}}</td>
-                <td>%</td>
+                <td>{{stockTotal | toCurrency}}</td>
+                <td>{{stockPercent}}</td>
             </tr>
             <tr>
                 <th>VAT</th>
-                <td>{{vatTotal}}</td>
-                <td>%</td>
+                <td>{{vatTotal | toCurrency}}</td>
+                <td>{{vatPercent}}</td>
             </tr>
             <tr>
                 <th>TAX</th>
-                <td>{{taxTotal}}</td>
-                <td>%</td>
+                <td>{{taxTotal | toCurrency}}</td>
+                <td>{{taxPercent}}</td>
             </tr>
             <tr>
                 <th>Building</th>
-                <td>{{buildingTotal}}</td>
-                <td>%</td>
+                <td>{{buildingTotal | toCurrency}}</td>
+                <td>{{buildingPercent}}</td>
             </tr>
             <tr>
                 <th>Marketing</th>
-                <td>{{marketingTotal}}</td>
-                <td>%</td>
+                <td>{{marketingTotal | toCurrency}}</td>
+                <td>{{marketingPercent}}</td>
             </tr>
             <tr>
                 <th>Condements</th>
-                <td>{{condementsTotal}}</td>
-                <td>%</td>
+                <td>{{condementsTotal | toCurrency}}</td>
+                <td>{{condementsPercent}}</td>
             </tr>
             <tr>
-                <th>Bank</th>
-                <td>{{bankTotal}}</td>
-                <td>%</td>
+                <th>Bank (Inc PDQ costs)</th>
+                <td>{{bankTotal | toCurrency}}</td>
+                <td>{{bankPercent}}</td>
             </tr>
             <tr>
                 <th>Utilities</th>
-                <td>{{utilitiesTotal}}</td>
-                <td>%</td>
+                <td>{{utilitiesTotal | toCurrency}}</td>
+                <td>{{utilitiesPercent}}</td>
             </tr>
             <tr>
                 <th>Loans</th>
-                <td>{{loansTotal}}</td>
-                <td>%</td>
+                <td>{{loansTotal | toCurrency}}</td>
+                <td>{{loansPercent}}</td>
             </tr>
             <tr>
                 <th>Staff Expenses</th>
-                <td>{{staffExpensesTotal}}</td>
-                <td>%</td>
+                <td>{{staffTotal | toCurrency}}</td>
+                <td>{{staffPercent}}</td>
             </tr>
             <tr>
                 <th>Misc</th>
-                <td>{{miscTotal}}</td>
-                <td>%</td>
+                <td>{{miscTotal | toCurrency}}</td>
+                <td>{{miscPercent}}</td>
             </tr>
             <tr>
                 <th>Other</th>
-                <td>{{otherTotal}}</td>
-                <td>%</td>
+                <td>{{otherTotal | toCurrency}}</td>
+                <td>{{otherPercent}}</td>
+            </tr>
+            <tr>
+                <th>Grand Total</th>
+                <td><strong>{{total | toCurrency}}</strong></td>
             </tr>
         </table>
     </div>
@@ -109,6 +113,12 @@
             }
         },
 
+        filters: {
+            toCurrency(amount) {
+                return "£" + Number(amount).toLocaleString()
+            }
+        },
+
         computed: {
             total() {
                 return this.costs.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
@@ -116,47 +126,92 @@
             wagesTotal() {
                 return this.wages.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
             },
+            wagesPercent() {
+                return (parseInt(this.wagesTotal) / parseInt(this.total) * 100).toFixed(1)
+            },
             freelanceTotal() {
                 return this.freelance.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+            },
+            freelancePercent() {
+                return (parseInt(this.freelanceTotal) / parseInt(this.total) * 100).toFixed(1)
             },
             drawingsTotal() {
                 return this.drawings.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
             },
+            drawingsPercent() {
+                return (parseInt(this.drawingsTotal) / parseInt(this.total) * 100).toFixed(1)
+            },
             stockTotal() {
                 return this.stock.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+            },
+            stockPercent() {
+                return (parseInt(this.stockTotal) / parseInt(this.total) * 100).toFixed(1)
             },
             vatTotal() {
                 return this.vat.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
             },
+            vatPercent() {
+                return (parseInt(this.vatTotal) / parseInt(this.total) * 100).toFixed(1)
+            },
             taxTotal() {
                 return this.tax.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+            },
+            taxPercent() {
+                return (parseInt(this.taxTotal) / parseInt(this.total) * 100).toFixed(1)
             },
             buildingTotal() {
                 return this.building.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
             },
+            buildingPercent() {
+                return (parseInt(this.buildingTotal) / parseInt(this.total) * 100).toFixed(1)
+            },
             marketingTotal() {
                 return this.marketing.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+            },
+            marketingPercent() {
+                return (parseInt(this.marketingTotal) / parseInt(this.total) * 100).toFixed(1)
             },
             condementsTotal() {
                 return this.condements.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
             },
+            condementsPercent() {
+                return (parseInt(this.condementsTotal) / parseInt(this.total) * 100).toFixed(1)
+            },
             bankTotal() {
                 return this.bank.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+            },
+            bankPercent() {
+                return (parseInt(this.bankTotal) / parseInt(this.total) * 100).toFixed(1)
             },
             utilitiesTotal() {
                 return this.utilities.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
             },
+            utilitiesPercent() {
+                return (parseInt(this.utilitiesTotal) / parseInt(this.total) * 100).toFixed(1)
+            },
             loansTotal() {
                 return this.loans.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
             },
-            staffExpensesTotal() {
+            loansPercent() {
+                return (parseInt(this.loansTotal) / parseInt(this.total) * 100).toFixed(1)
+            },
+            staffTotal() {
                 return this.staff.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+            },
+            staffPercent() {
+                return (parseInt(this.staffTotal) / parseInt(this.total) * 100).toFixed(1)
             },
             miscTotal() {
                 return this.misc.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
             },
+            miscPercent() {
+                return (parseInt(this.miscTotal) / parseInt(this.total) * 100).toFixed(1)
+            },
             otherTotal() {
                 return this.other.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+            },
+            otherPercent() {
+                return (parseInt(this.otherTotal) / parseInt(this.total) * 100).toFixed(1)
             }
         },
 
