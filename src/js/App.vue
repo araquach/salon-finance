@@ -7,9 +7,9 @@
 <!--        <JakTakings/>-->
 <!--        <PkTakings/>-->
 <!--        <BaseTakings/>-->
-<!--        <CostInput/>-->
-        <CostTotals/>
-        <TotalTakings/>
+        <CostInput/>
+<!--        <CostTotals/>-->
+<!--        <TotalTakings/>-->
         <p class="is-size-3 has-text-danger">Profit/loss: {{pl}}</p>
     </div>
 </template>

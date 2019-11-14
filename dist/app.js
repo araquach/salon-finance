@@ -1942,9 +1942,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      search: '',
       costs: []
     };
   },
@@ -1953,13 +1962,20 @@ __webpack_require__.r(__webpack_exports__);
       return this.costs.reduce(function (sum, val) {
         return sum + val.debit_amount;
       }, 0).toFixed(2);
+    },
+    filteredItem: function filteredItem() {
+      var _this = this;
+
+      return this.costs.filter(function (item) {
+        return item.trans_description.toLowerCase().indexOf(_this.search.toLowerCase()) > -1;
+      });
     }
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     axios.get('/api/bankdata').then(function (response) {
-      return _this.costs = response.data;
+      return _this2.costs = response.data;
     })["catch"](function (error) {
       console.log(error);
     });
@@ -16170,9 +16186,7 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
-      _c("CostTotals"),
-      _vm._v(" "),
-      _c("TotalTakings"),
+      _c("CostInput"),
       _vm._v(" "),
       _c("p", { staticClass: "is-size-3 has-text-danger" }, [
         _vm._v("Profit/loss: " + _vm._s(_vm.pl))
@@ -16223,13 +16237,41 @@ var render = function() {
       _vm._v("Cost Input")
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "field" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Search")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.search,
+              expression: "search"
+            }
+          ],
+          staticClass: "input",
+          attrs: { type: "text", placeholder: "Search" },
+          domProps: { value: _vm.search },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.search = $event.target.value
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
     _c(
       "table",
       { staticClass: "table" },
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._l(_vm.costs, function(cost, index) {
+        _vm._l(_vm.filteredItem, function(cost, index) {
           return _c("IndCost", { key: cost.id, attrs: { c: cost } })
         })
       ],
@@ -36659,15 +36701,14 @@ module.exports = g;
 /*!************************!*\
   !*** ./src/js/App.vue ***!
   \************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App_vue_vue_type_template_id_3ea74058___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=3ea74058& */ "./src/js/App.vue?vue&type=template&id=3ea74058&");
 /* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ "./src/js/App.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -36697,7 +36738,7 @@ component.options.__file = "src/js/App.vue"
 /*!*************************************************!*\
   !*** ./src/js/App.vue?vue&type=script&lang=js& ***!
   \*************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37267,8 +37308,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/adam-home/GoSites/salon-finance/src/js/app.js */"./src/js/app.js");
-module.exports = __webpack_require__(/*! /Users/adam-home/GoSites/salon-finance/src/app.scss */"./src/app.scss");
+__webpack_require__(/*! /Users/adam-macbook/GoSites/salon-finance/src/js/app.js */"./src/js/app.js");
+module.exports = __webpack_require__(/*! /Users/adam-macbook/GoSites/salon-finance/src/app.scss */"./src/app.scss");
 
 
 /***/ })
