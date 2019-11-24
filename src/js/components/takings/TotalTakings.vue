@@ -12,11 +12,11 @@
                 <th><strong>Grand Total</strong></th>
             </tr>
             <tr>
-                <td>{{serviceTotal}}</td>
-                <td>{{productTotal}}</td>
-                <td>{{flServiceTotal}}</td>
-                <td>{{flProductTotal}}</td>
-                <td><strong>{{grandTotal}}</strong></td>
+                <td>{{serviceTotal | toCurrency}}</td>
+                <td>{{productTotal | toCurrency}}</td>
+                <td>{{flServiceTotal | toCurrency}}</td>
+                <td>{{flProductTotal | toCurrency}}</td>
+                <td><strong>{{grandTotal | toCurrency}}</strong></td>
             </tr>
         </table>
     </div>

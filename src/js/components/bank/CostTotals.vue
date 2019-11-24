@@ -1,6 +1,6 @@
 <template>
     <div class="section">
-        <h1 class="title is-4 has-text-primary">Costs</h1>
+        <h1 class="title is-4">Costs</h1>
         <table class="table">
             <tr>
                 <th>Category</th>
@@ -110,12 +110,6 @@
                 staff: [],
                 misc: [],
                 other: []
-            }
-        },
-
-        filters: {
-            toCurrency(amount) {
-                return "£" + Number(amount).toLocaleString()
             }
         },
 

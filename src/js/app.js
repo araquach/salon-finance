@@ -14,6 +14,8 @@ const router = new VueRouter({
 
 window.axios = require('axios')
 
+Vue.filter("toCurrency",  amount => "£" + Number(amount).toLocaleString())
+
 new Vue({
     el: '#app',
     router,

@@ -1,6 +1,6 @@
 <template>
     <div class="section">
-        <h1 class="title is-4 has-text-primary">Cost Input</h1>
+        <h1 class="title is-4">Cost Input</h1>
 
         <div class="field">
             <label class="label">Search</label>

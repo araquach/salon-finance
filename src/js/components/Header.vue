@@ -1,8 +1,8 @@
 <template>
-    <b-navbar>
+    <b-navbar spaced>
         <template slot="brand">
             <b-navbar-item tag="router-link" :to="{ path: '' }">
-                <h1 class="title is-3 has-text-primary">Salon Finance</h1>
+                <h1 class="title is-3">Salon Finance</h1>
             </b-navbar-item>
         </template>
         <template slot="start">
@@ -12,7 +12,7 @@
             <b-navbar-item tag="router-link" to="/costs">
                 Costs
             </b-navbar-item>
-            <b-navbar-dropdown label="Info">
+            <b-navbar-dropdown label="More">
                 <b-navbar-item tag="router-link" to="/input">
                     Input
                 </b-navbar-item>

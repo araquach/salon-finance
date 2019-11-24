@@ -1959,6 +1959,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CostTotals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CostTotals */ "./src/js/components/bank/CostTotals.vue");
+/* harmony import */ var _takings_TotalTakings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../takings/TotalTakings */ "./src/js/components/takings/TotalTakings.vue");
 //
 //
 //
@@ -1969,7 +1971,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    TotalTakings: _takings_TotalTakings__WEBPACK_IMPORTED_MODULE_1__["default"],
+    CostTotals: _CostTotals__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       takings: [],
@@ -2130,11 +2138,6 @@ __webpack_require__.r(__webpack_exports__);
       misc: [],
       other: []
     };
-  },
-  filters: {
-    toCurrency: function toCurrency(amount) {
-      return "£" + Number(amount).toLocaleString();
-    }
   },
   computed: {
     total: function total() {
@@ -16236,6 +16239,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "b-navbar",
+    { attrs: { spaced: "" } },
     [
       _c(
         "template",
@@ -16244,11 +16248,7 @@ var render = function() {
           _c(
             "b-navbar-item",
             { attrs: { tag: "router-link", to: { path: "" } } },
-            [
-              _c("h1", { staticClass: "title is-3 has-text-primary" }, [
-                _vm._v("Salon Finance")
-              ])
-            ]
+            [_c("h1", { staticClass: "title is-3" }, [_vm._v("Salon Finance")])]
           )
         ],
         1
@@ -16268,7 +16268,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-navbar-dropdown",
-            { attrs: { label: "Info" } },
+            { attrs: { label: "More" } },
             [
               _c(
                 "b-navbar-item",
@@ -16351,9 +16351,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "section" }, [
-    _c("h1", { staticClass: "title is-4 has-text-primary" }, [
-      _vm._v("Cost Input")
-    ]),
+    _c("h1", { staticClass: "title is-4" }, [_vm._v("Cost Input")]),
     _vm._v(" "),
     _c("div", { staticClass: "field" }, [
       _c("label", { staticClass: "label" }, [_vm._v("Search")]),
@@ -16438,30 +16436,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("p", { staticClass: "is-size-3 has-text-danger" }, [
-      _vm._v("Profit/loss: " + _vm._s(_vm.pl))
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "section" }, [
-      _c("h1", { staticClass: "title is-3 has-text-primary" }, [
-        _vm._v("Salon Profit/loss")
-      ]),
+  return _c(
+    "div",
+    { staticClass: "section" },
+    [
+      _c("TotalTakings"),
       _vm._v(" "),
-      _c("h1", { staticClass: "subtitle has-text-primary" }, [
-        _vm._v("July/Aug/Sept/Oct")
+      _c("CostTotals"),
+      _vm._v(" "),
+      _c("p", { staticClass: "is-size-3 has-text-danger" }, [
+        _vm._v("Profit/loss: " + _vm._s(_vm.pl))
       ])
-    ])
-  }
-]
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -16484,7 +16474,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "section" }, [
-    _c("h1", { staticClass: "title is-4 has-text-primary" }, [_vm._v("Costs")]),
+    _c("h1", { staticClass: "title is-4" }, [_vm._v("Costs")]),
     _vm._v(" "),
     _c("table", { staticClass: "table" }, [
       _vm._m(0),
@@ -16877,15 +16867,17 @@ var render = function() {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(_vm._f("moment")(t.month_year, "MMMM")))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(t.services))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.services)))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(t.products))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.products)))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(t.fl_services))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.fl_services)))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(t.fl_products))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.fl_products)))]),
             _vm._v(" "),
-            _c("td", [_c("strong", [_vm._v(_vm._s(t.total))])])
+            _c("td", [
+              _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(t.total)))])
+            ])
           ])
         })
       ],
@@ -16953,15 +16945,17 @@ var render = function() {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(_vm._f("moment")(t.month_year, "MMMM")))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(t.services))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.services)))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(t.products))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.products)))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(t.fl_services))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.fl_services)))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(t.fl_products))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.fl_products)))]),
             _vm._v(" "),
-            _c("td", [_c("strong", [_vm._v(_vm._s(t.total))])])
+            _c("td", [
+              _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(t.total)))])
+            ])
           ])
         })
       ],
@@ -17029,15 +17023,17 @@ var render = function() {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(_vm._f("moment")(t.month_year, "MMMM")))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(t.services))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.services)))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(t.products))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.products)))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(t.fl_services))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.fl_services)))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(t.fl_products))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.fl_products)))]),
             _vm._v(" "),
-            _c("td", [_c("strong", [_vm._v(_vm._s(t.total))])])
+            _c("td", [
+              _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(t.total)))])
+            ])
           ])
         })
       ],
@@ -17045,7 +17041,7 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("p", { staticClass: "is-size-3" }, [
-      _vm._v("Total: £" + _vm._s(_vm.total))
+      _vm._v("Total: " + _vm._s(_vm._f("toCurrency")(_vm.total)))
     ])
   ])
 }
@@ -17099,15 +17095,17 @@ var render = function() {
       _vm._m(0),
       _vm._v(" "),
       _c("tr", [
-        _c("td", [_vm._v(_vm._s(_vm.serviceTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.serviceTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.productTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.productTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.flServiceTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.flServiceTotal)))]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.flProductTotal))]),
+        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.flProductTotal)))]),
         _vm._v(" "),
-        _c("td", [_c("strong", [_vm._v(_vm._s(_vm.grandTotal))])])
+        _c("td", [
+          _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.grandTotal)))])
+        ])
       ])
     ])
   ])
@@ -36956,6 +36954,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: _routes__WEBPACK_IMPORTED_MODULE_3__["routes"]
 });
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter("toCurrency", function (amount) {
+  return "£" + Number(amount).toLocaleString();
+});
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
   router: router,
@@ -37627,8 +37628,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/adam-home/GoSites/salon-finance/src/js/app.js */"./src/js/app.js");
-module.exports = __webpack_require__(/*! /Users/adam-home/GoSites/salon-finance/src/app.scss */"./src/app.scss");
+__webpack_require__(/*! /Users/adam-macbook/GoSites/salon-finance/src/js/app.js */"./src/js/app.js");
+module.exports = __webpack_require__(/*! /Users/adam-macbook/GoSites/salon-finance/src/app.scss */"./src/app.scss");
 
 
 /***/ })

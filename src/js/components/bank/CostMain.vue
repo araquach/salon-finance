@@ -1,15 +1,20 @@
 <template>
-    <div class="container">
-        <div class="section">
-            <h1 class="title is-3 has-text-primary">Salon Profit/loss</h1>
-            <h1 class="subtitle has-text-primary">July/Aug/Sept/Oct</h1>
-        </div>
+    <div class="section">
+
+        <TotalTakings/>
+        <CostTotals/>
+
         <p class="is-size-3 has-text-danger">Profit/loss: {{pl}}</p>
     </div>
 </template>
 
 <script>
+    import CostTotals from "./CostTotals";
+    import TotalTakings from "../takings/TotalTakings";
+
     export default {
+        components: {TotalTakings, CostTotals},
+
         data() {
             return {
                 takings: [],
