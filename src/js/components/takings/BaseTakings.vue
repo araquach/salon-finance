@@ -21,7 +21,7 @@
                 <td><strong>{{t.total | toCurrency}}</strong></td>
             </tr>
         </table>
-        <p class="is-size-3">Total: &pound;{{total}}</p>
+        <p class="is-size-3">Total: {{total | toCurrency}}</p>
     </div>
 </template>
 <script>

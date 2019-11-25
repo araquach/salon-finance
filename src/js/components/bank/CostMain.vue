@@ -4,7 +4,7 @@
         <TotalTakings/>
         <CostTotals/>
 
-        <p class="is-size-3 has-text-danger">Profit/loss: {{pl}}</p>
+        <p :class="{'has-text-danger' : switchPosNeg}" class="is-size-3 has-text-success">Profit/loss: {{pl}}</p>
     </div>
 </template>
 
@@ -19,6 +19,13 @@
             return {
                 takings: [],
                 costs: []
+            }
+        },
+
+        methods: {
+            switchPosNeg() {
+                let pos = true
+
             }
         },
 
