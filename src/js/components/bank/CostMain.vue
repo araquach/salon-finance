@@ -4,7 +4,7 @@
         <TotalTakings/>
         <CostTotals/>
 
-        <p :class="{'has-text-danger' : switchPosNeg}" class="is-size-3 has-text-success">Profit/loss: {{pl}}</p>
+        <p class="is-size-3 has-text-danger">Profit/loss: {{pl}}</p>
     </div>
 </template>
 
@@ -22,13 +22,6 @@
             }
         },
 
-        methods: {
-            switchPosNeg() {
-                let pos = true
-
-            }
-        },
-
         computed: {
             grandTotal() {
                 return this.takings.reduce((sum, val) => sum + val.total, 0)
@@ -37,7 +30,7 @@
                 return this.costs.reduce((sum, val) => sum + val.debit_amount, 0)
             },
             pl() {
-                return "£" + (this.grandTotal - this.totalCosts).toFixed(2)
+                return "£" + (this.grandTotal - this.totalCosts).toLocaleString()
             }
         },
 

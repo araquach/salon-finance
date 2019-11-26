@@ -5,7 +5,7 @@
         <div class="field">
             <label class="label">Search</label>
             <div class="control">
-                <input v-model="search" class="input" type="text" placeholder="Search">
+                <input v-model="search" class="input has-text-primary" type="text" placeholder="Search">
             </div>
         </div>
 
