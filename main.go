@@ -125,7 +125,7 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 	if (salon == "All") {
 		db.Find(&t)
 	} else {
-		db.Where("salon = ?", salon).Find(&t)
+		db.Order("month_year").Where("salon = ?", salon).Find(&t)
 		db.Close()
 	}
 
