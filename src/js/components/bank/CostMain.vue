@@ -1,20 +1,20 @@
 <template>
     <div class="section">
-
-        <TotalTakings/>
-        <CostTotals/>
-
-        <p class="is-size-3 has-text-danger">Profit/loss: {{pl}}</p>
+        <table class="table is-size-4">
+            <tr>
+                <th>Profit/Loss</th>
+                <th>Monthly Profit/Loss</th>
+            </tr>
+            <tr>
+                <td class="has-text-danger">{{pl | toCurrency}}</td>
+                <td class="has-text-danger">{{plAverage | toCurrency}}</td>
+            </tr>
+        </table>
     </div>
 </template>
 
 <script>
-    import CostTotals from "./CostTotals";
-    import TotalTakings from "../takings/TotalTakings";
-
     export default {
-        components: {TotalTakings, CostTotals},
-
         data() {
             return {
                 takings: [],
@@ -30,7 +30,10 @@
                 return this.costs.reduce((sum, val) => sum + val.debit_amount, 0)
             },
             pl() {
-                return "£" + (this.grandTotal - this.totalCosts).toLocaleString()
+                return (this.grandTotal - this.totalCosts).toFixed(2)
+            },
+            plAverage() {
+                return ((this.grandTotal - this.totalCosts) / 7).toFixed(2)
             }
         },
 

@@ -10,6 +10,7 @@
                 <th>FL Services</th>
                 <th>FL Products</th>
                 <th><strong>Grand Total</strong></th>
+                <th>Monthly Average</th>
             </tr>
             <tr>
                 <td>{{serviceTotal | toCurrency}}</td>
@@ -17,6 +18,7 @@
                 <td>{{flServiceTotal | toCurrency}}</td>
                 <td>{{flProductTotal | toCurrency}}</td>
                 <td><strong>{{grandTotal | toCurrency}}</strong></td>
+                <td>{{grandTotalAverage | toCurrency}}</td>
             </tr>
         </table>
     </div>
@@ -32,6 +34,9 @@
         computed: {
             grandTotal() {
                 return this.t.reduce((sum, val) => sum + val.total, 0).toFixed(2);
+            },
+            grandTotalAverage() {
+                return (this.grandTotal / 7).toFixed(2)
             },
             serviceTotal() {
                 return this.t.reduce((sum, val) => sum + val.services, 0).toFixed(2);
