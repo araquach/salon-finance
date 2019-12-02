@@ -2258,7 +2258,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      numMonths: 7,
+      numMonths: 8,
       costs: [],
       wages: [],
       freelance: [],
@@ -2843,7 +2843,7 @@ __webpack_require__.r(__webpack_exports__);
       }, 0).toFixed(2);
     },
     grandTotalAverage: function grandTotalAverage() {
-      return (this.grandTotal / 7).toFixed(2);
+      return (this.grandTotal / 8).toFixed(2);
     },
     serviceTotal: function serviceTotal() {
       return this.t.reduce(function (sum, val) {
@@ -38021,14 +38021,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./src/js/components/takings/TotalTakings.vue ***!
   \****************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TotalTakings_vue_vue_type_template_id_85bddd12___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TotalTakings.vue?vue&type=template&id=85bddd12& */ "./src/js/components/takings/TotalTakings.vue?vue&type=template&id=85bddd12&");
 /* harmony import */ var _TotalTakings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TotalTakings.vue?vue&type=script&lang=js& */ "./src/js/components/takings/TotalTakings.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _TotalTakings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _TotalTakings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -38058,7 +38059,7 @@ component.options.__file = "src/js/components/takings/TotalTakings.vue"
 /*!*****************************************************************************!*\
   !*** ./src/js/components/takings/TotalTakings.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

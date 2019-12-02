@@ -41,16 +41,6 @@ type Takings struct {
 }
 
 func dbConn() (db *gorm.DB) {
-	//dbhost     := os.Getenv("DB_HOST")
-	//dbport     := os.Getenv("DB_PORT")
-	//dbuser     := os.Getenv("DB_USER")
-	//dbpassword := os.Getenv("DB_PASSWORD")
-	//dbname     := os.Getenv("DB_NAME")
-	//
-	//psqlInfo := fmt.Sprintf("host=%s port=%s user=%s "+
-	//	"password=%s dbname=%s sslmode=disable",
-	//	dbhost, dbport, dbuser, dbpassword, dbname)
-
 	db, err := gorm.Open("postgres", os.Getenv("HEROKU_POSTGRESQL_PINK_URL"))
 	if err != nil {
 		panic(err)
@@ -76,7 +66,7 @@ func apiBankData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	db := dbConn()
 	bd := []BankData{}
-	db.Where("category = ?", "None").Find(&bd)
+	db.Find(&bd)
 	db.Close()
 
 	json, err := json.Marshal(bd)
