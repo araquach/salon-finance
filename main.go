@@ -76,7 +76,7 @@ func apiBankData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	db := dbConn()
 	bd := []BankData{}
-	db.Where("debit_amount != 0").Find(&bd)
+	db.Where("Category = ?", "None").Find(&bd)
 	db.Close()
 
 	json, err := json.Marshal(bd)
