@@ -7,15 +7,9 @@
         </template>
         <template slot="start">
             <b-navbar-item tag="router-link" to="/">
-                Home
+                Dashboard
             </b-navbar-item>
-            <b-navbar-item tag="router-link" to="/costs">
-                Costs
-            </b-navbar-item>
-            <b-navbar-dropdown label="More">
-                <b-navbar-item tag="router-link" to="/input">
-                    Input
-                </b-navbar-item>
+            <b-navbar-dropdown label="Menu">
                 <b-navbar-item tag="router-link" to="/total">
                     Total
                 </b-navbar-item>
@@ -27,6 +21,9 @@
                 </b-navbar-item>
                 <b-navbar-item tag="router-link" to="/base">
                     Base
+                </b-navbar-item>
+                <b-navbar-item tag="router-link" to="/input">
+                    Category Input
                 </b-navbar-item>
             </b-navbar-dropdown>
         </template>
