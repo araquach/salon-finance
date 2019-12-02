@@ -112,7 +112,7 @@
     export default {
         data() {
             return {
-                numMonths: 7,
+                numMonths: 8,
                 costs: [],
                 wages: [],
                 freelance: [],
