@@ -2822,6 +2822,11 @@ __webpack_require__.r(__webpack_exports__);
       t: []
     };
   },
+  filters: {
+    addVat: function addVat(t) {
+      return parseFloat(t) + parseFloat(t) * .25;
+    }
+  },
   computed: {
     total: function total() {
       return this.t.reduce(function (sum, val) {
@@ -2881,6 +2886,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       t: []
     };
+  },
+  filters: {
+    addVat: function addVat(t) {
+      return parseFloat(t) + parseFloat(t) * .25;
+    }
   },
   computed: {
     grandTotal: function grandTotal() {
@@ -17498,13 +17508,25 @@ var render = function() {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(_vm._f("moment")(t.month_year, "MMMM")))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.services)))]),
+            _c("td", [
+              _vm._v(_vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.services))))
+            ]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.products)))]),
+            _c("td", [
+              _vm._v(_vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.products))))
+            ]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.fl_services)))]),
+            _c("td", [
+              _vm._v(
+                _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.fl_services)))
+              )
+            ]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.fl_products)))]),
+            _c("td", [
+              _vm._v(
+                _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.fl_products)))
+              )
+            ]),
             _vm._v(" "),
             _c("td", [
               _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(t.total)))])
@@ -17570,13 +17592,29 @@ var render = function() {
       _vm._m(0),
       _vm._v(" "),
       _c("tr", [
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.serviceTotal)))]),
+        _c("td", [
+          _vm._v(
+            _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(_vm.serviceTotal)))
+          )
+        ]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.productTotal)))]),
+        _c("td", [
+          _vm._v(
+            _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(_vm.productTotal)))
+          )
+        ]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.flServiceTotal)))]),
+        _c("td", [
+          _vm._v(
+            _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(_vm.flServiceTotal)))
+          )
+        ]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.flProductTotal)))]),
+        _c("td", [
+          _vm._v(
+            _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(_vm.flProductTotal)))
+          )
+        ]),
         _vm._v(" "),
         _c("td", [
           _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.grandTotal)))])
@@ -38193,15 +38231,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./src/js/components/takings/TotalTakings.vue ***!
   \****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TotalTakings_vue_vue_type_template_id_85bddd12___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TotalTakings.vue?vue&type=template&id=85bddd12& */ "./src/js/components/takings/TotalTakings.vue?vue&type=template&id=85bddd12&");
 /* harmony import */ var _TotalTakings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TotalTakings.vue?vue&type=script&lang=js& */ "./src/js/components/takings/TotalTakings.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _TotalTakings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _TotalTakings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -38231,7 +38268,7 @@ component.options.__file = "src/js/components/takings/TotalTakings.vue"
 /*!*****************************************************************************!*\
   !*** ./src/js/components/takings/TotalTakings.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38325,8 +38362,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/adam-home/GoSites/salon-finance/src/js/app.js */"./src/js/app.js");
-module.exports = __webpack_require__(/*! /Users/adam-home/GoSites/salon-finance/src/app.scss */"./src/app.scss");
+__webpack_require__(/*! /Users/adam-macbook/GoSites/salon-finance/src/js/app.js */"./src/js/app.js");
+module.exports = __webpack_require__(/*! /Users/adam-macbook/GoSites/salon-finance/src/app.scss */"./src/app.scss");
 
 
 /***/ })

@@ -13,10 +13,10 @@
                 <th>Monthly Average</th>
             </tr>
             <tr>
-                <td>{{serviceTotal | toCurrency}}</td>
-                <td>{{productTotal | toCurrency}}</td>
-                <td>{{flServiceTotal | toCurrency}}</td>
-                <td>{{flProductTotal | toCurrency}}</td>
+                <td>{{serviceTotal | addVat | toCurrency}}</td>
+                <td>{{productTotal | addVat | toCurrency}}</td>
+                <td>{{flServiceTotal | addVat| toCurrency}}</td>
+                <td>{{flProductTotal | addVat| toCurrency}}</td>
                 <td><strong>{{grandTotal | toCurrency}}</strong></td>
                 <td>{{grandTotalAverage | toCurrency}}</td>
             </tr>
@@ -28,6 +28,12 @@
         data() {
             return {
                 t: []
+            }
+        },
+
+        filters: {
+            addVat(t) {
+                return parseFloat(t) + (parseFloat(t) * .25)
             }
         },
 

@@ -14,10 +14,10 @@
             </tr>
             <tr v-for="(t, index) in t">
                 <td>{{t.month_year | moment("MMMM")}}</td>
-                <td>{{t.services | toCurrency}}</td>
-                <td>{{t.products | toCurrency}}</td>
-                <td>{{t.fl_services | toCurrency}}</td>
-                <td>{{t.fl_products | toCurrency}}</td>
+                <td>{{t.services | addVat | toCurrency}}</td>
+                <td>{{t.products | addVat | toCurrency}}</td>
+                <td>{{t.fl_services | addVat | toCurrency}}</td>
+                <td>{{t.fl_products | addVat | toCurrency}}</td>
                 <td><strong>{{t.total | toCurrency}}</strong></td>
             </tr>
         </table>
@@ -29,6 +29,12 @@
         data() {
             return {
                 t: []
+            }
+        },
+
+        filters: {
+            addVat(t) {
+                return parseFloat(t) + (parseFloat(t) * .25)
             }
         },
 

@@ -17,7 +17,7 @@
                 <td>{{t.services | addVat | toCurrency}}</td>
                 <td>{{t.products | addVat | toCurrency}}</td>
                 <td>{{t.fl_services | addVat | toCurrency}}</td>
-                <td>{{t.fl_products | addVat |toCurrency}}</td>
+                <td>{{t.fl_products | addVat | toCurrency}}</td>
                 <td><strong>{{t.total | toCurrency}}</strong></td>
             </tr>
         </table>
