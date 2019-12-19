@@ -1974,7 +1974,7 @@ __webpack_require__.r(__webpack_exports__);
 
       return total;
     },
-    takingsByMonth: function takingsByMonth() {
+    monthTakingsFilter: function monthTakingsFilter() {
       var _this2 = this;
 
       var byMonth = [];
@@ -1992,16 +1992,16 @@ __webpack_require__.r(__webpack_exports__);
       return byMonth;
     },
     monthTakingsTotal: function monthTakingsTotal() {
-      var grandTotal = [];
+      var total = [];
 
       for (var i = 0; i < 12; i++) {
         var initialVal = 0;
-        total.push(this.takingsByMonth()[i].reduce(function (acc, current) {
+        total.push(this.monthTakingsFilter()[i].reduce(function (acc, current) {
           return acc + current.total;
         }, initialVal));
       }
 
-      return grandTotal;
+      return total;
     }
   },
   created: function created() {

@@ -42,7 +42,7 @@
                 }
                 return total;
             },
-            takingsByMonth() {
+            monthTakingsFilter() {
                 const byMonth =[];
                 for (let i = 0; i < 12; i++) {
                     byMonth.push(this.takings.filter(d => new Date(d.month_year).getMonth() === i));
@@ -50,12 +50,12 @@
                 return byMonth;
             },
             monthTakingsTotal() {
-                const grandTotal = [];
+                const total = [];
                 for (let i = 0; i < 12; i++) {
                     let initialVal = 0;
-                    total.push(this.takingsByMonth()[i].reduce((acc, current) => acc + current.total, initialVal));
+                    total.push(this.monthTakingsFilter()[i].reduce((acc, current) => acc + current.total, initialVal));
                 }
-                return grandTotal;
+                return total;
             },
         },
 
