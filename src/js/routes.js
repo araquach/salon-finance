@@ -6,8 +6,11 @@ import MainTakings from './components/takings/MainTakings'
 import JakTakings from './components/takings/JakTakings'
 import PkTakings from './components/takings/PkTakings'
 import BaseTakings from './components/takings/BaseTakings'
+import ProfitLossMonthlyMonthly from './components/ProfitLoss/ProfitLossMonthly'
 
 import Test from './components/Test'
+import ProfitLossMonthly from "./components/ProfitLoss/ProfitLossMonthly";
+
 
 export const routes = [
 
@@ -20,4 +23,5 @@ export const routes = [
     { path: '/jakata', component: JakTakings},
     { path: '/pk', component: PkTakings},
     { path: '/base', component: BaseTakings},
+    { path: '/profitloss', component: ProfitLossMonthlyMonthly}
 ]

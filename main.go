@@ -19,13 +19,13 @@ var (
 
 type BankData struct {
 	ID					int			`json:"id"`
-	TransDate			time.Time	`json:"trans_date"`
-	TransType			string		`json:"trans_type"`
-	AccountNumber		int			`json:"account_number"`
-	TransDescription 	string		`json:"trans_description"`
-	DebitAmount			float32		`json:"debit_amount"`
-	CreditAmount		float32		`json:"credit_amount"`
-	Balance				float32		`json:"balance"`
+	TransDate			time.Time	`json:"date"`
+	TransType			string		`json:"-"`
+	AccountNumber		int			`json:"account"`
+	TransDescription 	string		`json:"description"`
+	DebitAmount			float32		`json:"amount"`
+	CreditAmount		float32		`json:"-"`
+	Balance				float32		`json:"-"`
 	Category			string		`json:"category"`
 }
 

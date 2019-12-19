@@ -1,9 +1,9 @@
 <template>
     <tr>
-        <td>{{c.trans_date | moment("MMM")}}</td>
-        <td>{{c.account_number}}</td>
-        <td>{{c.trans_description}}</td>
-        <td>{{c.debit_amount.toFixed(2)}}</td>
+        <td>{{c.date | moment("MMM")}}</td>
+        <td>{{c.account}}</td>
+        <td>{{c.description}}</td>
+        <td>{{c.amount.toFixed(2)}}</td>
         <td>
             <b-dropdown v-model="category" aria-role="list">
                 <button class="button is-primary" slot="trigger">

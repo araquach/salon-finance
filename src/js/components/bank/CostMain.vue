@@ -27,7 +27,7 @@
                 return this.takings.reduce((sum, val) => sum + val.total, 0)
             },
             totalCosts() {
-                return this.costs.reduce((sum, val) => sum + val.debit_amount, 0)
+                return this.costs.reduce((sum, val) => sum + val.amount, 0)
             },
             pl() {
                 return (this.grandTotal - this.totalCosts).toFixed(2)

@@ -22,6 +22,9 @@
                 <b-navbar-item tag="router-link" to="/base">
                     Base
                 </b-navbar-item>
+                <b-navbar-item tag="router-link" to="/profitloss">
+                    Monthly Profit/loss
+                </b-navbar-item>
                 <b-navbar-item tag="router-link" to="/input">
                     Category Input
                 </b-navbar-item>

@@ -1909,6 +1909,119 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      bankData: [],
+      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '0ct', 'Nov', 'Dec'],
+      takings: []
+    };
+  },
+  computed: {
+    monthCostFilter: function monthCostFilter() {
+      var _this = this;
+
+      var byMonth = [];
+
+      var _loop = function _loop(i) {
+        byMonth.push(_this.bankData.filter(function (d) {
+          return new Date(d.date).getMonth() === i;
+        }));
+      };
+
+      for (var i = 0; i < 12; i++) {
+        _loop(i);
+      }
+
+      return byMonth;
+    },
+    monthCostTotal: function monthCostTotal() {
+      var total = [];
+
+      for (var i = 0; i < 12; i++) {
+        var initialVal = 0;
+        total.push(this.monthCostFilter[i].reduce(function (acc, current) {
+          return acc + current.amount;
+        }, initialVal));
+      }
+
+      return total;
+    },
+    takingsByMonth: function takingsByMonth() {
+      var _this2 = this;
+
+      var byMonth = [];
+
+      var _loop2 = function _loop2(i) {
+        byMonth.push(_this2.takings.filter(function (d) {
+          return new Date(d.month_year).getMonth() === i;
+        }));
+      };
+
+      for (var i = 0; i < 12; i++) {
+        _loop2(i);
+      }
+
+      return byMonth;
+    },
+    monthTakingsTotal: function monthTakingsTotal() {
+      var grandTotal = [];
+
+      for (var i = 0; i < 12; i++) {
+        var initialVal = 0;
+        total.push(this.takingsByMonth()[i].reduce(function (acc, current) {
+          return acc + current.total;
+        }, initialVal));
+      }
+
+      return grandTotal;
+    }
+  },
+  created: function created() {
+    var _this3 = this;
+
+    axios.get('/api/bankdata').then(function (response) {
+      return _this3.bankData = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    axios.get('/api/takings/All').then(function (response) {
+      return _this3.takings = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/Test.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/Test.vue?vue&type=script&lang=js& ***!
@@ -2045,14 +2158,14 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     total: function total() {
       return this.costs.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     filteredItem: function filteredItem() {
       var _this = this;
 
       return this.costs.filter(function (item) {
-        return item.trans_description.toLowerCase().indexOf(_this.search.toLowerCase()) > -1;
+        return item.description.toLowerCase().indexOf(_this.search.toLowerCase()) > -1;
       });
     }
   },
@@ -2108,7 +2221,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     totalCosts: function totalCosts() {
       return this.costs.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0);
     },
     pl: function pl() {
@@ -2280,7 +2393,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     total: function total() {
       return this.costs.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     totalAverage: function totalAverage() {
@@ -2288,7 +2401,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     wagesTotal: function wagesTotal() {
       return this.wages.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     wagesPercent: function wagesPercent() {
@@ -2299,7 +2412,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     freelanceTotal: function freelanceTotal() {
       return this.freelance.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     freelancePercent: function freelancePercent() {
@@ -2310,7 +2423,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     drawingsTotal: function drawingsTotal() {
       return this.drawings.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     drawingsPercent: function drawingsPercent() {
@@ -2321,7 +2434,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     stockTotal: function stockTotal() {
       return this.stock.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     stockPercent: function stockPercent() {
@@ -2332,7 +2445,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     vatTotal: function vatTotal() {
       return this.vat.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     vatPercent: function vatPercent() {
@@ -2343,7 +2456,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     taxTotal: function taxTotal() {
       return this.tax.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     taxPercent: function taxPercent() {
@@ -2354,7 +2467,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     buildingTotal: function buildingTotal() {
       return this.building.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     buildingPercent: function buildingPercent() {
@@ -2365,7 +2478,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     marketingTotal: function marketingTotal() {
       return this.marketing.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     marketingPercent: function marketingPercent() {
@@ -2376,7 +2489,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     condementsTotal: function condementsTotal() {
       return this.condements.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     condementsPercent: function condementsPercent() {
@@ -2387,7 +2500,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     bankTotal: function bankTotal() {
       return this.bank.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     bankPercent: function bankPercent() {
@@ -2398,7 +2511,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     utilitiesTotal: function utilitiesTotal() {
       return this.utilities.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     utilitiesPercent: function utilitiesPercent() {
@@ -2409,7 +2522,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     loansTotal: function loansTotal() {
       return this.loans.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     loansPercent: function loansPercent() {
@@ -2420,7 +2533,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     staffTotal: function staffTotal() {
       return this.staff.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     staffPercent: function staffPercent() {
@@ -2431,7 +2544,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     miscTotal: function miscTotal() {
       return this.misc.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     miscPercent: function miscPercent() {
@@ -2442,7 +2555,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     otherTotal: function otherTotal() {
       return this.other.reduce(function (sum, val) {
-        return sum + val.debit_amount;
+        return sum + val.amount;
       }, 0).toFixed(2);
     },
     otherPercent: function otherPercent() {
@@ -16539,6 +16652,12 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "b-navbar-item",
+                { attrs: { tag: "router-link", to: "/profitloss" } },
+                [_vm._v("\n                Monthly Profit/loss\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "b-navbar-item",
                 { attrs: { tag: "router-link", to: "/input" } },
                 [_vm._v("\n                Category Input\n            ")]
               )
@@ -16587,6 +16706,65 @@ var render = function() {
   )
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=template&id=013430ac&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=template&id=013430ac& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("table", { staticClass: "table is-narrow" }, [
+      _c(
+        "tr",
+        [
+          _c("th", [_vm._v("Months")]),
+          _vm._v(" "),
+          _vm._l(_vm.months, function(month) {
+            return _c("th", [_vm._v(_vm._s(month))])
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "tr",
+        [
+          _c("th", [_vm._v("Costs")]),
+          _vm._v(" "),
+          _vm._l(_vm.monthCostTotal, function(data, index) {
+            return _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(data)))])
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _vm._m(0)
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [_c("th", [_vm._v("Takings")])])
+  }
+]
 render._withStripped = true
 
 
@@ -17069,13 +17247,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("tr", [
-    _c("td", [_vm._v(_vm._s(_vm._f("moment")(_vm.c.trans_date, "MMM")))]),
+    _c("td", [_vm._v(_vm._s(_vm._f("moment")(_vm.c.date, "MMM")))]),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.c.account_number))]),
+    _c("td", [_vm._v(_vm._s(_vm.c.account))]),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.c.trans_description))]),
+    _c("td", [_vm._v(_vm._s(_vm.c.description))]),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.c.debit_amount.toFixed(2)))]),
+    _c("td", [_vm._v(_vm._s(_vm.c.amount.toFixed(2)))]),
     _vm._v(" "),
     _c(
       "td",
@@ -37606,6 +37784,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/js/components/ProfitLoss/ProfitLossMonthly.vue":
+/*!************************************************************!*\
+  !*** ./src/js/components/ProfitLoss/ProfitLossMonthly.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ProfitLossMonthly_vue_vue_type_template_id_013430ac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProfitLossMonthly.vue?vue&type=template&id=013430ac& */ "./src/js/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=template&id=013430ac&");
+/* harmony import */ var _ProfitLossMonthly_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProfitLossMonthly.vue?vue&type=script&lang=js& */ "./src/js/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ProfitLossMonthly_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ProfitLossMonthly_vue_vue_type_template_id_013430ac___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ProfitLossMonthly_vue_vue_type_template_id_013430ac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/js/components/ProfitLoss/ProfitLossMonthly.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/js/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./src/js/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossMonthly_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ProfitLossMonthly.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossMonthly_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/js/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=template&id=013430ac&":
+/*!*******************************************************************************************!*\
+  !*** ./src/js/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=template&id=013430ac& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossMonthly_vue_vue_type_template_id_013430ac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ProfitLossMonthly.vue?vue&type=template&id=013430ac& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=template&id=013430ac&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossMonthly_vue_vue_type_template_id_013430ac___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossMonthly_vue_vue_type_template_id_013430ac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./src/js/components/Test.vue":
 /*!************************************!*\
   !*** ./src/js/components/Test.vue ***!
@@ -38314,7 +38561,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_takings_JakTakings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/takings/JakTakings */ "./src/js/components/takings/JakTakings.vue");
 /* harmony import */ var _components_takings_PkTakings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/takings/PkTakings */ "./src/js/components/takings/PkTakings.vue");
 /* harmony import */ var _components_takings_BaseTakings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/takings/BaseTakings */ "./src/js/components/takings/BaseTakings.vue");
-/* harmony import */ var _components_Test__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Test */ "./src/js/components/Test.vue");
+/* harmony import */ var _components_ProfitLoss_ProfitLossMonthly__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ProfitLoss/ProfitLossMonthly */ "./src/js/components/ProfitLoss/ProfitLossMonthly.vue");
+/* harmony import */ var _components_Test__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Test */ "./src/js/components/Test.vue");
+
+
 
 
 
@@ -38332,7 +38582,7 @@ var routes = [{
   component: _components_bank_CostMain__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
   path: '/test',
-  component: _components_Test__WEBPACK_IMPORTED_MODULE_8__["default"]
+  component: _components_Test__WEBPACK_IMPORTED_MODULE_9__["default"]
 }, {
   path: '/costs',
   component: _components_bank_CostTotals__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -38351,6 +38601,9 @@ var routes = [{
 }, {
   path: '/base',
   component: _components_takings_BaseTakings__WEBPACK_IMPORTED_MODULE_7__["default"]
+}, {
+  path: '/profitloss',
+  component: _components_ProfitLoss_ProfitLossMonthly__WEBPACK_IMPORTED_MODULE_8__["default"]
 }];
 
 /***/ }),
@@ -38362,8 +38615,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/adam-macbook/GoSites/salon-finance/src/js/app.js */"./src/js/app.js");
-module.exports = __webpack_require__(/*! /Users/adam-macbook/GoSites/salon-finance/src/app.scss */"./src/app.scss");
+__webpack_require__(/*! /Users/imac-work/GoSites/salon-finance/src/js/app.js */"./src/js/app.js");
+module.exports = __webpack_require__(/*! /Users/imac-work/GoSites/salon-finance/src/app.scss */"./src/app.scss");
 
 
 /***/ })

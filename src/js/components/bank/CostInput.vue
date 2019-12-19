@@ -38,12 +38,12 @@
 
         computed: {
             total() {
-                return this.costs.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.costs.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
 
             filteredItem() {
                 return this.costs.filter(item => {
-                    return item.trans_description.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+                    return item.description.toLowerCase().indexOf(this.search.toLowerCase()) > -1
                 })
             }
         },

@@ -134,13 +134,13 @@
 
         computed: {
             total() {
-                return this.costs.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.costs.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             totalAverage() {
                 return (parseInt(this.total) / parseInt(this.numMonths)).toFixed(2)
             },
             wagesTotal() {
-                return this.wages.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.wages.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             wagesPercent() {
                 return (parseInt(this.wagesTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -149,7 +149,7 @@
                 return (parseInt(this.wagesTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             freelanceTotal() {
-                return this.freelance.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.freelance.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             freelancePercent() {
                 return (parseInt(this.freelanceTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -158,7 +158,7 @@
                 return (parseInt(this.freelanceTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             drawingsTotal() {
-                return this.drawings.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.drawings.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             drawingsPercent() {
                 return (parseInt(this.drawingsTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -167,7 +167,7 @@
                 return (parseInt(this.drawingsTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             stockTotal() {
-                return this.stock.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.stock.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             stockPercent() {
                 return (parseInt(this.stockTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -176,7 +176,7 @@
                 return (parseInt(this.stockTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             vatTotal() {
-                return this.vat.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.vat.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             vatPercent() {
                 return (parseInt(this.vatTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -185,7 +185,7 @@
                 return (parseInt(this.vatTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             taxTotal() {
-                return this.tax.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.tax.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             taxPercent() {
                 return (parseInt(this.taxTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -194,7 +194,7 @@
                 return (parseInt(this.taxTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             buildingTotal() {
-                return this.building.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.building.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             buildingPercent() {
                 return (parseInt(this.buildingTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -203,7 +203,7 @@
                 return (parseInt(this.buildingTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             marketingTotal() {
-                return this.marketing.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.marketing.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             marketingPercent() {
                 return (parseInt(this.marketingTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -212,7 +212,7 @@
                 return (parseInt(this.marketingTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             condementsTotal() {
-                return this.condements.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.condements.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             condementsPercent() {
                 return (parseInt(this.condementsTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -221,7 +221,7 @@
                 return (parseInt(this.condementsTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             bankTotal() {
-                return this.bank.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.bank.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             bankPercent() {
                 return (parseInt(this.bankTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -230,7 +230,7 @@
                 return (parseInt(this.bankTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             utilitiesTotal() {
-                return this.utilities.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.utilities.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             utilitiesPercent() {
                 return (parseInt(this.utilitiesTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -239,7 +239,7 @@
                 return (parseInt(this.utilitiesTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             loansTotal() {
-                return this.loans.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.loans.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             loansPercent() {
                 return (parseInt(this.loansTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -248,7 +248,7 @@
                 return (parseInt(this.loansTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             staffTotal() {
-                return this.staff.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.staff.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             staffPercent() {
                 return (parseInt(this.staffTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -257,7 +257,7 @@
                 return (parseInt(this.staffTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             miscTotal() {
-                return this.misc.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.misc.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             miscPercent() {
                 return (parseInt(this.miscTotal) / parseInt(this.total) * 100).toFixed(1)
@@ -266,7 +266,7 @@
                 return (parseInt(this.miscTotal) / parseInt(this.numMonths)).toFixed(2)
             },
             otherTotal() {
-                return this.other.reduce((sum, val) => sum + val.debit_amount, 0).toFixed(2)
+                return this.other.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             },
             otherPercent() {
                 return (parseInt(this.otherTotal) / parseInt(this.total) * 100).toFixed(1)
