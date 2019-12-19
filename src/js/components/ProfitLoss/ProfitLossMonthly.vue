@@ -21,8 +21,8 @@
         data()  {
             return {
                 bankData: [],
+                takings: [],
                 months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '0ct', 'Nov', 'Dec'],
-                takings: []
             }
         },
 
@@ -50,12 +50,12 @@
                 return byMonth;
             },
             monthTakingsTotal() {
-                const total = [];
+                const all = [];
                 for (let i = 0; i < 12; i++) {
                     let initialVal = 0;
                     total.push(this.monthTakingsFilter()[i].reduce((acc, current) => acc + current.total, initialVal));
                 }
-                return total;
+                return all;
             },
         },
 

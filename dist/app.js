@@ -1940,8 +1940,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       bankData: [],
-      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '0ct', 'Nov', 'Dec'],
-      takings: []
+      takings: [],
+      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '0ct', 'Nov', 'Dec']
     };
   },
   computed: {
@@ -1992,7 +1992,7 @@ __webpack_require__.r(__webpack_exports__);
       return byMonth;
     },
     monthTakingsTotal: function monthTakingsTotal() {
-      var total = [];
+      var all = [];
 
       for (var i = 0; i < 12; i++) {
         var initialVal = 0;
@@ -2001,7 +2001,7 @@ __webpack_require__.r(__webpack_exports__);
         }, initialVal));
       }
 
-      return total;
+      return all;
     }
   },
   created: function created() {
