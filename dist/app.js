@@ -1936,6 +1936,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1945,7 +1949,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    monthCostFilter: function monthCostFilter() {
+    monthCostTotal: function monthCostTotal() {
       var _this = this;
 
       var byMonth = [];
@@ -1960,21 +1964,18 @@ __webpack_require__.r(__webpack_exports__);
         _loop(i);
       }
 
-      return byMonth;
-    },
-    monthCostTotal: function monthCostTotal() {
       var total = [];
 
-      for (var i = 0; i < 12; i++) {
+      for (var _i = 0; _i < 12; _i++) {
         var initialVal = 0;
-        total.push(this.monthCostFilter[i].reduce(function (acc, current) {
+        total.push(byMonth[_i].reduce(function (acc, current) {
           return acc + current.amount;
         }, initialVal));
       }
 
       return total;
     },
-    monthTakingsFilter: function monthTakingsFilter() {
+    monthTakingsTotal: function monthTakingsTotal() {
       var _this2 = this;
 
       var byMonth = [];
@@ -1989,16 +1990,22 @@ __webpack_require__.r(__webpack_exports__);
         _loop2(i);
       }
 
-      return byMonth;
+      var total = [];
+
+      for (var _i2 = 0; _i2 < 12; _i2++) {
+        var initialVal = 0;
+        total.push(byMonth[_i2].reduce(function (acc, current) {
+          return acc + current.total;
+        }, initialVal));
+      }
+
+      return total;
     },
-    monthTakingsTotal: function monthTakingsTotal() {
+    monthProfitLoss: function monthProfitLoss() {
       var total = [];
 
       for (var i = 0; i < 12; i++) {
-        var initialVal = 0;
-        total.push(this.monthTakingsFilter[i].reduce(function (acc, current) {
-          return acc + current.total;
-        }, initialVal));
+        total.push(this.monthTakingsTotal[i] - this.monthCostTotal[i]);
       }
 
       return total;
@@ -16759,6 +16766,18 @@ var render = function() {
           _c("th", [_vm._v("Takings")]),
           _vm._v(" "),
           _vm._l(_vm.monthTakingsTotal, function(data, index) {
+            return _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(data)))])
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "tr",
+        [
+          _c("th", [_vm._v("Profit/Loss")]),
+          _vm._v(" "),
+          _vm._l(_vm.monthProfitLoss, function(data, index) {
             return _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(data)))])
           })
         ],

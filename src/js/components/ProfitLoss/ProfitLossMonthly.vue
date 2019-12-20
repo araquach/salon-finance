@@ -13,6 +13,10 @@
                 <th>Takings</th>
                 <td v-for="(data, index) in monthTakingsTotal">{{data | toCurrency}}</td>
             </tr>
+            <tr>
+                <th>Profit/Loss</th>
+                <td v-for="(data, index) in monthProfitLoss">{{data | toCurrency}}</td>
+            </tr>
         </table>
     </div>
 </template>
@@ -27,33 +31,36 @@
         },
 
         computed: {
-            monthCostFilter() {
+            monthCostTotal() {
                 const byMonth = [];
                 for (let i = 0; i < 12; i++) {
                     byMonth.push(this.bankData.filter(d => new Date(d.date).getMonth() === i));
                 }
-                return byMonth;
-            },
-            monthCostTotal() {
                 const total = [];
                 for (let i = 0; i < 12; i++) {
                     let initialVal = 0;
-                    total.push(this.monthCostFilter[i].reduce((acc, current) => acc + current.amount, initialVal));
+                    total.push(byMonth[i].reduce((acc, current) => acc + current.amount, initialVal));
                 }
                 return total;
             },
-            monthTakingsFilter() {
+
+            monthTakingsTotal() {
                 const byMonth =[];
                 for (let i = 0; i < 12; i++) {
                     byMonth.push(this.takings.filter(d => new Date(d.month_year).getMonth() === i));
                 }
-                return byMonth;
-            },
-            monthTakingsTotal() {
                 const total = [];
                 for (let i = 0; i < 12; i++) {
                     let initialVal = 0;
-                    total.push(this.monthTakingsFilter[i].reduce((acc, current) => acc + current.total, initialVal));
+                    total.push(byMonth[i].reduce((acc, current) => acc + current.total, initialVal));
+                }
+                return total;
+            },
+
+            monthProfitLoss() {
+                const total = [];
+                for (let i = 0; i < 12; i++) {
+                    total.push(this.monthTakingsTotal[i] - this.monthCostTotal[i]);
                 }
                 return total;
             }
