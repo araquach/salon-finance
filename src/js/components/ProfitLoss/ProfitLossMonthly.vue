@@ -11,7 +11,7 @@
             </tr>
             <tr>
                 <th>Takings</th>
-
+                <td v-for="(data, index) in monthTakingsTotal">{{data | toCurrency}}</td>
             </tr>
         </table>
     </div>
@@ -50,13 +50,13 @@
                 return byMonth;
             },
             monthTakingsTotal() {
-                const all = [];
+                const total = [];
                 for (let i = 0; i < 12; i++) {
                     let initialVal = 0;
-                    total.push(this.monthTakingsFilter()[i].reduce((acc, current) => acc + current.total, initialVal));
+                    total.push(this.monthTakingsFilter[i].reduce((acc, current) => acc + current.total, initialVal));
                 }
-                return all;
-            },
+                return total;
+            }
         },
 
         created() {

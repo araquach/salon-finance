@@ -1992,16 +1992,16 @@ __webpack_require__.r(__webpack_exports__);
       return byMonth;
     },
     monthTakingsTotal: function monthTakingsTotal() {
-      var all = [];
+      var total = [];
 
       for (var i = 0; i < 12; i++) {
         var initialVal = 0;
-        total.push(this.monthTakingsFilter()[i].reduce(function (acc, current) {
+        total.push(this.monthTakingsFilter[i].reduce(function (acc, current) {
           return acc + current.total;
         }, initialVal));
       }
 
-      return all;
+      return total;
     }
   },
   created: function created() {
@@ -16753,18 +16753,21 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _vm._m(0)
+      _c(
+        "tr",
+        [
+          _c("th", [_vm._v("Takings")]),
+          _vm._v(" "),
+          _vm._l(_vm.monthTakingsTotal, function(data, index) {
+            return _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(data)))])
+          })
+        ],
+        2
+      )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [_c("th", [_vm._v("Takings")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
