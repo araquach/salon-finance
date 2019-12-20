@@ -1887,7 +1887,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bank_CostMain__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bank/CostMain */ "./src/js/components/bank/CostMain.vue");
-/* harmony import */ var _bank_CostTotals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bank/CostTotals */ "./src/js/components/bank/CostTotals.vue");
+/* harmony import */ var _bank_CostTotals1__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bank/CostTotals1 */ "./src/js/components/bank/CostTotals1.vue");
 /* harmony import */ var _takings_TotalTakings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./takings/TotalTakings */ "./src/js/components/takings/TotalTakings.vue");
 //
 //
@@ -1902,7 +1902,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     CostMain: _bank_CostMain__WEBPACK_IMPORTED_MODULE_0__["default"],
-    CostTotals: _bank_CostTotals__WEBPACK_IMPORTED_MODULE_1__["default"],
+    CostTotals: _bank_CostTotals1__WEBPACK_IMPORTED_MODULE_1__["default"],
     TotalTakings: _takings_TotalTakings__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
@@ -2256,10 +2256,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals1.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostTotals1.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17046,10 +17046,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33&":
-/*!************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33& ***!
-  \************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals1.vue?vue&type=template&id=18dfae0e&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostTotals1.vue?vue&type=template&id=18dfae0e& ***!
+  \*************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -38082,17 +38082,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/components/bank/CostTotals.vue":
-/*!***********************************************!*\
-  !*** ./src/js/components/bank/CostTotals.vue ***!
-  \***********************************************/
+/***/ "./src/js/components/bank/CostTotals1.vue":
+/*!************************************************!*\
+  !*** ./src/js/components/bank/CostTotals1.vue ***!
+  \************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CostTotals.vue?vue&type=template&id=090f2a33& */ "./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33&");
-/* harmony import */ var _CostTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CostTotals.vue?vue&type=script&lang=js& */ "./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CostTotals1_vue_vue_type_template_id_18dfae0e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CostTotals1.vue?vue&type=template&id=18dfae0e& */ "./src/js/components/bank/CostTotals1.vue?vue&type=template&id=18dfae0e&");
+/* harmony import */ var _CostTotals1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CostTotals1.vue?vue&type=script&lang=js& */ "./src/js/components/bank/CostTotals1.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -38102,9 +38102,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CostTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _CostTotals1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CostTotals1_vue_vue_type_template_id_18dfae0e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CostTotals1_vue_vue_type_template_id_18dfae0e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -38114,38 +38114,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "src/js/components/bank/CostTotals.vue"
+component.options.__file = "src/js/components/bank/CostTotals1.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js&":
-/*!************************************************************************!*\
-  !*** ./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js& ***!
-  \************************************************************************/
+/***/ "./src/js/components/bank/CostTotals1.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./src/js/components/bank/CostTotals1.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CostTotals.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CostTotals1.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals1.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33&":
-/*!******************************************************************************!*\
-  !*** ./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33& ***!
-  \******************************************************************************/
+/***/ "./src/js/components/bank/CostTotals1.vue?vue&type=template&id=18dfae0e&":
+/*!*******************************************************************************!*\
+  !*** ./src/js/components/bank/CostTotals1.vue?vue&type=template&id=18dfae0e& ***!
+  \*******************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CostTotals.vue?vue&type=template&id=090f2a33& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals1_vue_vue_type_template_id_18dfae0e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CostTotals1.vue?vue&type=template&id=18dfae0e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals1.vue?vue&type=template&id=18dfae0e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals1_vue_vue_type_template_id_18dfae0e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals1_vue_vue_type_template_id_18dfae0e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -38578,7 +38578,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_MainDashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/MainDashboard */ "./src/js/components/MainDashboard.vue");
 /* harmony import */ var _components_bank_CostMain__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/bank/CostMain */ "./src/js/components/bank/CostMain.vue");
 /* harmony import */ var _components_bank_CostInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/bank/CostInput */ "./src/js/components/bank/CostInput.vue");
-/* harmony import */ var _components_bank_CostTotals__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/bank/CostTotals */ "./src/js/components/bank/CostTotals.vue");
+/* harmony import */ var _components_bank_CostTotals1__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/bank/CostTotals1 */ "./src/js/components/bank/CostTotals1.vue");
 /* harmony import */ var _components_takings_MainTakings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/takings/MainTakings */ "./src/js/components/takings/MainTakings.vue");
 /* harmony import */ var _components_takings_JakTakings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/takings/JakTakings */ "./src/js/components/takings/JakTakings.vue");
 /* harmony import */ var _components_takings_PkTakings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/takings/PkTakings */ "./src/js/components/takings/PkTakings.vue");
@@ -38607,7 +38607,7 @@ var routes = [{
   component: _components_Test__WEBPACK_IMPORTED_MODULE_9__["default"]
 }, {
   path: '/costs',
-  component: _components_bank_CostTotals__WEBPACK_IMPORTED_MODULE_3__["default"]
+  component: _components_bank_CostTotals1__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
   path: '/input',
   component: _components_bank_CostInput__WEBPACK_IMPORTED_MODULE_2__["default"]
