@@ -29,9 +29,11 @@
             totalAverage() {
                 return (parseInt(this.total) / parseInt(this.numMonths)).toFixed(2)
             },
-            categoryTotal() {
-
+            categoryTotal_backup() {
                 return this.wages.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
+            },
+            categoryTotal() {
+                return this.categories.forEach(element => element.reduce((sum, val) => sum + val.amount, 0).toFixed(2));
             },
             categoryPercent() {
                 return (parseInt(this.wagesTotal) / parseInt(this.total) * 100).toFixed(1)

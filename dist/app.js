@@ -1887,7 +1887,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bank_CostMain__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bank/CostMain */ "./src/js/components/bank/CostMain.vue");
-/* harmony import */ var _bank_CostTotals1__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bank/CostTotals1 */ "./src/js/components/bank/CostTotals1.vue");
+/* harmony import */ var _bank_CostTotals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bank/CostTotals */ "./src/js/components/bank/CostTotals.vue");
 /* harmony import */ var _takings_TotalTakings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./takings/TotalTakings */ "./src/js/components/takings/TotalTakings.vue");
 //
 //
@@ -1902,7 +1902,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     CostMain: _bank_CostMain__WEBPACK_IMPORTED_MODULE_0__["default"],
-    CostTotals: _bank_CostTotals1__WEBPACK_IMPORTED_MODULE_1__["default"],
+    CostTotals: _bank_CostTotals__WEBPACK_IMPORTED_MODULE_1__["default"],
     TotalTakings: _takings_TotalTakings__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
@@ -2246,6 +2246,81 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (error) {
       console.log(error);
     });
+    axios.get('/api/bankdata').then(function (response) {
+      return _this.costs = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      numMonths: 8,
+      costs: [],
+      categories: ['Wages', 'Freelance', 'Drawings', 'Stock', 'Vat', 'Tax', 'Building', 'Marketing', 'Condements', 'Bank', 'Utilities', 'Loans', 'Staff', 'Misc', 'Other']
+    };
+  },
+  computed: {
+    totalAverage: function totalAverage() {
+      return (parseInt(this.total) / parseInt(this.numMonths)).toFixed(2);
+    },
+    categoryTotal_backup: function categoryTotal_backup() {
+      return this.wages.reduce(function (sum, val) {
+        return sum + val.amount;
+      }, 0).toFixed(2);
+    },
+    categoryTotal: function categoryTotal() {
+      return this.categories.forEach(function (element) {
+        return element.reduce(function (sum, val) {
+          return sum + val.amount;
+        }, 0).toFixed(2);
+      });
+    },
+    categoryPercent: function categoryPercent() {
+      return (parseInt(this.wagesTotal) / parseInt(this.total) * 100).toFixed(1);
+    },
+    categoryAverage: function categoryAverage() {
+      return (parseInt(this.wagesTotal) / parseInt(this.numMonths)).toFixed(2);
+    },
+    total: function total() {
+      return this.costs.reduce(function (sum, val) {
+        return sum + val.amount;
+      }, 0).toFixed(2);
+    }
+  },
+  created: function created() {
+    var _this = this;
+
     axios.get('/api/bankdata').then(function (response) {
       return _this.costs = response.data;
     })["catch"](function (error) {
@@ -17037,6 +17112,53 @@ var staticRenderFns = [
       _c("th", [_vm._v("Profit/Loss")]),
       _vm._v(" "),
       _c("th", [_vm._v("Monthly Profit/Loss")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "section" }, [
+      _c("h1", { staticClass: "title is-4" }, [_vm._v("Costs")]),
+      _vm._v(" "),
+      _c("table", { staticClass: "table" }, [
+        _c("tr", [
+          _c("th", [_vm._v("Category")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Amount")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Percent")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Average")])
+        ]),
+        _vm._v(" "),
+        _c("tr")
+      ])
     ])
   }
 ]
@@ -38077,6 +38199,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostMain_vue_vue_type_template_id_1b240f86___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostMain_vue_vue_type_template_id_1b240f86___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./src/js/components/bank/CostTotals.vue":
+/*!***********************************************!*\
+  !*** ./src/js/components/bank/CostTotals.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CostTotals.vue?vue&type=template&id=090f2a33& */ "./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33&");
+/* harmony import */ var _CostTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CostTotals.vue?vue&type=script&lang=js& */ "./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CostTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/js/components/bank/CostTotals.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CostTotals.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33&":
+/*!******************************************************************************!*\
+  !*** ./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CostTotals.vue?vue&type=template&id=090f2a33& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals.vue?vue&type=template&id=090f2a33&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
