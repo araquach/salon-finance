@@ -2283,6 +2283,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2311,7 +2312,11 @@ __webpack_require__.r(__webpack_exports__);
       return result;
     },
     categoryPercent: function categoryPercent() {
-      return (parseInt(this.wagesTotal) / parseInt(this.total) * 100).toFixed(1);
+      var percent = [];
+      this.categoryTotal.forEach(function (item) {
+        percent.push(item.amount / this.total * 100);
+      });
+      return percent;
     },
     categoryAverage: function categoryAverage() {
       return (parseInt(this.wagesTotal) / parseInt(this.numMonths)).toFixed(2);
@@ -17153,7 +17158,9 @@ var render = function() {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(category.category))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(category.amount)))])
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(category.amount)))]),
+            _vm._v(" "),
+            _c("td")
           ])
         })
       ],

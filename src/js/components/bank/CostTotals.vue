@@ -11,6 +11,7 @@
             <tr v-for="category in categoryTotal">
                 <td>{{category.category}}</td>
                 <td>{{category.amount | toCurrency}}</td>
+                <td></td>
             </tr>
         </table>
     </div>
@@ -42,7 +43,11 @@
                 return result
             },
             categoryPercent() {
-                return (parseInt(this.wagesTotal) / parseInt(this.total) * 100).toFixed(1)
+                const percent = []
+                this.categoryTotal.forEach(function(item){
+                    percent.push((item.amount / this.total) * 100)
+                })
+                return percent
             },
             categoryAverage() {
                 return (parseInt(this.wagesTotal) / parseInt(this.numMonths)).toFixed(2)
