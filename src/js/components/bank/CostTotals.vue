@@ -8,8 +8,9 @@
                 <th>Percent</th>
                 <th>Average</th>
             </tr>
-            <tr>
-
+            <tr v-for="category in categoryTotal">
+                <td>{{category.category}}</td>
+                <td>{{category.amount | toCurrency}}</td>
             </tr>
         </table>
     </div>
@@ -20,8 +21,7 @@
         data() {
             return {
                 numMonths: 8,
-                costs: [],
-                categories: ['Wages', 'Freelance', 'Drawings', 'Stock', 'Vat', 'Tax', 'Building', 'Marketing', 'Condements', 'Bank', 'Utilities', 'Loans', 'Staff', 'Misc', 'Other']
+                costs: []
             }
         },
 
@@ -29,11 +29,17 @@
             totalAverage() {
                 return (parseInt(this.total) / parseInt(this.numMonths)).toFixed(2)
             },
-            categoryTotal_backup() {
-                return this.wages.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
-            },
             categoryTotal() {
-                return this.categories.forEach(element => element.reduce((sum, val) => sum + val.amount, 0).toFixed(2));
+                const result = [];
+                this.costs.reduce(function(res, value) {
+                    if (!res[value.category]) {
+                        res[value.category] = { category: value.category, amount: 0 }
+                        result.push(res[value.category])
+                    }
+                    res[value.category].amount += value.amount
+                    return res
+                }, {})
+                return result
             },
             categoryPercent() {
                 return (parseInt(this.wagesTotal) / parseInt(this.total) * 100).toFixed(1)

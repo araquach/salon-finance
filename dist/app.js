@@ -2282,29 +2282,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       numMonths: 8,
-      costs: [],
-      categories: ['Wages', 'Freelance', 'Drawings', 'Stock', 'Vat', 'Tax', 'Building', 'Marketing', 'Condements', 'Bank', 'Utilities', 'Loans', 'Staff', 'Misc', 'Other']
+      costs: []
     };
   },
   computed: {
     totalAverage: function totalAverage() {
       return (parseInt(this.total) / parseInt(this.numMonths)).toFixed(2);
     },
-    categoryTotal_backup: function categoryTotal_backup() {
-      return this.wages.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
     categoryTotal: function categoryTotal() {
-      return this.categories.forEach(function (element) {
-        return element.reduce(function (sum, val) {
-          return sum + val.amount;
-        }, 0).toFixed(2);
-      });
+      var result = [];
+      this.costs.reduce(function (res, value) {
+        if (!res[value.category]) {
+          res[value.category] = {
+            category: value.category,
+            amount: 0
+          };
+          result.push(res[value.category]);
+        }
+
+        res[value.category].amount += value.amount;
+        return res;
+      }, {});
+      return result;
     },
     categoryPercent: function categoryPercent() {
       return (parseInt(this.wagesTotal) / parseInt(this.total) * 100).toFixed(1);
@@ -17136,29 +17140,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "section" }, [
+    _c("h1", { staticClass: "title is-4" }, [_vm._v("Costs")]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.categoryTotal, function(category) {
+          return _c("tr", [
+            _c("td", [_vm._v(_vm._s(category.category))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(category.amount)))])
+          ])
+        })
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "section" }, [
-      _c("h1", { staticClass: "title is-4" }, [_vm._v("Costs")]),
+    return _c("tr", [
+      _c("th", [_vm._v("Category")]),
       _vm._v(" "),
-      _c("table", { staticClass: "table" }, [
-        _c("tr", [
-          _c("th", [_vm._v("Category")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Amount")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Percent")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Average")])
-        ]),
-        _vm._v(" "),
-        _c("tr")
-      ])
+      _c("th", [_vm._v("Amount")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Percent")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Average")])
     ])
   }
 ]
