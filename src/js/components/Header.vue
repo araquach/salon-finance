@@ -10,25 +10,22 @@
                 Dashboard
             </b-navbar-item>
             <b-navbar-dropdown label="Menu">
-                <b-navbar-item tag="router-link" to="/total">
-                    Total
-                </b-navbar-item>
-                <b-navbar-item tag="router-link" to="/jakata">
-                    Jakata
-                </b-navbar-item>
-                <b-navbar-item tag="router-link" to="/pk">
-                    PK
-                </b-navbar-item>
-                <b-navbar-item tag="router-link" to="/base">
-                    Base
+                <b-navbar-item tag="router-link" to="/totals">
+                    Totals
                 </b-navbar-item>
                 <b-navbar-item tag="router-link" to="/profitloss">
                     Monthly Profit/loss
                 </b-navbar-item>
-                <b-navbar-item tag="router-link" to="/input">
-                    Category Input
-                </b-navbar-item>
             </b-navbar-dropdown>
+        </template>
+        <template slot="end">
+            <b-navbar-item tag="div">
+                <div class="buttons">
+                    <b-navbar-item tag="router-link" to="/input">
+                        Category Input
+                    </b-navbar-item>
+                </div>
+            </b-navbar-item>
         </template>
     </b-navbar>
 </template>

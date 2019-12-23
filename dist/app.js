@@ -2612,30 +2612,30 @@ __webpack_require__.r(__webpack_exports__);
     grandTotal: function grandTotal() {
       return this.t.reduce(function (sum, val) {
         return sum + val.total;
-      }, 0).toFixed(2);
+      }, 0);
     },
     grandTotalAverage: function grandTotalAverage() {
-      return (this.grandTotal / 8).toFixed(2);
+      return this.grandTotal / 8;
     },
     serviceTotal: function serviceTotal() {
       return this.t.reduce(function (sum, val) {
         return sum + val.services;
-      }, 0).toFixed(2);
+      }, 0);
     },
     productTotal: function productTotal() {
       return this.t.reduce(function (sum, val) {
         return sum + val.products;
-      }, 0).toFixed(2);
+      }, 0);
     },
     flServiceTotal: function flServiceTotal() {
       return this.t.reduce(function (sum, val) {
         return sum + val.fl_services;
-      }, 0).toFixed(2);
+      }, 0);
     },
     flProductTotal: function flProductTotal() {
       return this.t.reduce(function (sum, val) {
         return sum + val.fl_products;
-      }, 0).toFixed(2);
+      }, 0);
     }
   },
   created: function created() {
@@ -16231,42 +16231,44 @@ var render = function() {
             [
               _c(
                 "b-navbar-item",
-                { attrs: { tag: "router-link", to: "/total" } },
-                [_vm._v("\n                Total\n            ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "b-navbar-item",
-                { attrs: { tag: "router-link", to: "/jakata" } },
-                [_vm._v("\n                Jakata\n            ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "b-navbar-item",
-                { attrs: { tag: "router-link", to: "/pk" } },
-                [_vm._v("\n                PK\n            ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "b-navbar-item",
-                { attrs: { tag: "router-link", to: "/base" } },
-                [_vm._v("\n                Base\n            ")]
+                { attrs: { tag: "router-link", to: "/totals" } },
+                [_vm._v("\n                Totals\n            ")]
               ),
               _vm._v(" "),
               _c(
                 "b-navbar-item",
                 { attrs: { tag: "router-link", to: "/profitloss" } },
                 [_vm._v("\n                Monthly Profit/loss\n            ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "b-navbar-item",
-                { attrs: { tag: "router-link", to: "/input" } },
-                [_vm._v("\n                Category Input\n            ")]
               )
             ],
             1
           )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "template",
+        { slot: "end" },
+        [
+          _c("b-navbar-item", { attrs: { tag: "div" } }, [
+            _c(
+              "div",
+              { staticClass: "buttons" },
+              [
+                _c(
+                  "b-navbar-item",
+                  { attrs: { tag: "router-link", to: "/input" } },
+                  [
+                    _vm._v(
+                      "\n                    Category Input\n                "
+                    )
+                  ]
+                )
+              ],
+              1
+            )
+          ])
         ],
         1
       )
@@ -37016,7 +37018,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 });
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter("toCurrency", function (amount) {
-  return "£" + Number(amount).toLocaleString();
+  return Number(amount).toLocaleString('en-GB', {
+    style: 'currency',
+    currency: 'GBP'
+  });
 });
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
@@ -37855,13 +37860,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_bank_CostInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/bank/CostInput */ "./src/js/components/bank/CostInput.vue");
 /* harmony import */ var _components_bank_CostTotals__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/bank/CostTotals */ "./src/js/components/bank/CostTotals.vue");
 /* harmony import */ var _components_takings_MainTakings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/takings/MainTakings */ "./src/js/components/takings/MainTakings.vue");
-/* harmony import */ var _components_takings_JakTakings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/takings/JakTakings */ "./src/js/components/takings/JakTakings.vue");
-/* harmony import */ var _components_takings_PkTakings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/takings/PkTakings */ "./src/js/components/takings/PkTakings.vue");
-/* harmony import */ var _components_takings_BaseTakings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/takings/BaseTakings */ "./src/js/components/takings/BaseTakings.vue");
-/* harmony import */ var _components_ProfitLoss_ProfitLossMonthly__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ProfitLoss/ProfitLossMonthly */ "./src/js/components/ProfitLoss/ProfitLossMonthly.vue");
-
-
-
+/* harmony import */ var _components_ProfitLoss_ProfitLossMonthly__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/ProfitLoss/ProfitLossMonthly */ "./src/js/components/ProfitLoss/ProfitLossMonthly.vue");
 
 
 
@@ -37872,29 +37871,17 @@ var routes = [{
   path: '',
   component: _components_MainDashboard__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
-  path: '',
-  component: _components_bank_CostMain__WEBPACK_IMPORTED_MODULE_1__["default"]
-}, {
   path: '/costs',
   component: _components_bank_CostTotals__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
   path: '/input',
   component: _components_bank_CostInput__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
-  path: '/total',
+  path: '/totals',
   component: _components_takings_MainTakings__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
-  path: '/jakata',
-  component: _components_takings_JakTakings__WEBPACK_IMPORTED_MODULE_5__["default"]
-}, {
-  path: '/pk',
-  component: _components_takings_PkTakings__WEBPACK_IMPORTED_MODULE_6__["default"]
-}, {
-  path: '/base',
-  component: _components_takings_BaseTakings__WEBPACK_IMPORTED_MODULE_7__["default"]
-}, {
   path: '/profitloss',
-  component: _components_ProfitLoss_ProfitLossMonthly__WEBPACK_IMPORTED_MODULE_8__["default"]
+  component: _components_ProfitLoss_ProfitLossMonthly__WEBPACK_IMPORTED_MODULE_5__["default"]
 }];
 
 /***/ }),

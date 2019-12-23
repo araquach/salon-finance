@@ -15,8 +15,8 @@
             <tr>
                 <td>{{serviceTotal | addVat | toCurrency}}</td>
                 <td>{{productTotal | addVat | toCurrency}}</td>
-                <td>{{flServiceTotal | addVat| toCurrency}}</td>
-                <td>{{flProductTotal | addVat| toCurrency}}</td>
+                <td>{{flServiceTotal | addVat | toCurrency}}</td>
+                <td>{{flProductTotal | addVat | toCurrency}}</td>
                 <td><strong>{{grandTotal | toCurrency}}</strong></td>
                 <td>{{grandTotalAverage | toCurrency}}</td>
             </tr>
@@ -39,22 +39,22 @@
 
         computed: {
             grandTotal() {
-                return this.t.reduce((sum, val) => sum + val.total, 0).toFixed(2);
+                return this.t.reduce((sum, val) => sum + val.total, 0)
             },
             grandTotalAverage() {
-                return (this.grandTotal / 8).toFixed(2)
+                return (this.grandTotal / 8)
             },
             serviceTotal() {
-                return this.t.reduce((sum, val) => sum + val.services, 0).toFixed(2);
+                return this.t.reduce((sum, val) => sum + val.services, 0)
             },
             productTotal() {
-                return this.t.reduce((sum, val) => sum + val.products, 0).toFixed(2);
+                return this.t.reduce((sum, val) => sum + val.products, 0)
             },
             flServiceTotal() {
-                return this.t.reduce((sum, val) => sum + val.fl_services, 0).toFixed(2);
+                return this.t.reduce((sum, val) => sum + val.fl_services, 0)
             },
             flProductTotal() {
-                return this.t.reduce((sum, val) => sum + val.fl_products, 0).toFixed(2);
+                return this.t.reduce((sum, val) => sum + val.fl_products, 0)
             }
         },
 
