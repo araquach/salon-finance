@@ -2029,93 +2029,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/Test.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/Test.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      takings: [],
-      selectedSalon: 'All'
-    };
-  },
-  computed: {
-    filteredItem: function filteredItem() {
-      var _this = this;
-
-      if (this.selectedSalon == 'All') {
-        return this.takings;
-      } else {
-        return this.takings.filter(function (item) {
-          return item.salon.indexOf(_this.selectedSalon) > -1;
-        });
-      }
-    },
-    totalProducts: function totalProducts() {
-      return this.filteredItem.reduce(function (sum, val) {
-        return sum + val.products;
-      }, 0).toFixed(2);
-    },
-    totalServices: function totalServices() {
-      return this.filteredItem.reduce(function (sum, val) {
-        return sum + val.services;
-      }, 0).toFixed(2);
-    },
-    grandTotal: function grandTotal() {
-      return Number(this.totalProducts) + Number(this.totalServices);
-    }
-  },
-  created: function created() {
-    var _this2 = this;
-
-    axios.get('/api/takings/All').then(function (response) {
-      return _this2.takings = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostInput.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostInput.vue?vue&type=script&lang=js& ***!
@@ -2284,6 +2197,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2292,39 +2212,35 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    grandTotal: function grandTotal() {
+      return this.costs.reduce(function (sum, val) {
+        return sum + val.amount;
+      }, 0).toFixed(2);
+    },
     totalAverage: function totalAverage() {
-      return (parseInt(this.total) / parseInt(this.numMonths)).toFixed(2);
+      return this.grandTotal / this.numMonths;
     },
     categoryTotal: function categoryTotal() {
+      var numMonths = this.numMonths;
       var result = [];
+      var mainTotal = this.grandTotal;
       this.costs.reduce(function (res, value) {
         if (!res[value.category]) {
           res[value.category] = {
             category: value.category,
-            amount: 0
+            amount: 0,
+            percent: 0,
+            average: 0
           };
           result.push(res[value.category]);
         }
 
-        res[value.category].amount += value.amount;
+        var total = res[value.category].amount += value.amount;
+        res[value.category].percent = total / mainTotal * 100;
+        res[value.category].average = total / numMonths;
         return res;
       }, {});
       return result;
-    },
-    categoryPercent: function categoryPercent() {
-      var percent = [];
-      this.categoryTotal.forEach(function (item) {
-        percent.push(item.amount / this.total * 100);
-      });
-      return percent;
-    },
-    categoryAverage: function categoryAverage() {
-      return (parseInt(this.wagesTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    total: function total() {
-      return this.costs.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
     }
   },
   created: function created() {
@@ -2332,410 +2248,6 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get('/api/bankdata').then(function (response) {
       return _this.costs = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals1.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostTotals1.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      numMonths: 8,
-      costs: [],
-      wages: [],
-      freelance: [],
-      drawings: [],
-      stock: [],
-      vat: [],
-      tax: [],
-      building: [],
-      marketing: [],
-      condements: [],
-      bank: [],
-      utilities: [],
-      loans: [],
-      staff: [],
-      misc: [],
-      other: []
-    };
-  },
-  computed: {
-    total: function total() {
-      return this.costs.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    totalAverage: function totalAverage() {
-      return (parseInt(this.total) / parseInt(this.numMonths)).toFixed(2);
-    },
-    wagesTotal: function wagesTotal() {
-      return this.wages.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    wagesPercent: function wagesPercent() {
-      return (parseInt(this.wagesTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    wagesAverage: function wagesAverage() {
-      return (parseInt(this.wagesTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    freelanceTotal: function freelanceTotal() {
-      return this.freelance.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    freelancePercent: function freelancePercent() {
-      return (parseInt(this.freelanceTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    freelanceAverage: function freelanceAverage() {
-      return (parseInt(this.freelanceTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    drawingsTotal: function drawingsTotal() {
-      return this.drawings.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    drawingsPercent: function drawingsPercent() {
-      return (parseInt(this.drawingsTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    drawingsAverage: function drawingsAverage() {
-      return (parseInt(this.drawingsTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    stockTotal: function stockTotal() {
-      return this.stock.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    stockPercent: function stockPercent() {
-      return (parseInt(this.stockTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    stockAverage: function stockAverage() {
-      return (parseInt(this.stockTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    vatTotal: function vatTotal() {
-      return this.vat.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    vatPercent: function vatPercent() {
-      return (parseInt(this.vatTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    vatAverage: function vatAverage() {
-      return (parseInt(this.vatTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    taxTotal: function taxTotal() {
-      return this.tax.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    taxPercent: function taxPercent() {
-      return (parseInt(this.taxTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    taxAverage: function taxAverage() {
-      return (parseInt(this.taxTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    buildingTotal: function buildingTotal() {
-      return this.building.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    buildingPercent: function buildingPercent() {
-      return (parseInt(this.buildingTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    buildingAverage: function buildingAverage() {
-      return (parseInt(this.buildingTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    marketingTotal: function marketingTotal() {
-      return this.marketing.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    marketingPercent: function marketingPercent() {
-      return (parseInt(this.marketingTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    marketingAverage: function marketingAverage() {
-      return (parseInt(this.marketingTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    condementsTotal: function condementsTotal() {
-      return this.condements.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    condementsPercent: function condementsPercent() {
-      return (parseInt(this.condementsTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    condementsAverage: function condementsAverage() {
-      return (parseInt(this.condementsTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    bankTotal: function bankTotal() {
-      return this.bank.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    bankPercent: function bankPercent() {
-      return (parseInt(this.bankTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    bankAverage: function bankAverage() {
-      return (parseInt(this.bankTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    utilitiesTotal: function utilitiesTotal() {
-      return this.utilities.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    utilitiesPercent: function utilitiesPercent() {
-      return (parseInt(this.utilitiesTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    utilitiesAverage: function utilitiesAverage() {
-      return (parseInt(this.utilitiesTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    loansTotal: function loansTotal() {
-      return this.loans.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    loansPercent: function loansPercent() {
-      return (parseInt(this.loansTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    loansAverage: function loansAverage() {
-      return (parseInt(this.loansTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    staffTotal: function staffTotal() {
-      return this.staff.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    staffPercent: function staffPercent() {
-      return (parseInt(this.staffTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    staffAverage: function staffAverage() {
-      return (parseInt(this.staffTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    miscTotal: function miscTotal() {
-      return this.misc.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    miscPercent: function miscPercent() {
-      return (parseInt(this.miscTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    miscAverage: function miscAverage() {
-      return (parseInt(this.miscTotal) / parseInt(this.numMonths)).toFixed(2);
-    },
-    otherTotal: function otherTotal() {
-      return this.other.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0).toFixed(2);
-    },
-    otherPercent: function otherPercent() {
-      return (parseInt(this.otherTotal) / parseInt(this.total) * 100).toFixed(1);
-    },
-    otherAverage: function otherAverage() {
-      return (parseInt(this.otherTotal) / parseInt(this.numMonths)).toFixed(2);
-    }
-  },
-  created: function created() {
-    var _this = this;
-
-    axios.get('/api/bankdata').then(function (response) {
-      return _this.costs = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Stock').then(function (response) {
-      return _this.stock = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Wages').then(function (response) {
-      return _this.wages = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Freelance').then(function (response) {
-      return _this.freelance = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Drawings').then(function (response) {
-      return _this.drawings = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/VAT').then(function (response) {
-      return _this.vat = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Tax').then(function (response) {
-      return _this.tax = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Building').then(function (response) {
-      return _this.building = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Marketing').then(function (response) {
-      return _this.marketing = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Condements').then(function (response) {
-      return _this.condements = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Bank').then(function (response) {
-      return _this.bank = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Utilities').then(function (response) {
-      return _this.utilities = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Loans').then(function (response) {
-      return _this.loans = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Staff').then(function (response) {
-      return _this.staff = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Misc').then(function (response) {
-      return _this.misc = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/costscategory/Other').then(function (response) {
-      return _this.other = response.data;
     })["catch"](function (error) {
       console.log(error);
     });
@@ -16877,124 +16389,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/Test.vue?vue&type=template&id=05b2e744&":
-/*!*************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/Test.vue?vue&type=template&id=05b2e744& ***!
-  \*************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "section" },
-    [
-      _c("h1", { staticClass: "title" }, [_vm._v("Test")]),
-      _vm._v(" "),
-      _c(
-        "b-dropdown",
-        {
-          attrs: { "aria-role": "list" },
-          model: {
-            value: _vm.selectedSalon,
-            callback: function($$v) {
-              _vm.selectedSalon = $$v
-            },
-            expression: "selectedSalon"
-          }
-        },
-        [
-          _c(
-            "button",
-            {
-              staticClass: "button is-primary",
-              attrs: { slot: "trigger" },
-              slot: "trigger"
-            },
-            [
-              _c("span", [_vm._v("Select Salon")]),
-              _vm._v(" "),
-              _c("b-icon", { attrs: { icon: "menu-down" } })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-dropdown-item",
-            { attrs: { "aria-role": "listitem", value: "Jakata" } },
-            [_vm._v("Jakata")]
-          ),
-          _vm._v(" "),
-          _c(
-            "b-dropdown-item",
-            { attrs: { "aria-role": "listitem", value: "PK" } },
-            [_vm._v("PK")]
-          ),
-          _vm._v(" "),
-          _c(
-            "b-dropdown-item",
-            { attrs: { "aria-role": "listitem", value: "Base" } },
-            [_vm._v("Base")]
-          ),
-          _vm._v(" "),
-          _c(
-            "b-dropdown-item",
-            { attrs: { "aria-role": "listitem", value: "All" } },
-            [_vm._v("All")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("br"),
-      _c("br"),
-      _vm._v(" "),
-      _c("table", { staticClass: "table" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", [_vm._v(_vm._s(_vm.selectedSalon))]),
-          _vm._v(" "),
-          _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.totalServices)))]),
-          _vm._v(" "),
-          _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.totalProducts)))]),
-          _vm._v(" "),
-          _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.grandTotal)))])
-        ])
-      ])
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Salon")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Services")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Products")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Total")])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostInput.vue?vue&type=template&id=5ab44314&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostInput.vue?vue&type=template&id=5ab44314& ***!
@@ -17160,219 +16554,25 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(category.amount)))]),
             _vm._v(" "),
-            _c("td")
+            _c("td", [_vm._v(_vm._s(category.percent.toFixed(1)))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(category.average)))])
           ])
-        })
+        }),
+        _c("tr", [
+          _c("th", [_vm._v("Grand Total")]),
+          _vm._v(" "),
+          _c("td", [
+            _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.grandTotal)))])
+          ]),
+          _vm._v(" "),
+          _c("td"),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.totalAverage)))])
+        ])
       ],
       2
     )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Category")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Amount")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Percent")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Average")])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals1.vue?vue&type=template&id=18dfae0e&":
-/*!*************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/js/components/bank/CostTotals1.vue?vue&type=template&id=18dfae0e& ***!
-  \*************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "section" }, [
-    _c("h1", { staticClass: "title is-4" }, [_vm._v("Costs")]),
-    _vm._v(" "),
-    _c("table", { staticClass: "table" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Wages (Excluding Izzy)")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.wagesTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.wagesPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.wagesAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Freelance")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.freelanceTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.freelancePercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.freelanceAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Drawings (inc Izzy's wage)")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.drawingsTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.drawingsPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.drawingsAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Stock")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.stockTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.stockPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.stockAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("VAT")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.vatTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.vatPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.vatAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("TAX")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.taxTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.taxPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.taxAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Building")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.buildingTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.buildingPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.buildingAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Marketing")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.marketingTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.marketingPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.marketingAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Condements")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.condementsTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.condementsPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.condementsAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Bank (Inc PDQ costs)")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.bankTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.bankPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.bankAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Utilities")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.utilitiesTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.utilitiesPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.utilitiesAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Loans")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.loansTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.loansPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.loansAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Staff Expenses")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.staffTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.staffPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.staffAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Misc")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.miscTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.miscPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.miscAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Other")]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.otherTotal)))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.otherPercent))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.otherAverage)))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("th", [_vm._v("Grand Total")]),
-        _vm._v(" "),
-        _c("td", [
-          _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.total)))])
-        ]),
-        _vm._v(" "),
-        _c("td"),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.totalAverage)))])
-      ])
-    ])
   ])
 }
 var staticRenderFns = [
@@ -38019,75 +37219,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/components/Test.vue":
-/*!************************************!*\
-  !*** ./src/js/components/Test.vue ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Test_vue_vue_type_template_id_05b2e744___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Test.vue?vue&type=template&id=05b2e744& */ "./src/js/components/Test.vue?vue&type=template&id=05b2e744&");
-/* harmony import */ var _Test_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Test.vue?vue&type=script&lang=js& */ "./src/js/components/Test.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Test_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Test_vue_vue_type_template_id_05b2e744___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Test_vue_vue_type_template_id_05b2e744___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "src/js/components/Test.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./src/js/components/Test.vue?vue&type=script&lang=js&":
-/*!*************************************************************!*\
-  !*** ./src/js/components/Test.vue?vue&type=script&lang=js& ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Test_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Test.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/Test.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Test_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./src/js/components/Test.vue?vue&type=template&id=05b2e744&":
-/*!*******************************************************************!*\
-  !*** ./src/js/components/Test.vue?vue&type=template&id=05b2e744& ***!
-  \*******************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Test_vue_vue_type_template_id_05b2e744___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Test.vue?vue&type=template&id=05b2e744& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/Test.vue?vue&type=template&id=05b2e744&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Test_vue_vue_type_template_id_05b2e744___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Test_vue_vue_type_template_id_05b2e744___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./src/js/components/bank/CostInput.vue":
 /*!**********************************************!*\
   !*** ./src/js/components/bank/CostInput.vue ***!
@@ -38290,75 +37421,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals_vue_vue_type_template_id_090f2a33___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./src/js/components/bank/CostTotals1.vue":
-/*!************************************************!*\
-  !*** ./src/js/components/bank/CostTotals1.vue ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CostTotals1_vue_vue_type_template_id_18dfae0e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CostTotals1.vue?vue&type=template&id=18dfae0e& */ "./src/js/components/bank/CostTotals1.vue?vue&type=template&id=18dfae0e&");
-/* harmony import */ var _CostTotals1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CostTotals1.vue?vue&type=script&lang=js& */ "./src/js/components/bank/CostTotals1.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CostTotals1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CostTotals1_vue_vue_type_template_id_18dfae0e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CostTotals1_vue_vue_type_template_id_18dfae0e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "src/js/components/bank/CostTotals1.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./src/js/components/bank/CostTotals1.vue?vue&type=script&lang=js&":
-/*!*************************************************************************!*\
-  !*** ./src/js/components/bank/CostTotals1.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CostTotals1.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals1.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./src/js/components/bank/CostTotals1.vue?vue&type=template&id=18dfae0e&":
-/*!*******************************************************************************!*\
-  !*** ./src/js/components/bank/CostTotals1.vue?vue&type=template&id=18dfae0e& ***!
-  \*******************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals1_vue_vue_type_template_id_18dfae0e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CostTotals1.vue?vue&type=template&id=18dfae0e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/js/components/bank/CostTotals1.vue?vue&type=template&id=18dfae0e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals1_vue_vue_type_template_id_18dfae0e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostTotals1_vue_vue_type_template_id_18dfae0e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -38791,15 +37853,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_MainDashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/MainDashboard */ "./src/js/components/MainDashboard.vue");
 /* harmony import */ var _components_bank_CostMain__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/bank/CostMain */ "./src/js/components/bank/CostMain.vue");
 /* harmony import */ var _components_bank_CostInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/bank/CostInput */ "./src/js/components/bank/CostInput.vue");
-/* harmony import */ var _components_bank_CostTotals1__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/bank/CostTotals1 */ "./src/js/components/bank/CostTotals1.vue");
+/* harmony import */ var _components_bank_CostTotals__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/bank/CostTotals */ "./src/js/components/bank/CostTotals.vue");
 /* harmony import */ var _components_takings_MainTakings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/takings/MainTakings */ "./src/js/components/takings/MainTakings.vue");
 /* harmony import */ var _components_takings_JakTakings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/takings/JakTakings */ "./src/js/components/takings/JakTakings.vue");
 /* harmony import */ var _components_takings_PkTakings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/takings/PkTakings */ "./src/js/components/takings/PkTakings.vue");
 /* harmony import */ var _components_takings_BaseTakings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/takings/BaseTakings */ "./src/js/components/takings/BaseTakings.vue");
 /* harmony import */ var _components_ProfitLoss_ProfitLossMonthly__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ProfitLoss/ProfitLossMonthly */ "./src/js/components/ProfitLoss/ProfitLossMonthly.vue");
-/* harmony import */ var _components_Test__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Test */ "./src/js/components/Test.vue");
-
-
 
 
 
@@ -38816,11 +37875,8 @@ var routes = [{
   path: '',
   component: _components_bank_CostMain__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
-  path: '/test',
-  component: _components_Test__WEBPACK_IMPORTED_MODULE_9__["default"]
-}, {
   path: '/costs',
-  component: _components_bank_CostTotals1__WEBPACK_IMPORTED_MODULE_3__["default"]
+  component: _components_bank_CostTotals__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
   path: '/input',
   component: _components_bank_CostInput__WEBPACK_IMPORTED_MODULE_2__["default"]

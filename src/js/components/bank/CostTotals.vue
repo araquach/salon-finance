@@ -11,7 +11,14 @@
             <tr v-for="category in categoryTotal">
                 <td>{{category.category}}</td>
                 <td>{{category.amount | toCurrency}}</td>
+                <td>{{category.percent.toFixed(1)}}</td>
+                <td>{{category.average | toCurrency}}</td>
+            <tr>
+                <th>Grand Total</th>
+                <td><strong>{{grandTotal | toCurrency}}</strong></td>
                 <td></td>
+                <td>{{totalAverage | toCurrency}}</td>
+            </tr>
             </tr>
         </table>
     </div>
@@ -27,33 +34,27 @@
         },
 
         computed: {
+            grandTotal() {
+                return this.costs.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
+            },
             totalAverage() {
-                return (parseInt(this.total) / parseInt(this.numMonths)).toFixed(2)
+                return this.grandTotal / this.numMonths
             },
             categoryTotal() {
-                const result = [];
+                let numMonths = this.numMonths
+                const result = []
+                const mainTotal = this.grandTotal
                 this.costs.reduce(function(res, value) {
                     if (!res[value.category]) {
-                        res[value.category] = { category: value.category, amount: 0 }
+                        res[value.category] = { category: value.category, amount: 0, percent: 0, average: 0 }
                         result.push(res[value.category])
                     }
-                    res[value.category].amount += value.amount
+                    let total = res[value.category].amount += value.amount
+                    res[value.category].percent = (total / mainTotal) * 100
+                    res[value.category].average = total / numMonths
                     return res
                 }, {})
                 return result
-            },
-            categoryPercent() {
-                const percent = []
-                this.categoryTotal.forEach(function(item){
-                    percent.push((item.amount / this.total) * 100)
-                })
-                return percent
-            },
-            categoryAverage() {
-                return (parseInt(this.wagesTotal) / parseInt(this.numMonths)).toFixed(2)
-            },
-            total() {
-                return this.costs.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
             }
         },
 
