@@ -27,7 +27,8 @@
     export default {
         data() {
             return {
-                t: []
+                t: [],
+                months: 9
             }
         },
 
@@ -42,7 +43,7 @@
                 return this.t.reduce((sum, val) => sum + val.total, 0)
             },
             grandTotalAverage() {
-                return (this.grandTotal / 9)
+                return (this.grandTotal / this.months)
             },
             serviceTotal() {
                 return this.t.reduce((sum, val) => sum + val.services, 0)
