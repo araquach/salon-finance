@@ -19,7 +19,7 @@
             return {
                 takings: [],
                 costs: [],
-                numMonths: 9
+                numMonths: 12
             }
         },
 

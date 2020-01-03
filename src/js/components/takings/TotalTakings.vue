@@ -28,7 +28,7 @@
         data() {
             return {
                 t: [],
-                months: 9
+                months: 12
             }
         },
 

@@ -2131,7 +2131,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       takings: [],
       costs: [],
-      numMonths: 9
+      numMonths: 12
     };
   },
   computed: {
@@ -2208,7 +2208,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      numMonths: 9,
+      numMonths: 12,
       costs: []
     };
   },
@@ -2602,7 +2602,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       t: [],
-      months: 9
+      months: 12
     };
   },
   filters: {
