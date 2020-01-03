@@ -42,7 +42,7 @@
                 return this.t.reduce((sum, val) => sum + val.total, 0)
             },
             grandTotalAverage() {
-                return (this.grandTotal / 8)
+                return (this.grandTotal / 9)
             },
             serviceTotal() {
                 return this.t.reduce((sum, val) => sum + val.services, 0)

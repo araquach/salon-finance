@@ -28,7 +28,7 @@
     export default {
         data() {
             return {
-                numMonths: 8,
+                numMonths: 9,
                 costs: []
             }
         },
