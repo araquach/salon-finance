@@ -19,7 +19,7 @@
             return {
                 takings: [],
                 costs: [],
-                numMonths: 12
+                // numMonths: 12
             }
         },
 
@@ -34,7 +34,7 @@
                 return (this.grandTotal - this.totalCosts).toFixed(2)
             },
             plAverage() {
-                return ((this.grandTotal - this.totalCosts) / this.numMonths).toFixed(2)
+                return ((this.grandTotal - this.totalCosts) / numMonths).toFixed(2)
             }
         },
 
