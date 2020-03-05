@@ -8,7 +8,7 @@ Vue.use(Buefy)
 Vue.use(require('vue-moment'))
 Vue.use(VueRouter)
 
-Vue.prototype.numMonths = 14
+// Vue.prototype.numMonths = 14
 
 const router = new VueRouter({
     routes
