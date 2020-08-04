@@ -137,4 +137,5 @@ fabric.properties
 .idea/workspace.xml
 
 node_modules/node_modules/
+*.csv
 .env
