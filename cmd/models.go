@@ -28,6 +28,11 @@ type Totals struct {
 	D float64
 }
 
+type CategoryTotal struct {
+	Category string
+	Total float64
+}
+
 type BankData struct {
 	ID					int			`json:"id"`
 	TransDate			time.Time	`json:"date"`

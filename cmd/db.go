@@ -22,30 +22,8 @@ func dbConn() (db *gorm.DB) {
 	return db
 }
 
-func GetTotals() {
-	var s, p, d Totals
-
-	db := dbConn()
-	db.LogMode(false)
-	defer db.Close()
-
-	db.Table("takings").Select("sum(services) as s").Where("date >= ? AND date <= ?", "2020-01-03", "2020-01-03").Scan(&s)
-	fmt.Println("Services:", s.S)
-
-	db.Table("takings").Select("sum(products) as p").Where("date > ?, AND date <= ?", "2020-01-03", "2020-01-03").Scan(&p)
-	fmt.Println("Products:", p.P)
-
-	fmt.Println("Total Takings:", s.S+p.P)
-
-	db.Table("costs").Select("sum(debit) as d").Where("date > ? AND date <= ?", "2020-01-03", "2020-01-15").Scan(&d)
-	fmt.Println("Total Costs:", d.D)
-}
-
-func loadCosts() {
-	var err error
-	var costs []Cost
-
-	categories := map[string][]string{
+func GetCategories() (c map[string][]string) {
+	c = map[string][]string{
 		"Wages": {
 			"MR J SHARP",
 			"JAMES SHARPE",
@@ -300,6 +278,46 @@ func loadCosts() {
 			"ACOUSTIC CAFE",
 		},
 	}
+	return
+}
+
+func GetTotals() {
+	var s, p, d Totals
+
+	db := dbConn()
+	db.LogMode(false)
+	defer db.Close()
+
+	db.Table("takings").Select("sum(services) as s").Where("date >= ? AND date <= ?", "2020-01-03", "2020-01-03").Scan(&s)
+	fmt.Println("Services:", s.S)
+
+	db.Table("takings").Select("sum(products) as p").Where("date > ?, AND date <= ?", "2020-01-03", "2020-01-03").Scan(&p)
+	fmt.Println("Products:", p.P)
+
+	fmt.Println("Total Takings:", s.S+p.P)
+
+	db.Table("costs").Select("sum(debit) as d").Where("date > ? AND date <= ?", "2020-01-03", "2020-01-15").Scan(&d)
+	fmt.Println("Total Costs:", d.D)
+}
+
+func GetCategoryTotals() {
+	var c, t CategoryTotal
+	cats := GetCategories()
+
+	db := dbConn()
+	db.LogMode(false)
+	defer db.Close()
+
+	for k, _ := range cats {
+		fmt.Println(k)
+	}
+}
+
+func loadCosts() {
+	var err error
+	var costs []Cost
+
+	categories := GetCategories()
 
 	db := dbConn()
 	db.LogMode(true)
