@@ -314,8 +314,10 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 	db.LogMode(true)
 	defer db.Close()
 
-	db.Table("takings").Select("sum(services) as s").Where("name = ?", "Natalie Sharpe").Scan(&s)
-	db.Table("takings").Select("sum(products) as p").Where("name = ?", "Natalie Sharpe").Scan(&s)
+	stylist := "Adam Carter"
+
+	db.Table("takings").Select("sum(services) as s").Where("name = ?", stylist).Scan(&s)
+	db.Table("takings").Select("sum(products) as p").Where("name = ?", stylist).Scan(&s)
 
 	json, err := json.Marshal(s)
 	if err != nil {
