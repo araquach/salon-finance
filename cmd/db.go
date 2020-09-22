@@ -281,38 +281,6 @@ func GetCategories() (c map[string][]string) {
 	return
 }
 
-func GetTotals() {
-	var s, p, d Totals
-
-	db := dbConn()
-	db.LogMode(false)
-	defer db.Close()
-
-	db.Table("takings").Select("sum(services) as s").Where("date >= ? AND date <= ?", "2020-01-03", "2020-01-03").Scan(&s)
-	fmt.Println("Services:", s.S)
-
-	db.Table("takings").Select("sum(products) as p").Where("date > ?, AND date <= ?", "2020-01-03", "2020-01-03").Scan(&p)
-	fmt.Println("Products:", p.P)
-
-	fmt.Println("Total Takings:", s.S+p.P)
-
-	db.Table("costs").Select("sum(debit) as d").Where("date > ? AND date <= ?", "2020-01-03", "2020-01-15").Scan(&d)
-	fmt.Println("Total Costs:", d.D)
-}
-
-func GetCategoryTotals() {
-	var c, t CategoryTotal
-	cats := GetCategories()
-
-	db := dbConn()
-	db.LogMode(false)
-	defer db.Close()
-
-	for k, _ := range cats {
-		fmt.Println(k)
-	}
-}
-
 func loadCosts() {
 	var err error
 	var costs []Cost
@@ -352,7 +320,7 @@ func loadCosts() {
 			b, _ := strconv.ParseFloat(line[7], 8)
 			date, _ := time.Parse("2006-01-02", dateFormat(line[0]))
 
-			if line[5] != "" && line[1] != "TFR" {
+			if line[5] != "" && line[1] != "TFR" && line[1] != "" {
 				costs = append(costs, Cost{
 					Date:        date,
 					Type:        line[1],
