@@ -3,9 +3,9 @@ package main
 import (
 	"bufio"
 	"encoding/csv"
-	"fmt"
 	"github.com/jinzhu/gorm"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -354,51 +354,60 @@ func loadCosts() {
 func loadTakings() {
 	var err error
 	var takings []Taking
-	var files []string
 
 	db := dbConn()
 	db.LogMode(true)
 	db.AutoMigrate(&Taking{})
 	db.Close()
 
-	root := "data/takings"
-	err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-		if info.IsDir() {
-			return nil
-		}
-		if filepath.Ext(path) != ".csv" {
-			return nil
-		}
-		files = append(files, path)
-		return nil
-	})
+	fileName := "data/takings/jakata.csv"
+
+	fileBytes, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		panic(err)
 	}
-	for _, file := range files {
-		csvFile, _ := os.Open(file)
-		file = strings.TrimSuffix(file, filepath.Ext(file))
-		fname := strings.Split(file, "/")
-		f := strings.Split(fname[2], "_")
-		fmt.Println(f)
-		reader := csv.NewReader(bufio.NewReader(csvFile))
+
+	sliceData := strings.Split(string(fileBytes), "x,,,,,,,,")
+
+	for _, v := range sliceData {
+
+		lines := strings.SplitAfter(v, "\n")
+
+		var data []string
+
+		if len(lines) > 4 {
+			data = lines[4:len(lines)-2]
+		} else {
+			data = lines[4:]
+		}
+
+		joinedData := strings.Join(data, "")
+
+		stylist := strings.Split(lines[1], ",")[0]
+
+		r := csv.NewReader(strings.NewReader(joinedData))
+
 		for {
-			line, error := reader.Read()
-			if error == io.EOF {
+			record, err := r.Read()
+			if err == io.EOF {
 				break
-			} else if error != nil {
-				log.Fatal(error)
 			}
-			s, _ := strconv.ParseFloat(line[1], 8)
-			p, _ := strconv.ParseFloat(line[2], 8)
-			d, _ := time.Parse("2006-01-02", dateFormatYear(line[0]))
-			takings = append(takings, Taking{
-				Date:     d,
-				Name:     f[1],
-				Salon:    f[0],
-				Services: s,
-				Products: p,
-			})
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			if !strings.Contains(record[0], "Page") && !strings.Contains(record[0], "Total"){
+				s, _ := strconv.ParseFloat(record[2], 8)
+				p, _ := strconv.ParseFloat(record[6], 8)
+				d, _ := time.Parse("2006-01-02", dateFormatYear(record[0]))
+				takings = append(takings, Taking{
+					Date:     d,
+					Name:     stylist,
+					Salon:    "Jakata",
+					Services: s,
+					Products: p,
+				})
+			}
 		}
 	}
 	for _, t := range takings {

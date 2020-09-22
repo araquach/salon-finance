@@ -24,7 +24,7 @@ type Taking struct {
 
 type Totals struct {
 	C string
-	S float64
-	P float64
+	S float64 `json:"services"`
+	P float64 `json:"products"`
 	D float64
 }

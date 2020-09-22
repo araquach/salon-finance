@@ -314,9 +314,10 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 	db.LogMode(true)
 	defer db.Close()
 
-	db.Table("takings").Select("category, sum(services) as s").Where("date >= ? AND date <= ?", "2020-01-03", "2020-01-03").Scan(&s)
-	
-	json, err := json.Marshal(s.S)
+	db.Table("takings").Select("sum(services) as s").Where("name = ?", "Natalie Sharpe").Scan(&s)
+	db.Table("takings").Select("sum(products) as p").Where("name = ?", "Natalie Sharpe").Scan(&s)
+
+	json, err := json.Marshal(s)
 	if err != nil {
 		log.Println(err)
 	}
@@ -326,7 +327,7 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 func apiMonthlyTakings(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	db := dbConn()
-	t := []Takings{}
+	t := []Taking{}
 
 	params := mux.Vars(r)
 	month := params["month_year"]
