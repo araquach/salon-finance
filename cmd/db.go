@@ -353,12 +353,15 @@ func loadCosts() {
 
 func loadTakings() {
 	var err error
+	var files []string
 	var takings []Taking
 
 	db := dbConn()
 	db.LogMode(true)
 	db.AutoMigrate(&Taking{})
 	db.Close()
+
+	
 
 	fileName := "data/takings/jakata.csv"
 
