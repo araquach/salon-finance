@@ -361,65 +361,79 @@ func loadTakings() {
 	db.AutoMigrate(&Taking{})
 	db.Close()
 
-	
+	root := "data/takings"
 
-	fileName := "data/takings/jakata.csv"
-
-	fileBytes, err := ioutil.ReadFile(fileName)
+	err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+		if info.IsDir() {
+			return nil
+		}
+		if filepath.Ext(path) != ".csv" {
+			return nil
+		}
+		files = append(files, path)
+		return nil
+	})
 	if err != nil {
 		panic(err)
 	}
+	for _, fileName := range files {
 
-	sliceData := strings.Split(string(fileBytes), "x,,,,,,,,")
-
-	for _, v := range sliceData {
-
-		lines := strings.SplitAfter(v, "\n")
-
-		var data []string
-
-		if len(lines) > 4 {
-			data = lines[4:len(lines)-2]
-		} else {
-			data = lines[4:]
-		}
-
-		joinedData := strings.Join(data, "")
-
-		stylist := strings.Split(lines[1], ",")[0]
-
-		r := csv.NewReader(strings.NewReader(joinedData))
-
-		for {
-			record, err := r.Read()
-			if err == io.EOF {
-				break
-			}
-			if err != nil {
-				log.Fatal(err)
-			}
-
-			if !strings.Contains(record[0], "Page") && !strings.Contains(record[0], "Total"){
-				s, _ := strconv.ParseFloat(record[2], 8)
-				p, _ := strconv.ParseFloat(record[6], 8)
-				d, _ := time.Parse("2006-01-02", dateFormatYear(record[0]))
-				takings = append(takings, Taking{
-					Date:     d,
-					Name:     stylist,
-					Salon:    "Jakata",
-					Services: s,
-					Products: p,
-				})
-			}
-		}
-	}
-	for _, t := range takings {
-		db = dbConn()
-		db.LogMode(true)
-		db.Create(&t)
+		fileBytes, err := ioutil.ReadFile(fileName)
 		if err != nil {
-			log.Panic(err)
+			panic(err)
 		}
-		db.Close()
+
+		sliceData := strings.Split(string(fileBytes), "x,,,,,,,,")
+
+		for _, v := range sliceData {
+
+			lines := strings.SplitAfter(v, "\n")
+
+			var data []string
+
+			if len(lines) > 4 {
+				data = lines[4 : len(lines)-2]
+			} else {
+				data = lines[4:]
+			}
+
+			joinedData := strings.Join(data, "")
+
+			stylist := strings.Split(lines[1], ",")[0]
+
+			r := csv.NewReader(strings.NewReader(joinedData))
+
+			for {
+				record, err := r.Read()
+				if err == io.EOF {
+					break
+				}
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				if !strings.Contains(record[0], "Page") && !strings.Contains(record[0], "Total") {
+					s, _ := strconv.ParseFloat(record[2], 8)
+					p, _ := strconv.ParseFloat(record[6], 8)
+					d, _ := time.Parse("2006-01-02", dateFormatYear(record[0]))
+					takings = append(takings, Taking{
+						Date:     d,
+						Name:     stylist,
+						Salon:    "Jakata",
+						Services: s,
+						Products: p,
+					})
+				}
+			}
+		}
+		for _, t := range takings {
+			db = dbConn()
+			db.LogMode(true)
+			db.Create(&t)
+			if err != nil {
+				log.Panic(err)
+			}
+			db.Close()
+		}
 	}
 }
