@@ -276,7 +276,7 @@ func getCategories() (c map[string][]string) {
 func apiCostsCategory(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	// var d Totals
-	var c Totals
+	var c GetCost
 
 	db := dbConn()
 	db.LogMode(true)
@@ -284,8 +284,8 @@ func apiCostsCategory(w http.ResponseWriter, r *http.Request) {
 
 	cat := "Wages"
 
-	db.Table("costs").Select("(category) as c").Where("category = ?", cat).Scan(&c)
-	json, err := json.Marshal(c.C)
+	db.Table("costs").Select("sum(debit) as d").Where("category = ?", cat).Scan(&c)
+	json, err := json.Marshal(c)
 	if err != nil {
 		log.Println(err)
 	}
@@ -306,9 +306,9 @@ func apiCostsCategory(w http.ResponseWriter, r *http.Request) {
 func apiTakings(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	var s Totals
-	// var p Totals
-	// var d Totals
+	var s Total
+	// var p Total
+	// var d Total
 
 	db := dbConn()
 	db.LogMode(true)
@@ -316,8 +316,9 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 
 	stylist := "Adam Carter"
 
-	db.Table("takings").Select("sum(services) as s").Where("name = ?", stylist).Scan(&s)
-	db.Table("takings").Select("sum(products) as p").Where("name = ?", stylist).Scan(&s)
+	db.Table("takings").Select("sum(services) as s, sum(products) as p").Where("name = ?", stylist).Scan(&s)
+	s.C = stylist
+	s.D = s.P + s.S
 
 	json, err := json.Marshal(s)
 	if err != nil {

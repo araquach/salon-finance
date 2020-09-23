@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"encoding/csv"
+	"fmt"
 	"github.com/jinzhu/gorm"
 	"io"
 	"io/ioutil"
@@ -374,13 +375,15 @@ func loadTakings() {
 		return nil
 	})
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	for _, fileName := range files {
-
+		fname := strings.Split(fileName, "/")
+		f := strings.Split(fname[2], "_")
+		fmt.Println(f)
 		fileBytes, err := ioutil.ReadFile(fileName)
 		if err != nil {
-			panic(err)
+			log.Println(err)
 		}
 
 		sliceData := strings.Split(string(fileBytes), "x,,,,,,,,")
@@ -409,17 +412,17 @@ func loadTakings() {
 					break
 				}
 				if err != nil {
-					log.Fatal(err)
+					log.Println(err)
 				}
 
 				if !strings.Contains(record[0], "Page") && !strings.Contains(record[0], "Total") {
 					s, _ := strconv.ParseFloat(record[2], 8)
 					p, _ := strconv.ParseFloat(record[6], 8)
-					d, _ := time.Parse("2006-01-02", dateFormatYear(record[0]))
+
 					takings = append(takings, Taking{
-						Date:     d,
+						Date:     record[0],
 						Name:     stylist,
-						Salon:    "Jakata",
+						Salon:    f[0],
 						Services: s,
 						Products: p,
 					})
@@ -431,7 +434,7 @@ func loadTakings() {
 			db.LogMode(true)
 			db.Create(&t)
 			if err != nil {
-				log.Panic(err)
+				log.Println(err)
 			}
 			db.Close()
 		}

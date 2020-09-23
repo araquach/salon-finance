@@ -28,8 +28,9 @@ func main() {
 
 	db := dbConn()
 	defer db.Close()
-	// db.DropTableIfExists(&Taking{})
-	// loadTakings()
+
+	//db.DropTableIfExists(&Taking{})
+	//loadTakings()
 
 	if db.HasTable(&Taking{}) == false {
 		loadTakings()
