@@ -10,6 +10,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -386,7 +387,9 @@ func loadTakings() {
 			log.Println(err)
 		}
 
-		sliceData := strings.Split(string(fileBytes), "x,,,,,,,,")
+		//sliceData := strings.Split(string(fileBytes), "x,,,,,,,,")
+
+		sliceData := regexp.MustCompile("Total,\".").Split(string(fileBytes), 10)
 
 		for _, v := range sliceData {
 
