@@ -10,7 +10,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -387,27 +386,38 @@ func loadTakings() {
 			log.Println(err)
 		}
 
-		//sliceData := strings.Split(string(fileBytes), "x,,,,,,,,")
+		split := strings.SplitAfter(string(fileBytes), "\n")[3:]
 
-		sliceData := regexp.MustCompile("Total,\".").Split(string(fileBytes), 10)
+		var section []string
 
-		for _, v := range sliceData {
+		for _, line := range split {
+			if string(line[0]) == "T" {
+				line = "X"
+			}
+			if !strings.Contains(line, "Page") {
+				section = append(section, line)
+			}
+		}
 
-			lines := strings.SplitAfter(v, "\n")
+		joined := strings.Join(section, "")
+		formatted := strings.Split(joined, "X")
 
+		for _, l := range formatted {
 			var data []string
 
-			if len(lines) > 4 {
-				data = lines[4 : len(lines)-2]
-			} else {
-				data = lines[4:]
+			s := strings.SplitAfter(l, "\n")
+
+			stylist := s[0]
+
+			stylist = strings.Split(stylist, ",")[0]
+
+			if len(s) > 1 {
+				data = s[3:]
 			}
 
-			joinedData := strings.Join(data, "")
+			csvReady := strings.Join(data, "")
 
-			stylist := strings.Split(lines[1], ",")[0]
-
-			r := csv.NewReader(strings.NewReader(joinedData))
+			r := csv.NewReader(strings.NewReader(csvReady))
 
 			for {
 				record, err := r.Read()
