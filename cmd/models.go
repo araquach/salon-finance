@@ -15,7 +15,7 @@ type Cost struct {
 
 type Taking struct {
 	ID       uint    `json:"id" gorm: "primary_key"`
-	Date     string  `json:"date" gorm:"type:date"`
+	Date     string  `json:"date"`
 	Name     string  `json:"name"`
 	Salon    string  `json:"salon"`
 	Services float64 `json:"services"`
