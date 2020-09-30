@@ -428,12 +428,13 @@ func loadTakings() {
 					log.Println(err)
 				}
 
-				if !strings.Contains(record[0], "Page") && !strings.Contains(record[0], "Total") {
+				if len(record[0]) > 0 && !strings.Contains(record[0], "Page") && !strings.Contains(record[0], "Total") {
 					s, _ := strconv.ParseFloat(record[2], 8)
 					p, _ := strconv.ParseFloat(record[6], 8)
+					date, _ := time.Parse("2006-01-02", dateFormatYear(record[0]))
 
 					takings = append(takings, Taking{
-						Date:     record[0],
+						Date:     date,
 						Name:     stylist,
 						Salon:    f[0],
 						Services: s,

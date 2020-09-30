@@ -14,22 +14,22 @@ type Cost struct {
 }
 
 type Taking struct {
-	ID       uint    `json:"id" gorm: "primary_key"`
-	Date     string  `json:"date"`
-	Name     string  `json:"name"`
-	Salon    string  `json:"salon"`
-	Services float64 `json:"services"`
-	Products float64 `json:"products"`
+	ID       uint      `json:"id" gorm:"primary_key"`
+	Date     time.Time `json:"date" gorm:"type:date"`
+	Name     string    `json:"name"`
+	Salon    string    `json:"salon"`
+	Services float64   `json:"services"`
+	Products float64   `json:"products"`
 }
 
-type Total struct {
+type GetTotal struct {
 	C string
 	S float64 `json:"services"`
 	P float64 `json:"products"`
-	D float64
+	T float64 `json:"total"`
 }
 
 type GetCost struct {
 	C float64 `json:"cost"`
-	D string `json:"category"`
+	D string  `json:"category"`
 }

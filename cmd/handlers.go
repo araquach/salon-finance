@@ -306,7 +306,7 @@ func apiCostsCategory(w http.ResponseWriter, r *http.Request) {
 func apiTakings(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	var s Total
+	var s GetTotal
 	// var p Total
 	// var d Total
 
@@ -314,17 +314,17 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 	db.LogMode(true)
 	defer db.Close()
 
-	// stylist := "Adam Carter"
+	stylist := "Natalie Sharpe"
 
-	dateFrom := "2019-08-16"
-	dateTo := "2020-08-16"
+	dateFrom := "2019-01-01"
+	dateTo := "2020-01-01"
 
-	db.Table("takings").Select("sum(services) as s, sum(products) as p").Where("date >= ? AND date <= ?", dateFrom, dateTo).Where("salon = ?", "Jakata").Scan(&s)
+	db.Table("takings").Select("sum(services) as s, sum(products) as p").Where("date >= ? AND date <= ?", dateFrom, dateTo).Where("name = ?", stylist).Scan(&s)
 
 	// db.Table("takings").Select("sum(services) as s, sum(products) as p").Where("name = ?", stylist).Scan(&s)
 
 	//s.C = stylist
-	s.D = s.P + s.S
+	s.T = s.P + s.S
 
 	json, err := json.Marshal(s)
 	if err != nil {
