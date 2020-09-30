@@ -442,14 +442,14 @@ func loadTakings() {
 				}
 			}
 		}
-		for _, t := range takings {
-			db = dbConn()
-			db.LogMode(true)
-			db.Create(&t)
-			if err != nil {
-				log.Println(err)
-			}
-			db.Close()
+	}
+	for _, t := range takings {
+		db = dbConn()
+		db.LogMode(true)
+		db.Create(&t)
+		if err != nil {
+			log.Println(err)
 		}
+		db.Close()
 	}
 }
