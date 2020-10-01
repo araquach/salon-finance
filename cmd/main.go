@@ -56,16 +56,13 @@ func main() {
 
 	r := mux.NewRouter()
 	r.PathPrefix("/dist/").Handler(http.StripPrefix("/dist/", http.FileServer(http.Dir(dir))))
-
-
-
-	r.HandleFunc("/", index).Methods("GET")
-
-
-	//r.HandleFunc("/api/bankdata", apiBankData).Methods("GET")
-	//r.HandleFunc("/api/bankdata/{id}", apiAddCategory).Methods("PUT")
+	// API routes
 	r.HandleFunc("/api/takings", apiTakings).Methods("GET")
 	r.HandleFunc("/api/costscategory", apiCostsCategory).Methods("GET")
+	// Main Routes
+	r.HandleFunc("/{category}/{name}", index)
+	r.HandleFunc("/{name}", index)
+	r.HandleFunc("/", index).Methods("GET")
 
 	log.Printf("Starting server on %s", port)
 

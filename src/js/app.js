@@ -1,16 +1,16 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import App from './App.vue'
+import Vue from "vue"
+import VueRouter from "vue-router"
+import App from "./App.vue"
+import { store } from "./store"
 import { routes } from "./routes"
 
-import Buefy from 'buefy'
+import Buefy from "buefy"
 Vue.use(Buefy)
 Vue.use(require('vue-moment'))
 Vue.use(VueRouter)
 
-// Vue.prototype.numMonths = 14
-
 const router = new VueRouter({
+    mode: 'history',
     routes
 })
 
@@ -24,6 +24,7 @@ Vue.filter("toCurrency",  amount => Number(amount).toLocaleString('en-GB',
 
 new Vue({
     el: '#app',
+    store,
     router,
     render: h => h(App)
 })
