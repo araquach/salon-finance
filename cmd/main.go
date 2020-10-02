@@ -59,6 +59,8 @@ func main() {
 	// API routes
 	r.HandleFunc("/api/takings", apiTakings).Methods("GET")
 	r.HandleFunc("/api/costscategory", apiCostsCategory).Methods("GET")
+	r.HandleFunc("/api/total-takings", apiTotalTakings).Methods("GET")
+	r.HandleFunc("/api/costs-by-cat", apiCostsByCat).Methods("GET")
 	// Main Routes
 	r.HandleFunc("/{category}/{name}", index)
 	r.HandleFunc("/{name}", index)

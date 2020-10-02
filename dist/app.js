@@ -2086,61 +2086,32 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      takings: [],
-      costs: [],
-      numMonths: 14
-    };
-  },
-  computed: {
-    grandTotal: function grandTotal() {
-      return this.takings.reduce(function (sum, val) {
-        return sum + val.total;
-      }, 0);
-    },
-    totalCosts: function totalCosts() {
-      return this.costs.reduce(function (sum, val) {
-        return sum + val.amount;
-      }, 0);
-    },
-    pl: function pl() {
-      return (this.grandTotal - this.totalCosts).toFixed(2);
-    },
-    plAverage: function plAverage() {
-      return ((this.grandTotal - this.totalCosts) / this.numMonths).toFixed(2);
-    }
-  },
-  created: function created() {
-    var _this = this;
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-    axios.get('/api/takings/All').then(function (response) {
-      return _this.takings = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-    axios.get('/api/bankdata').then(function (response) {
-      return _this.costs = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])([])),
+  created: function created() {}
 });
 
 /***/ }),
@@ -2263,38 +2234,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      t: []
-    };
-  },
-  filters: {
-    addVat: function addVat(t) {
-      return parseFloat(t) + parseFloat(t) * .25;
-    }
-  },
-  computed: {
-    total: function total() {
-      return this.t.reduce(function (sum, val) {
-        return sum + val.total;
-      }, 0).toFixed(2);
-    }
-  },
-  created: function created() {
-    var _this = this;
-
-    axios.get('/api/takings/Base').then(function (response) {
-      return _this.t = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -2329,38 +2269,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      t: []
-    };
-  },
-  filters: {
-    addVat: function addVat(t) {
-      return parseFloat(t) + parseFloat(t) * .25;
-    }
-  },
-  computed: {
-    total: function total() {
-      return this.t.reduce(function (sum, val) {
-        return sum + val.total;
-      }, 0).toFixed(2);
-    }
-  },
-  created: function created() {
-    var _this = this;
-
-    axios.get('/api/takings/Jakata').then(function (response) {
-      return _this.t = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -2431,38 +2340,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      t: []
-    };
-  },
-  filters: {
-    addVat: function addVat(t) {
-      return parseFloat(t) + parseFloat(t) * .25;
-    }
-  },
-  computed: {
-    total: function total() {
-      return this.t.reduce(function (sum, val) {
-        return sum + val.total;
-      }, 0).toFixed(2);
-    }
-  },
-  created: function created() {
-    var _this = this;
-
-    axios.get('/api/takings/PK').then(function (response) {
-      return _this.t = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -2475,45 +2353,39 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      takings: []
-    };
-  },
-  created: function created() {
-    var _this = this;
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-    axios.get('/api/takings/All').then(function (response) {
-      return _this.takings = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["totalTakings"])),
+  created: function created() {
+    this.$store.dispatch('loadTotalTakings');
   }
 });
 
@@ -18646,31 +18518,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "section" }, [
-    _c("table", { staticClass: "table is-size-4" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("tr", [
-        _c("td", { staticClass: "has-text-danger" }, [
-          _vm._v(_vm._s(_vm._f("toCurrency")(_vm.pl)))
-        ]),
-        _vm._v(" "),
-        _c("td", { staticClass: "has-text-danger" }, [
-          _vm._v(_vm._s(_vm._f("toCurrency")(_vm.plAverage)))
-        ])
-      ])
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Profit/Loss")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Monthly Profit/Loss")])
+    return _c("div", { staticClass: "section" }, [
+      _c("table", { staticClass: "table is-size-4" }, [
+        _c("tr", [
+          _c("th", [_vm._v("Profit/Loss")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Monthly Profit/Loss")])
+        ]),
+        _vm._v(" "),
+        _c("tr", [
+          _c("td", { staticClass: "has-text-danger" }),
+          _vm._v(" "),
+          _c("td", { staticClass: "has-text-danger" })
+        ])
+      ])
     ])
   }
 ]
@@ -18783,25 +18651,9 @@ var render = function() {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(_vm._f("moment")(t.month_year, "MMMM")))]),
             _vm._v(" "),
-            _c("td", [
-              _vm._v(_vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.services))))
-            ]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.services)))]),
             _vm._v(" "),
-            _c("td", [
-              _vm._v(_vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.products))))
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.fl_services)))
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.fl_products)))
-              )
-            ]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.products)))]),
             _vm._v(" "),
             _c("td", [
               _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(t.total)))])
@@ -18828,10 +18680,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Services")]),
       _vm._v(" "),
       _c("th", [_vm._v("Products")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("FL Services")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("FL Products")]),
       _vm._v(" "),
       _c("th", [_vm._v("Total")])
     ])
@@ -18873,25 +18721,9 @@ var render = function() {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(_vm._f("moment")(t.month_year, "MMMM")))]),
             _vm._v(" "),
-            _c("td", [
-              _vm._v(_vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.services))))
-            ]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.services)))]),
             _vm._v(" "),
-            _c("td", [
-              _vm._v(_vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.products))))
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.fl_services)))
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.fl_products)))
-              )
-            ]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.products)))]),
             _vm._v(" "),
             _c("td", [
               _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(t.total)))])
@@ -18918,10 +18750,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Services")]),
       _vm._v(" "),
       _c("th", [_vm._v("Products")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("FL Services")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("FL Products")]),
       _vm._v(" "),
       _c("th", [_vm._v("Total")])
     ])
@@ -19000,25 +18828,9 @@ var render = function() {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(_vm._f("moment")(t.month_year, "MMMM")))]),
             _vm._v(" "),
-            _c("td", [
-              _vm._v(_vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.services))))
-            ]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.services)))]),
             _vm._v(" "),
-            _c("td", [
-              _vm._v(_vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.products))))
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.fl_services)))
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(t.fl_products)))
-              )
-            ]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(t.products)))]),
             _vm._v(" "),
             _c("td", [
               _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(t.total)))])
@@ -19045,10 +18857,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Services")]),
       _vm._v(" "),
       _c("th", [_vm._v("Products")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("FL Services")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("FL Products")]),
       _vm._v(" "),
       _c("th", [_vm._v("Total")])
     ])
@@ -19085,34 +18893,22 @@ var render = function() {
       _vm._v(" "),
       _c("tr", [
         _c("td", [
-          _vm._v(
-            _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(_vm.serviceTotal)))
-          )
+          _vm._v(_vm._s(_vm._f("toCurrency")(_vm.totalTakings.services)))
         ]),
         _vm._v(" "),
         _c("td", [
-          _vm._v(
-            _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(_vm.productTotal)))
-          )
+          _vm._v(_vm._s(_vm._f("toCurrency")(_vm.totalTakings.products)))
         ]),
         _vm._v(" "),
         _c("td", [
-          _vm._v(
-            _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(_vm.flServiceTotal)))
-          )
+          _c("strong", [
+            _vm._v(_vm._s(_vm._f("toCurrency")(_vm.totalTakings.total)))
+          ])
         ]),
         _vm._v(" "),
         _c("td", [
-          _vm._v(
-            _vm._s(_vm._f("toCurrency")(_vm._f("addVat")(_vm.flProductTotal)))
-          )
-        ]),
-        _vm._v(" "),
-        _c("td", [
-          _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.grandTotal)))])
-        ]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.grandTotalAverage)))])
+          _vm._v(_vm._s(_vm._f("toCurrency")(_vm.totalTakings.average)))
+        ])
       ])
     ])
   ])
@@ -19126,10 +18922,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Services")]),
       _vm._v(" "),
       _c("th", [_vm._v("Products")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("FL Services")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("FL Products")]),
       _vm._v(" "),
       _c("th", [_c("strong", [_vm._v("Grand Total")])]),
       _vm._v(" "),
@@ -41268,12 +41060,16 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     totalTakings: {}
   },
   getters: {},
-  mutations: {},
+  mutations: {
+    LOAD_TOTAL_TAKINGS: function LOAD_TOTAL_TAKINGS(state, payload) {
+      state.totalTakings = payload;
+    }
+  },
   actions: {
     loadTotalTakings: function loadTotalTakings(_ref) {
       var commit = _ref.commit;
-      axios.get('/api/takings').then(function (response) {
-        commit('UPDATE_TOTAL_TAKINGS', response.data);
+      axios.get('/api/total-takings').then(function (response) {
+        commit('LOAD_TOTAL_TAKINGS', response.data);
       });
     }
   }

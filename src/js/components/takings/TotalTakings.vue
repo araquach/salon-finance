@@ -7,36 +7,28 @@
             <tr>
                 <th>Services</th>
                 <th>Products</th>
-                <th>FL Services</th>
-                <th>FL Products</th>
                 <th><strong>Grand Total</strong></th>
                 <th>Monthly Average</th>
             </tr>
             <tr>
-                <td>{{serviceTotal | addVat | toCurrency}}</td>
-                <td>{{productTotal | addVat | toCurrency}}</td>
-                <td>{{flServiceTotal | addVat | toCurrency}}</td>
-                <td>{{flProductTotal | addVat | toCurrency}}</td>
-                <td><strong>{{grandTotal | toCurrency}}</strong></td>
-                <td>{{grandTotalAverage | toCurrency}}</td>
+                <td>{{ totalTakings.services | toCurrency}}</td>
+                <td>{{ totalTakings.products | toCurrency }}</td>
+                <td><strong>{{ totalTakings.total | toCurrency }}</strong></td>
+                <td>{{ totalTakings.average | toCurrency}}</td>
             </tr>
         </table>
     </div>
 </template>
 <script>
+    import { mapState } from "vuex"
+
     export default {
-        data() {
-            return {
-                takings: []
-            }
-        },
+      computed: {
+        ...mapState(["totalTakings"])
+      },
 
-
-        created() {
-            axios.get('/api/takings/All').then(response => this.takings = response.data)
-                .catch(error => {
-                    console.log(error)
-                })
-        }
+      created() {
+        this.$store.dispatch('loadTotalTakings')
+      }
     }
 </script>
