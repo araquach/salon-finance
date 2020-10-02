@@ -41,21 +41,19 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	var c CostByCat
-
 	var d []CostByCat
 
 	db := dbConn()
 	db.LogMode(true)
 	defer db.Close()
 
-	//categories := GetCategories()
-	//keys := reflect.ValueOf(categories).MapKeys()
+	dateFrom := "2019-01-01"
+	dateTo := "2020-01-01"
 
-	cats := []string{"Wages", "Stock", "Amazon"}
+	categories := GetCategories()
 
-	for _, cat := range cats {
-		db.Table("costs").Select("sum(debit) as a").Where("category = ?", cat).Scan(&c)
-
+	for cat, _ := range categories {
+		db.Table("costs").Select("sum(debit) as a").Where("category = ?", cat).Where("date >= ? AND date <= ?", dateFrom, dateTo).Scan(&c)
 		d = append(d, CostByCat{cat, c.A})
 	}
 

@@ -2040,6 +2040,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2065,7 +2072,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["costs"])),
+  created: function created() {
+    this.$store.dispatch('loadCosts');
+  }
+});
 
 /***/ }),
 
@@ -18273,15 +18286,11 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._l(_vm.categoryTotal, function(category) {
+        _vm._l(_vm.costs, function(cost) {
           return _c("tr", [
-            _c("td", [_vm._v(_vm._s(category.category))]),
+            _c("td", [_vm._v(_vm._s(cost.category))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(category.amount)))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(category.percent.toFixed(1)))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(category.average)))])
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(cost.amount)))])
           ])
         }),
         _c("tr", [
@@ -40224,12 +40233,16 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    takings: {}
+    takings: {},
+    costs: []
   },
   getters: {},
   mutations: {
     LOAD_TAKINGS: function LOAD_TAKINGS(state, payload) {
       state.takings = payload;
+    },
+    LOAD_COSTS: function LOAD_COSTS(state, payload) {
+      state.costs = payload;
     }
   },
   actions: {
@@ -40237,6 +40250,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       var commit = _ref.commit;
       axios.get('/api/takings').then(function (response) {
         commit('LOAD_TAKINGS', response.data);
+      });
+    },
+    loadCosts: function loadCosts(_ref2) {
+      var commit = _ref2.commit;
+      axios.get('/api/costs').then(function (response) {
+        commit('LOAD_COSTS', response.data);
       });
     }
   }

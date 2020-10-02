@@ -8,11 +8,11 @@
                 <th>Percent</th>
                 <th>Average</th>
             </tr>
-            <tr v-for="category in categoryTotal">
-                <td>{{category.category}}</td>
-                <td>{{category.amount | toCurrency}}</td>
-                <td>{{category.percent.toFixed(1)}}</td>
-                <td>{{category.average | toCurrency}}</td>
+            <tr v-for="cost in costs">
+                <td>{{cost.category}}</td>
+                <td>{{cost.amount | toCurrency}}</td>
+<!--                <td>{{category.percent.toFixed(1)}}</td>-->
+<!--                <td>{{category.average | toCurrency}}</td>-->
             <tr>
                 <th>Grand Total</th>
                 <td><strong>{{grandTotal | toCurrency}}</strong></td>
@@ -24,7 +24,15 @@
 </template>
 
 <script>
-    export default {
+  import { mapState } from "vuex"
 
+  export default {
+    computed: {
+      ...mapState(["costs"])
+    },
+
+    created() {
+      this.$store.dispatch('loadCosts')
     }
+  }
 </script>
