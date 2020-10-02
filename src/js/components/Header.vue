@@ -13,19 +13,13 @@
                 <b-navbar-item tag="router-link" to="/totals">
                     Totals
                 </b-navbar-item>
-                <b-navbar-item tag="router-link" to="/profitloss">
+                <b-navbar-item tag="router-link" to="/profit-loss">
                     Monthly Profit/loss
                 </b-navbar-item>
             </b-navbar-dropdown>
         </template>
         <template slot="end">
-            <b-navbar-item tag="div">
-                <div class="buttons">
-                    <b-navbar-item tag="router-link" to="/input">
-                        Category Input
-                    </b-navbar-item>
-                </div>
-            </b-navbar-item>
+
         </template>
     </b-navbar>
 </template>

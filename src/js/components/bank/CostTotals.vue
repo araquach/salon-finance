@@ -19,7 +19,6 @@
                 <td></td>
                 <td>{{totalAverage | toCurrency}}</td>
             </tr>
-            </tr>
         </table>
     </div>
 </template>

@@ -14,7 +14,7 @@ export const store = new Vuex.Store({
 
     mutations: {
         LOAD_TAKINGS(state, payload) {
-            state.totalTakings = payload
+            state.takings = payload
         },
     },
 
