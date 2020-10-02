@@ -40,7 +40,9 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	var c []CostByCat
+	var c CostByCat
+
+	var d []CostByCat
 
 	db := dbConn()
 	db.LogMode(true)
@@ -49,15 +51,15 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	//categories := GetCategories()
 	//keys := reflect.ValueOf(categories).MapKeys()
 
-	cat := "Wages"
+	cats := []string{"Wages", "Stock", "Amazon"}
 
-	db.Table("costs").Select("sum(debit) as a").Where("category = ?", cat).Scan(&c)
-	
-	c[0].C = cat
+	for _, cat := range cats {
+		db.Table("costs").Select("sum(debit) as a").Where("category = ?", cat).Scan(&c)
 
-	data := c
+		d = append(d, CostByCat{cat, c.A})
+	}
 
-	json, err := json.Marshal(data)
+	json, err := json.Marshal(d)
 	if err != nil {
 		log.Println(err)
 	}
