@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"reflect"
 )
 
 func index(w http.ResponseWriter, r *http.Request) {
@@ -41,25 +40,27 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	var c CostByCat
+	var c []CostByCat
 
 	db := dbConn()
 	db.LogMode(true)
 	defer db.Close()
 
-	// cat := "Wages"
+	//categories := GetCategories()
+	//keys := reflect.ValueOf(categories).MapKeys()
 
-	categories := GetCategories()
+	cat := "Wages"
 
-	keys := reflect.ValueOf(categories).MapKeys()
+	db.Table("costs").Select("sum(debit) as a").Where("category = ?", cat).Scan(&c)
+	
+	c[0].C = cat
 
-	for _, cat := range keys {
-		db.Table("costs").Select("sum(debit) as a").Where("category = ?", cat).Scan(&c)
+	data := c
 
-		json, err := json.Marshal(c)
-		if err != nil {
-			log.Println(err)
-		}
-		w.Write(json)
+	json, err := json.Marshal(data)
+	if err != nil {
+		log.Println(err)
 	}
+	w.Write(json)
+
 }

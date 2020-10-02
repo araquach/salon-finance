@@ -30,13 +30,7 @@ type Total struct {
 	
 }
 
-type CatCost struct {
+type CostByCat struct {
 	C string `json:"category"`
 	A float64 `json:"amount"`
-}
-
-type CostByCat struct {
-	C []CatCost `json:"cost"`
-	P float64 `json:"percent"`
-	Av float64 `json:"average"`
 }
