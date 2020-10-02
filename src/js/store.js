@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        totalTakings: {},
+        takings: {},
     },
 
     getters: {
@@ -13,15 +13,15 @@ export const store = new Vuex.Store({
     },
 
     mutations: {
-        LOAD_TOTAL_TAKINGS(state, payload) {
+        LOAD_TAKINGS(state, payload) {
             state.totalTakings = payload
         },
     },
 
     actions: {
-        loadTotalTakings({ commit }) {
-            axios.get('/api/total-takings').then((response) => {
-                commit('LOAD_TOTAL_TAKINGS', response.data
+        loadTakings({ commit }) {
+            axios.get('/api/takings').then((response) => {
+                commit('LOAD_TAKINGS', response.data
                 )
             })
         }

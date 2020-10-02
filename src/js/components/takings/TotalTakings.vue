@@ -11,10 +11,10 @@
                 <th>Monthly Average</th>
             </tr>
             <tr>
-                <td>{{ totalTakings.services | toCurrency}}</td>
-                <td>{{ totalTakings.products | toCurrency }}</td>
-                <td><strong>{{ totalTakings.total | toCurrency }}</strong></td>
-                <td>{{ totalTakings.average | toCurrency}}</td>
+                <td>{{ takings.services | toCurrency}}</td>
+                <td>{{ takings.products | toCurrency }}</td>
+                <td><strong>{{ takings.total | toCurrency }}</strong></td>
+                <td>{{ takings.average | toCurrency}}</td>
             </tr>
         </table>
     </div>
@@ -24,11 +24,11 @@
 
     export default {
       computed: {
-        ...mapState(["totalTakings"])
+        ...mapState(["takings"])
       },
 
       created() {
-        this.$store.dispatch('loadTotalTakings')
+        this.$store.dispatch('loadTakings')
       }
     }
 </script>

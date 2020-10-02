@@ -26,43 +26,6 @@
 
 <script>
     export default {
-        data() {
-            return {
-                numMonths: 14,
-                costs: []
-            }
-        },
 
-        computed: {
-            grandTotal() {
-                return this.costs.reduce((sum, val) => sum + val.amount, 0).toFixed(2)
-            },
-            totalAverage() {
-                return this.grandTotal / this.numMonths
-            },
-            categoryTotal() {
-                let numMonths = this.numMonths
-                const result = []
-                const mainTotal = this.grandTotal
-                this.costs.reduce(function(res, value) {
-                    if (!res[value.category]) {
-                        res[value.category] = { category: value.category, amount: 0, percent: 0, average: 0 }
-                        result.push(res[value.category])
-                    }
-                    let total = res[value.category].amount += value.amount
-                    res[value.category].percent = (total / mainTotal) * 100
-                    res[value.category].average = total / numMonths
-                    return res
-                }, {})
-                return result
-            }
-        },
-
-        created() {
-            axios.get('/api/bankdata').then(response => this.costs = response.data)
-                .catch(error => {
-                    console.log(error)
-                })
-        }
     }
 </script>
