@@ -6,11 +6,13 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         takings: {},
-        costs: []
+        costs: {}
     },
 
     getters: {
-
+        totalCost: state => {
+            return state.costs.amount.reduce((a, b) => a + b, 0)
+        },
     },
 
     mutations: {

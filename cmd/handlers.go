@@ -22,8 +22,8 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 	db.LogMode(true)
 	defer db.Close()
 
-	dateFrom := "2019-01-01"
-	dateTo := "2020-01-01"
+	dateFrom := "2019-10-03"
+	dateTo := "2020-10-03"
 
 	db.Table("takings").Select("sum(services) as s, sum(products) as p").Where("date >= ? AND date <= ?", dateFrom, dateTo).Scan(&s)
 
@@ -40,22 +40,32 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
+	var d CostData
 	var c CostByCat
-	var d []CostByCat
+	var e []CostByCat
 
 	db := dbConn()
 	db.LogMode(true)
 	defer db.Close()
 
-	dateFrom := "2019-01-01"
-	dateTo := "2020-01-01"
+	dateFrom := "2019-10-03"
+	dateTo := "2020-10-03"
 
 	categories := GetCategories()
 
+	db.Table("costs").Select("sum(debit) as a").Where("date >= ? AND date <= ?", dateFrom, dateTo).Scan(&c)
+	d.T = c.A
+
 	for cat, _ := range categories {
 		db.Table("costs").Select("sum(debit) as a").Where("category = ?", cat).Where("date >= ? AND date <= ?", dateFrom, dateTo).Scan(&c)
-		d = append(d, CostByCat{cat, c.A})
+
+		percent := (c.A / d.T) * 100
+		average := c.A / 12
+
+		e = append(e, CostByCat{cat, c.A, percent, average})
 	}
+	d.C = e
+
 
 	json, err := json.Marshal(d)
 	if err != nil {

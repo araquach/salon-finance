@@ -2072,9 +2072,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["costs"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['costs'])),
   created: function created() {
     this.$store.dispatch('loadCosts');
   }
@@ -18286,23 +18287,29 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._l(_vm.costs, function(cost) {
+        _vm._l(_vm.costs.individual, function(cost) {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(cost.category))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(cost.amount)))])
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(cost.amount)))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(cost.percent.toFixed(1)))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(cost.average)))])
           ])
         }),
         _c("tr", [
           _c("th", [_vm._v("Grand Total")]),
           _vm._v(" "),
-          _c("td", [
-            _c("strong", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.grandTotal)))])
+          _c("td", { staticClass: "is-size-5" }, [
+            _c("strong", [
+              _vm._v(_vm._s(_vm._f("toCurrency")(_vm.costs.total)))
+            ])
           ]),
           _vm._v(" "),
           _c("td"),
           _vm._v(" "),
-          _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(_vm.totalAverage)))])
+          _c("td")
         ])
       ],
       2
@@ -40234,9 +40241,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     takings: {},
-    costs: []
+    costs: {}
   },
-  getters: {},
+  getters: {
+    totalCost: function totalCost(state) {
+      return state.costs.amount.reduce(function (a, b) {
+        return a + b;
+      }, 0);
+    }
+  },
   mutations: {
     LOAD_TAKINGS: function LOAD_TAKINGS(state, payload) {
       state.takings = payload;
