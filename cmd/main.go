@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"github.com/araquach/salon-finance/cmd/finance"
+	"github.com/araquach/salon-finance/cmd/stock"
 	"github.com/gorilla/mux"
-	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
 	"html/template"
@@ -24,14 +24,6 @@ func init() {
 	}
 }
 
-func dbConn() (db *gorm.DB) {
-	db, err := gorm.Open("postgres", os.Getenv("DATABASE_URL"))
-	if err != nil {
-		panic(err)
-	}
-	return db
-}
-
 func index(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	if err := tplIndex.Execute(w, nil); err != nil {
@@ -42,6 +34,11 @@ func index(w http.ResponseWriter, r *http.Request) {
 func main() {
 	var err error
 	var dir string
+
+	finance.LoadCosts()
+	finance.LoadTakings()
+	stock.LoadProfessional()
+	stock.LoadRetail()
 
 	port := os.Getenv("PORT")
 	if port == "" {

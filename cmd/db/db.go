@@ -1,7 +1,6 @@
 package db
 
 import (
-	"github.com/araquach/salon-finance/cmd/finance"
 	"github.com/jinzhu/gorm"
 	"os"
 )
@@ -13,9 +12,4 @@ func DbConn() (db *gorm.DB) {
 		panic(err)
 	}
 	return db
-}
-
-func Migrate() {
-	db := DbConn()
-	db.AutoMigrate(&finance.Cost{}, &finance.Taking{})
 }
