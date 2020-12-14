@@ -2,7 +2,9 @@ package main
 
 import (
 	"flag"
+	"github.com/araquach/salon-finance/cmd/finance"
 	"github.com/gorilla/mux"
+	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
 	"html/template"
@@ -22,6 +24,21 @@ func init() {
 	}
 }
 
+func dbConn() (db *gorm.DB) {
+	db, err := gorm.Open("postgres", os.Getenv("DATABASE_URL"))
+	if err != nil {
+		panic(err)
+	}
+	return db
+}
+
+func index(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	if err := tplIndex.Execute(w, nil); err != nil {
+		panic(err)
+	}
+}
+
 func main() {
 	var err error
 	var dir string
@@ -32,12 +49,12 @@ func main() {
 	//db.DropTableIfExists(&Taking{})
 	//loadTakings()
 
-	if db.HasTable(&Taking{}) == false {
-		loadTakings()
+	if db.HasTable(&finance.Taking{}) == false {
+		finance.LoadTakings()
 	}
 
-	if db.HasTable(&Cost{}) == false {
-		loadCosts()
+	if db.HasTable(&finance.Cost{}) == false {
+		finance.LoadCosts()
 	}
 
 	port := os.Getenv("PORT")
@@ -57,8 +74,8 @@ func main() {
 	r := mux.NewRouter()
 	r.PathPrefix("/dist/").Handler(http.StripPrefix("/dist/", http.FileServer(http.Dir(dir))))
 	// API routes
-	r.HandleFunc("/api/takings", apiTakings).Methods("GET")
-	r.HandleFunc("/api/costs", apiCostsByCat).Methods("GET")
+	r.HandleFunc("/api/takings", finance.ApiTakings).Methods("GET")
+	r.HandleFunc("/api/costs", finance.ApiCostsByCat).Methods("GET")
 	// Main Routes
 	r.HandleFunc("/{category}/{name}", index)
 	r.HandleFunc("/{name}", index)

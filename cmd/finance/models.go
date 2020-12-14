@@ -1,4 +1,4 @@
-package main
+package finance
 
 import "time"
 
@@ -38,5 +38,5 @@ type CostByCat struct {
 
 type CostData struct {
 	C []CostByCat `json:"individual"`
-	T float64 `json:"total"`
+	T float64     `json:"total"`
 }

@@ -1,24 +1,18 @@
-package main
+package finance
 
 import (
 	"encoding/json"
+	"github.com/araquach/salon-finance/cmd/db"
 	"log"
 	"net/http"
 )
 
-func index(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
-	if err := tplIndex.Execute(w, nil); err != nil {
-		panic(err)
-	}
-}
-
-func apiTakings(w http.ResponseWriter, r *http.Request) {
+func ApiTakings(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	var s Total
 
-	db := dbConn()
+	db := db.DbConn()
 	db.LogMode(true)
 	defer db.Close()
 
@@ -37,14 +31,14 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 	w.Write(json)
 }
 
-func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
+func ApiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	var d CostData
 	var c CostByCat
 	var e []CostByCat
 
-	db := dbConn()
+	db := db.DbConn()
 	db.LogMode(true)
 	defer db.Close()
 

@@ -1,6 +1,6 @@
-module contra-design.com/salon-finance
+module github.com/araquach/salon-finance
 
-go 1.12
+go 1.14
 
 require (
 	github.com/gorilla/mux v1.6.2
