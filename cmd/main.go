@@ -43,20 +43,6 @@ func main() {
 	var err error
 	var dir string
 
-	db := dbConn()
-	defer db.Close()
-
-	//db.DropTableIfExists(&Taking{})
-	//loadTakings()
-
-	if db.HasTable(&finance.Taking{}) == false {
-		finance.LoadTakings()
-	}
-
-	if db.HasTable(&finance.Cost{}) == false {
-		finance.LoadCosts()
-	}
-
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatal("$PORT must be set")

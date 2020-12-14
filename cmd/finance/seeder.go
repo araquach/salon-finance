@@ -22,8 +22,6 @@ func LoadCosts() {
 	categories := GetCategories()
 
 	db := db.DbConn()
-	db.LogMode(true)
-	db.AutoMigrate(&Cost{})
 
 	var files []string
 
@@ -88,8 +86,6 @@ func LoadTakings() {
 	var takings []Taking
 
 	db := db.DbConn()
-	db.LogMode(true)
-	db.AutoMigrate(&Taking{})
 
 	root := "data/takings"
 
