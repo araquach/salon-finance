@@ -24,7 +24,6 @@ func LoadCosts() {
 	db := db.DbConn()
 	db.LogMode(true)
 	db.AutoMigrate(&Cost{})
-	db.Close()
 
 	var files []string
 
@@ -80,7 +79,6 @@ func LoadCosts() {
 		if err != nil {
 			log.Panic(err)
 		}
-		db.Close()
 	}
 }
 
@@ -92,7 +90,6 @@ func LoadTakings() {
 	db := db.DbConn()
 	db.LogMode(true)
 	db.AutoMigrate(&Taking{})
-	db.Close()
 
 	root := "data/takings"
 
@@ -181,6 +178,5 @@ func LoadTakings() {
 		if err != nil {
 			log.Println(err)
 		}
-		db.Close()
 	}
 }
