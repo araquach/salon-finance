@@ -15,3 +15,8 @@ type ProductData struct {
 	SubBrand string `json:"sub_brand"`
 	Type string `json:"type"`
 }
+
+type Total struct {
+	S string `json:"salon"`
+	T int `json:"total"`
+}

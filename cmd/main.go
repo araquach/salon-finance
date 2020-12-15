@@ -28,13 +28,13 @@ func init() {
 func migrate()  {
 	db := db.DbConn()
 	defer db.Close()
-	db.DropTable(&stock.ProductData{})
-	db.AutoMigrate(&stock.ProductData{})
+	//db.DropTable(&stock.ProductData{})
+	db.AutoMigrate(&stock.ProductData{}, &finance.Taking{}, &finance.Cost{})
 
-	finance.LoadCosts()
-	finance.LoadTakings()
-	stock.LoadProfessional()
-	stock.LoadRetail()
+	//finance.LoadCosts()
+	//finance.LoadTakings()
+	//stock.LoadProfessional()
+	//stock.LoadRetail()
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
@@ -69,6 +69,8 @@ func main() {
 	// API routes
 	r.HandleFunc("/api/takings", finance.ApiTakings).Methods("GET")
 	r.HandleFunc("/api/costs", finance.ApiCostsByCat).Methods("GET")
+
+	r.HandleFunc("/api/stock", stock.GetProductUseBySalon).Methods("GET")
 	// Main Routes
 	r.HandleFunc("/{category}/{name}", index)
 	r.HandleFunc("/{name}", index)
