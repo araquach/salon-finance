@@ -25,7 +25,7 @@ func LoadCosts() {
 
 	var files []string
 
-	root := "data/bank"
+	root := "data/finance/bank"
 	err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
 			return nil
@@ -87,7 +87,7 @@ func LoadTakings() {
 
 	db := db.DbConn()
 
-	root := "data/takings"
+	root := "data/finance/takings"
 
 	err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {

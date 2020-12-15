@@ -21,7 +21,7 @@ func LoadProfessional() {
 	var stockTransfers []StockData
 	var err error
 
-	root := "data/stock-out/Professional"
+	root := "data/stock/stock-out/Professional"
 
 	err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
@@ -56,7 +56,7 @@ func LoadProfessional() {
 				log.Println(err)
 			}
 
-			sl :="data/stock-list/professional.csv"
+			sl :="data/stock/stock-list/professional.csv"
 
 			csvFile2, _ := os.Open(sl)
 
@@ -98,7 +98,7 @@ func LoadRetail() {
 	var stockTransfers []StockData
 	var err error
 
-	root := "data/stock-out/Retail"
+	root := "data/stock/stock-out/Retail"
 
 	err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
@@ -133,7 +133,7 @@ func LoadRetail() {
 				log.Println(err)
 			}
 
-			sl :="data/stock-list/retail.csv"
+			sl :="data/stack/stock-list/retail.csv"
 
 			csvFile2, _ := os.Open(sl)
 
