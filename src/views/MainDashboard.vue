@@ -6,9 +6,9 @@
     </div>
 </template>
 <script>
-    import CostMain from "./bank/CostMain"
-    import CostTotals from "./bank/CostTotals"
-    import TotalTakings from "./takings/TotalTakings";
+    import CostMain from "../components/bank/CostMain"
+    import CostTotals from "../components/bank/CostTotals"
+    import TotalTakings from "../components/takings/TotalTakings";
     export default {
         components: {CostMain, CostTotals, TotalTakings}
     }

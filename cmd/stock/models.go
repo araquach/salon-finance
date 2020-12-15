@@ -2,7 +2,7 @@ package stock
 
 import "time"
 
-type StockData struct {
+type ProductData struct {
 	ID int `json:"id" gorm:"primary_key"`
 	Date time.Time `json:"date"`
 	Salon string `json:"salon"`

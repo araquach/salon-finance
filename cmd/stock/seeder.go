@@ -18,7 +18,7 @@ func LoadProfessional() {
 	db := db.DbConn()
 
 	var files []string
-	var stockTransfers []StockData
+	var stockTransfers []ProductData
 	var err error
 
 	root := "data/stock/stock-out/Professional"
@@ -56,7 +56,7 @@ func LoadProfessional() {
 				log.Println(err)
 			}
 
-			sl :="data/stock/stock-list/professional.csv"
+			sl :="data/stock/stock-list/Professional.csv"
 
 			csvFile2, _ := os.Open(sl)
 
@@ -77,7 +77,7 @@ func LoadProfessional() {
 					totalPrice, _ := strconv.ParseFloat(sor[2], 8)
 					price := totalPrice / float64(quantity)
 
-					stockTransfers = append(stockTransfers, StockData{Date: formattedDate, Salon: salon, Product: sor[0], Quantity: quantity, Price: price, Supplier: slr[1], Brand: slr[2], Category: slr[3], SubBrand: slr[4], Type: slr[5]})
+					stockTransfers = append(stockTransfers, ProductData{Date: formattedDate, Salon: salon, Product: sor[0], Quantity: quantity, Price: price, Supplier: slr[1], Brand: slr[2], Category: slr[3], SubBrand: slr[4], Type: slr[5]})
 				}
 			}
 		}
@@ -95,7 +95,7 @@ func LoadRetail() {
 	db := db.DbConn()
 
 	var files []string
-	var stockTransfers []StockData
+	var stockTransfers []ProductData
 	var err error
 
 	root := "data/stock/stock-out/Retail"
@@ -133,7 +133,7 @@ func LoadRetail() {
 				log.Println(err)
 			}
 
-			sl :="data/stack/stock-list/retail.csv"
+			sl :="data/stock/stock-list/Retail.csv"
 
 			csvFile2, _ := os.Open(sl)
 
@@ -154,7 +154,7 @@ func LoadRetail() {
 					quantity, _ := strconv.Atoi(sor[4])
 					price, _ := strconv.ParseFloat(sor[1], 8)
 
-					stockTransfers = append(stockTransfers, StockData{Date: formattedDate, Salon: salon, Product: sor[0], Quantity: quantity, Price: price, Supplier: slr[1], Brand: slr[2], Category: slr[3], SubBrand: slr[4], Type: slr[5]})
+					stockTransfers = append(stockTransfers, ProductData{Date: formattedDate, Salon: salon, Product: sor[0], Quantity: quantity, Price: price, Supplier: slr[1], Brand: slr[2], Category: slr[3], SubBrand: slr[4], Type: slr[5]})
 				}
 			}
 		}

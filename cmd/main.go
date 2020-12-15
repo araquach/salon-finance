@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"github.com/araquach/salon-finance/cmd/db"
 	"github.com/araquach/salon-finance/cmd/finance"
 	"github.com/araquach/salon-finance/cmd/stock"
 	"github.com/gorilla/mux"
@@ -24,6 +25,18 @@ func init() {
 	}
 }
 
+func migrate()  {
+	db := db.DbConn()
+	defer db.Close()
+	db.DropTable(&stock.ProductData{})
+	db.AutoMigrate(&stock.ProductData{})
+
+	finance.LoadCosts()
+	finance.LoadTakings()
+	stock.LoadProfessional()
+	stock.LoadRetail()
+}
+
 func index(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 	if err := tplIndex.Execute(w, nil); err != nil {
@@ -35,10 +48,7 @@ func main() {
 	var err error
 	var dir string
 
-	finance.LoadCosts()
-	finance.LoadTakings()
-	stock.LoadProfessional()
-	stock.LoadRetail()
+	migrate()
 
 	port := os.Getenv("PORT")
 	if port == "" {
