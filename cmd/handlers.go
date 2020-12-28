@@ -19,8 +19,6 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 	var s Total
 
 	db := dbConn()
-	db.LogMode(true)
-	defer db.Close()
 
 	dateFrom := "2019-10-03"
 	dateTo := "2020-10-03"
@@ -45,8 +43,6 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	var e []CostByCat
 
 	db := dbConn()
-	db.LogMode(true)
-	defer db.Close()
 
 	dateFrom := "2019-10-03"
 	dateTo := "2020-10-03"

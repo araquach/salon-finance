@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"github.com/gorilla/mux"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
 	"html/template"
 	"log"
@@ -26,19 +25,8 @@ func main() {
 	var err error
 	var dir string
 
-	db := dbConn()
-	defer db.Close()
-
-	//db.DropTableIfExists(&Taking{})
-	//loadTakings()
-
-	if db.HasTable(&Taking{}) == false {
-		loadTakings()
-	}
-
-	if db.HasTable(&Cost{}) == false {
-		loadCosts()
-	}
+	loadTakings()
+	loadCosts()
 
 	port := os.Getenv("PORT")
 	if port == "" {

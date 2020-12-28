@@ -4,7 +4,9 @@ import (
 	"bufio"
 	"encoding/csv"
 	"fmt"
-	"github.com/jinzhu/gorm"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"io"
 	"io/ioutil"
 	"log"
@@ -16,9 +18,11 @@ import (
 )
 
 func dbConn() (db *gorm.DB) {
-	db, err := gorm.Open("postgres", os.Getenv("DATABASE_URL"))
+	db, err := gorm.Open(postgres.Open(os.Getenv("DATABASE_URL")), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
+	})
 	if err != nil {
-		panic(err)
+		panic("failed to connect database")
 	}
 	return db
 }
@@ -289,9 +293,8 @@ func loadCosts() {
 	categories := GetCategories()
 
 	db := dbConn()
-	db.LogMode(true)
 	db.AutoMigrate(&Cost{})
-	db.Close()
+
 
 	var files []string
 
@@ -343,12 +346,10 @@ func loadCosts() {
 			}
 		}
 		db = dbConn()
-		db.LogMode(true)
 		db.Create(&t)
 		if err != nil {
 			log.Panic(err)
 		}
-		db.Close()
 	}
 }
 
@@ -358,9 +359,7 @@ func loadTakings() {
 	var takings []Taking
 
 	db := dbConn()
-	db.LogMode(true)
 	db.AutoMigrate(&Taking{})
-	db.Close()
 
 	root := "data/takings"
 
@@ -446,11 +445,9 @@ func loadTakings() {
 	}
 	for _, t := range takings {
 		db = dbConn()
-		db.LogMode(true)
 		db.Create(&t)
 		if err != nil {
 			log.Println(err)
 		}
-		db.Close()
 	}
 }
