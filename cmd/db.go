@@ -293,12 +293,14 @@ func loadCosts() {
 	categories := GetCategories()
 
 	db := dbConn()
-	db.AutoMigrate(&Cost{})
-
+	err = db.AutoMigrate(&Cost{})
+	if err != nil {
+		panic(err)
+	}
 
 	var files []string
 
-	root := "data/bank"
+	root := "data/finance/bank"
 	err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
 			return nil
@@ -345,11 +347,7 @@ func loadCosts() {
 				}
 			}
 		}
-		db = dbConn()
 		db.Create(&t)
-		if err != nil {
-			log.Panic(err)
-		}
 	}
 }
 
@@ -359,9 +357,12 @@ func loadTakings() {
 	var takings []Taking
 
 	db := dbConn()
-	db.AutoMigrate(&Taking{})
+	err = db.AutoMigrate(&Taking{})
+	if err != nil {
+		panic(err)
+	}
 
-	root := "data/takings"
+	root := "data/finance/takings"
 
 	err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
@@ -444,7 +445,6 @@ func loadTakings() {
 		}
 	}
 	for _, t := range takings {
-		db = dbConn()
 		db.Create(&t)
 		if err != nil {
 			log.Println(err)
