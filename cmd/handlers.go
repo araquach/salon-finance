@@ -20,8 +20,8 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 
 	db := dbConn()
 
-	dateFrom := "2019-10-03"
-	dateTo := "2020-10-03"
+	dateFrom := "2019-10-01"
+	dateTo := "2020-01-01"
 
 	db.Table("takings").Select("sum(services) as s, sum(products) as p").Where("date >= ? AND date <= ?", dateFrom, dateTo).Scan(&s)
 
