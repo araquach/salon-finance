@@ -55,6 +55,12 @@ func GetCategories() (c map[string][]string) {
 			"VICTORIA NYLAND",
 			"LOUISE BAILEY",
 			"LILLY SMITH",
+			"ROSEMARIE WINTERBU",
+			"JAMIE BANNING-HIGH",
+			"EVE SIMPSON",
+			"REBECCA COTTON",
+			"SARAH CUDDY",
+			"SHAE HOUGHTON",
 		},
 		"PAYE": {
 			"HMRC CUSTOMS AND E",
@@ -74,6 +80,7 @@ func GetCategories() (c map[string][]string) {
 		},
 		"VAT": {
 			"HMRC VAT",
+			"HMRC E VAT",
 		},
 		"Utilities": {
 			"BRIT GAS",
@@ -86,6 +93,7 @@ func GetCategories() (c map[string][]string) {
 			"BG BUSINESS",
 			"ASH WASTE",
 			"CATHEDRAL LEASING",
+			"CATHEDRAL HYGIENE",
 			"WWW.BRITISHGAS.CO.",
 			"PASTDUE",
 			"SCOTTISHPOWER",
@@ -93,6 +101,8 @@ func GetCategories() (c map[string][]string) {
 			"O2 05056477/001",
 			"EE & T-MOBILE",
 			"E.ON",
+			"CHUBB",
+			"WWW.MY.CHUBB.CO.UK",
 		},
 		"Building": {
 			"MEREHALL ESTATES",
@@ -104,6 +114,8 @@ func GetCategories() (c map[string][]string) {
 			"WARRINGTON B.C.",
 			"W.B.C MV INTERNET",
 			"JENSEN INVESTMENTS",
+			"MR ROBERT A ANTONO",
+			"A6 ROLLER SHUTTERS",
 		},
 		"Base": {
 			"NJS MAINTENANCE",
@@ -139,6 +151,9 @@ func GetCategories() (c map[string][]string) {
 			"CLOUD9",
 			"BEAUTY WORX",
 			"AMERICAN CREW",
+			"GHD",
+			"WWW.SALON-SERVICES",
+			"SP * HAIRMADEEASIS",
 		},
 		"Marketing": {
 			"RACKSPACE",
@@ -169,6 +184,13 @@ func GetCategories() (c map[string][]string) {
 			"Evernote",
 			"DISCOUNT DISPLAYS",
 			"CARTRIDGEPEOPLE.CO",
+			"LOOMLY US",
+			"JETBRAINS",
+			"INDEED",
+			"HTTPS://HEROPOST.I CA",
+			"TEXT ANYWHERE",
+			"TEXTMAGIC.COM",
+			"WWW.PHOREST.COM",
 		},
 		"Insurance": {
 			"CLOSE-COVERSURE",
@@ -182,6 +204,9 @@ func GetCategories() (c map[string][]string) {
 			"HMRC NDDS",
 			"HMRC - ACCOUNTS OF",
 			"HMRC 600000000562153302",
+			"HMRC 300000000784948091",
+			"HMRC 200000000588802019",
+			"1ST LOCATE UK",
 		},
 		"Staff": {
 			"TRAINLINE",
@@ -203,9 +228,12 @@ func GetCategories() (c map[string][]string) {
 			"DMN/DIRTYMARTINIMA",
 			"Circo",
 			"AIRBNB",
+			"BEHINDTHECHAIR.COM",
+			"THE BOTANIST",
 		},
 		"Sundries": {
 			"Spotify",
+			"SPOTIFY",
 			"PPLPRS",
 			"VIMTO OUT",
 			"DLT MEDIA",
@@ -220,6 +248,7 @@ func GetCategories() (c map[string][]string) {
 			"MM NEWSAGENTS",
 			"MARTIN MCCOLL",
 			"COSTCO",
+			"B&M",
 		},
 		"Paypal": {
 			"PAYPAL",
@@ -238,12 +267,14 @@ func GetCategories() (c map[string][]string) {
 			"QUANTUM",
 			"JOHN LAMB",
 			"D A CARTER",
+			"LOAN",
 		},
 		"Bank": {
 			"NON-GBP TRANS FEE",
 			"O/DRAFT INTEREST",
 			"SERVICE CHARGES",
 			"RETAIL MERCHANT SE",
+			"RMS",
 			"GLOBAL PAYMENTS",
 			"EMS",
 			"UNAUTH'D BORR. FEE",
@@ -281,6 +312,25 @@ func GetCategories() (c map[string][]string) {
 			"CHATURBIL",
 			"APPLE.COM/UK",
 			"ACOUSTIC CAFE",
+			"SODASTREAM",
+			"MADE.COM",
+		},
+		"Equipment": {
+			"CURRYS CD",
+			"TENZY",
+			"JM-AC",
+			"LADDERS UK",
+			"SP * YOISCISSORS",
+			"WWW ESPARES",
+			"WWW.BUYSPARES.CO.U CD",
+			"HOWHIGHBRANDS.CO.U",
+			"AMBICOOL",
+			"BARBER BLADES",
+			"WWW.LEDSUPPLYANDFI",
+		},
+		"Accountant": {
+			"CMT ACCOUNTING",
+			"POS-HARDWARE LTD",
 		},
 	}
 	return
@@ -293,6 +343,7 @@ func loadCosts() {
 	categories := GetCategories()
 
 	db := dbConn()
+	db.Migrator().DropTable(&Cost{})
 	err = db.AutoMigrate(&Cost{})
 	if err != nil {
 		panic(err)
@@ -357,6 +408,7 @@ func loadTakings() {
 	var takings []Taking
 
 	db := dbConn()
+	db.Migrator().DropTable(&Taking{})
 	err = db.AutoMigrate(&Taking{})
 	if err != nil {
 		panic(err)
