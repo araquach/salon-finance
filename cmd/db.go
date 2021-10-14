@@ -76,7 +76,7 @@ func loadCosts() {
 					Description: line[4],
 					Debit:       d,
 					Balance:     b,
-					Category:    "Other",
+					Category:    "other",
 					SubCat:      "other",
 				})
 			}

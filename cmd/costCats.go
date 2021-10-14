@@ -2,8 +2,8 @@ package main
 
 func GetCategories() (c map[string]map[string][]string) {
 	c = map[string]map[string][]string{
-		"Wages": {
-			"wages": {
+		"wages": {
+			"stylist": {
 				"MR J SHARP",
 				"JAMES SHARPE",
 				"MISS L HALL",
@@ -29,7 +29,6 @@ func GetCategories() (c map[string]map[string][]string) {
 				"VICTORIA NYLAND",
 				"LOUISE BAILEY",
 				"LILLY SMITH",
-				"ROSEMARIE WINTERBU",
 				"JAMIE BANNING-HIGH",
 				"EVE SIMPSON",
 				"REBECCA COTTON",
@@ -37,20 +36,6 @@ func GetCategories() (c map[string]map[string][]string) {
 				"SHAE HOUGHTON",
 				"MISS I LAMB",
 			},
-		},
-		"PAYE": {
-			"paye": {
-				"HMRC CUSTOMS AND E",
-				"FREDRICKSON",
-				"ADVANTIS",
-			},
-		},
-		"Pension": {
-			"pension": {
-				"NEST",
-			},
-		},
-		"Freelance": {
 			"freelance": {
 				"NATALIE SHARPE",
 				"MATHEW LANE",
@@ -59,144 +44,23 @@ func GetCategories() (c map[string]map[string][]string) {
 				"MICHELLE RAILTON",
 				"LEON PRITCHARD",
 			},
+			"other": {
+				"ROSEMARIE WINTERBU",
+			},
+			"paye": {
+				"HMRC CUSTOMS AND E",
+				"FREDRICKSON",
+				"ADVANTIS",
+			},
+			"pension": {
+				"NEST",
+			},
 		},
-		"VAT": {
+		"taxes": {
 			"vat": {
 				"HMRC VAT",
 				"HMRC E VAT",
 			},
-		},
-		"Utilities": {
-			"utilities": {
-				"BRIT GAS",
-				"BRITISH TELECOM",
-				"SCOTTISH POWER",
-				"EDF ENERGY",
-				"WATER PLUS",
-				"EE LIMITED",
-				"BT GROUP",
-				"BG BUSINESS",
-				"ASH WASTE",
-				"CATHEDRAL LEASING",
-				"CATHEDRAL HYGIENE",
-				"WWW.BRITISHGAS.CO.",
-				"PASTDUE",
-				"SCOTTISHPOWER",
-				"O2 DEVICE PLAN",
-				"O2 05056477/001",
-				"EE & T-MOBILE",
-				"E.ON",
-				"CHUBB",
-				"WWW.MY.CHUBB.CO.UK",
-			},
-		},
-		"Building": {
-			"building": {
-				"MEREHALL ESTATES",
-				"BETTERBOOZE LTD",
-				"WBC NNDR",
-				"JENSON INVESTMENTS",
-				"WARRINGTON BOROUGH",
-				"WARRINGTON CD",
-				"WARRINGTON B.C.",
-				"W.B.C MV INTERNET",
-				"JENSEN INVESTMENTS",
-				"MR ROBERT A ANTONO",
-				"A6 ROLLER SHUTTERS",
-			},
-		},
-		"Base": {
-			"base": {
-				"NJS MAINTENANCE",
-				"M SUTTON",
-				"MODERN LIGHTING",
-				"M A SUTTON",
-				"JACOB INTERIORS",
-			},
-		},
-		"Stock": {
-			"stock": {
-				"BEAUTY WORKS",
-				"BEAUTYWORKS",
-				"ICON CONSULTANCY",
-				"SWEET SQUARED",
-				"ALAN HOWARD",
-				"HENKEL",
-				"WWW.ASTONANDFINCHE",
-				"ALAN HOWARD(STOCKP CD 6954",
-				"SALLY SALON",
-				"WWW.GHDHAIR.COM",
-				"FEEL FOR HAIR",
-				"SALONS DIRECT",
-				"GOCARDLESS",
-				"FA UK LIMITED",
-				"JAMELLA",
-				"WWW.SALONSDIRECT.C",
-				"BALMAINHAIR.CO.UK",
-				"WWW.FEEFORHAIR.CO.",
-				"JEMELLA LTD",
-				"THE WIGGINS",
-				"SIMPLYHAIR",
-				"SALONEASY",
-				"JEMELLA",
-				"CLOUD9",
-				"BEAUTY WORX",
-				"AMERICAN CREW",
-				"GHD",
-				"WWW.SALON-SERVICES",
-				"SP * HAIRMADEEASIS",
-			},
-		},
-		"Marketing": {
-			"marketing": {
-				"RACKSPACE",
-				"GOOGLE",
-				"TEXTANYWHERE",
-				"BUFFER",
-				"HEROKU",
-				"FACEBK",
-				"ADOBE",
-				"JetBrains",
-				"DIGITALOCEAN.COM",
-				"FORGE.LARAVEL.COM",
-				"LARACASTS",
-				"NDEVOR",
-				"COSCHEDULE.COM",
-				"COSCHEDULE",
-				"THREE BEST RATED",
-				"VUEMASTERY.COM",
-				"DNSIMPLE",
-				"123 REG",
-				"WWW.DISCOUNTDISPLA",
-				"WINDOWFILMS",
-				"THE PRINTING PEOPL",
-				"SG MANUFACTURING",
-				"POST OFFICE SELF",
-				"PENTANGLE CARDS",
-				"GRAFENIA",
-				"Evernote",
-				"DISCOUNT DISPLAYS",
-				"CARTRIDGEPEOPLE.CO",
-				"LOOMLY US",
-				"JETBRAINS",
-				"INDEED",
-				"HTTPS://HEROPOST.I CA",
-				"TEXT ANYWHERE",
-				"TEXTMAGIC.COM",
-				"WWW.PHOREST.COM",
-			},
-		},
-		"Insurance": {
-			"insurance": {
-				"CLOSE-COVERSURE",
-				"BAUER CONSUMER MED",
-				"VLS RE KLARNA",
-				"VLS RE CLOSE BROS",
-				"GROVE-DEAN.CO.UK",
-				"CURRYS  3267567149",
-			},
-		},
-		"Tax": {
 			"tax": {
 				"HMRC NDDS",
 				"HMRC - ACCOUNTS OF",
@@ -206,44 +70,225 @@ func GetCategories() (c map[string]map[string][]string) {
 				"1ST LOCATE UK",
 			},
 		},
-		"Staff": {
-			"staff": {
+		"utilities": {
+			"energy": {
+				"BRIT GAS",
+				"SCOTTISH POWER",
+				"EDF ENERGY",
+				"BG BUSINESS",
+				"WWW.BRITISHGAS.CO.",
+				"SCOTTISHPOWER",
+				"E.ON",
+			},
+			"water": {
+				"WATER PLUS",
+				"PASTDUE",
+			},
+			"telecoms": {"BRITISH TELECOM",
+				"EE LIMITED",
+				"BT GROUP",
+				"O2 DEVICE PLAN",
+				"O2 05056477/001",
+				"EE & T-MOBILE",},
+			"waste": {
+				"ASH WASTE",
+				"CATHEDRAL LEASING",
+				"CATHEDRAL HYGIENE",
+			},
+			"other": {
+				"CHUBB",
+				"WWW.MY.CHUBB.CO.UK",
+			},
+		},
+		"building": {
+			"rent": {
+				"MEREHALL ESTATES",
+				"BETTERBOOZE LTD",
+				"JENSON INVESTMENTS",
+				"JENSEN INVESTMENTS",
+			},
+			"rates": {
+				"WARRINGTON BOROUGH",
+				"WARRINGTON CD",
+				"WARRINGTON B.C.",
+				"W.B.C MV INTERNET",
+				"WBC NNDR",
+			},
+			"repairs": {
+				"MR ROBERT A ANTONO",
+				"A6 ROLLER SHUTTERS",
+			},
+			"base": {
+				"NJS MAINTENANCE",
+				"M SUTTON",
+				"MODERN LIGHTING",
+				"M A SUTTON",
+				"JACOB INTERIORS",
+			},
+		},
+		"stock": {
+			"schwarzkopf": {
+				"HENKEL",
+			},
+			"kevin murphy": {
+				"ICON CONSULTANCY",
+				"SWEET SQUARED",
+			},
+			"ghd": {
+				"WWW.GHDHAIR.COM",
+				"JAMELLA",
+				"JEMELLA LTD",
+				"JEMELLA",
+				"GHD",
+			},
+			"olaplex": {
+				"WWW.ASTONANDFINCHE",
+			},
+			"extensions": {
+				"BEAUTY WORKS",
+				"BEAUTYWORKS",
+				"BALMAINHAIR.CO.UK",
+				"THE WIGGINS",
+				"SIMPLYHAIR",
+				"BEAUTY WORX",
+				"SP * HAIRMADEEASIS",
+			},
+			"gowns": {
+				"WWW.FEEFORHAIR.CO.",
+				"FEEL FOR HAIR",
+			},
+			"misc": {
+				"WWW.SALONSDIRECT.C",
+				"SALONEASY",
+				"ALAN HOWARD",
+				"ALAN HOWARD(STOCKP CD 6954",
+				"SALLY SALON",
+				"SALONS DIRECT",
+				"WWW.SALON-SERVICES",
+				"FA UK LIMITED",
+				"CLOUD9",
+				"AMERICAN CREW",
+				"GOCARDLESS",
+			},
+		},
+		"marketing": {
+			"website": {
+				"RACKSPACE",
+				"HEROKU",
+				"DIGITALOCEAN.COM",
+				"FORGE.LARAVEL.COM",
+				"DNSIMPLE",
+				"123 REG",
+			},
+			"sms": {
+				"TEXTANYWHERE",
+				"TEXT ANYWHERE",
+				"TEXTMAGIC.COM",
+			},
+			"software": {
+				"ADOBE",
+				"Evernote",
+				"WWW.PHOREST.COM",
+				"NDEVOR",
+				"JETBRAINS",
+				"JetBrains",
+			},
+			"courses": {
+				"LARACASTS",
+				"VUEMASTERY.COM",
+			},
+			"social media": {
+				"BUFFER",
+				"COSCHEDULE.COM",
+				"COSCHEDULE",
+				"LOOMLY US",
+				"HTTPS://HEROPOST.I CA",
+			},
+			"advertising": {
+				"GOOGLE",
+				"FACEBK",
+				"THREE BEST RATED",
+			},
+			"printing": {
+
+			},
+			"signage": {
+				"WWW.DISCOUNTDISPLA",
+				"WINDOWFILMS",
+				"THE PRINTING PEOPL",
+				"SG MANUFACTURING",
+				"DISCOUNT DISPLAYS",
+			},
+			"other": {
+				"POST OFFICE SELF",
+				"PENTANGLE CARDS",
+				"GRAFENIA",
+				"INDEED",
+			},
+		},
+		"insurance": {
+			"insurance": {
+				"CLOSE-COVERSURE",
+				"BAUER CONSUMER MED",
+				"VLS RE KLARNA",
+				"VLS RE CLOSE BROS",
+				"GROVE-DEAN.CO.UK",
+				"CURRYS  3267567149",
+			},
+		},
+		"staff": {
+			"transport": {
 				"TRAINLINE",
-				"D WRIGHT",
-				"PARAGON",
 				"Trainline.com",
-				"Village Hotel Warr",
 				"VIRGIN TRAINS",
+			},
+			"HR": {
+				"D WRIGHT",
+			},
+			"education": {
+				"PARAGON",
+				"SALON PUNK",
+				"FIRE EVENTS",
+				"BEHINDTHECHAIR.COM",
+			},
+			"accommodation": {
+				"Village Hotel Warr",
 				"THE CUMBERLAND",
 				"SUITES HOTEL KNOWS",
-				"SALON PUNK",
+				"GREAT CUMBERLAND",
+				"AIRBNB",
+			},
+			"social": {
 				"PAPA JONES PIZZA",
 				"MR LAU'S",
 				"LAS RAMBLAS",
 				"Just Eat",
-				"GREAT CUMBERLAND",
 				"FRIAR PENKETH",
-				"FIRE EVENTS",
 				"DMN/DIRTYMARTINIMA",
 				"Circo",
-				"AIRBNB",
-				"BEHINDTHECHAIR.COM",
 				"THE BOTANIST",
 			},
 		},
-		"Sundries": {
-			"sundries": {
+		"sundries": {
+			"music": {
 				"Spotify",
 				"SPOTIFY",
 				"PPLPRS",
+				"PPL PRS",
+			},
+			"refreshments": {
 				"VIMTO OUT",
-				"DLT MEDIA",
-				"WWW.GOMPELS.CO.UK",
 				"DJ DRINK SOLUTIONS",
+			},
+			"magazines": {
+				"DLT MEDIA",
+			},
+			"misc": {
+				"WWW.GOMPELS.CO.UK",
 				"VIKING",
 				"TILLROLLSDIRECT.CO",
+				"CARTRIDGEPEOPLE.CO",
 				"WWW.COSTCO.CO.UK",
-				"PPL PRS",
 				"POUNDLAND",
 				"POUND SUPER STORE",
 				"MM NEWSAGENTS",
@@ -252,12 +297,12 @@ func GetCategories() (c map[string]map[string][]string) {
 				"B&M",
 			},
 		},
-		"Paypal": {
+		"paypal": {
 			"paypal": {
 				"PAYPAL",
 			},
 		},
-		"Amazon": {
+		"amazon": {
 			"amazon": {
 				"AMZNMKTPLACE ",
 				"AMZNMktplace",
@@ -267,7 +312,7 @@ func GetCategories() (c map[string]map[string][]string) {
 				"AMAZON",
 			},
 		},
-		"Loans": {
+		"loans": {
 			"loans": {
 				"KENNET",
 				"INVESTEC",
@@ -277,7 +322,7 @@ func GetCategories() (c map[string]map[string][]string) {
 				"LOAN",
 			},
 		},
-		"Bank": {
+		"bank": {
 			"bank": {
 				"NON-GBP TRANS FEE",
 				"O/DRAFT INTEREST",
@@ -292,7 +337,7 @@ func GetCategories() (c map[string]map[string][]string) {
 				"NON-STG TRANS FEE",
 			},
 		},
-		"Drawings": {
+		"drawings": {
 			"drawings": {
 				"ADAM CARTER",
 				"NETFLIX.COM",
@@ -326,7 +371,7 @@ func GetCategories() (c map[string]map[string][]string) {
 				"MADE.COM",
 			},
 		},
-		"Equipment": {
+		"equipment": {
 			"equipment": {
 				"CURRYS CD",
 				"TENZY",
@@ -341,7 +386,7 @@ func GetCategories() (c map[string]map[string][]string) {
 				"WWW.LEDSUPPLYANDFI",
 			},
 		},
-		"Accountant": {
+		"accountant": {
 			"accountant": {
 				"CMT ACCOUNTING",
 				"POS-HARDWARE LTD",
