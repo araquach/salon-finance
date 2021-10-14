@@ -25,7 +25,7 @@ func main() {
 	var err error
 	var dir string
 
-	loadTakings()
+	// loadTakings()
 	loadCosts()
 
 	port := os.Getenv("PORT")

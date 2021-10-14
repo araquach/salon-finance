@@ -11,6 +11,7 @@ type Cost struct {
 	Debit       float64   `json:"debit"`
 	Balance     float64   `json:"balance"`
 	Category    string    `json:"category"`
+	SubCat      string    `json:"sub_cat"`
 }
 
 type Taking struct {
@@ -30,13 +31,13 @@ type Total struct {
 }
 
 type CostByCat struct {
-	C string `json:"category"`
-	A float64 `json:"amount"`
-	P float64 `json:"percent"`
+	C  string  `json:"category"`
+	A  float64 `json:"amount"`
+	P  float64 `json:"percent"`
 	Av float64 `json:"average"`
 }
 
 type CostData struct {
 	C []CostByCat `json:"individual"`
-	T float64 `json:"total"`
+	T float64     `json:"total"`
 }

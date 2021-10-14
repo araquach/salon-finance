@@ -27,315 +27,6 @@ func dbConn() (db *gorm.DB) {
 	return db
 }
 
-func GetCategories() (c map[string][]string) {
-	c = map[string][]string{
-		"Wages": {
-			"MR J SHARP",
-			"JAMES SHARPE",
-			"MISS L HALL",
-			"GEORGIA LUTTON",
-			"LAUREN THOMPSON",
-			"LAYLA RELF",
-			"ABBI GREEN",
-			"MISS V ROWLAND",
-			"KELLY REEDY",
-			"JOANNE MAHONEY",
-			"BRADLEY RYAN",
-			"ABIGAIL CLARKE",
-			"DAVID RANDLES",
-			"LUCY WATSON",
-			"LAUREN WATSON",
-			"RUBY JOHNSON",
-			"SOPHIE YOUDS",
-			"BETH BROWN",
-			"HARRISON DOOLEY",
-			"SARAH CARTWRIGHT",
-			"KATE O HALLORAN",
-			"DOROTA SOKOLOWSKI",
-			"VICTORIA NYLAND",
-			"LOUISE BAILEY",
-			"LILLY SMITH",
-			"ROSEMARIE WINTERBU",
-			"JAMIE BANNING-HIGH",
-			"EVE SIMPSON",
-			"REBECCA COTTON",
-			"SARAH CUDDY",
-			"SHAE HOUGHTON",
-		},
-		"PAYE": {
-			"HMRC CUSTOMS AND E",
-			"FREDRICKSON",
-			"ADVANTIS",
-		},
-		"Pension": {
-			"NEST",
-		},
-		"Freelance": {
-			"NATALIE SHARPE",
-			"MATHEW LANE",
-			"MATTHEW LANE",
-			"AMY WOODS",
-			"MICHELLE RAILTON",
-			"LEON PRITCHARD",
-		},
-		"VAT": {
-			"HMRC VAT",
-			"HMRC E VAT",
-		},
-		"Utilities": {
-			"BRIT GAS",
-			"BRITISH TELECOM",
-			"SCOTTISH POWER",
-			"EDF ENERGY",
-			"WATER PLUS",
-			"EE LIMITED",
-			"BT GROUP",
-			"BG BUSINESS",
-			"ASH WASTE",
-			"CATHEDRAL LEASING",
-			"CATHEDRAL HYGIENE",
-			"WWW.BRITISHGAS.CO.",
-			"PASTDUE",
-			"SCOTTISHPOWER",
-			"O2 DEVICE PLAN",
-			"O2 05056477/001",
-			"EE & T-MOBILE",
-			"E.ON",
-			"CHUBB",
-			"WWW.MY.CHUBB.CO.UK",
-		},
-		"Building": {
-			"MEREHALL ESTATES",
-			"BETTERBOOZE LTD",
-			"WBC NNDR",
-			"JENSON INVESTMENTS",
-			"WARRINGTON BOROUGH",
-			"WARRINGTON CD",
-			"WARRINGTON B.C.",
-			"W.B.C MV INTERNET",
-			"JENSEN INVESTMENTS",
-			"MR ROBERT A ANTONO",
-			"A6 ROLLER SHUTTERS",
-		},
-		"Base": {
-			"NJS MAINTENANCE",
-			"M SUTTON",
-			"MODERN LIGHTING",
-			"M A SUTTON",
-			"JACOB INTERIORS",
-		},
-		"Stock": {
-			"BEAUTY WORKS",
-			"BEAUTYWORKS",
-			"ICON CONSULTANCY",
-			"SWEET SQUARED",
-			"ALAN HOWARD",
-			"HENKEL",
-			"WWW.ASTONANDFINCHE",
-			"ALAN HOWARD(STOCKP CD 6954",
-			"SALLY SALON",
-			"WWW.GHDHAIR.COM",
-			"FEEL FOR HAIR",
-			"SALONS DIRECT",
-			"GOCARDLESS",
-			"FA UK LIMITED",
-			"JAMELLA",
-			"WWW.SALONSDIRECT.C",
-			"BALMAINHAIR.CO.UK",
-			"WWW.FEEFORHAIR.CO.",
-			"JEMELLA LTD",
-			"THE WIGGINS",
-			"SIMPLYHAIR",
-			"SALONEASY",
-			"JEMELLA",
-			"CLOUD9",
-			"BEAUTY WORX",
-			"AMERICAN CREW",
-			"GHD",
-			"WWW.SALON-SERVICES",
-			"SP * HAIRMADEEASIS",
-		},
-		"Marketing": {
-			"RACKSPACE",
-			"GOOGLE",
-			"TEXTANYWHERE",
-			"BUFFER",
-			"HEROKU",
-			"FACEBK",
-			"ADOBE",
-			"JetBrains",
-			"DIGITALOCEAN.COM",
-			"FORGE.LARAVEL.COM",
-			"LARACASTS",
-			"NDEVOR",
-			"COSCHEDULE.COM",
-			"COSCHEDULE",
-			"THREE BEST RATED",
-			"VUEMASTERY.COM",
-			"DNSIMPLE",
-			"123 REG",
-			"WWW.DISCOUNTDISPLA",
-			"WINDOWFILMS",
-			"THE PRINTING PEOPL",
-			"SG MANUFACTURING",
-			"POST OFFICE SELF",
-			"PENTANGLE CARDS",
-			"GRAFENIA",
-			"Evernote",
-			"DISCOUNT DISPLAYS",
-			"CARTRIDGEPEOPLE.CO",
-			"LOOMLY US",
-			"JETBRAINS",
-			"INDEED",
-			"HTTPS://HEROPOST.I CA",
-			"TEXT ANYWHERE",
-			"TEXTMAGIC.COM",
-			"WWW.PHOREST.COM",
-		},
-		"Insurance": {
-			"CLOSE-COVERSURE",
-			"BAUER CONSUMER MED",
-			"VLS RE KLARNA",
-			"VLS RE CLOSE BROS",
-			"GROVE-DEAN.CO.UK",
-			"CURRYS  3267567149",
-		},
-		"Tax": {
-			"HMRC NDDS",
-			"HMRC - ACCOUNTS OF",
-			"HMRC 600000000562153302",
-			"HMRC 300000000784948091",
-			"HMRC 200000000588802019",
-			"1ST LOCATE UK",
-		},
-		"Staff": {
-			"TRAINLINE",
-			"D WRIGHT",
-			"PARAGON",
-			"Trainline.com",
-			"Village Hotel Warr",
-			"VIRGIN TRAINS",
-			"THE CUMBERLAND",
-			"SUITES HOTEL KNOWS",
-			"SALON PUNK",
-			"PAPA JONES PIZZA",
-			"MR LAU'S",
-			"LAS RAMBLAS",
-			"Just Eat",
-			"GREAT CUMBERLAND",
-			"FRIAR PENKETH",
-			"FIRE EVENTS",
-			"DMN/DIRTYMARTINIMA",
-			"Circo",
-			"AIRBNB",
-			"BEHINDTHECHAIR.COM",
-			"THE BOTANIST",
-		},
-		"Sundries": {
-			"Spotify",
-			"SPOTIFY",
-			"PPLPRS",
-			"VIMTO OUT",
-			"DLT MEDIA",
-			"WWW.GOMPELS.CO.UK",
-			"DJ DRINK SOLUTIONS",
-			"VIKING",
-			"TILLROLLSDIRECT.CO",
-			"WWW.COSTCO.CO.UK",
-			"PPL PRS",
-			"POUNDLAND",
-			"POUND SUPER STORE",
-			"MM NEWSAGENTS",
-			"MARTIN MCCOLL",
-			"COSTCO",
-			"B&M",
-		},
-		"Paypal": {
-			"PAYPAL",
-		},
-		"Amazon": {
-			"AMZNMKTPLACE ",
-			"AMZNMktplace",
-			"Amazon",
-			"AMZN",
-			"AMZ*BC",
-			"AMAZON",
-		},
-		"Loans": {
-			"KENNET",
-			"INVESTEC",
-			"QUANTUM",
-			"JOHN LAMB",
-			"D A CARTER",
-			"LOAN",
-		},
-		"Bank": {
-			"NON-GBP TRANS FEE",
-			"O/DRAFT INTEREST",
-			"SERVICE CHARGES",
-			"RETAIL MERCHANT SE",
-			"RMS",
-			"GLOBAL PAYMENTS",
-			"EMS",
-			"UNAUTH'D BORR. FEE",
-			"RETURNED D/D",
-			"OVERDRAFT FEE",
-			"NON-STG TRANS FEE",
-		},
-		"Drawings": {
-			"ADAM CARTER",
-			"MISS I LAMB",
-			"NETFLIX.COM",
-			"APPLE.COM/BILL",
-			"ITUNES.COM/BILL",
-			"Audible.co.uk",
-			"STARBUCKS",
-			"LNK WARRINGTON",
-			"Prime",
-			"VISION DIRECT",
-			"Kindle",
-			"Amazon Prime*MB8HF",
-			"WWW.ASOS.COM",
-			"WWW.TWOSEASONS.CO.",
-			"Audible UK",
-			"WWW.MISSGUIDED.CO.",
-			"VOLCOM SAS",
-			"TOPPIK.CO.UK",
-			"TICKETMASTER",
-			"PropellerheadsCOM",
-			"MCDONALDS",
-			"GRUMPY MULE",
-			"FGT*TICKETMASTER",
-			"Etsy.com",
-			"EASYJET",
-			"DANIEL HANCOCK",
-			"CHATURBIL",
-			"APPLE.COM/UK",
-			"ACOUSTIC CAFE",
-			"SODASTREAM",
-			"MADE.COM",
-		},
-		"Equipment": {
-			"CURRYS CD",
-			"TENZY",
-			"JM-AC",
-			"LADDERS UK",
-			"SP * YOISCISSORS",
-			"WWW ESPARES",
-			"WWW.BUYSPARES.CO.U CD",
-			"HOWHIGHBRANDS.CO.U",
-			"AMBICOOL",
-			"BARBER BLADES",
-			"WWW.LEDSUPPLYANDFI",
-		},
-		"Accountant": {
-			"CMT ACCOUNTING",
-			"POS-HARDWARE LTD",
-		},
-	}
-	return
-}
-
 func loadCosts() {
 	var err error
 	var costs []Cost
@@ -386,15 +77,19 @@ func loadCosts() {
 					Debit:       d,
 					Balance:     b,
 					Category:    "Other",
+					SubCat:      "other",
 				})
 			}
 		}
 	}
 	for _, t := range costs {
 		for i, cat := range categories {
-			for _, c := range cat {
-				if strings.Contains(t.Description, c) {
-					t.Category = i
+			for j, c := range cat {
+				for _, s := range c {
+					if strings.Contains(t.Description, s) {
+						t.Category = i
+						t.SubCat = j
+					}
 				}
 			}
 		}
@@ -431,14 +126,14 @@ func loadTakings() {
 	}
 	for _, fileName := range files {
 		fname := strings.Split(fileName, "/")
-		f := strings.Split(fname[2], "_")
+		f := strings.Split(fname[3], "_")
 		fmt.Println(f)
 		fileBytes, err := ioutil.ReadFile(fileName)
 		if err != nil {
 			log.Println(err)
 		}
 
-		split := strings.SplitAfter(string(fileBytes), "\n")[3:]
+		split := strings.SplitAfter(string(fileBytes), "\n")
 
 		var section []string
 
@@ -456,12 +151,23 @@ func loadTakings() {
 
 		for _, l := range formatted {
 			var data []string
+			var stylist string
 
 			s := strings.SplitAfter(l, "\n")
 
-			stylist := s[0]
+			stylistLine := s[0]
 
-			stylist = strings.Split(stylist, ",")[0]
+			stylistBlock := strings.Split(stylistLine, ",")[0]
+
+			stylistBF := strings.SplitAfter(stylistBlock, " ")
+
+			if len(stylistBF) > 1 {
+				if stylistBF[1] == " " {
+					stylist = stylistBF[0] + strings.TrimSpace(stylistBF[2])
+				} else {
+					stylist = stylistBF[0] + strings.TrimSpace(stylistBF[1])
+				}
+			}
 
 			if len(s) > 1 {
 				data = s[3:]
