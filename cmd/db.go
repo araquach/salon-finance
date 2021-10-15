@@ -76,8 +76,8 @@ func loadCosts() {
 					Description: line[4],
 					Debit:       d,
 					Balance:     b,
-					Category:    "other",
-					SubCat:      "other",
+					Category:    "uncategorized",
+					SubCat:      "uncategorized",
 				})
 			}
 		}

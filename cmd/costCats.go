@@ -89,7 +89,9 @@ func GetCategories() (c map[string]map[string][]string) {
 				"BT GROUP",
 				"O2 DEVICE PLAN",
 				"O2 05056477/001",
-				"EE & T-MOBILE",},
+				"EE & T-MOBILE",
+				"VIRGIN MEDIA PYMTS",
+			},
 			"waste": {
 				"ASH WASTE",
 				"CATHEDRAL LEASING",
@@ -113,10 +115,13 @@ func GetCategories() (c map[string]map[string][]string) {
 				"WARRINGTON B.C.",
 				"W.B.C MV INTERNET",
 				"WBC NNDR",
+				"WARRINGTON BC",
 			},
 			"repairs": {
 				"MR ROBERT A ANTONO",
 				"A6 ROLLER SHUTTERS",
+				"SECURITY CENTRES",
+				"Selco Trade Centre",
 			},
 			"base": {
 				"NJS MAINTENANCE",
@@ -369,6 +374,8 @@ func GetCategories() (c map[string]map[string][]string) {
 				"ACOUSTIC CAFE",
 				"SODASTREAM",
 				"MADE.COM",
+				"TYN-Y-MUR.CO.UK",
+				"B & T SKIP",
 			},
 		},
 		"equipment": {
@@ -384,12 +391,23 @@ func GetCategories() (c map[string]map[string][]string) {
 				"AMBICOOL",
 				"BARBER BLADES",
 				"WWW.LEDSUPPLYANDFI",
+				"CURRYS ONLINE",
+				"IKEA LTD",
+				"ANY.DO US",
+				"ARGOS RETAIL GROUP",
+				"vidaXL UK",
+				"SALONAQUAFLOW",
 			},
 		},
 		"accountant": {
 			"accountant": {
 				"CMT ACCOUNTING",
 				"POS-HARDWARE LTD",
+			},
+		},
+		"other": {
+			"other": {
+				"WWW.SMART-STORAGE",
 			},
 		},
 	}
