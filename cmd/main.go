@@ -25,6 +25,9 @@ func main() {
 	var err error
 	var dir string
 
+	dsn := os.Getenv("DATABASE_URL")
+	dbInit(dsn)
+
 	// loadTakings()
 	loadCosts()
 

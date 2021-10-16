@@ -18,8 +18,6 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 
 	var s Total
 
-	db := dbConn()
-
 	dateFrom := "2019-10-01"
 	dateTo := "2020-01-01"
 
@@ -41,8 +39,6 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	var d CostData
 	var c CostByCat
 	var e []CostByCat
-
-	db := dbConn()
 
 	dateFrom := "2019-10-03"
 	dateTo := "2020-10-03"

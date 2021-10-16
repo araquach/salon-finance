@@ -17,14 +17,17 @@ import (
 	"time"
 )
 
-func dbConn() (db *gorm.DB) {
-	db, err := gorm.Open(postgres.Open(os.Getenv("DATABASE_URL")), &gorm.Config{
+var db *gorm.DB
+
+func dbInit(dsn string) {
+	var err error
+
+	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
 	if err != nil {
-		panic("failed to connect database")
+		log.Panic(err)
 	}
-	return db
 }
 
 func loadCosts() {
@@ -33,7 +36,6 @@ func loadCosts() {
 
 	categories := GetCategories()
 
-	db := dbConn()
 	db.Migrator().DropTable(&Cost{})
 	err = db.AutoMigrate(&Cost{})
 	if err != nil {
@@ -102,7 +104,6 @@ func loadTakings() {
 	var files []string
 	var takings []Taking
 
-	db := dbConn()
 	db.Migrator().DropTable(&Taking{})
 	err = db.AutoMigrate(&Taking{})
 	if err != nil {
