@@ -43,7 +43,7 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	dateFrom := "2019-10-03"
 	dateTo := "2020-10-03"
 
-	categories := GetCategories()
+	categories := categories()
 
 	db.Table("costs").Select("sum(debit) as a").Where("date >= ? AND date <= ?", dateFrom, dateTo).Scan(&c)
 	d.T = c.A

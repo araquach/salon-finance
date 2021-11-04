@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"encoding/csv"
 	"fmt"
 	"gorm.io/driver/postgres"
@@ -31,72 +30,14 @@ func dbInit(dsn string) {
 }
 
 func loadCosts() {
-	var err error
-	var costs []Cost
+	costs := addCostCategories()
+	pp := addPayPalCategories()
 
-	categories := GetCategories()
-
-	db.Migrator().DropTable(&Cost{})
-	err = db.AutoMigrate(&Cost{})
-	if err != nil {
-		panic(err)
+	for _, v := range pp {
+		costs = append(costs, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit,Category: v.Category, SubCat: v.SubCat})
 	}
 
-	var files []string
-
-	root := "data/finance/bank"
-	err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-		if info.IsDir() {
-			return nil
-		}
-		files = append(files, path)
-		return nil
-	})
-	if err != nil {
-		panic(err)
-	}
-	for _, file := range files {
-		csvFile, _ := os.Open(file)
-
-		reader := csv.NewReader(bufio.NewReader(csvFile))
-		for {
-			line, error := reader.Read()
-			if error == io.EOF {
-				break
-			} else if error != nil {
-				log.Fatal(error)
-			}
-			d, _ := strconv.ParseFloat(line[5], 8)
-			b, _ := strconv.ParseFloat(line[7], 8)
-			date, _ := time.Parse("2006-01-02", dateFormat(line[0]))
-
-			if line[5] != "" && line[1] != "TFR" && line[1] != "" {
-				costs = append(costs, Cost{
-					Date:        date,
-					Type:        line[1],
-					Account:     line[3],
-					Description: line[4],
-					Debit:       d,
-					Balance:     b,
-					Category:    "uncategorized",
-					SubCat:      "uncategorized",
-				})
-			}
-		}
-	}
-	for _, t := range costs {
-		for i, cat := range categories {
-			for j, c := range cat {
-				for _, s := range c {
-					if strings.Contains(t.Description, s) {
-						t.Category = i
-						t.SubCat = j
-					}
-				}
-			}
-		}
-		db.Create(&t)
-	}
+	db.Create(&costs)
 }
 
 func loadTakings() {

@@ -9,7 +9,6 @@ type Cost struct {
 	Account     string    `json:"account"`
 	Description string    `json:"description"`
 	Debit       float64   `json:"debit"`
-	Balance     float64   `json:"balance"`
 	Category    string    `json:"category"`
 	SubCat      string    `json:"sub_cat"`
 }

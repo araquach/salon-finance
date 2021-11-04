@@ -1,6 +1,6 @@
 package main
 
-func GetCategories() (c map[string]map[string][]string) {
+func categories() (c map[string]map[string][]string) {
 	c = map[string]map[string][]string{
 		"wages": {
 			"stylist": {
