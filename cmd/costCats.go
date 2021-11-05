@@ -309,7 +309,7 @@ func categories() (c map[string]map[string][]string) {
 		},
 		"amazon": {
 			"amazon": {
-				"AMZNMKTPLACE ",
+				"AMZNMKTPLACE",
 				"AMZNMktplace",
 				"Amazon",
 				"AMZN",

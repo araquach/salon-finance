@@ -30,10 +30,18 @@ func dbInit(dsn string) {
 }
 
 func loadCosts() {
+	db.Migrator().DropTable(&Cost{})
+	db.AutoMigrate(&Cost{})
+
 	costs := addCostCategories()
 	pp := addPayPalCategories()
+	amzn := addAmazonCategories()
 
 	for _, v := range pp {
+		costs = append(costs, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit,Category: v.Category, SubCat: v.SubCat})
+	}
+
+	for _, v := range amzn {
 		costs = append(costs, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit,Category: v.Category, SubCat: v.SubCat})
 	}
 

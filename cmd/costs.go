@@ -57,7 +57,13 @@ func costData() []Cost {
 			date, _ := time.Parse("2006-01-02", dateFormat(col[0]))
 			debit, _ := strconv.ParseFloat(col[5], 8)
 
-			if col[5] != "" && col[1] != "TFR" && col[1] != "" && !strings.Contains(col[4], "PAYPAL") {
+			if col[5] != "" && col[1] != "TFR" && col[1] != "" &&
+				!strings.Contains(col[4], "AMZNMKTPLACE") &&
+				!strings.Contains(col[4], "AMZNMktplace") &&
+				!strings.Contains(col[4], "Amazon") &&
+				!strings.Contains(col[4], "AMZN") &&
+				!strings.Contains(col[4], "AMZ*BC") &&
+				!strings.Contains(col[4], "AMAZON") {
 				costs = append(costs, Cost{
 					Date:   date,
 					Type: col[1],
@@ -96,7 +102,7 @@ func payPalData() []Cost {
 			}
 
 			date, _ := time.Parse("2006-01-02", dateFormat(col[0]))
-			debit, _ := strconv.ParseFloat(col[5], 8)
+			debit, _ := strconv.ParseFloat(col[5][1:], 8)
 
 			if col[11] != "" {
 				paypal = append(paypal, Cost{
@@ -112,6 +118,46 @@ func payPalData() []Cost {
 		}
 	}
 	return paypal
+}
+
+func amazonData() []Cost{
+	var err error
+	var amazon []Cost
+
+	f, err := readDir("amazon")
+	if err != nil {
+		panic(err)
+	}
+
+	for _, file := range f {
+		csvFile, _ := os.Open(file)
+
+		reader := csv.NewReader(bufio.NewReader(csvFile))
+		for {
+			col, err := reader.Read()
+			if err == io.EOF {
+				break
+			} else if err != nil {
+				log.Fatal(err)
+			}
+
+			date, _ := time.Parse("2006-01-02", dateFormat(col[0]))
+			debit, _ := strconv.ParseFloat(col[29], 8)
+
+			if col[11] != "" {
+				amazon = append(amazon, Cost{
+					Date:   date,
+					Type: "AMAZON",
+					Account: "06517160",
+					Description:     col[15],
+					Debit: debit,
+					Category: "uncategorized",
+					SubCat:   "uncategorized",
+				})
+			}
+		}
+	}
+	return amazon
 }
 
 func addCostCategories() []Cost {
@@ -151,3 +197,23 @@ func addPayPalCategories() []Cost {
 	}
 	return pp
 }
+
+func addAmazonCategories() []Cost {
+	amzn := amazonData()
+	cats := amazonCats()
+
+	for k, v := range amzn {
+		for kk, vv := range cats {
+			for kkk, vvv := range vv {
+				for _, av := range vvv {
+					if av == v.Description {
+						(amzn)[k].Category = kk
+						(amzn)[k].SubCat = kkk
+					}
+				}
+			}
+		}
+	}
+	return amzn
+}
+
