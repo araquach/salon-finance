@@ -122,6 +122,9 @@ func categories() (c map[string]map[string][]string) {
 				"A6 ROLLER SHUTTERS",
 				"SECURITY CENTRES",
 				"Selco Trade Centre",
+				"WWW.ILOVEWALLPAPER",
+				"SCREWFIX",
+				"SELCO POOLE",
 			},
 			"base": {
 				"NJS MAINTENANCE",
@@ -300,6 +303,7 @@ func categories() (c map[string]map[string][]string) {
 				"MARTIN MCCOLL",
 				"COSTCO",
 				"B&M",
+				"CHURCH AND DWIGHT",
 			},
 		},
 		"paypal": {
@@ -315,6 +319,7 @@ func categories() (c map[string]map[string][]string) {
 				"AMZN",
 				"AMZ*BC",
 				"AMAZON",
+				"AMZ*riversidehertf",
 			},
 		},
 		"loans": {
@@ -406,8 +411,22 @@ func categories() (c map[string]map[string][]string) {
 			},
 		},
 		"other": {
+			"refunds": {
+				"RACHEL V PARRY",
+			},
 			"other": {
 				"WWW.SMART-STORAGE",
+				"CREDIT SECURITY",
+				"SQ *HENRY LEWIS",
+				"MRS NICOLA COBLEY",
+				"HOME BARGAINS",
+				"TESCO STORES",
+				"WAYFAIR",
+				"WILKO",
+				"SUPERDRUG",
+				"WH SMITH",
+				"CIRCUS STARR",
+				"PYRAMID SCREEN PRO",
 			},
 		},
 	}

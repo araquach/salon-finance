@@ -57,21 +57,15 @@ func costData() []Cost {
 			date, _ := time.Parse("2006-01-02", dateFormat(col[0]))
 			debit, _ := strconv.ParseFloat(col[5], 8)
 
-			if col[5] != "" && col[1] != "TFR" && col[1] != "" &&
-				!strings.Contains(col[4], "AMZNMKTPLACE") &&
-				!strings.Contains(col[4], "AMZNMktplace") &&
-				!strings.Contains(col[4], "Amazon") &&
-				!strings.Contains(col[4], "AMZN") &&
-				!strings.Contains(col[4], "AMZ*BC") &&
-				!strings.Contains(col[4], "AMAZON") {
+			if col[5] != "" && col[1] != "TFR" && col[1] != "" {
 				costs = append(costs, Cost{
 					Date:   date,
 					Type: col[1],
 					Account: col[3],
 					Description:     col[4],
 					Debit: debit,
-					Category: "uncategorized",
-					SubCat:   "uncategorized",
+					Category: "uncategorised",
+					SubCat:   "uncategorised",
 				})
 			}
 		}
@@ -111,8 +105,8 @@ func payPalData() []Cost {
 					Account: "06517160",
 					Description:     col[11],
 					Debit: debit,
-					Category: "uncategorized",
-					SubCat:   "uncategorized",
+					Category: "uncategorised",
+					SubCat:   "uncategorised",
 				})
 			}
 		}
@@ -142,17 +136,17 @@ func amazonData() []Cost{
 			}
 
 			date, _ := time.Parse("2006-01-02", dateFormat(col[0]))
-			debit, _ := strconv.ParseFloat(col[29], 8)
+			debit, _ := strconv.ParseFloat(col[50], 8)
 
 			if col[11] != "" {
 				amazon = append(amazon, Cost{
 					Date:   date,
 					Type: "AMAZON",
 					Account: "06517160",
-					Description:     col[15],
+					Description:     col[36],
 					Debit: debit,
-					Category: "uncategorized",
-					SubCat:   "uncategorized",
+					Category: "uncategorised",
+					SubCat:   "uncategorised",
 				})
 			}
 		}

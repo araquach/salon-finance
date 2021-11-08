@@ -3,7 +3,8 @@ package main
 func paypalCats() (c map[string]map[string][]string) {
 	c = map[string]map[string][]string{
 		"building": {
-			"repairs": {},
+			"repairs": {
+			},
 		},
 		"stock": {
 			"olaplex": {
@@ -69,6 +70,7 @@ func paypalCats() (c map[string]map[string][]string) {
 		"sundries": {
 			"music": {
 				"Spotify Finance Limited",
+				"Spotify AB",
 			},
 			"refreshments": {},
 			"magazines": {},
@@ -79,6 +81,7 @@ func paypalCats() (c map[string]map[string][]string) {
 		},
 		"drawings": {
 			"adam": {
+				"adidas (UK) Limited",
 				"ROUTE ONE RETAIL LIMITED",
 				"www.twoseasons.co.uk",
 				"Customer Service - Epoch",
@@ -117,6 +120,7 @@ func paypalCats() (c map[string]map[string][]string) {
 				"eSpares Ltd",
 				"MPB Europe Limited",
 				"Creative Video Productions Ltd.",
+				"wirral Discount Supplies limited",
 			},
 		},
 		"other": {
@@ -129,6 +133,22 @@ func paypalCats() (c map[string]map[string][]string) {
 				"Argofield Limited",
 				"Internet Fusion Ltd",
 				"Envato Pty Ltd",
+				"Paul Ainley",
+				"Virgin Money Giving Limited",
+				"Reflective Supplies",
+				"eBay (UK) Limited",
+				"eBay UK Limited",
+				"Kira Schneiders",
+				"christopher reid",
+				"Ultimate Wraps Ltd",
+				"Joey Underwood",
+				"david j stout",
+				"永耀 李",
+				"Apple Store",
+				"Peggy Nash",
+				"Real Cadence Ltd",
+				"NAPALI SAS (Etablissement Soorts Hossegor)",
+				"Paddle.com Market Limited",
 			},
 		},
 	}
