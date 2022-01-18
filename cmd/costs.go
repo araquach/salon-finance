@@ -43,7 +43,10 @@ func costData() []Cost {
 	}
 
 	for _, file := range f {
-		csvFile, _ := os.Open(file)
+		csvFile, err := os.Open(file)
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		reader := csv.NewReader(bufio.NewReader(csvFile))
 		for {
@@ -59,13 +62,13 @@ func costData() []Cost {
 
 			if col[5] != "" && col[1] != "TFR" && col[1] != "" {
 				costs = append(costs, Cost{
-					Date:   date,
-					Type: col[1],
-					Account: col[3],
-					Description:     col[4],
-					Debit: debit,
-					Category: "uncategorised",
-					SubCat:   "uncategorised",
+					Date:        date,
+					Type:        col[1],
+					Account:     col[3],
+					Description: col[4],
+					Debit:       debit,
+					Category:    "uncategorised",
+					SubCat:      "uncategorised",
 				})
 			}
 		}
@@ -100,13 +103,13 @@ func payPalData() []Cost {
 
 			if col[11] != "" {
 				paypal = append(paypal, Cost{
-					Date:   date,
-					Type: "PAYPAL",
-					Account: "06517160",
-					Description:     col[11],
-					Debit: debit,
-					Category: "uncategorised",
-					SubCat:   "uncategorised",
+					Date:        date,
+					Type:        "PAYPAL",
+					Account:     "06517160",
+					Description: col[11],
+					Debit:       debit,
+					Category:    "uncategorised",
+					SubCat:      "uncategorised",
 				})
 			}
 		}
@@ -114,7 +117,7 @@ func payPalData() []Cost {
 	return paypal
 }
 
-func amazonData() []Cost{
+func amazonData() []Cost {
 	var err error
 	var amazon []Cost
 
@@ -140,13 +143,13 @@ func amazonData() []Cost{
 
 			if col[11] != "" {
 				amazon = append(amazon, Cost{
-					Date:   date,
-					Type: "AMAZON",
-					Account: "06517160",
-					Description:     col[36],
-					Debit: debit,
-					Category: "uncategorised",
-					SubCat:   "uncategorised",
+					Date:        date,
+					Type:        "AMAZON",
+					Account:     "06517160",
+					Description: col[36],
+					Debit:       debit,
+					Category:    "uncategorised",
+					SubCat:      "uncategorised",
 				})
 			}
 		}
@@ -210,4 +213,3 @@ func addAmazonCategories() []Cost {
 	}
 	return amzn
 }
-
