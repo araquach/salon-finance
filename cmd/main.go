@@ -28,7 +28,7 @@ func main() {
 	dsn := os.Getenv("DATABASE_URL")
 	dbInit(dsn)
 
-	loadTakings()
+	// loadTakings()
 	loadCosts()
 
 	port := os.Getenv("PORT")
