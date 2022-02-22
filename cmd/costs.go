@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"encoding/csv"
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -139,21 +140,19 @@ func amazonData() []Cost {
 			}
 
 			date, _ := time.Parse("2006-01-02", dateFormat(col[0]))
-			debit, _ := strconv.ParseFloat(col[50], 8)
-
-			if col[11] != "" {
-				amazon = append(amazon, Cost{
-					Date:        date,
-					Type:        "AMAZON",
-					Account:     "06517160",
-					Description: col[36],
-					Debit:       debit,
-					Category:    "uncategorised",
-					SubCat:      "uncategorised",
-				})
-			}
+			debit, _ := strconv.ParseFloat(col[29], 8)
+			amazon = append(amazon, Cost{
+				Date:        date,
+				Type:        "AMAZON",
+				Account:     "06517160",
+				Description: col[16],
+				Debit:       debit,
+				Category:    "uncategorised",
+				SubCat:      "uncategorised",
+			})
 		}
 	}
+	fmt.Println(amazon)
 	return amazon
 }
 
