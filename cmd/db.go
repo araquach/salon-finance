@@ -41,9 +41,7 @@ func loadCosts() {
 
 
 	for _, v := range costs {
-		if v.Category != "paypal" && v.Category != "amazon" {
-			data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit,Category: v.Category, SubCat: v.SubCat})
-		}
+		data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit,Category: v.Category, SubCat: v.SubCat})
 	}
 
 	for _, v := range pp {

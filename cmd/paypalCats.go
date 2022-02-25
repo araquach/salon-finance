@@ -4,6 +4,7 @@ func paypalCats() (c map[string]map[string][]string) {
 	c = map[string]map[string][]string{
 		"building": {
 			"repairs": {
+				"The Wood Veneer Hub",
 			},
 		},
 		"stock": {
@@ -29,6 +30,7 @@ func paypalCats() (c map[string]map[string][]string) {
 		"marketing": {
 			"website": {
 				"123-reg Limited",
+				"123-reg Limited",
 			},
 			"sms": {},
 			"software": {
@@ -45,6 +47,7 @@ func paypalCats() (c map[string]map[string][]string) {
 			"social media": {},
 			"advertising": {
 				"Facebook",
+				"Google",
 			},
 			"printing": {},
 			"signage": {
@@ -77,6 +80,8 @@ func paypalCats() (c map[string]map[string][]string) {
 			"misc": {
 				"The Cartridge People Ltd",
 				"Costco UK",
+				"Ideal Envelopes Limited",
+				"Cartridge Save Limited",
 			},
 		},
 		"drawings": {
@@ -107,6 +112,7 @@ func paypalCats() (c map[string]map[string][]string) {
 			"izzy": {
 				"Sixty Stores Ltd",
 				"ASOS.COM Ltd",
+				"Airwair International Limited",
 			},
 		},
 		"equipment": {
@@ -121,6 +127,9 @@ func paypalCats() (c map[string]map[string][]string) {
 				"MPB Europe Limited",
 				"Creative Video Productions Ltd.",
 				"wirral Discount Supplies limited",
+				"Cult Furniture ltd",
+				"Next Retail Ltd",
+				"Lights4fun Ltd",
 			},
 		},
 		"other": {
@@ -149,6 +158,8 @@ func paypalCats() (c map[string]map[string][]string) {
 				"Real Cadence Ltd",
 				"NAPALI SAS (Etablissement Soorts Hossegor)",
 				"Paddle.com Market Limited",
+				"Ecotrade Europe Ltd",
+				"Warehouse Express Ltd",
 			},
 		},
 	}

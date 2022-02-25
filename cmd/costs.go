@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"encoding/csv"
-	"fmt"
 	"io"
 	"log"
 	"os"
@@ -100,7 +99,8 @@ func payPalData() []Cost {
 			}
 
 			date, _ := time.Parse("2006-01-02", dateFormat(col[0]))
-			debit, _ := strconv.ParseFloat(col[5][1:], 8)
+			d := strings.Replace(col[5], ",", "", -1)
+			debit, _ := strconv.ParseFloat(d[1:], 8)
 
 			if col[11] != "" {
 				paypal = append(paypal, Cost{
@@ -140,19 +140,21 @@ func amazonData() []Cost {
 			}
 
 			date, _ := time.Parse("2006-01-02", dateFormat(col[0]))
-			debit, _ := strconv.ParseFloat(col[29], 8)
-			amazon = append(amazon, Cost{
-				Date:        date,
-				Type:        "AMAZON",
-				Account:     "06517160",
-				Description: col[16],
-				Debit:       debit,
-				Category:    "uncategorised",
-				SubCat:      "uncategorised",
-			})
+			debit, _ := strconv.ParseFloat(col[24], 8)
+
+			if col[37] != "" {
+				amazon = append(amazon, Cost{
+					Date:        date,
+					Type:        "AMAZON",
+					Account:     "06517160",
+					Description: col[37],
+					Debit:       debit,
+					Category:    "uncategorised",
+					SubCat:      "uncategorised",
+				})
+			}
 		}
 	}
-	fmt.Println(amazon)
 	return amazon
 }
 

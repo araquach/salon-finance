@@ -276,6 +276,7 @@ func categories() (c map[string]map[string][]string) {
 				"GOOGLE",
 				"FACEBK",
 				"THREE BEST RATED",
+				"MY ARK",
 			},
 			"printing": {
 
@@ -328,6 +329,7 @@ func categories() (c map[string]map[string][]string) {
 				"BEHINDTHECHAIR.COM",
 				"JON CALHOUN",
 				"Udemy",
+				"NOTANOTHERACADEMY.",
 			},
 			"accommodation": {
 				"Village Hotel Warr",
@@ -339,6 +341,7 @@ func categories() (c map[string]map[string][]string) {
 				"INTERNATIONAL INN",
 				"AMBA HOTEL MARBLE",
 				"GROSVENOR HOUSE",
+				"PREMIER INN4451265",
 			},
 			"social": {
 				"PAPA JONES PIZZA",
@@ -357,6 +360,7 @@ func categories() (c map[string]map[string][]string) {
 				"SQ *LOUIES PIZZA",
 				"DEAD EYES",
 				"THREE TUNS",
+				"Acoustic Cafe",
 			},
 			"incentives": {
 				"YUVA MEDISPA",
