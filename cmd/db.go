@@ -39,17 +39,16 @@ func loadCosts() {
 	pp := addPayPalCategories()
 	amzn := addAmazonCategories()
 
-
 	for _, v := range costs {
-		data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit,Category: v.Category, SubCat: v.SubCat})
+		data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
 	}
 
 	for _, v := range pp {
-		data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit,Category: v.Category, SubCat: v.SubCat})
+		data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
 	}
 
 	for _, v := range amzn {
-		data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit,Category: v.Category, SubCat: v.SubCat})
+		data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
 	}
 
 	db.Create(&data)

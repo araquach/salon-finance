@@ -61,6 +61,7 @@ func amazonCats() (c map[string]map[string][]string) {
 				"SousVideTools",
 			},
 			"misc": {
+				"K-Mart Limited",
 				"Youngever LLC",
 				"Utopia Towels",
 				"Thepaperbagstore",
@@ -103,6 +104,7 @@ func amazonCats() (c map[string]map[string][]string) {
 		},
 		"drawings": {
 			"adam": {
+				"SUPJOYES",
 				"Yogibare",
 				"Trung Nguyen",
 				"Taylor Tools",
@@ -190,6 +192,7 @@ func amazonCats() (c map[string]map[string][]string) {
 				"Oypla",
 			},
 			"izzy": {
+				"JASBON",
 				"Yousave Accessories",
 				"WEKIN",
 				"VATIN Officials",
@@ -272,6 +275,9 @@ func amazonCats() (c map[string]map[string][]string) {
 		},
 		"equipment": {
 			"equipment": {
+				"NEW'C",
+				"EbestINC",
+				"SanDisk",
 				"Zeadio",
 				"YKS",
 				"Vogel's",

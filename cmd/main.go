@@ -29,7 +29,7 @@ func main() {
 	dbInit(dsn)
 
 	// loadTakings()
-	loadCosts()
+	// loadCosts()
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -48,8 +48,10 @@ func main() {
 	r := mux.NewRouter()
 	r.PathPrefix("/dist/").Handler(http.StripPrefix("/dist/", http.FileServer(http.Dir(dir))))
 	// API routes
-	r.HandleFunc("/api/takings", apiTakings).Methods("GET")
-	r.HandleFunc("/api/costs", apiCostsByCat).Methods("GET")
+	r.HandleFunc("/api/takings/{start}/{end}", apiTakingsByStylist).Methods("GET")
+	r.HandleFunc("/api/costs/{start}/{end}", apiCostsByCat).Methods("GET")
+	r.HandleFunc("/api/costs-by-month", apiCostsByMonth).Methods("GET")
+	r.HandleFunc("/api/takings-by-month", apiTakingsByMonth).Methods("GET")
 	// Main Routes
 	r.HandleFunc("/{category}/{name}", index)
 	r.HandleFunc("/{name}", index)

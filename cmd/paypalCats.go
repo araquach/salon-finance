@@ -117,6 +117,9 @@ func paypalCats() (c map[string]map[string][]string) {
 		},
 		"equipment": {
 			"equipment": {
+				"Park Cameras Ltd",
+				"Analogue Wonderland",
+				"Amara Living Limited",
 				"Richer Sounds Plc",
 				"Argos Limited",
 				"Qualtex UK Ltd",
@@ -160,6 +163,8 @@ func paypalCats() (c map[string]map[string][]string) {
 				"Paddle.com Market Limited",
 				"Ecotrade Europe Ltd",
 				"Warehouse Express Ltd",
+				"LUZERN ECOMMERCE LTD",
+				"eBay",
 			},
 		},
 	}

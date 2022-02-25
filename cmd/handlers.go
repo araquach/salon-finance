@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 )
@@ -13,20 +14,25 @@ func index(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func apiTakings(w http.ResponseWriter, r *http.Request) {
+func apiTakingsByStylist(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	var s Total
+	type result struct {
+		Stylist  string
+		Products float32
+		Services float32
+		Total    float32
+	}
 
-	dateFrom := "2019-10-01"
-	dateTo := "2020-01-01"
+	vars := mux.Vars(r)
+	sd := vars["start"]
+	ed := vars["end"]
 
-	db.Table("takings").Select("sum(services) as s, sum(products) as p").Where("date >= ? AND date <= ?", dateFrom, dateTo).Scan(&s)
+	var res []result
 
-	s.T = s.P + s.S
-	s.A = s.T / 12
+	db.Model(&Taking{}).Select("name as stylist, sum(services) as services, sum(products) as products, sum(services) + sum(products) as total").Where("date BETWEEN ? AND ?", sd, ed).Group("name").Find(&res)
 
-	json, err := json.Marshal(s)
+	json, err := json.Marshal(res)
 	if err != nil {
 		log.Println(err)
 	}
@@ -36,33 +42,62 @@ func apiTakings(w http.ResponseWriter, r *http.Request) {
 func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	var d CostData
-	var c CostByCat
-	var e []CostByCat
-
-	dateFrom := "2019-10-03"
-	dateTo := "2020-10-03"
-
-	categories := categories()
-
-	db.Table("costs").Select("sum(debit) as a").Where("date >= ? AND date <= ?", dateFrom, dateTo).Scan(&c)
-	d.T = c.A
-
-	for cat, _ := range categories {
-		db.Table("costs").Select("sum(debit) as a").Where("category = ?", cat).Where("date >= ? AND date <= ?", dateFrom, dateTo).Scan(&c)
-
-		percent := (c.A / d.T) * 100
-		average := c.A / 12
-
-		e = append(e, CostByCat{cat, c.A, percent, average})
+	type result struct {
+		Category string
+		Total    float32
 	}
-	d.C = e
 
+	vars := mux.Vars(r)
+	sd := vars["start"]
+	ed := vars["end"]
 
-	json, err := json.Marshal(d)
+	var res []result
+
+	db.Model(&Cost{}).Select("category, sum(debit) as total").Where("date BETWEEN ? AND ?", sd, ed).Group("category").Find(&res)
+
+	json, err := json.Marshal(res)
 	if err != nil {
 		log.Println(err)
 	}
 	w.Write(json)
+}
 
+func apiCostsByMonth(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	type result struct {
+		MonthTotal string
+		Total      float32
+	}
+
+	var res []result
+
+	db.Raw("SELECT DATE_TRUNC('month', date) AS  month_total, sum(debit) AS total FROM costs GROUP BY month_total").Scan(&res)
+
+	json, err := json.Marshal(res)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
+}
+
+func apiTakingsByMonth(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	type result struct {
+		MonthTotal string
+		Services   float32
+		Products   float32
+		Total      float32
+	}
+
+	var res []result
+
+	db.Raw("SELECT DATE_TRUNC('month', date) AS month_total, sum(services) AS services, sum(products) as products, sum(services) + sum(products) as total FROM takings GROUP BY month_total").Scan(&res)
+
+	json, err := json.Marshal(res)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
 }
