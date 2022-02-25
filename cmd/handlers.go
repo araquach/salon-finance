@@ -70,9 +70,13 @@ func apiCostsByMonth(w http.ResponseWriter, r *http.Request) {
 		Total      float32
 	}
 
+	vars := mux.Vars(r)
+	sd := vars["start"]
+	ed := vars["end"]
+
 	var res []result
 
-	db.Raw("SELECT DATE_TRUNC('month', date) AS  month_total, sum(debit) AS total FROM costs GROUP BY month_total").Scan(&res)
+	db.Raw("SELECT DATE_TRUNC('month', date) AS  month_total, sum(debit) AS total FROM costs WHERE date BETWEEN ? AND ? GROUP BY month_total", sd, ed).Scan(&res)
 
 	json, err := json.Marshal(res)
 	if err != nil {
@@ -91,9 +95,13 @@ func apiTakingsByMonth(w http.ResponseWriter, r *http.Request) {
 		Total      float32
 	}
 
+	vars := mux.Vars(r)
+	sd := vars["start"]
+	ed := vars["end"]
+
 	var res []result
 
-	db.Raw("SELECT DATE_TRUNC('month', date) AS month_total, sum(services) AS services, sum(products) as products, sum(services) + sum(products) as total FROM takings GROUP BY month_total").Scan(&res)
+	db.Raw("SELECT DATE_TRUNC('month', date) AS month_total, sum(services) AS services, sum(products) as products, sum(services) + sum(products) as total FROM takings WHERE date BETWEEN ? AND ? GROUP BY month_total", sd, ed).Scan(&res)
 
 	json, err := json.Marshal(res)
 	if err != nil {
