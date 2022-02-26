@@ -29,7 +29,7 @@ func main() {
 	dbInit(dsn)
 
 	//loadTakings()
-	loadCosts()
+	//loadCosts()
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -37,7 +37,7 @@ func main() {
 	}
 
 	tplIndex = template.Must(template.ParseFiles(
-		"views/index.gohtml"))
+		"index.gohtml"))
 	if err != nil {
 		panic(err)
 	}
@@ -48,10 +48,10 @@ func main() {
 	r := mux.NewRouter()
 	r.PathPrefix("/dist/").Handler(http.StripPrefix("/dist/", http.FileServer(http.Dir(dir))))
 	// API routes
-	r.HandleFunc("/api/takings/{start}/{end}", apiTakingsByStylist).Methods("GET")
-	r.HandleFunc("/api/costs/{start}/{end}", apiCostsByCat).Methods("GET")
-	r.HandleFunc("/api/costs-by-month/{start}/{end}", apiCostsByMonth).Methods("GET")
-	r.HandleFunc("/api/takings-by-month/{start}/{end}", apiTakingsByMonth).Methods("GET")
+	r.HandleFunc("/api/takings-by-stylist/{salon}/{start}/{end}", apiTakingsByStylist).Methods("GET")
+	r.HandleFunc("/api/takings-by-month/{salon}/{start}/{end}", apiTakingsByMonth).Methods("GET")
+	r.HandleFunc("/api/costs-by-cat/{salon}/{start}/{end}", apiCostsByCat).Methods("GET")
+	r.HandleFunc("/api/costs-by-month/{salon}/{start}/{end}", apiCostsByMonth).Methods("GET")
 	// Main Routes
 	r.HandleFunc("/{category}/{name}", index)
 	r.HandleFunc("/{name}", index)

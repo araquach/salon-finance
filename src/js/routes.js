@@ -1,10 +1,21 @@
-import MainDashboard from "./components/MainDashboard"
-import CostTotals from './components/bank/CostTotals'
-import ProfitLossMonthly from './components/ProfitLoss/ProfitLossMonthly'
-
+import MainDashboard from "./views/MainDashboard"
+import CostTotals from "./components/bank/CostTotals"
+import TotalTakings from "./components/takings/TotalTakings"
 
 export const routes = [
-    { path: '', component: MainDashboard},
-    { path: '/costs', component: CostTotals},
-    { path: '/profit-loss', component: ProfitLossMonthly}
+    {
+        path: '',
+        name: 'dashboard',
+        component: MainDashboard,
+    },
+    {
+        path: '/cost-totals',
+        name: 'cost-totals',
+        component: CostTotals
+    },
+    {
+        path: '/total-takings',
+        name: 'total-takings',
+        component: TotalTakings
+    }
 ]

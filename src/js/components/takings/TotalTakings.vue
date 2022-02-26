@@ -1,34 +1,35 @@
 <template>
-    <div class="section">
-        <h2 class="title is-4">
-            Total Salon Turnover
-        </h2>
-        <table class="table is-size-5">
-            <tr>
-                <th>Services</th>
-                <th>Products</th>
-                <th><strong>Grand Total</strong></th>
-                <th>Monthly Average</th>
-            </tr>
-            <tr>
-                <td>{{ takings.services | toCurrency}}</td>
-                <td>{{ takings.products | toCurrency }}</td>
-                <td><strong>{{ takings.total | toCurrency }}</strong></td>
-                <td>{{ takings.average | toCurrency}}</td>
-            </tr>
-        </table>
-    </div>
+  <div class="section">
+    <h2 class="title is-4">Total Turnover by Date Range</h2>
+    <table class="table is-size-5">
+      <tr>
+        <th>Month</th>
+        <th>Services</th>
+        <th>Products</th>
+        <th class="has-text-weight-bold">Total</th>
+      </tr>
+      <tr v-for="total in totalsByMonth">
+        <td>{{ total.month | showMonth }}</td>
+        <td>{{ total.services | toCurrency }}</td>
+        <td>{{ total.products | toCurrency }}</td>
+        <td class="has-text-weight-bold has-text-warning">{{ total.services + total.products | toCurrency}}</td>
+      </tr>
+    </table>
+  </div>
 </template>
 <script>
-    import { mapState } from "vuex"
+import {mapState} from "vuex"
+import {parseISO, format} from "date-fns"
 
-    export default {
-      computed: {
-        ...mapState(["takings"])
-      },
+export default {
+  filters: {
+    showMonth: value => format(parseISO(value), 'LLLL')
+  },
 
-      created() {
-        this.$store.dispatch('loadTakings')
-      }
-    }
+  computed: {
+    ...mapState({
+      totalsByMonth: state => state.takingsByMonth
+    })
+  }
+}
 </script>

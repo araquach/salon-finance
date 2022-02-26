@@ -5,39 +5,69 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        takings: {},
-        costs: {}
+        takingsByStylist: {},
+        takingsByMonth: {},
+        costsByCat: {},
+        costsByMonth: {}
     },
 
     getters: {
-        totalCost: state => {
-            return state.costs.amount.reduce((a, b) => a + b, 0)
-        },
+
     },
 
     mutations: {
-        LOAD_TAKINGS(state, payload) {
-            state.takings = payload
+        LOAD_TAKINGS_BY_STYLIST(state, payload) {
+            state.takingsByStylist = payload
         },
 
-        LOAD_COSTS(state, payload) {
-            state.costs = payload
+        LOAD_TAKINGS_BY_MONTH(state, payload) {
+            state.takingsByMonth = payload
+        },
+
+        LOAD_COSTS_BY_CAT(state, payload) {
+            state.costsByCat = payload
+        },
+
+        LOAD_COSTS_BY_MONTH(state, payload) {
+            state.costsByMonth = payload
         }
     },
 
     actions: {
-        loadTakings({ commit }) {
-            axios.get('/api/takings').then((response) => {
-                commit('LOAD_TAKINGS', response.data
-                )
-            })
+        loadTakingsByStylist({ commit }) {
+            axios
+                .get('/api/takings-by-stylist/' + 'all/2021-01-01/2021-12-31')
+                .then(r => r.data)
+                .then(data => {
+                    commit('LOAD_TAKINGS_BY_STYLIST', data)
+                })
         },
 
-        loadCosts({ commit }) {
-            axios.get('/api/costs').then((response) => {
-                commit('LOAD_COSTS', response.data
-                )
-            })
+        loadTakingsByMonth({ commit }) {
+            axios
+                .get('/api/takings-by-month/' + 'all/2021-01-01/2021-12-31')
+                .then(r => r.data)
+                .then(data => {
+                    commit('LOAD_TAKINGS_BY_MONTH', data)
+                })
+        },
+
+        loadCostsByCat({ commit }) {
+            axios
+                .get('/api/costs-by-cat/' + 'all/2021-01-01/2021-12-31')
+                .then(r => r.data)
+                .then(data => {
+                    commit('LOAD_COSTS_BY_CAT', data)
+                })
+        },
+
+        loadCostsByMonth({ commit }) {
+            axios
+                .get('/api/costs-by-month/' + 'all/2021-01-01/2021-12-31')
+                .then(r => r.data)
+                .then(data => {
+                    commit('LOAD_COSTS_BY_MONTH', data)
+                })
         }
     }
 })

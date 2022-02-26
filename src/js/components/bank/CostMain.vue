@@ -18,11 +18,9 @@
 
   export default {
     computed: {
-      ...mapState([])
-    },
+      ...mapState({
 
-    created() {
-
+      }),
     }
   }
 </script>
