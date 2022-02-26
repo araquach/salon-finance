@@ -38388,11 +38388,13 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _vm._l(_vm.costsByCat, function(cost) {
-          return _c("tr", { key: _vm.costsByCat.index }, [
-            _c("td", [_vm._v(_vm._s(_vm._f("upperCaseFirst")(cost.category)))]),
+          return _c("tr", [
+            _c("td", [
+              _vm._v(_vm._s(_vm._f("upperCaseFirst")(cost.figures[0].category)))
+            ]),
             _vm._v(" "),
             _c("td", { staticClass: "has-text-warning" }, [
-              _vm._v(_vm._s(_vm._f("toCurrency")(cost.total)))
+              _vm._v(_vm._s(_vm._f("toCurrency")(cost.figures.total)))
             ]),
             _vm._v(" "),
             _c("td", [_vm._v("Percent")]),
@@ -60195,10 +60197,11 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     loadCostsByCat: function loadCostsByCat(_ref3) {
       var commit = _ref3.commit;
-      axios.get('/api/costs-by-cat/' + 'all/2021-01-01/2021-12-31').then(function (r) {
+      axios.get('/api/costs-by-cat/' + '06517160/2021-01-01/2021-12-31').then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_CAT', data);
+        console.log(data);
       });
     },
     loadCostsByMonth: function loadCostsByMonth(_ref4) {

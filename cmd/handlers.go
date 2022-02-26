@@ -87,7 +87,7 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 
 	var t float32
 
-	type result struct {
+	type Result struct {
 		Account  string  `json:"account"`
 		Category string  `json:"category"`
 		Total    float32 `json:"total"`
@@ -95,10 +95,10 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 		Average  float32 `json:"average"`
 	}
 
-	type data struct {
+	type Data struct {
 		GrandTotal float32  `json:"grand_total"`
 		Months     int      `json:"months"`
-		Figures    []result `json:"figures"`
+		Figures    []Result `json:"figures"`
 	}
 
 	vars := mux.Vars(r)
@@ -117,7 +117,7 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 
 	mnths := monthsCount(startDate, endDate)
 
-	var res []result
+	var res []Result
 
 	if s == "all" {
 		db.Model(&Cost{}).Order("total desc").Select("category, sum(debit) as total").Where("date BETWEEN ? AND ?", sd, ed).Group("category").Find(&res)
@@ -131,15 +131,15 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for k, v := range res {
-		monthAv := float32(t) / float32(mnths)
+		monthAv := t / float32(mnths)
 
 		(res)[k].Average = v.Total / float32(mnths)
 		(res)[k].Percent = (v.Total / monthAv) * 100
 	}
 
-	f := data{
+	f := Data{
 		GrandTotal: t,
-		Months: mnths,
+		Months:     mnths,
 		Figures:    res,
 	}
 

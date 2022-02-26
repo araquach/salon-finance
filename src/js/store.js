@@ -54,10 +54,11 @@ export const store = new Vuex.Store({
 
         loadCostsByCat({ commit }) {
             axios
-                .get('/api/costs-by-cat/' + 'all/2021-01-01/2021-12-31')
+                .get('/api/costs-by-cat/' + '06517160/2021-01-01/2021-12-31')
                 .then(r => r.data)
                 .then(data => {
                     commit('LOAD_COSTS_BY_CAT', data)
+                    console.log(data)
                 })
         },
 

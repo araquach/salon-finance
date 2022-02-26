@@ -8,9 +8,9 @@
         <th>Percent</th>
         <th>Average</th>
       </tr>
-      <tr v-for="cost in costsByCat" :key="costsByCat.index">
-        <td>{{ cost.category | upperCaseFirst }}</td>
-        <td class="has-text-warning">{{ cost.total | toCurrency }}</td>
+      <tr v-for="cost in costsByCat">
+        <td>{{ cost.figures[0].category | upperCaseFirst }}</td>
+        <td class="has-text-warning">{{ cost.figures.total | toCurrency }}</td>
         <td>Percent</td>
         <td>Average</td>
       </tr>
