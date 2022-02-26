@@ -40,8 +40,11 @@ func loadCosts() {
 	amzn := addAmazonCategories()
 
 	for _, v := range costs {
-		sd := time.Date(2019, 01, 01, 0, 0, 0, 0, time.UTC)
-		if v.Category == "paypal" && sd.Before(v.Date) {
+		sd := time.Date(2019, 01, 07, 0, 0, 0, 0, time.UTC)
+		if v.Category == "paypal" && sd.After(v.Date) {
+			data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
+		}
+		if v.Category != "paypal" {
 			data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
 		}
 	}
