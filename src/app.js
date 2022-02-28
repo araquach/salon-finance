@@ -10,9 +10,7 @@ Vue.use(Vuelidate)
 
 window.axios = require('axios')
 
-Vue.filter('textLimit', function (text, length) {
-    return text.substring(0, length)
-})
+Vue.filter('toUpperCase', s => s[0].toUpperCase() + s.slice(1))
 
 Vue.filter("toCurrency",  amount => Number(Math.round(amount)).toLocaleString('en-GB',
     {

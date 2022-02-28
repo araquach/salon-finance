@@ -8,7 +8,7 @@
         <th>Products</th>
         <th class="has-text-weight-bold">Total</th>
       </tr>
-      <tr v-for="total in totalsByMonth">
+      <tr v-for="total in total">
         <td>{{ total.month | showMonth }}</td>
         <td>{{ total.services | toCurrency }}</td>
         <td>{{ total.products | toCurrency }}</td>
@@ -28,7 +28,7 @@ export default {
 
   computed: {
     ...mapState({
-      totalsByStylist: state => state.takingsByStylist
+      total: state => state.takingsByStylist
     })
   }
 }

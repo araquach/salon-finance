@@ -12,9 +12,9 @@
 
       created() {
         this.$store.dispatch('loadTakingsByStylist')
-        this.$store.dispatch('loadTakingsByMonth')
+        this.$store.dispatch('loadTakingsByDateRange')
         this.$store.dispatch('loadCostsByCat')
-        this.$store.dispatch('loadCostsByMonth')
+        this.$store.dispatch('loadCostsByDateRange')
       }
     }
 </script>

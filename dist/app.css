@@ -14995,3 +14995,6 @@ MIT (https://github.com/Wikiki/bulma-steps/blob/master/LICENSE)
     z-index: -1;
   }
 }
+p {
+  line-height: 1.8rem;
+}

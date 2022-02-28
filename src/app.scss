@@ -2,3 +2,7 @@
 @import "~bulmaswatch/darkly/_variables.scss";
 @import "~bulmaswatch/darkly/_overrides.scss";
 @import "~buefy/src/scss/buefy";
+
+p {
+  line-height: 1.8rem;
+}

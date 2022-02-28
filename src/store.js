@@ -6,9 +6,9 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         takingsByStylist: {},
-        takingsByMonth: {},
+        takingsByDateRange: {},
         costsByCat: {},
-        costsByMonth: {}
+        costsByDateRange: {}
     },
 
     getters: {
@@ -20,41 +20,41 @@ export const store = new Vuex.Store({
             state.takingsByStylist = payload
         },
 
-        LOAD_TAKINGS_BY_MONTH(state, payload) {
-            state.takingsByMonth = payload
+        LOAD_TAKINGS_BY_DATE_RANGE(state, payload) {
+            state.takingsByDateRange = payload
         },
 
         LOAD_COSTS_BY_CAT(state, payload) {
             state.costsByCat = payload
         },
 
-        LOAD_COSTS_BY_MONTH(state, payload) {
-            state.costsByMonth = payload
+        LOAD_COSTS_BY_DATE_RANGE(state, payload) {
+            state.costsByDateRange = payload
         }
     },
 
     actions: {
         loadTakingsByStylist({ commit }) {
             axios
-                .get('/api/takings-by-stylist/' + 'all/2021-01-01/2021-12-31')
+                .get('/api/takings-by-stylist/' + 'all/2021-07-01/2021-12-31')
                 .then(r => r.data)
                 .then(data => {
                     commit('LOAD_TAKINGS_BY_STYLIST', data)
                 })
         },
 
-        loadTakingsByMonth({ commit }) {
+        loadTakingsByDateRange({ commit }) {
             axios
-                .get('/api/takings-by-month/' + 'all/2021-01-01/2021-12-31')
+                .get('/api/takings-by-date-range/' + 'all/2021-07-01/2021-12-31')
                 .then(r => r.data)
                 .then(data => {
-                    commit('LOAD_TAKINGS_BY_MONTH', data)
+                    commit('LOAD_TAKINGS_BY_DATE_RANGE', data)
                 })
         },
 
         loadCostsByCat({ commit }) {
             axios
-                .get('/api/costs-by-cat/' + '06517160/2021-01-01/2021-12-31')
+                .get('/api/costs-by-cat/' + 'all/2021-07-01/2021-12-31')
                 .then(r => r.data)
                 .then(data => {
                     commit('LOAD_COSTS_BY_CAT', data)
@@ -62,12 +62,12 @@ export const store = new Vuex.Store({
 
         },
 
-        loadCostsByMonth({ commit }) {
+        loadCostsByDateRange({ commit }) {
             axios
-                .get('/api/costs-by-month/' + 'all/2021-01-01/2021-12-31')
+                .get('/api/costs-by-date-range/' + 'all/2021-07-01/2021-12-31')
                 .then(r => r.data)
                 .then(data => {
-                    commit('LOAD_COSTS_BY_MONTH', data)
+                    commit('LOAD_COSTS_BY_DATE_RANGE', data)
                 })
         }
     }

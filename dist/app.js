@@ -2080,9 +2080,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.$store.dispatch('loadTakingsByStylist');
-    this.$store.dispatch('loadTakingsByMonth');
+    this.$store.dispatch('loadTakingsByDateRange');
     this.$store.dispatch('loadCostsByCat');
-    this.$store.dispatch('loadCostsByMonth');
+    this.$store.dispatch('loadCostsByDateRange');
   }
 });
 
@@ -2127,19 +2127,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  filters: {
-    upperCaseFirst: function upperCaseFirst(value) {
-      return value[0].toUpperCase() + value.slice(1);
-    }
-  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)({
+    salon: function salon(state) {
+      return state.costsByCat.salon;
+    },
     figures: function figures(state) {
       return state.costsByCat.figures;
     },
     total: function total(state) {
-      return state.costsByCat.total;
+      return state.costsByCat.grand_total;
+    },
+    byYear: function byYear(state) {
+      return state.costsByCat.by_year;
     },
     months: function months(state) {
       return state.costsByCat.months;
@@ -2175,16 +2186,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)({}))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)({
+    costs: function costs(state) {
+      return state.costsByDateRange;
+    }
+  }))
 });
 
 /***/ }),
@@ -2228,6 +2236,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2237,8 +2264,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
-    totalsByMonth: function totalsByMonth(state) {
-      return state.takingsByMonth;
+    salon: function salon(state) {
+      return state.takingsByDateRange.salon;
+    },
+    takings: function takings(state) {
+      return state.takingsByDateRange.figures;
+    },
+    months: function months(state) {
+      return state.takingsByDateRange.months;
+    },
+    totals: function totals(state) {
+      return state.takingsByDateRange.grand_totals;
     }
   }))
 });
@@ -2293,7 +2329,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
-    totalsByStylist: function totalsByStylist(state) {
+    total: function total(state) {
       return state.takingsByStylist;
     }
   }))
@@ -2351,8 +2387,8 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(buefy__WEBPACK_IMPORTED_MODULE_4__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vuelidate__WEBPACK_IMPORTED_MODULE_5__["default"]);
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].filter('textLimit', function (text, length) {
-  return text.substring(0, length);
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].filter('toUpperCase', function (s) {
+  return s[0].toUpperCase() + s.slice(1);
 });
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].filter("toCurrency", function (amount) {
   return Number(Math.round(amount)).toLocaleString('en-GB', {
@@ -2420,7 +2456,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]({
     component: _components_takings_TakingsByDateRange__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: '/takings-by-stylist',
-    name: 'takings',
+    name: 'takings-by-stylist',
     component: _components_takings_TakingsByStylist__WEBPACK_IMPORTED_MODULE_4__["default"]
   }]
 });
@@ -2447,56 +2483,56 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     takingsByStylist: {},
-    takingsByMonth: {},
+    takingsByDateRange: {},
     costsByCat: {},
-    costsByMonth: {}
+    costsByDateRange: {}
   },
   getters: {},
   mutations: {
     LOAD_TAKINGS_BY_STYLIST: function LOAD_TAKINGS_BY_STYLIST(state, payload) {
       state.takingsByStylist = payload;
     },
-    LOAD_TAKINGS_BY_MONTH: function LOAD_TAKINGS_BY_MONTH(state, payload) {
-      state.takingsByMonth = payload;
+    LOAD_TAKINGS_BY_DATE_RANGE: function LOAD_TAKINGS_BY_DATE_RANGE(state, payload) {
+      state.takingsByDateRange = payload;
     },
     LOAD_COSTS_BY_CAT: function LOAD_COSTS_BY_CAT(state, payload) {
       state.costsByCat = payload;
     },
-    LOAD_COSTS_BY_MONTH: function LOAD_COSTS_BY_MONTH(state, payload) {
-      state.costsByMonth = payload;
+    LOAD_COSTS_BY_DATE_RANGE: function LOAD_COSTS_BY_DATE_RANGE(state, payload) {
+      state.costsByDateRange = payload;
     }
   },
   actions: {
     loadTakingsByStylist: function loadTakingsByStylist(_ref) {
       var commit = _ref.commit;
-      axios.get('/api/takings-by-stylist/' + 'all/2021-01-01/2021-12-31').then(function (r) {
+      axios.get('/api/takings-by-stylist/' + 'all/2021-07-01/2021-12-31').then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TAKINGS_BY_STYLIST', data);
       });
     },
-    loadTakingsByMonth: function loadTakingsByMonth(_ref2) {
+    loadTakingsByDateRange: function loadTakingsByDateRange(_ref2) {
       var commit = _ref2.commit;
-      axios.get('/api/takings-by-month/' + 'all/2021-01-01/2021-12-31').then(function (r) {
+      axios.get('/api/takings-by-date-range/' + 'all/2021-07-01/2021-12-31').then(function (r) {
         return r.data;
       }).then(function (data) {
-        commit('LOAD_TAKINGS_BY_MONTH', data);
+        commit('LOAD_TAKINGS_BY_DATE_RANGE', data);
       });
     },
     loadCostsByCat: function loadCostsByCat(_ref3) {
       var commit = _ref3.commit;
-      axios.get('/api/costs-by-cat/' + '06517160/2021-01-01/2021-12-31').then(function (r) {
+      axios.get('/api/costs-by-cat/' + 'all/2021-07-01/2021-12-31').then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_CAT', data);
       });
     },
-    loadCostsByMonth: function loadCostsByMonth(_ref4) {
+    loadCostsByDateRange: function loadCostsByDateRange(_ref4) {
       var commit = _ref4.commit;
-      axios.get('/api/costs-by-month/' + 'all/2021-01-01/2021-12-31').then(function (r) {
+      axios.get('/api/costs-by-date-range/' + 'all/2021-07-01/2021-12-31').then(function (r) {
         return r.data;
       }).then(function (data) {
-        commit('LOAD_COSTS_BY_MONTH', data);
+        commit('LOAD_COSTS_BY_DATE_RANGE', data);
       });
     }
   }
@@ -22041,20 +22077,6 @@ var render = function () {
         [
           _c(
             "b-navbar-item",
-            { attrs: { to: { name: "costs-by-month" }, tag: "router-link" } },
-            [_vm._v("\n      Costs by Month\n    ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "b-navbar-item",
-            {
-              attrs: { to: { name: "costs-by-category" }, tag: "router-link" },
-            },
-            [_vm._v("\n      Costs by category\n    ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "b-navbar-item",
             {
               attrs: {
                 to: { name: "takings-by-date-range" },
@@ -22067,9 +22089,23 @@ var render = function () {
           _c(
             "b-navbar-item",
             {
+              attrs: { to: { name: "costs-by-category" }, tag: "router-link" },
+            },
+            [_vm._v("\n      Costs by Category\n    ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "b-navbar-item",
+            {
               attrs: { to: { name: "takings-by-stylist" }, tag: "router-link" },
             },
             [_vm._v("\n      Takings by Stylist\n    ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "b-navbar-item",
+            { attrs: { to: { name: "costs-by-month" }, tag: "router-link" } },
+            [_vm._v("\n      Costs by Month\n    ")]
           ),
           _vm._v(" "),
           _c("b-navbar-dropdown", { attrs: { label: "Menu" } }),
@@ -22106,11 +22142,17 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "section" }, [
-    _c("h1", { staticClass: "title is-4" }, [
+    _c("h1", { staticClass: "title is-5" }, [
       _vm._v("Categorised Costs By Date Range"),
     ]),
     _vm._v(" "),
+    _c("p", { staticClass: "is-size-4" }, [
+      _vm._v("Salon: " + _vm._s(_vm._f("toUpperCase")(_vm.salon))),
+    ]),
+    _vm._v(" "),
     _c("p", [_vm._v("Number of months: " + _vm._s(_vm.months))]),
+    _vm._v(" "),
+    _c("br"),
     _vm._v(" "),
     _c(
       "table",
@@ -22120,7 +22162,7 @@ var render = function () {
         _vm._v(" "),
         _vm._l(_vm.figures, function (cost) {
           return _c("tr", [
-            _c("td", [_vm._v(_vm._s(_vm._f("upperCaseFirst")(cost.category)))]),
+            _c("td", [_vm._v(_vm._s(_vm._f("toUpperCase")(cost.category)))]),
             _vm._v(" "),
             _c("td", { staticClass: "has-text-warning" }, [
               _vm._v(_vm._s(_vm._f("toCurrency")(cost.total))),
@@ -22131,6 +22173,24 @@ var render = function () {
             _c("td", [_vm._v(_vm._s(_vm._f("toCurrency")(cost.average)))]),
           ])
         }),
+        _vm._v(" "),
+        _c("tr", { staticClass: "is-size-3" }, [
+          _c("td", [_vm._v("Grand Total")]),
+          _vm._v(" "),
+          _c("td", { staticClass: "has-text-warning" }, [
+            _vm._v(_vm._s(_vm._f("toCurrency")(_vm.total))),
+          ]),
+        ]),
+        _vm._v(" "),
+        _vm.months !== 12
+          ? _c("tr", { staticClass: "is-size-3" }, [
+              _c("td", [_vm._v("Yearly")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "has-text-warning" }, [
+                _vm._v(_vm._s(_vm._f("toCurrency")(_vm.byYear))),
+              ]),
+            ])
+          : _vm._e(),
       ],
       2
     ),
@@ -22182,19 +22242,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "section" }, [
-      _c("table", { staticClass: "table is-size-4" }, [
-        _c("tr", [
-          _c("th", [_vm._v("Profit/Loss")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Monthly Profit/Loss")]),
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", { staticClass: "has-text-danger" }),
-          _vm._v(" "),
-          _c("td", { staticClass: "has-text-danger" }),
-        ]),
-      ]),
+      _c("table", { staticClass: "table is-size-4" }),
     ])
   },
 ]
@@ -22225,13 +22273,21 @@ var render = function () {
       _vm._v("Total Takings by Date Range"),
     ]),
     _vm._v(" "),
+    _c("p", { staticClass: "is-size-5" }, [
+      _vm._v("Salon: " + _vm._s(_vm._f("toUpperCase")(_vm.salon))),
+    ]),
+    _vm._v(" "),
+    _c("p", [_vm._v("Number of months: " + _vm._s(_vm.months))]),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
     _c(
       "table",
       { staticClass: "table is-size-5" },
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._l(_vm.totalsByMonth, function (total) {
+        _vm._l(_vm.takings, function (total) {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(_vm._f("showMonth")(total.month)))]),
             _vm._v(" "),
@@ -22246,6 +22302,40 @@ var render = function () {
             ]),
           ])
         }),
+        _vm._v(" "),
+        _c("tr", { staticClass: "is-size-4" }, [
+          _c("td", [_vm._v("Total Services")]),
+          _vm._v(" "),
+          _c("td", { staticClass: "has-text-warning" }, [
+            _vm._v(_vm._s(_vm._f("toCurrency")(_vm.totals.services))),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("tr", { staticClass: "is-size-4" }, [
+          _c("td", [_vm._v("Total Products")]),
+          _vm._v(" "),
+          _c("td", { staticClass: "has-text-warning" }, [
+            _vm._v(_vm._s(_vm._f("toCurrency")(_vm.totals.products))),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("tr", { staticClass: "is-size-3" }, [
+          _c("td", [_vm._v("Grand Total")]),
+          _vm._v(" "),
+          _c("td", { staticClass: "has-text-warning" }, [
+            _vm._v(_vm._s(_vm._f("toCurrency")(_vm.totals.grand_total))),
+          ]),
+        ]),
+        _vm._v(" "),
+        _vm.months !== 12
+          ? _c("tr", { staticClass: "is-size-3" }, [
+              _c("td", [_vm._v("Yearly Total")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "has-text-warning" }, [
+                _vm._v(_vm._s(_vm._f("toCurrency")(_vm.totals.yearly))),
+              ]),
+            ])
+          : _vm._e(),
       ],
       2
     ),
@@ -22300,7 +22390,7 @@ var render = function () {
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._l(_vm.totalsByMonth, function (total) {
+        _vm._l(_vm.total, function (total) {
           return _c("tr", [
             _c("td", [_vm._v(_vm._s(_vm._f("showMonth")(total.month)))]),
             _vm._v(" "),

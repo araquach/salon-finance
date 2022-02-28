@@ -55,12 +55,25 @@ func apiTakingsByStylist(w http.ResponseWriter, r *http.Request) {
 func apiTakingsByDateRange(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	type result struct {
-		Salon      string  `json:"salon"`
+	type Result struct {
 		MonthTotal string  `json:"month"`
 		Services   float32 `json:"services"`
 		Products   float32 `json:"products"`
 		Total      float32 `json:"total"`
+	}
+
+	type GrandTotals struct {
+		Services   float32 `json:"services"`
+		Products   float32 `json:"products"`
+		GrandTotal float32 `json:"grand_total"`
+		Yearly     float32 `json:"yearly"`
+	}
+
+	type Data struct {
+		Salon       string      `json:"salon"`
+		Months      int         `json:"months"`
+		Figures     []Result    `json:"figures"`
+		GrandTotals GrandTotals `json:"grand_totals"`
 	}
 
 	vars := mux.Vars(r)
@@ -68,14 +81,42 @@ func apiTakingsByDateRange(w http.ResponseWriter, r *http.Request) {
 	sd := vars["start"]
 	ed := vars["end"]
 
-	var res []result
+	startDate, err := time.Parse("2006-01-02", sd)
+	if err != nil {
+		panic(err)
+	}
+	endDate, err := time.Parse("2006-01-02", ed)
+	if err != nil {
+		panic(err)
+	}
+
+	mnths := monthsCount(startDate, endDate)
+
+	var res []Result
+	var gt GrandTotals
+
 	if s == "all" {
 		db.Raw("SELECT DATE_TRUNC('month', date) AS month_total, sum(services) AS services, sum(products) as products, sum(services) + sum(products) as total FROM takings WHERE date BETWEEN ? AND ? GROUP BY month_total ORDER BY month_total", sd, ed).Scan(&res)
 	} else {
 		db.Raw("SELECT salon, DATE_TRUNC('month', date) AS month_total, sum(services) AS services, sum(products) as products, sum(services) + sum(products) as total FROM takings WHERE salon = ? AND date BETWEEN ? AND ? GROUP BY salon, month_total ORDER BY month_total", s, sd, ed).Scan(&res)
 	}
 
-	json, err := json.Marshal(res)
+	// Calculate total income
+	for _, r := range res {
+		gt.Services += r.Services
+		gt.Products += r.Products
+		gt.GrandTotal += r.Total
+		gt.Yearly = gt.GrandTotal / float32(mnths) * 12
+	}
+
+	f := Data{
+		Salon:       s,
+		GrandTotals: gt,
+		Months:      mnths,
+		Figures:     res,
+	}
+
+	json, err := json.Marshal(f)
 	if err != nil {
 		log.Println(err)
 	}
@@ -88,7 +129,6 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	var t float32
 
 	type Result struct {
-		Account  string  `json:"account"`
 		Category string  `json:"category"`
 		Total    float32 `json:"total"`
 		Percent  float32 `json:"percent"`
@@ -96,7 +136,9 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	}
 
 	type Data struct {
+		Salon      string   `json:"salon"`
 		GrandTotal float32  `json:"grand_total"`
+		ByYear     float32  `json:"by_year"`
 		Months     int      `json:"months"`
 		Figures    []Result `json:"figures"`
 	}
@@ -122,23 +164,23 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	if s == "all" {
 		db.Model(&Cost{}).Order("total desc").Select("category, sum(debit) as total").Where("date BETWEEN ? AND ?", sd, ed).Group("category").Find(&res)
 	} else {
-		db.Model(&Cost{}).Select("account, category, sum(debit) as total").Where("date BETWEEN ? AND ?", sd, ed).Where("account", s).Group("account, category").Find(&res)
+		db.Model(&Cost{}).Order("total desc").Select("account, category, sum(debit) as total").Where("date BETWEEN ? AND ?", sd, ed).Where("account", s).Group("account, category").Find(&res)
 	}
 
 	// Calculate total costs
 	for _, r := range res {
-		t += r.Total * float32(len(res))
+		t += r.Total
 	}
 
 	for k, v := range res {
-		monthAv := t / float32(mnths)
-
 		(res)[k].Average = v.Total / float32(mnths)
-		(res)[k].Percent = (v.Total / monthAv) * 100
+		(res)[k].Percent = (v.Total / t) * 100
 	}
 
 	f := Data{
+		Salon:      s,
 		GrandTotal: t,
+		ByYear:     t / float32(mnths) * 12,
 		Months:     mnths,
 		Figures:    res,
 	}
@@ -154,22 +196,29 @@ func apiCostsByDateRange(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	type result struct {
-		Account    string  `json:"account"`
-		MonthTotal string  `json:"month_total"`
-		Total      float32 `json:"total"`
+		Salon string  `json:"salon"`
+		Month string  `json:"month"`
+		Total float32 `json:"total"`
 	}
 
 	vars := mux.Vars(r)
-	s := vars["salon"]
 	sd := vars["start"]
 	ed := vars["end"]
 
 	var res []result
 
-	if s == "all" {
-		db.Raw("SELECT account, DATE_TRUNC('month', date) AS  month_total, sum(debit) AS total FROM costs WHERE date BETWEEN ? AND ? GROUP BY account, month_total", sd, ed).Scan(&res)
-	} else {
-		db.Raw("SELECT account, DATE_TRUNC('month', date) AS  month_total, sum(debit) AS total FROM costs WHERE account = ? AND date BETWEEN ? AND ? GROUP BY account, month_total", s, sd, ed).Scan(&res)
+	db.Raw("SELECT account as salon, DATE_TRUNC('month', date) AS  month, sum(debit) AS total FROM costs WHERE date BETWEEN ? AND ? GROUP BY account, month", sd, ed).Scan(&res)
+
+	for k, v := range res {
+		if (res[k]).Salon == "02017546" {
+			v.Salon = "PK"
+		}
+		if (res[k]).Salon == "17623364" {
+			v.Salon = "Base"
+		}
+		if (res[k]).Salon == "06517160" {
+			v.Salon = "Jakata"
+		}
 	}
 
 	json, err := json.Marshal(res)
