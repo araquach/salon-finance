@@ -1,27 +1,35 @@
 <template>
-    <div>
-        <table class="table is-narrow">
-            <tr>
-                <th>Months</th>
-                <th v-for="(month in months">{{month}}</th>
-            </tr>
-            <tr>
-                <th>Costs</th>
-                <td v-for="(data, index) in monthCostTotal">{{data | toCurrency}}</td>
-            </tr>
-            <tr>
-                <th>Takings</th>
-                <td v-for="(data, index) in monthTakingsTotal">{{data | toCurrency}}</td>
-            </tr>
-            <tr>
-                <th>Profit/Loss</th>
-                <td v-for="(data, index) in monthProfitLoss">{{data | toCurrency}}</td>
-            </tr>
-        </table>
-    </div>
+  <div>
+    <table class="table">
+      <tr>
+        <th>Month</th>
+        <th>Jakata</th>
+        <th>PK</th>
+        <th>Base</th>
+        <th>All</th>
+      </tr>
+      <tr v-for="data in takingsAll">
+        <td>{{ data.month | showMonth }}</td>
+      </tr>
+    </table>
+  </div>
 </template>
 <script>
-    export default {
+import {mapState} from "vuex"
+import {format, parseISO} from "date-fns";
 
-    }
+export default {
+  filters: {
+    showMonth: value => format(parseISO(value), 'LLLL')
+  },
+
+  computed: {
+    ...mapState({
+      takingsJakata: state => state.totalsByDateRange.jakata,
+      takingsPK: state => state.totalsByDateRange.pk,
+      takingsBase: state => state.totalsByDateRange.base,
+      takingsAll: state => state.totalsByDateRange.all
+    })
+  }
+}
 </script>

@@ -123,6 +123,64 @@ func apiTakingsByDateRange(w http.ResponseWriter, r *http.Request) {
 	w.Write(json)
 }
 
+func apiTotalsByDateRange(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	type JakataTotals struct {
+		Month string  `json:"month"`
+		Total float32 `json:"total"`
+	}
+
+	type PKTotals struct {
+		Month string  `json:"month"`
+		Total float32 `json:"total"`
+	}
+
+	type BaseTotals struct {
+		Month string  `json:"month"`
+		Total float32 `json:"total"`
+	}
+
+	type TotalTotals struct {
+		Month string  `json:"month"`
+		Total float32 `json:"total"`
+	}
+
+	type Data struct {
+		JakataTotals []JakataTotals `json:"jakata"`
+		PKTotals     []PKTotals     `json:"pk"`
+		BaseTotals   []BaseTotals   `json:"base"`
+		TotalTotals  []TotalTotals  `json:"all"`
+	}
+
+	vars := mux.Vars(r)
+	sd := vars["start"]
+	ed := vars["end"]
+
+	var jakata []JakataTotals
+	var pk []PKTotals
+	var base []BaseTotals
+	var totals []TotalTotals
+
+	db.Raw("SELECT salon, DATE_TRUNC('month', date) AS  month, sum(services) + sum(products) AS total FROM takings WHERE salon = 'jakata' AND date BETWEEN ? AND ? GROUP BY salon, month ORDER BY month", sd, ed).Scan(&jakata)
+	db.Raw("SELECT salon, DATE_TRUNC('month', date) AS  month, sum(services) + sum(products) AS total FROM takings WHERE salon = 'pk' AND date BETWEEN ? AND ? GROUP BY salon, month ORDER BY month", sd, ed).Scan(&pk)
+	db.Raw("SELECT salon, DATE_TRUNC('month', date) AS  month, sum(services) + sum(products) AS total FROM takings WHERE salon = 'base' AND date BETWEEN ? AND ? GROUP BY salon, month ORDER BY month", sd, ed).Scan(&base)
+	db.Raw("SELECT DATE_TRUNC('month', date) AS  month, sum(services) + sum(products) AS total FROM takings WHERE date BETWEEN ? AND ? GROUP BY month ORDER BY month", sd, ed).Scan(&totals)
+
+	f := Data{
+		JakataTotals: jakata,
+		PKTotals:     pk,
+		BaseTotals:   base,
+		TotalTotals:  totals,
+	}
+
+	json, err := json.Marshal(f)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
+}
+
 func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -195,33 +253,55 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 func apiCostsByDateRange(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	type result struct {
-		Salon string  `json:"salon"`
+	type JakataTotals struct {
 		Month string  `json:"month"`
 		Total float32 `json:"total"`
+	}
+
+	type PKTotals struct {
+		Month string  `json:"month"`
+		Total float32 `json:"total"`
+	}
+
+	type BaseTotals struct {
+		Month string  `json:"month"`
+		Total float32 `json:"total"`
+	}
+
+	type TotalTotals struct {
+		Month string  `json:"month"`
+		Total float32 `json:"total"`
+	}
+
+	type Data struct {
+		JakataTotals []JakataTotals `json:"jakata"`
+		PKTotals     []PKTotals     `json:"pk"`
+		BaseTotals   []BaseTotals   `json:"base"`
+		TotalTotals  []TotalTotals  `json:"all"`
 	}
 
 	vars := mux.Vars(r)
 	sd := vars["start"]
 	ed := vars["end"]
 
-	var res []result
+	var jakata []JakataTotals
+	var pk []PKTotals
+	var base []BaseTotals
+	var totals []TotalTotals
 
-	db.Raw("SELECT account as salon, DATE_TRUNC('month', date) AS  month, sum(debit) AS total FROM costs WHERE date BETWEEN ? AND ? GROUP BY account, month", sd, ed).Scan(&res)
+	db.Raw("SELECT account as salon, DATE_TRUNC('month', date) AS  month, sum(debit) AS total FROM costs WHERE account = '06517160' AND date BETWEEN ? AND ? GROUP BY account, month ORDER BY month", sd, ed).Scan(&jakata)
+	db.Raw("SELECT account as salon, DATE_TRUNC('month', date) AS  month, sum(debit) AS total FROM costs WHERE account = '02017546' AND date BETWEEN ? AND ? GROUP BY account, month ORDER BY month", sd, ed).Scan(&pk)
+	db.Raw("SELECT account as salon, DATE_TRUNC('month', date) AS  month, sum(debit) AS total FROM costs WHERE account = '17623364' AND date BETWEEN ? AND ? GROUP BY account, month ORDER BY month", sd, ed).Scan(&base)
+	db.Raw("SELECT DATE_TRUNC('month', date) AS  month, sum(debit) AS total FROM costs WHERE date BETWEEN ? AND ? GROUP BY month ORDER BY month", sd, ed).Scan(&totals)
 
-	for k, v := range res {
-		if (res[k]).Salon == "02017546" {
-			v.Salon = "PK"
-		}
-		if (res[k]).Salon == "17623364" {
-			v.Salon = "Base"
-		}
-		if (res[k]).Salon == "06517160" {
-			v.Salon = "Jakata"
-		}
+	f := Data{
+		JakataTotals: jakata,
+		PKTotals:     pk,
+		BaseTotals:   base,
+		TotalTotals:  totals,
 	}
 
-	json, err := json.Marshal(res)
+	json, err := json.Marshal(f)
 	if err != nil {
 		log.Println(err)
 	}

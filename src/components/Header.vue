@@ -19,7 +19,9 @@
         Costs by Month
       </b-navbar-item>
       <b-navbar-dropdown label="Menu">
-
+        <b-navbar-item :to="{ name: 'profit-loss-monthly' }" tag="router-link">
+          Profit Loss Monthly
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
     <template slot="end">

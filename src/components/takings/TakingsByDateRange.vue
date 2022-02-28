@@ -1,6 +1,6 @@
 <template>
   <div class="section">
-    <h2 class="title is-4">Total Takings by Date Range</h2>
+    <h2 class="title is-3">Total Takings by Date Range</h2>
     <p class="is-size-5">Salon: {{ salon | toUpperCase }}</p>
     <p>Number of months: {{ months }}</p>
     <br>

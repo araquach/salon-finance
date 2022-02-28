@@ -2081,9 +2081,72 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.$store.dispatch('loadTakingsByStylist');
     this.$store.dispatch('loadTakingsByDateRange');
+    this.$store.dispatch('loadTotalsByDateRange');
     this.$store.dispatch('loadCostsByCat');
     this.$store.dispatch('loadCostsByDateRange');
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/parseISO/index.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  filters: {
+    showMonth: function showMonth(value) {
+      return (0,date_fns__WEBPACK_IMPORTED_MODULE_0__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(value), 'LLLL');
+    }
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
+    takingsJakata: function takingsJakata(state) {
+      return state.totalsByDateRange.jakata;
+    },
+    takingsPK: function takingsPK(state) {
+      return state.totalsByDateRange.pk;
+    },
+    takingsBase: function takingsBase(state) {
+      return state.totalsByDateRange.base;
+    },
+    takingsAll: function takingsAll(state) {
+      return state.totalsByDateRange.all;
+    }
+  }))
 });
 
 /***/ }),
@@ -2421,13 +2484,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _views_MainDashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./views/MainDashboard */ "./src/views/MainDashboard.vue");
 /* harmony import */ var _components_costs_CostsByCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/costs/CostsByCategory */ "./src/components/costs/CostsByCategory.vue");
 /* harmony import */ var _components_costs_CostsByMonth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/costs/CostsByMonth */ "./src/components/costs/CostsByMonth.vue");
 /* harmony import */ var _components_takings_TakingsByDateRange__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/takings/TakingsByDateRange */ "./src/components/takings/TakingsByDateRange.vue");
 /* harmony import */ var _components_takings_TakingsByStylist__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/takings/TakingsByStylist */ "./src/components/takings/TakingsByStylist.vue");
+/* harmony import */ var _components_ProfitLoss_ProfitLossMonthly__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/ProfitLoss/ProfitLossMonthly */ "./src/components/ProfitLoss/ProfitLossMonthly.vue");
 
 
 
@@ -2435,8 +2499,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]({
+
+vue__WEBPACK_IMPORTED_MODULE_6__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_7__["default"]);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_7__["default"]({
   mode: 'history',
   routes: [{
     path: '',
@@ -2458,6 +2523,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]({
     path: '/takings-by-stylist',
     name: 'takings-by-stylist',
     component: _components_takings_TakingsByStylist__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }, {
+    path: '/profit-loss-monthly',
+    name: 'profit-loss-monthly',
+    component: _components_ProfitLoss_ProfitLossMonthly__WEBPACK_IMPORTED_MODULE_5__["default"]
   }]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -2484,6 +2553,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     takingsByStylist: {},
     takingsByDateRange: {},
+    totalsByDateRange: {},
     costsByCat: {},
     costsByDateRange: {}
   },
@@ -2494,6 +2564,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     LOAD_TAKINGS_BY_DATE_RANGE: function LOAD_TAKINGS_BY_DATE_RANGE(state, payload) {
       state.takingsByDateRange = payload;
+    },
+    LOAD_TOTALS_BY_DATE_RANGE: function LOAD_TOTALS_BY_DATE_RANGE(state, payload) {
+      state.totalsByDateRange = payload;
     },
     LOAD_COSTS_BY_CAT: function LOAD_COSTS_BY_CAT(state, payload) {
       state.costsByCat = payload;
@@ -2519,17 +2592,25 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         commit('LOAD_TAKINGS_BY_DATE_RANGE', data);
       });
     },
-    loadCostsByCat: function loadCostsByCat(_ref3) {
+    loadTotalsByDateRange: function loadTotalsByDateRange(_ref3) {
       var commit = _ref3.commit;
+      axios.get('/api/totals-by-date-range/' + '2021-07-01/2021-12-31').then(function (r) {
+        return r.data;
+      }).then(function (data) {
+        commit('LOAD_TOTALS_BY_DATE_RANGE', data);
+      });
+    },
+    loadCostsByCat: function loadCostsByCat(_ref4) {
+      var commit = _ref4.commit;
       axios.get('/api/costs-by-cat/' + 'all/2021-07-01/2021-12-31').then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_CAT', data);
       });
     },
-    loadCostsByDateRange: function loadCostsByDateRange(_ref4) {
-      var commit = _ref4.commit;
-      axios.get('/api/costs-by-date-range/' + 'all/2021-07-01/2021-12-31').then(function (r) {
+    loadCostsByDateRange: function loadCostsByDateRange(_ref5) {
+      var commit = _ref5.commit;
+      axios.get('/api/costs-by-date-range/' + '2021-07-01/2021-12-31').then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_DATE_RANGE', data);
@@ -21598,6 +21679,45 @@ component.options.__file = "src/components/Header.vue"
 
 /***/ }),
 
+/***/ "./src/components/ProfitLoss/ProfitLossMonthly.vue":
+/*!*********************************************************!*\
+  !*** ./src/components/ProfitLoss/ProfitLossMonthly.vue ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ProfitLossMonthly_vue_vue_type_template_id_54e8c70e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProfitLossMonthly.vue?vue&type=template&id=54e8c70e& */ "./src/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=template&id=54e8c70e&");
+/* harmony import */ var _ProfitLossMonthly_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProfitLossMonthly.vue?vue&type=script&lang=js& */ "./src/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ProfitLossMonthly_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ProfitLossMonthly_vue_vue_type_template_id_54e8c70e___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ProfitLossMonthly_vue_vue_type_template_id_54e8c70e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/components/ProfitLoss/ProfitLossMonthly.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./src/components/costs/CostsByCategory.vue":
 /*!**************************************************!*\
   !*** ./src/components/costs/CostsByCategory.vue ***!
@@ -21809,6 +21929,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./src/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossMonthly_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProfitLossMonthly.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossMonthly_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./src/components/costs/CostsByCategory.vue?vue&type=script&lang=js&":
 /*!***************************************************************************!*\
   !*** ./src/components/costs/CostsByCategory.vue?vue&type=script&lang=js& ***!
@@ -21919,6 +22055,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Header_vue_vue_type_template_id_61dd7a3d___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Header_vue_vue_type_template_id_61dd7a3d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Header.vue?vue&type=template&id=61dd7a3d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/Header.vue?vue&type=template&id=61dd7a3d&");
+
+
+/***/ }),
+
+/***/ "./src/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=template&id=54e8c70e&":
+/*!****************************************************************************************!*\
+  !*** ./src/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=template&id=54e8c70e& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossMonthly_vue_vue_type_template_id_54e8c70e___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossMonthly_vue_vue_type_template_id_54e8c70e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossMonthly_vue_vue_type_template_id_54e8c70e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProfitLossMonthly.vue?vue&type=template&id=54e8c70e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=template&id=54e8c70e&");
 
 
 /***/ }),
@@ -22108,7 +22261,23 @@ var render = function () {
             [_vm._v("\n      Costs by Month\n    ")]
           ),
           _vm._v(" "),
-          _c("b-navbar-dropdown", { attrs: { label: "Menu" } }),
+          _c(
+            "b-navbar-dropdown",
+            { attrs: { label: "Menu" } },
+            [
+              _c(
+                "b-navbar-item",
+                {
+                  attrs: {
+                    to: { name: "profit-loss-monthly" },
+                    tag: "router-link",
+                  },
+                },
+                [_vm._v("\n        Profit Loss Monthly\n      ")]
+              ),
+            ],
+            1
+          ),
         ],
         1
       ),
@@ -22119,6 +22288,63 @@ var render = function () {
   )
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=template&id=54e8c70e&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/ProfitLoss/ProfitLossMonthly.vue?vue&type=template&id=54e8c70e& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "table",
+      { staticClass: "table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.takingsAll, function (data) {
+          return _c("tr", [
+            _c("td", [_vm._v(_vm._s(_vm._f("showMonth")(data.month)))]),
+          ])
+        }),
+      ],
+      2
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Month")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Jakata")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("PK")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Base")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("All")]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -22142,7 +22368,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "section" }, [
-    _c("h1", { staticClass: "title is-5" }, [
+    _c("h1", { staticClass: "title is-3" }, [
       _vm._v("Categorised Costs By Date Range"),
     ]),
     _vm._v(" "),
@@ -22269,7 +22495,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "section" }, [
-    _c("h2", { staticClass: "title is-4" }, [
+    _c("h2", { staticClass: "title is-3" }, [
       _vm._v("Total Takings by Date Range"),
     ]),
     _vm._v(" "),
@@ -22380,7 +22606,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "section" }, [
-    _c("h2", { staticClass: "title is-4" }, [
+    _c("h2", { staticClass: "title is-3" }, [
       _vm._v("Stylist Takings by Date Range"),
     ]),
     _vm._v(" "),

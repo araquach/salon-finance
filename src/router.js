@@ -5,6 +5,7 @@ import CostsByCategory from "./components/costs/CostsByCategory"
 import CostsByMonth from "./components/costs/CostsByMonth"
 import TakingsByDateRange from "./components/takings/TakingsByDateRange"
 import TakingsByStylist from "./components/takings/TakingsByStylist"
+import ProfitLossMonthly from "./components/ProfitLoss/ProfitLossMonthly"
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ const router = new Router({
             path: '/takings-by-stylist',
             name: 'takings-by-stylist',
             component: TakingsByStylist
+        },
+        {
+            path: '/profit-loss-monthly',
+            name: 'profit-loss-monthly',
+            component: ProfitLossMonthly
         },
     ]
 })

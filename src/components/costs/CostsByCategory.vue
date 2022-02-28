@@ -1,6 +1,6 @@
 <template>
   <div class="section">
-    <h1 class="title is-5">Categorised Costs By Date Range</h1>
+    <h1 class="title is-3">Categorised Costs By Date Range</h1>
     <p class="is-size-4">Salon: {{ salon | toUpperCase }}</p>
     <p>Number of months: {{ months }}</p>
     <br>

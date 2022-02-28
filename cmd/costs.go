@@ -37,7 +37,7 @@ func costData() []Cost {
 	var err error
 	var costs []Cost
 
-	f, err := readDir("costs")
+	f, err := readDir("bank")
 	if err != nil {
 		panic(err)
 	}
