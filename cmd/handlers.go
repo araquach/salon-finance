@@ -52,7 +52,7 @@ func apiTakingsByStylist(w http.ResponseWriter, r *http.Request) {
 	w.Write(json)
 }
 
-func apiTakingsByMonth(w http.ResponseWriter, r *http.Request) {
+func apiTakingsByDateRange(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	type result struct {
@@ -150,7 +150,7 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	w.Write(json)
 }
 
-func apiCostsByMonth(w http.ResponseWriter, r *http.Request) {
+func apiCostsByDateRange(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	type result struct {

@@ -32,12 +32,12 @@ func readDir(dir string) ([]string, error) {
 	return files, err
 }
 
-// Import bank data into a struct
+// Import costs data into a struct
 func costData() []Cost {
 	var err error
 	var costs []Cost
 
-	f, err := readDir("bank")
+	f, err := readDir("costs")
 	if err != nil {
 		panic(err)
 	}

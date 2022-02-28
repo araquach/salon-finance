@@ -49,9 +49,9 @@ func main() {
 	r.PathPrefix("/dist/").Handler(http.StripPrefix("/dist/", http.FileServer(http.Dir(dir))))
 	// API routes
 	r.HandleFunc("/api/takings-by-stylist/{salon}/{start}/{end}", apiTakingsByStylist).Methods("GET")
-	r.HandleFunc("/api/takings-by-month/{salon}/{start}/{end}", apiTakingsByMonth).Methods("GET")
+	r.HandleFunc("/api/takings-by-date-range/{salon}/{start}/{end}", apiTakingsByDateRange).Methods("GET")
 	r.HandleFunc("/api/costs-by-cat/{salon}/{start}/{end}", apiCostsByCat).Methods("GET")
-	r.HandleFunc("/api/costs-by-month/{salon}/{start}/{end}", apiCostsByMonth).Methods("GET")
+	r.HandleFunc("/api/costs-by-date-range/{salon}/{start}/{end}", apiCostsByDateRange).Methods("GET")
 	// Main Routes
 	r.HandleFunc("/{category}/{name}", index)
 	r.HandleFunc("/{name}", index)

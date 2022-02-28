@@ -1,6 +1,6 @@
 <template>
   <div class="section">
-    <h2 class="title is-4">Total Turnover by Date Range</h2>
+    <h2 class="title is-4">Stylist Takings by Date Range</h2>
     <table class="table is-size-5">
       <tr>
         <th>Month</th>
@@ -28,7 +28,7 @@ export default {
 
   computed: {
     ...mapState({
-      totalsByMonth: state => state.takingsByMonth
+      totalsByStylist: state => state.takingsByStylist
     })
   }
 }

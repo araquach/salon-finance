@@ -431,7 +431,7 @@ func categories() (c map[string]map[string][]string) {
 				"JOHN LAMB",
 				"D A CARTER",
 			},
-			"bank": {
+			"costs": {
 				"LOAN",
 				"BARCLAYS BANK PLC",
 			},
@@ -442,8 +442,8 @@ func categories() (c map[string]map[string][]string) {
 				"GE CAPITAL",
 			},
 		},
-		"bank": {
-			"bank": {
+		"costs": {
+			"costs": {
 				"NON-GBP TRANS FEE",
 				"O/DRAFT INTEREST",
 				"SERVICE CHARGES",

@@ -58,8 +58,8 @@ export const store = new Vuex.Store({
                 .then(r => r.data)
                 .then(data => {
                     commit('LOAD_COSTS_BY_CAT', data)
-                    console.log(data)
                 })
+
         },
 
         loadCostsByMonth({ commit }) {
