@@ -1,7 +1,7 @@
 <template>
   <div class="section">
     <h2 class="title is-3">Total Takings by Date Range</h2>
-    <p class="is-size-5">Salon: {{ salon | toUpperCase }}</p>
+    <p class="is-size-4">Salon: {{ salon | toUpperCase }}</p>
     <p>Number of months: {{ months }}</p>
     <br>
     <table class="table is-size-5">
@@ -52,6 +52,10 @@ export default {
       months: state => state.takingsByDateRange.months,
       totals: state => state.takingsByDateRange.grand_totals
     })
+  },
+
+  created() {
+    this.$store.dispatch('loadTakingsByDateRange')
   }
 }
 </script>

@@ -206,6 +206,17 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	sd := vars["start"]
 	ed := vars["end"]
 
+	var acc string
+
+	switch s {
+	case "jakata":
+		acc = "06517160"
+	case "pk":
+		acc = "02017546"
+	case "base":
+		acc = "17623364"
+	}
+
 	startDate, err := time.Parse("2006-01-02", sd)
 	if err != nil {
 		panic(err)
@@ -222,7 +233,7 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	if s == "all" {
 		db.Model(&Cost{}).Order("total desc").Select("category, sum(debit) as total").Where("date BETWEEN ? AND ?", sd, ed).Group("category").Find(&res)
 	} else {
-		db.Model(&Cost{}).Order("total desc").Select("account, category, sum(debit) as total").Where("date BETWEEN ? AND ?", sd, ed).Where("account", s).Group("account, category").Find(&res)
+		db.Model(&Cost{}).Order("total desc").Select("account, category, sum(debit) as total").Where("date BETWEEN ? AND ?", sd, ed).Where("account", acc).Group("account, category").Find(&res)
 	}
 
 	// Calculate total costs
@@ -312,6 +323,48 @@ func apiCostsByDateRange(w http.ResponseWriter, r *http.Request) {
 	}
 
 	json, err := json.Marshal(f)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
+}
+
+func apiCostsAndTakings(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	type CostsByMonth struct {
+	}
+
+	type Costs struct {
+		Total float32 `json:"total"`
+	}
+
+	type Takings struct {
+		Total float32 `json:"total"`
+	}
+
+	type Result struct {
+		Costs   Costs   `json:"costs"`
+		Takings Takings `json:"takings"`
+	}
+
+	vars := mux.Vars(r)
+	sd := vars["start"]
+	ed := vars["end"]
+
+	var c Costs
+	var t Takings
+	var res Result
+
+	db.Model(&Cost{}).Select("sum(debit) as total").Where("date BETWEEN ? AND ?", sd, ed).Find(&c)
+	db.Model(&Taking{}).Select("sum(products) + sum(services) as total").Where("date BETWEEN ? AND ?", sd, ed).Find(&t)
+
+	res = Result{
+		Costs:   c,
+		Takings: t,
+	}
+
+	json, err := json.Marshal(res)
 	if err != nil {
 		log.Println(err)
 	}

@@ -30,6 +30,10 @@ export default {
     ...mapState({
       total: state => state.takingsByStylist
     })
+  },
+
+  created() {
+    this.$store.dispatch('loadTakingsByStylist')
   }
 }
 </script>

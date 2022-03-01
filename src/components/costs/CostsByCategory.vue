@@ -41,6 +41,10 @@ export default {
       byYear: state=> state.costsByCat.by_year,
       months: state => state.costsByCat.months
     })
+  },
+
+  created() {
+    this.$store.dispatch('loadCostsByCat')
   }
 }
 </script>

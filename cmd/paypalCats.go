@@ -15,9 +15,9 @@ func paypalCats() (c map[string]map[string][]string) {
 				"ICON CONSULTANCY",
 				"SWEET SQUARED",
 			},
-			"ghd": {},
+			"ghd":        {},
 			"extensions": {},
-			"gowns": {},
+			"gowns":      {},
 			"misc": {
 				"saloneasy.com",
 				"Salons Direct Ltd",
@@ -62,7 +62,7 @@ func paypalCats() (c map[string]map[string][]string) {
 			"transport": {
 				"Virgin Trains",
 			},
-			"HR": {},
+			"HR":        {},
 			"education": {},
 			"accommodation": {
 				"Travelodge Hotels Limited",
@@ -76,8 +76,9 @@ func paypalCats() (c map[string]map[string][]string) {
 				"Spotify AB",
 			},
 			"refreshments": {},
-			"magazines": {},
+			"magazines":    {},
 			"misc": {
+				"Amazon Basics",
 				"The Cartridge People Ltd",
 				"Costco UK",
 				"Ideal Envelopes Limited",
@@ -86,6 +87,7 @@ func paypalCats() (c map[string]map[string][]string) {
 		},
 		"drawings": {
 			"adam": {
+				"Fairdeal Music Limited",
 				"adidas (UK) Limited",
 				"ROUTE ONE RETAIL LIMITED",
 				"www.twoseasons.co.uk",
@@ -117,6 +119,7 @@ func paypalCats() (c map[string]map[string][]string) {
 		},
 		"equipment": {
 			"equipment": {
+				"Toolstation Limited",
 				"Park Cameras Ltd",
 				"Analogue Wonderland",
 				"Amara Living Limited",

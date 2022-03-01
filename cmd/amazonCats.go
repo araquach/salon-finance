@@ -41,7 +41,7 @@ func amazonCats() (c map[string]map[string][]string) {
 		},
 		"staff": {
 			"education": {},
-			"social": {},
+			"social":    {},
 		},
 		"sundries": {
 			"refreshments": {
@@ -61,6 +61,7 @@ func amazonCats() (c map[string]map[string][]string) {
 				"SousVideTools",
 			},
 			"misc": {
+				"Amazon Basics",
 				"K-Mart Limited",
 				"Youngever LLC",
 				"Utopia Towels",
@@ -104,6 +105,9 @@ func amazonCats() (c map[string]map[string][]string) {
 		},
 		"drawings": {
 			"adam": {
+				"Schneider Electric",
+				"BG Electrical",
+				"Vinyl Clear",
 				"SUPJOYES",
 				"Yogibare",
 				"Trung Nguyen",
@@ -275,6 +279,10 @@ func amazonCats() (c map[string]map[string][]string) {
 		},
 		"equipment": {
 			"equipment": {
+				"Cleefun",
+				"HAKUSHA",
+				"humpun",
+				"Wyze",
 				"NEW'C",
 				"EbestINC",
 				"SanDisk",
@@ -407,6 +415,8 @@ func amazonCats() (c map[string]map[string][]string) {
 		},
 		"other": {
 			"other": {
+				"QLOUNI",
+				"Aioneus",
 				"Sabichi",
 				"AUPROTEC",
 				"Beslagsboden",

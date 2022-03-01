@@ -2066,6 +2066,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Header */ "./src/components/Header.vue");
+/* harmony import */ var _components_other_Selector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/other/Selector */ "./src/components/other/Selector.vue");
 //
 //
 //
@@ -2074,9 +2075,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Header: _components_Header__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Header: _components_Header__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Selector: _components_other_Selector__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   created: function created() {
     this.$store.dispatch('loadTakingsByStylist');
@@ -2218,7 +2221,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     months: function months(state) {
       return state.costsByCat.months;
     }
-  }))
+  })),
+  created: function created() {
+    this.$store.dispatch('loadCostsByCat');
+  }
 });
 
 /***/ }),
@@ -2255,7 +2261,78 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     costs: function costs(state) {
       return state.costsByDateRange;
     }
-  }))
+  })),
+  created: function created() {
+    this.$store.dispatch('loadCostsByDateRange');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/other/Selector.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/other/Selector.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      salon: '',
+      dateRange: {
+        startDate: new Date(),
+        endDate: new Date()
+      }
+    };
+  },
+  methods: _objectSpread({
+    updateInfo: function updateInfo() {
+      this.UPDATE_SALON(this.salon);
+      this.UPDATE_DATE_RANGE(this.dateRange);
+    }
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)(['UPDATE_SALON', 'UPDATE_DATE_RANGE']))
 });
 
 /***/ }),
@@ -2339,7 +2416,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     totals: function totals(state) {
       return state.takingsByDateRange.grand_totals;
     }
-  }))
+  })),
+  created: function created() {
+    this.$store.dispatch('loadTakingsByDateRange');
+  }
 });
 
 /***/ }),
@@ -2395,7 +2475,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     total: function total(state) {
       return state.takingsByStylist;
     }
-  }))
+  })),
+  created: function created() {
+    this.$store.dispatch('loadTakingsByStylist');
+  }
 });
 
 /***/ }),
@@ -2551,6 +2634,13 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
+    salon: "all",
+    dateRange: {
+      startDate: '2021-07-01',
+      endDate: '2022-02-28'
+    },
+    totalTurnover: null,
+    totalCosts: null,
     takingsByStylist: {},
     takingsByDateRange: {},
     totalsByDateRange: {},
@@ -2573,12 +2663,18 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     LOAD_COSTS_BY_DATE_RANGE: function LOAD_COSTS_BY_DATE_RANGE(state, payload) {
       state.costsByDateRange = payload;
+    },
+    UPDATE_SALON: function UPDATE_SALON(state, payload) {
+      state.salon = payload;
+    },
+    UPDATE_DATE_RANGE: function UPDATE_DATE_RANGE(state, payload) {
+      state.dateRange = payload;
     }
   },
   actions: {
     loadTakingsByStylist: function loadTakingsByStylist(_ref) {
       var commit = _ref.commit;
-      axios.get('/api/takings-by-stylist/' + 'all/2021-01-01/2021-12-31').then(function (r) {
+      axios.get("/api/takings-by-stylist/".concat(store.state.salon, "/").concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TAKINGS_BY_STYLIST', data);
@@ -2586,7 +2682,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     loadTakingsByDateRange: function loadTakingsByDateRange(_ref2) {
       var commit = _ref2.commit;
-      axios.get('/api/takings-by-date-range/' + 'all/2021-01-01/2021-12-31').then(function (r) {
+      axios.get("/api/takings-by-date-range/".concat(store.state.salon, "/").concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TAKINGS_BY_DATE_RANGE', data);
@@ -2594,7 +2690,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     loadTotalsByDateRange: function loadTotalsByDateRange(_ref3) {
       var commit = _ref3.commit;
-      axios.get('/api/totals-by-date-range/' + '2021-01-01/2021-12-31').then(function (r) {
+      axios.get("/api/totals-by-date-range/".concat(store.state.dateRasnge.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TOTALS_BY_DATE_RANGE', data);
@@ -2602,7 +2698,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     loadCostsByCat: function loadCostsByCat(_ref4) {
       var commit = _ref4.commit;
-      axios.get('/api/costs-by-cat/' + 'all/2021-01-01/2021-12-31').then(function (r) {
+      axios.get("/api/costs-by-cat/".concat(store.state.salon, "/").concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_CAT', data);
@@ -2610,7 +2706,15 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     loadCostsByDateRange: function loadCostsByDateRange(_ref5) {
       var commit = _ref5.commit;
-      axios.get('/api/costs-by-date-range/' + '2021-01-01/2021-12-31').then(function (r) {
+      axios.get("/api/costs-by-date-range/".concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
+        return r.data;
+      }).then(function (data) {
+        commit('LOAD_COSTS_BY_DATE_RANGE', data);
+      });
+    },
+    loadCostAndTakingsTotals: function loadCostAndTakingsTotals(_ref6) {
+      var commit = _ref6.commit;
+      axios.get("/api/costs-andtakings-totals/".concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_DATE_RANGE', data);
@@ -21796,6 +21900,45 @@ component.options.__file = "src/components/costs/CostsByMonth.vue"
 
 /***/ }),
 
+/***/ "./src/components/other/Selector.vue":
+/*!*******************************************!*\
+  !*** ./src/components/other/Selector.vue ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Selector_vue_vue_type_template_id_23b281a4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Selector.vue?vue&type=template&id=23b281a4& */ "./src/components/other/Selector.vue?vue&type=template&id=23b281a4&");
+/* harmony import */ var _Selector_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Selector.vue?vue&type=script&lang=js& */ "./src/components/other/Selector.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Selector_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Selector_vue_vue_type_template_id_23b281a4___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Selector_vue_vue_type_template_id_23b281a4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/components/other/Selector.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./src/components/takings/TakingsByDateRange.vue":
 /*!*******************************************************!*\
   !*** ./src/components/takings/TakingsByDateRange.vue ***!
@@ -21977,6 +22120,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/components/other/Selector.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./src/components/other/Selector.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Selector_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Selector.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/other/Selector.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Selector_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./src/components/takings/TakingsByDateRange.vue?vue&type=script&lang=js&":
 /*!********************************************************************************!*\
   !*** ./src/components/takings/TakingsByDateRange.vue?vue&type=script&lang=js& ***!
@@ -22106,6 +22265,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostsByMonth_vue_vue_type_template_id_16cb36c8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CostsByMonth_vue_vue_type_template_id_16cb36c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CostsByMonth.vue?vue&type=template&id=16cb36c8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/costs/CostsByMonth.vue?vue&type=template&id=16cb36c8&");
+
+
+/***/ }),
+
+/***/ "./src/components/other/Selector.vue?vue&type=template&id=23b281a4&":
+/*!**************************************************************************!*\
+  !*** ./src/components/other/Selector.vue?vue&type=template&id=23b281a4& ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Selector_vue_vue_type_template_id_23b281a4___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Selector_vue_vue_type_template_id_23b281a4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Selector_vue_vue_type_template_id_23b281a4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Selector.vue?vue&type=template&id=23b281a4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/other/Selector.vue?vue&type=template&id=23b281a4&");
 
 
 /***/ }),
@@ -22478,6 +22654,112 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/other/Selector.vue?vue&type=template&id=23b281a4&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/other/Selector.vue?vue&type=template&id=23b281a4& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("p", [_vm._v("Salon")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.salon,
+            expression: "salon",
+          },
+        ],
+        attrs: { type: "text", label: "salon" },
+        domProps: { value: _vm.salon },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.salon = $event.target.value
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c(
+        "b-field",
+        { attrs: { label: "Select a date" } },
+        [
+          _c("b-datepicker", {
+            attrs: {
+              placeholder: "Click to select...",
+              icon: "calendar-today",
+              "icon-right": _vm.selected ? "close-circle" : "",
+              "icon-right-clickable": "",
+              "trap-focus": "",
+            },
+            on: { "icon-right-click": _vm.clearDate },
+            model: {
+              value: _vm.dateRange.startDate,
+              callback: function ($$v) {
+                _vm.$set(_vm.dateRange, "startDate", $$v)
+              },
+              expression: "dateRange.startDate",
+            },
+          }),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-field",
+        { attrs: { label: "Select a date" } },
+        [
+          _c("b-datepicker", {
+            attrs: {
+              placeholder: "Click to select...",
+              icon: "calendar-today",
+              "icon-right": _vm.selected ? "close-circle" : "",
+              "icon-right-clickable": "",
+              "trap-focus": "",
+            },
+            on: { "icon-right-click": _vm.clearDate },
+            model: {
+              value: _vm.dateRange.endDate,
+              callback: function ($$v) {
+                _vm.$set(_vm.dateRange, "endDate", $$v)
+              },
+              expression: "dateRange.endDate",
+            },
+          }),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("button", { staticClass: "button", on: { click: _vm.updateInfo } }, [
+        _vm._v("Update"),
+      ]),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/takings/TakingsByDateRange.vue?vue&type=template&id=b1461e0e&":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/takings/TakingsByDateRange.vue?vue&type=template&id=b1461e0e& ***!
@@ -22499,7 +22781,7 @@ var render = function () {
       _vm._v("Total Takings by Date Range"),
     ]),
     _vm._v(" "),
-    _c("p", { staticClass: "is-size-5" }, [
+    _c("p", { staticClass: "is-size-4" }, [
       _vm._v("Salon: " + _vm._s(_vm._f("toUpperCase")(_vm.salon))),
     ]),
     _vm._v(" "),

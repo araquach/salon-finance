@@ -14,6 +14,10 @@
       ...mapState({
         costs: state => state.costsByDateRange
       }),
+    },
+
+    created() {
+      this.$store.dispatch('loadCostsByDateRange')
     }
   }
 </script>

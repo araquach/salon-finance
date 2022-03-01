@@ -47,9 +47,6 @@ func categories() (c map[string]map[string][]string) {
 				"MICHELLE RAILTON",
 				"LEON PRITCHARD",
 			},
-			"other": {
-				"ROSEMARIE WINTERBU",
-			},
 			"paye": {
 				"HMRC CUSTOMS AND E",
 				"FREDRICKSON",
@@ -126,6 +123,7 @@ func categories() (c map[string]map[string][]string) {
 				"WARRINGTON BC",
 			},
 			"repairs": {
+				"CITY ALUMINIUM SHO",
 				"MR ROBERT A ANTONO",
 				"A6 ROLLER SHUTTERS",
 				"SECURITY CENTRES",
@@ -278,15 +276,16 @@ func categories() (c map[string]map[string][]string) {
 				"THREE BEST RATED",
 				"MY ARK",
 			},
-			"printing": {
-
-			},
+			"printing": {},
 			"signage": {
 				"WWW.DISCOUNTDISPLA",
 				"WINDOWFILMS",
 				"THE PRINTING PEOPL",
 				"SG MANUFACTURING",
 				"DISCOUNT DISPLAYS",
+			},
+			"wages": {
+				"ROSEMARIE WINTERBU",
 			},
 			"other": {
 				"POST OFFICE SELF",
@@ -311,6 +310,7 @@ func categories() (c map[string]map[string][]string) {
 		},
 		"staff": {
 			"transport": {
+				"EURO CAR PARKS",
 				"TRAINLINE",
 				"Trainline.com",
 				"VIRGIN TRAINS",
@@ -332,6 +332,7 @@ func categories() (c map[string]map[string][]string) {
 				"NOTANOTHERACADEMY.",
 			},
 			"accommodation": {
+				"Hotel at Booking.c",
 				"Village Hotel Warr",
 				"THE CUMBERLAND",
 				"SUITES HOTEL KNOWS",
@@ -344,6 +345,9 @@ func categories() (c map[string]map[string][]string) {
 				"PREMIER INN4451265",
 			},
 			"social": {
+				"SQ *ESCAPE HUNT",
+				"PREZZO",
+				"THE GRILL ON THE S",
 				"PAPA JONES PIZZA",
 				"MR LAU'S",
 				"LAS RAMBLAS",
@@ -564,6 +568,7 @@ func categories() (c map[string]map[string][]string) {
 				"RACHEL V PARRY",
 				"LAUREN MINCHION",
 				"KATE JOHNSON",
+				"MRS A M JAMES ",
 			},
 			"charity": {
 				"WWW.HEARINGDIRECT",
