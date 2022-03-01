@@ -231,8 +231,18 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for k, v := range res {
-		(res)[k].Average = v.Total / float32(mnths)
-		(res)[k].Percent = (v.Total / t) * 100
+		//remove Izzys Wage and loans from drawings
+		if v.Category == "drawings" {
+			(res)[k].Total = (res)[k].Total - ((2000 + 450.23 + 300) * float32(mnths))
+		}
+		if v.Category == "loans" {
+			(res)[k].Total = (res)[k].Total + ((450 + 300) * float32(mnths))
+		}
+		if v.Category == "wages" {
+			(res)[k].Total = (res)[k].Total + (2000 * float32(mnths))
+		}
+		(res)[k].Average = (res)[k].Total / float32(mnths)
+		(res)[k].Percent = ((res)[k].Total / t) * 100
 	}
 
 	f := Data{

@@ -22,21 +22,4 @@ type Taking struct {
 	Products float64   `json:"products"`
 }
 
-type Total struct {
-	S float64 `json:"services"`
-	P float64 `json:"products"`
-	T float64 `json:"total"`
-	A float64 `json:"average"`
-}
 
-type CostByCat struct {
-	C  string  `json:"category"`
-	A  float64 `json:"amount"`
-	P  float64 `json:"percent"`
-	Av float64 `json:"average"`
-}
-
-type CostData struct {
-	C []CostByCat `json:"individual"`
-	T float64     `json:"total"`
-}

@@ -2578,7 +2578,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   actions: {
     loadTakingsByStylist: function loadTakingsByStylist(_ref) {
       var commit = _ref.commit;
-      axios.get('/api/takings-by-stylist/' + 'all/2021-07-01/2021-12-31').then(function (r) {
+      axios.get('/api/takings-by-stylist/' + 'all/2021-01-01/2021-12-31').then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TAKINGS_BY_STYLIST', data);
@@ -2586,7 +2586,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     loadTakingsByDateRange: function loadTakingsByDateRange(_ref2) {
       var commit = _ref2.commit;
-      axios.get('/api/takings-by-date-range/' + 'all/2021-07-01/2021-12-31').then(function (r) {
+      axios.get('/api/takings-by-date-range/' + 'all/2021-01-01/2021-12-31').then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TAKINGS_BY_DATE_RANGE', data);
@@ -2594,7 +2594,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     loadTotalsByDateRange: function loadTotalsByDateRange(_ref3) {
       var commit = _ref3.commit;
-      axios.get('/api/totals-by-date-range/' + '2021-07-01/2021-12-31').then(function (r) {
+      axios.get('/api/totals-by-date-range/' + '2021-01-01/2021-12-31').then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TOTALS_BY_DATE_RANGE', data);
@@ -2602,7 +2602,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     loadCostsByCat: function loadCostsByCat(_ref4) {
       var commit = _ref4.commit;
-      axios.get('/api/costs-by-cat/' + 'all/2021-07-01/2021-12-31').then(function (r) {
+      axios.get('/api/costs-by-cat/' + 'all/2021-01-01/2021-12-31').then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_CAT', data);
@@ -2610,7 +2610,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     loadCostsByDateRange: function loadCostsByDateRange(_ref5) {
       var commit = _ref5.commit;
-      axios.get('/api/costs-by-date-range/' + '2021-07-01/2021-12-31').then(function (r) {
+      axios.get('/api/costs-by-date-range/' + '2021-01-01/2021-12-31').then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_DATE_RANGE', data);

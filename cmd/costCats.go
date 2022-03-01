@@ -34,7 +34,6 @@ func categories() (c map[string]map[string][]string) {
 				"REBECCA COTTON",
 				"SARAH CUDDY",
 				"SHAE HOUGHTON",
-				"MISS I LAMB",
 				"MISS N BAILEY",
 				"MAISIE THOMPSON",
 				"CALEB BARRIE",
@@ -142,6 +141,7 @@ func categories() (c map[string]map[string][]string) {
 				"DELTA GLAZING",
 			},
 			"salon refits": {
+				"MR J SHARP 200000000304140444",
 				"NJS MAINTENANCE",
 				"M SUTTON",
 				"MODERN LIGHTING",
@@ -464,6 +464,7 @@ func categories() (c map[string]map[string][]string) {
 		"drawings": {
 			"drawings": {
 				"ADAM CARTER",
+				"MISS I LAMB",
 				"NETFLIX.COM",
 				"APPLE.COM/BILL",
 				"ITUNES.COM/BILL",
