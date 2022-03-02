@@ -10,7 +10,7 @@ export const store = new Vuex.Store({
             startDate: '2021-07-01',
             endDate: '2022-02-28',
         },
-        totalTurnover: null,
+        totalTurnover: 895304.00,
         totalCosts: null,
         takingsByStylist: {},
         takingsByDateRange: {},
@@ -51,6 +51,14 @@ export const store = new Vuex.Store({
         UPDATE_DATE_RANGE(state, payload) {
             state.dateRange = payload
         },
+
+        SET_TOTAL_TURNOVER(state, payload) {
+            state.totalTurnover = payload
+        },
+
+        ADJUST_TOTAL_TURNOVER(state, payload) {
+            state.totalTurnover = state.totalTurnover - payload
+        }
     },
 
     actions: {

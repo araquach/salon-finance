@@ -28,8 +28,8 @@ func main() {
 	dsn := os.Getenv("DATABASE_URL")
 	dbInit(dsn)
 
-	//loadTakings()
-	//loadCosts()
+	loadTakings()
+	// 	loadCosts()
 
 	port := os.Getenv("PORT")
 	if port == "" {

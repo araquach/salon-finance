@@ -6,6 +6,11 @@ import CostsByMonth from "./components/costs/CostsByMonth"
 import TakingsByDateRange from "./components/takings/TakingsByDateRange"
 import TakingsByStylist from "./components/takings/TakingsByStylist"
 import ProfitLossMonthly from "./components/ProfitLoss/ProfitLossMonthly"
+// Meeting Stuff
+import LastYearsTakings from "./views/meeting/LastYearsTakings"
+import LastEightMonths from "./views/meeting/LastEightMonths"
+import CostBreakdown from "./views/meeting/CostBreakdown"
+import ProfitLosChart from "./views/meeting/ProfitLossChart"
 
 Vue.use(Router)
 
@@ -42,6 +47,27 @@ const router = new Router({
             name: 'profit-loss-monthly',
             component: ProfitLossMonthly
         },
+        // meeting stuff
+        {
+            path: '/last-years-takings',
+            name: 'last-years-takings',
+            component: LastYearsTakings
+        },
+        {
+            path: '/last-eight-months',
+            name: 'last-eight-months',
+            component: LastEightMonths
+        },
+        {
+            path: '/cost-breakdown',
+            name: 'cost-breakdown',
+            component: CostBreakdown
+        },
+        {
+            path: '/profit-loss-chart',
+            name: 'profit-loss-chart',
+            component: ProfitLosChart
+        }
     ]
 })
 

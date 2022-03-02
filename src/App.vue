@@ -13,12 +13,12 @@ import Selector from "./components/other/Selector"
 export default {
   components: {Header, Selector},
 
-  created() {
-    this.$store.dispatch('loadTakingsByStylist')
-    this.$store.dispatch('loadTakingsByDateRange')
-    this.$store.dispatch('loadTotalsByDateRange')
-    this.$store.dispatch('loadCostsByCat')
-    this.$store.dispatch('loadCostsByDateRange')
-  }
+  // created() {
+  //   this.$store.dispatch('loadTakingsByStylist')
+  //   this.$store.dispatch('loadTakingsByDateRange')
+  //   this.$store.dispatch('loadTotalsByDateRange')
+  //   this.$store.dispatch('loadCostsByCat')
+  //   this.$store.dispatch('loadCostsByDateRange')
+  // }
 }
 </script>

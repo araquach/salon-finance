@@ -6,23 +6,18 @@
       </b-navbar-item>
     </template>
     <template slot="start">
-      <b-navbar-item :to="{ name: 'takings-by-date-range' }" tag="router-link">
-        Takings (date range)
+      <b-navbar-item :to="{ name: 'last-years-takings' }" tag="router-link">
+        Last Years Takings
       </b-navbar-item>
-      <b-navbar-item :to="{ name: 'costs-by-category' }" tag="router-link">
-        Costs by Category
+      <b-navbar-item :to="{ name: 'last-eight-months' }" tag="router-link">
+        Last Eight Months
       </b-navbar-item>
-      <b-navbar-item :to="{ name: 'takings-by-stylist' }" tag="router-link">
-        Takings by Stylist
+      <b-navbar-item :to="{ name: 'cost-breakdown' }" tag="router-link">
+        Cost Breakdown
       </b-navbar-item>
-      <b-navbar-item :to="{ name: 'costs-by-month' }" tag="router-link">
-        Costs by Month
+      <b-navbar-item :to="{ name: 'profit-loss-chart' }" tag="router-link">
+        Profit/Loss Chart
       </b-navbar-item>
-      <b-navbar-dropdown label="Menu">
-        <b-navbar-item :to="{ name: 'profit-loss-monthly' }" tag="router-link">
-          Profit Loss Monthly
-        </b-navbar-item>
-      </b-navbar-dropdown>
     </template>
     <template slot="end">
 
