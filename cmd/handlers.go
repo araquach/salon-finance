@@ -271,6 +271,100 @@ func apiCostsByCat(w http.ResponseWriter, r *http.Request) {
 	w.Write(json)
 }
 
+// For Meeting - excludes drawings
+func apiCostsByCatMeeting(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	var t float32
+
+	type Result struct {
+		Category string  `json:"category"`
+		Total    float32 `json:"total"`
+		Percent  float32 `json:"percent"`
+		Average  float32 `json:"average"`
+	}
+
+	type Data struct {
+		Salon      string   `json:"salon"`
+		GrandTotal float32  `json:"grand_total"`
+		ByYear     float32  `json:"by_year"`
+		Months     int      `json:"months"`
+		Figures    []Result `json:"figures"`
+	}
+
+	vars := mux.Vars(r)
+	s := vars["salon"]
+	sd := vars["start"]
+	ed := vars["end"]
+
+	var acc string
+
+	switch s {
+	case "jakata":
+		acc = "06517160"
+	case "pk":
+		acc = "02017546"
+	case "base":
+		acc = "17623364"
+	}
+
+	startDate, err := time.Parse("2006-01-02", sd)
+	if err != nil {
+		panic(err)
+	}
+	endDate, err := time.Parse("2006-01-02", ed)
+	if err != nil {
+		panic(err)
+	}
+
+	mnths := monthsCount(startDate, endDate)
+
+	var res []Result
+
+	if s == "all" {
+		db.Model(&Cost{}).Order("total desc").Select("category, sum(debit) as total").Where("date BETWEEN ? AND ?", sd, ed).Group("category").Find(&res)
+	} else {
+		db.Model(&Cost{}).Order("total desc").Select("account, category, sum(debit) as total").Where("date BETWEEN ? AND ?", sd, ed).Where("account", acc).Group("account, category").Find(&res)
+	}
+
+	// Calculate total costs
+	for _, r := range res {
+		t += r.Total
+	}
+
+	for k, v := range res {
+		//remove Izzys Wage and loans from drawings
+		if v.Category == "drawings" {
+			(res)[k].Total = 0
+		}
+		if v.Category == "loans" {
+			(res)[k].Total = (res)[k].Total + ((450 + 291) * float32(mnths))
+		}
+		if v.Category == "wages" {
+			(res)[k].Total = (res)[k].Total + (2000 * float32(mnths))
+		}
+		(res)[k].Average = (res)[k].Total / float32(mnths)
+		(res)[k].Percent = ((res)[k].Total / t) * 100
+		if v.Category == "costs" {
+			(res)[k].Total = 0
+		}
+	}
+
+	f := Data{
+		Salon:      s,
+		GrandTotal: t,
+		ByYear:     t / float32(mnths) * 12,
+		Months:     mnths,
+		Figures:    res,
+	}
+
+	json, err := json.Marshal(f)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
+}
+
 func apiCostsByDateRange(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 

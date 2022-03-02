@@ -1,7 +1,7 @@
 <template>
   <div class="section">
     <h1 class="title is-3">Breakdown of Costs</h1>
-    <p class="is-size-2">Averaged Annual Turnover: <span class="has-text-warning">{{ takings | toCurrency }}</span></p>
+    <p class="is-size-4">Turnover: <span class="has-text-warning is-size-2">{{ takings | toCurrency }}</span></p>
     <br><br>
     <table class="table is-size-3">
       <tr>
@@ -44,13 +44,13 @@ export default {
     }),
 
     adaptedFigures() {
-      return this.figures.filter((item) => item.category !== 'drawings')
+      return this.figures.filter((item) => item.category !== 'costs' && item.category !== 'drawings' && item.category !== 'other')
     }
   },
 
   created() {
       axios
-          .get(`/api/costs-by-cat/all/2021-07-01/2022-02-28`)
+          .get(`/api/costs-by-cat-meeting/all/2021-07-01/2022-02-28`)
           .then(r => r.data)
           .then(data => {
             this.figures = data.figures

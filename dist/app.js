@@ -2530,7 +2530,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['cost'],
   data: function data() {
@@ -2613,14 +2612,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })), {}, {
     adaptedFigures: function adaptedFigures() {
       return this.figures.filter(function (item) {
-        return item.category !== 'drawings';
+        return item.category !== 'costs' && item.category !== 'drawings' && item.category !== 'other';
       });
     }
   }),
   created: function created() {
     var _this = this;
 
-    axios.get("/api/costs-by-cat/all/2021-07-01/2022-02-28").then(function (r) {
+    axios.get("/api/costs-by-cat-meeting/all/2021-07-01/2022-02-28").then(function (r) {
       return r.data;
     }).then(function (data) {
       _this.figures = data.figures;
@@ -65486,9 +65485,9 @@ var render = function () {
   return _c("div", { staticClass: "section" }, [
     _c("h1", { staticClass: "title is-3" }, [_vm._v("Breakdown of Costs")]),
     _vm._v(" "),
-    _c("p", { staticClass: "is-size-2" }, [
-      _vm._v("Averaged Annual Turnover: "),
-      _c("span", { staticClass: "has-text-warning" }, [
+    _c("p", { staticClass: "is-size-4" }, [
+      _vm._v("Turnover: "),
+      _c("span", { staticClass: "has-text-warning is-size-2" }, [
         _vm._v(_vm._s(_vm._f("toCurrency")(_vm.takings))),
       ]),
     ]),
