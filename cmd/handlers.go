@@ -426,32 +426,31 @@ func apiCostsByDateRange(w http.ResponseWriter, r *http.Request) {
 func apiCostsAndTakings(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	type CostsByMonth struct {
-	}
-
 	type Costs struct {
+		Month string  `json:"month"`
 		Total float32 `json:"total"`
 	}
 
 	type Takings struct {
+		Month string  `json:"month"`
 		Total float32 `json:"total"`
 	}
 
 	type Result struct {
-		Costs   Costs   `json:"costs"`
-		Takings Takings `json:"takings"`
+		Costs   []Costs   `json:"costs"`
+		Takings []Takings `json:"takings"`
 	}
 
 	vars := mux.Vars(r)
 	sd := vars["start"]
 	ed := vars["end"]
 
-	var c Costs
-	var t Takings
+	var c []Costs
+	var t []Takings
 	var res Result
 
-	db.Model(&Cost{}).Select("sum(debit) as total").Where("date BETWEEN ? AND ?", sd, ed).Find(&c)
-	db.Model(&Taking{}).Select("sum(products) + sum(services) as total").Where("date BETWEEN ? AND ?", sd, ed).Find(&t)
+	db.Raw("SELECT DATE_TRUNC('month', date) AS  month, sum(debit) AS total FROM costs WHERE date BETWEEN ? AND ? GROUP BY month ORDER BY month", sd, ed).Scan(&c)
+	db.Raw("SELECT DATE_TRUNC('month', date) AS  month, sum(services) + sum(products) AS total FROM takings WHERE date BETWEEN ? AND ? GROUP BY month ORDER BY month", sd, ed).Scan(&t)
 
 	res = Result{
 		Costs:   c,

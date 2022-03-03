@@ -10,7 +10,7 @@ import ProfitLossMonthly from "./components/ProfitLoss/ProfitLossMonthly"
 import LastYearsTakings from "./views/meeting/LastYearsTakings"
 import LastEightMonths from "./views/meeting/LastEightMonths"
 import CostBreakdown from "./views/meeting/CostBreakdown"
-import ProfitLosChart from "./views/meeting/ProfitLossChart"
+import FiguresChart from "./views/meeting/FiguresChart"
 
 Vue.use(Router)
 
@@ -64,9 +64,9 @@ const router = new Router({
             component: CostBreakdown
         },
         {
-            path: '/profit-loss-chart',
-            name: 'profit-loss-chart',
-            component: ProfitLosChart
+            path: '/figures-chart',
+            name: 'figures-chart',
+            component: FiguresChart
         }
     ]
 })

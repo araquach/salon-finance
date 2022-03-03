@@ -2630,6 +2630,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/FiguresChart.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/FiguresChart.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      costs: [],
+      takings: []
+    };
+  },
+  computed: {},
+  created: function created() {
+    var _this = this;
+
+    axios.get("/api/costs-and-takings/2017-06-01/2022-02-28").then(function (r) {
+      return r.data;
+    }).then(function (data) {
+      _this.costs = data.costs;
+      _this.takings = data.takings;
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/LastEightMonths.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/LastEightMonths.vue?vue&type=script&lang=js& ***!
@@ -2778,20 +2818,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/ProfitLossChart.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/ProfitLossChart.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************************************/
-/***/ (() => {
-
-//
-//
-//
-//
-//
-
-/***/ }),
-
 /***/ "./src/app.js":
 /*!********************!*\
   !*** ./src/app.js ***!
@@ -2866,7 +2892,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_meeting_LastYearsTakings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/meeting/LastYearsTakings */ "./src/views/meeting/LastYearsTakings.vue");
 /* harmony import */ var _views_meeting_LastEightMonths__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./views/meeting/LastEightMonths */ "./src/views/meeting/LastEightMonths.vue");
 /* harmony import */ var _views_meeting_CostBreakdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./views/meeting/CostBreakdown */ "./src/views/meeting/CostBreakdown.vue");
-/* harmony import */ var _views_meeting_ProfitLossChart__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./views/meeting/ProfitLossChart */ "./src/views/meeting/ProfitLossChart.vue");
+/* harmony import */ var _views_meeting_FiguresChart__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./views/meeting/FiguresChart */ "./src/views/meeting/FiguresChart.vue");
 
 
 
@@ -2921,9 +2947,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_11__["default"]({
     name: 'cost-breakdown',
     component: _views_meeting_CostBreakdown__WEBPACK_IMPORTED_MODULE_8__["default"]
   }, {
-    path: '/profit-loss-chart',
-    name: 'profit-loss-chart',
-    component: _views_meeting_ProfitLossChart__WEBPACK_IMPORTED_MODULE_9__["default"]
+    path: '/figures-chart',
+    name: 'figures-chart',
+    component: _views_meeting_FiguresChart__WEBPACK_IMPORTED_MODULE_9__["default"]
   }]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -64238,6 +64264,45 @@ component.options.__file = "src/views/meeting/CostBreakdown.vue"
 
 /***/ }),
 
+/***/ "./src/views/meeting/FiguresChart.vue":
+/*!********************************************!*\
+  !*** ./src/views/meeting/FiguresChart.vue ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _FiguresChart_vue_vue_type_template_id_b9f7e7c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FiguresChart.vue?vue&type=template&id=b9f7e7c6& */ "./src/views/meeting/FiguresChart.vue?vue&type=template&id=b9f7e7c6&");
+/* harmony import */ var _FiguresChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FiguresChart.vue?vue&type=script&lang=js& */ "./src/views/meeting/FiguresChart.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FiguresChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FiguresChart_vue_vue_type_template_id_b9f7e7c6___WEBPACK_IMPORTED_MODULE_0__.render,
+  _FiguresChart_vue_vue_type_template_id_b9f7e7c6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/views/meeting/FiguresChart.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./src/views/meeting/LastEightMonths.vue":
 /*!***********************************************!*\
   !*** ./src/views/meeting/LastEightMonths.vue ***!
@@ -64312,48 +64377,6 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "src/views/meeting/LastYearsTakings.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./src/views/meeting/ProfitLossChart.vue":
-/*!***********************************************!*\
-  !*** ./src/views/meeting/ProfitLossChart.vue ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _ProfitLossChart_vue_vue_type_template_id_bbafc40e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProfitLossChart.vue?vue&type=template&id=bbafc40e& */ "./src/views/meeting/ProfitLossChart.vue?vue&type=template&id=bbafc40e&");
-/* harmony import */ var _ProfitLossChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProfitLossChart.vue?vue&type=script&lang=js& */ "./src/views/meeting/ProfitLossChart.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _ProfitLossChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _ProfitLossChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[__WEBPACK_IMPORT_KEY__]
-/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ProfitLossChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ProfitLossChart_vue_vue_type_template_id_bbafc40e___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ProfitLossChart_vue_vue_type_template_id_bbafc40e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "src/views/meeting/ProfitLossChart.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -64518,6 +64541,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/views/meeting/FiguresChart.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./src/views/meeting/FiguresChart.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FiguresChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FiguresChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/FiguresChart.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FiguresChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./src/views/meeting/LastEightMonths.vue?vue&type=script&lang=js&":
 /*!************************************************************************!*\
   !*** ./src/views/meeting/LastEightMonths.vue?vue&type=script&lang=js& ***!
@@ -64547,26 +64586,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LastYearsTakings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LastYearsTakings.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/LastYearsTakings.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LastYearsTakings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./src/views/meeting/ProfitLossChart.vue?vue&type=script&lang=js&":
-/*!************************************************************************!*\
-  !*** ./src/views/meeting/ProfitLossChart.vue?vue&type=script&lang=js& ***!
-  \************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProfitLossChart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/ProfitLossChart.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
-/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default())); 
 
 /***/ }),
 
@@ -64757,6 +64776,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/views/meeting/FiguresChart.vue?vue&type=template&id=b9f7e7c6&":
+/*!***************************************************************************!*\
+  !*** ./src/views/meeting/FiguresChart.vue?vue&type=template&id=b9f7e7c6& ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FiguresChart_vue_vue_type_template_id_b9f7e7c6___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FiguresChart_vue_vue_type_template_id_b9f7e7c6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FiguresChart_vue_vue_type_template_id_b9f7e7c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FiguresChart.vue?vue&type=template&id=b9f7e7c6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/FiguresChart.vue?vue&type=template&id=b9f7e7c6&");
+
+
+/***/ }),
+
 /***/ "./src/views/meeting/LastEightMonths.vue?vue&type=template&id=abf8c464&":
 /*!******************************************************************************!*\
   !*** ./src/views/meeting/LastEightMonths.vue?vue&type=template&id=abf8c464& ***!
@@ -64787,23 +64823,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LastYearsTakings_vue_vue_type_template_id_7bfb007d___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LastYearsTakings_vue_vue_type_template_id_7bfb007d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LastYearsTakings.vue?vue&type=template&id=7bfb007d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/LastYearsTakings.vue?vue&type=template&id=7bfb007d&");
-
-
-/***/ }),
-
-/***/ "./src/views/meeting/ProfitLossChart.vue?vue&type=template&id=bbafc40e&":
-/*!******************************************************************************!*\
-  !*** ./src/views/meeting/ProfitLossChart.vue?vue&type=template&id=bbafc40e& ***!
-  \******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossChart_vue_vue_type_template_id_bbafc40e___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossChart_vue_vue_type_template_id_bbafc40e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProfitLossChart_vue_vue_type_template_id_bbafc40e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProfitLossChart.vue?vue&type=template&id=bbafc40e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/ProfitLossChart.vue?vue&type=template&id=bbafc40e&");
 
 
 /***/ }),
@@ -64899,9 +64918,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "b-navbar-item",
-            {
-              attrs: { to: { name: "profit-loss-chart" }, tag: "router-link" },
-            },
+            { attrs: { to: { name: "figures-chart" }, tag: "router-link" } },
             [_vm._v("\n      Profit/Loss Chart\n    ")]
           ),
         ],
@@ -65543,6 +65560,43 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/FiguresChart.vue?vue&type=template&id=b9f7e7c6&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/FiguresChart.vue?vue&type=template&id=b9f7e7c6& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "section" },
+    [
+      _c("h1", { staticClass: "title is-4" }, [
+        _vm._v("Turnover/Outgoings Chart"),
+      ]),
+      _vm._v(" "),
+      _c("line-chart", { attrs: { data: _vm.costs } }),
+      _vm._v("\n  " + _vm._s(_vm.costs) + "\n"),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/LastEightMonths.vue?vue&type=template&id=abf8c464&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/LastEightMonths.vue?vue&type=template&id=abf8c464& ***!
@@ -65730,40 +65784,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Products")]),
       _vm._v(" "),
       _c("th", { staticClass: "has-text-weight-bold" }, [_vm._v("Total")]),
-    ])
-  },
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/ProfitLossChart.vue?vue&type=template&id=bbafc40e&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/views/meeting/ProfitLossChart.vue?vue&type=template&id=bbafc40e& ***!
-  \*********************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "section" }, [
-      _c("h1", { staticClass: "title is-3" }, [_vm._v("Profit/Loss Chart")]),
     ])
   },
 ]

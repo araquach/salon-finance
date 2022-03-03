@@ -53,9 +53,9 @@ func main() {
 	r.HandleFunc("/api/totals-by-date-range/{start}/{end}", apiTotalsByDateRange).Methods("GET")
 	r.HandleFunc("/api/costs-by-cat/{salon}/{start}/{end}", apiCostsByCat).Methods("GET")
 	r.HandleFunc("/api/costs-by-date-range/{start}/{end}", apiCostsByDateRange).Methods("GET")
-	r.HandleFunc("/api/costs-and-takings/{start}/{end}", apiCostsAndTakings).Methods("GET")
 	//for meeting
 	r.HandleFunc("/api/costs-by-cat-meeting/{salon}/{start}/{end}", apiCostsByCatMeeting).Methods("GET")
+	r.HandleFunc("/api/costs-and-takings/{start}/{end}", apiCostsAndTakings).Methods("GET")
 	// Main Routes
 	r.HandleFunc("/{category}/{name}", index)
 	r.HandleFunc("/{name}", index)

@@ -50,14 +50,14 @@ export default {
     showMonth: value => format(parseISO(value), 'LLLL')
   },
 
-  created() {
-    axios
-        .get(`/api/takings-by-date-range/all/2021-07-01/2022-02-28`)
-        .then(r => r.data)
-        .then(data => {
-          this.takings = data.figures
-          this.totals = data.grand_totals
-        })
+    created() {
+      axios
+          .get(`/api/takings-by-date-range/all/2021-07-01/2022-02-28`)
+          .then(r => r.data)
+          .then(data => {
+            this.takings = data.figures
+            this.totals = data.grand_totals
+          })
   }
 }
 </script>
