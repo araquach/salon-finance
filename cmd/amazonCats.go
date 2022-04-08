@@ -5,6 +5,7 @@ func amazonCats() (c map[string]map[string][]string) {
 		"building": {
 			"repairs": {
 				"Chimney Sheep",
+				"Chimney Sheep2",
 				"Bonlux",
 				"LLRY",
 				"Sterling",
