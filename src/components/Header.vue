@@ -15,9 +15,6 @@
       <b-navbar-item :to="{ name: 'cost-breakdown' }" tag="router-link">
         Cost Breakdown
       </b-navbar-item>
-      <b-navbar-item :to="{ name: 'figures-chart' }" tag="router-link">
-        Profit/Loss Chart
-      </b-navbar-item>
     </template>
     <template slot="end">
 
