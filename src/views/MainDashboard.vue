@@ -12,6 +12,7 @@ export default {
     this.$store.dispatch('loadTakingsByMonth')
     this.$store.dispatch('loadCostsByCat')
     this.$store.dispatch('loadCostsByMonth')
+    //this.$store.dispatch('loadStylistTakingsMonthByMonth')
   }
 }
 </script>
