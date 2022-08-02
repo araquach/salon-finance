@@ -21,6 +21,33 @@ func index(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func apiStylistsTakingsMonthByMonth(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	type result struct {
+		Month string `json:"month"`
+		Products float32 `json:"products"`
+		Services float32 `json:"services"`
+		Total    float32 `json:"total"`
+	}
+
+	vars := mux.Vars(r)
+	//s := vars["salon"]
+	st := vars ["stylist"]
+
+	var res []result
+
+	// db.Raw("SELECT TO_CHAR(DATE(date), 'Month') AS month, SUM(services) AS services, SUM(products) AS products, SUM(services) + SUM(products) AS total FROM takings WHERE salon = s AND name ILIKE st% GROUP BY month ORDER BY month", s, st).Scan(&res)
+
+	db.Raw("SELECT DATE_TRUNC('month',date) AS  month, SUM(services) AS services, SUM(products) AS products, SUM(services) + SUM(products) AS total FROM takings WHERE name ILIKE ? GROUP BY month ORDER BY month", st + " %").Scan(&res)
+
+	json, err := json.Marshal(res)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
+}
+
 func apiTakingsByStylist(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
