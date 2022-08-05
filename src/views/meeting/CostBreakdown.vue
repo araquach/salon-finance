@@ -11,7 +11,7 @@
         <th>Percent</th>
         <th>Monthly Average</th>
       </tr>
-      <CostBreakDownItem :cost="cost" v-for="cost in adaptedFigures"/>
+      <CostBreakDownItem :cost="cost" key="cost.id" v-for="cost in adaptedFigures"/>
       <tr v-if="showTotal" class="is-size-3">
         <td>Yearly</td>
         <td class="has-text-warning">{{ byYear | toCurrency }}</td>

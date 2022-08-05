@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from "axios"
+import {format, parseISO} from "date-fns"
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        salon: "all",
+        salon: 'base',
+        stylist: 'beth',
         dateRange: {
             startDate: '2021-07-01',
             endDate: '2022-02-28',
@@ -21,7 +24,26 @@ export const store = new Vuex.Store({
     },
 
     getters: {
+        getStylistTakingsMonthByMonth(state) {
+            let stmbm = state.stylistTakingsMonthByMonth
 
+            let res = {
+                datasets: [
+                    {
+                        borderColor: '#3e95cd',
+                        data: [],
+                        fill: false,
+                        label: (state.stylist.charAt(0).toUpperCase() + state.stylist.slice(1)),
+                    }
+                ],
+                labels: []
+            }
+
+            Array.from(stmbm).forEach(el => res.labels.push(format(parseISO(el.month), 'LLL yy')))
+            Array.from(stmbm).forEach(el => res.datasets[0].data.push(el.total))
+
+            return res
+        }
     },
 
     mutations: {
@@ -67,7 +89,13 @@ export const store = new Vuex.Store({
     },
 
     actions: {
-        loadTakingsByStylist({ commit }) {
+        loadStylistTakingsMonthByMonth({commit}) {
+            axios.get(`/api/stylist-takings-month-by-month/${store.state.salon}/${store.state.stylist}`).then((response) => {
+                commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', response.data)
+            })
+        },
+
+        loadTakingsByStylist({commit}) {
             axios
                 .get(`/api/takings-by-stylist/${store.state.salon}/${store.state.dateRange.startDate}/${store.state.dateRange.endDate}`)
                 .then(r => r.data)
@@ -76,21 +104,12 @@ export const store = new Vuex.Store({
                 })
         },
 
-        loadTakingsByDateRange({ commit }) {
+        loadTakingsByDateRange({commit}) {
             axios
                 .get(`/api/takings-by-date-range/${store.state.salon}/${store.state.dateRange.startDate}/${store.state.dateRange.endDate}`)
                 .then(r => r.data)
                 .then(data => {
                     commit('LOAD_TAKINGS_BY_DATE_RANGE', data)
-                })
-        },
-
-        loadStylistTakingsMonthByMonth({commit}) {
-            axios
-                .get(`/api/stylist-takings-month-by-month/base/adam`)
-                .then(r => r.data)
-                .then(data => {
-                    commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', data)
                 })
         },
 
@@ -103,7 +122,7 @@ export const store = new Vuex.Store({
                 })
         },
 
-        loadCostsByCat({ commit }) {
+        loadCostsByCat({commit}) {
             axios
                 .get(`/api/costs-by-cat/${store.state.salon}/${store.state.dateRange.startDate}/${store.state.dateRange.endDate}`)
                 .then(r => r.data)
@@ -113,7 +132,7 @@ export const store = new Vuex.Store({
 
         },
 
-        loadCostsByDateRange({ commit }) {
+        loadCostsByDateRange({commit}) {
             axios
                 .get(`/api/costs-by-date-range/${store.state.dateRange.startDate}/${store.state.dateRange.endDate}`)
                 .then(r => r.data)
@@ -122,7 +141,7 @@ export const store = new Vuex.Store({
                 })
         },
 
-        loadCostAndTakingsTotals({ commit}) {
+        loadCostAndTakingsTotals({commit}) {
             axios
                 .get(`/api/costs-and-takings-totals/${store.state.dateRange.startDate}/${store.state.dateRange.endDate}`)
                 .then(r => r.data)

@@ -2257,8 +2257,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var vue_chartjs_legacy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-chartjs/legacy */ "./node_modules/vue-chartjs/legacy/index.js");
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/chart.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_MODULE_0__.Title, chart_js__WEBPACK_IMPORTED_MODULE_0__.Tooltip, chart_js__WEBPACK_IMPORTED_MODULE_0__.Legend, chart_js__WEBPACK_IMPORTED_MODULE_0__.LineElement, chart_js__WEBPACK_IMPORTED_MODULE_0__.LinearScale, chart_js__WEBPACK_IMPORTED_MODULE_0__.CategoryScale, chart_js__WEBPACK_IMPORTED_MODULE_0__.PointElement);
@@ -2301,40 +2309,16 @@ chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_
   },
   data: function data() {
     return {
-      chartData: {
-        labels: ["week 1", "week 2", "week 3", "week 4", "week 5", "week 6", "week 7", "week 8", "week 9", "week 10"],
-        datasets: [{
-          data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-          label: "Africa",
-          borderColor: "#3e95cd",
-          fill: false
-        }, {
-          data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
-          label: "Asia",
-          borderColor: "#8e5ea2",
-          fill: false
-        }, {
-          data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
-          label: "Europe",
-          borderColor: "#3cba9f",
-          fill: false
-        }, {
-          data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
-          label: "Latin America",
-          borderColor: "#e8c3b9",
-          fill: false
-        }, {
-          data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
-          label: "North America",
-          borderColor: "#c45850",
-          fill: false
-        }]
-      },
+      loaded: true,
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false
       }
     };
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['getStylistTakingsMonthByMonth'])),
+  created: function created() {
+    this.$store.dispatch('loadStylistTakingsMonthByMonth');
   }
 });
 
@@ -2445,7 +2429,7 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('loadTakingsByStylist');
     this.$store.dispatch('loadTakingsByMonth');
     this.$store.dispatch('loadCostsByCat');
-    this.$store.dispatch('loadCostsByMonth'); //this.$store.dispatch('loadStylistTakingsMonthByMonth')
+    this.$store.dispatch('loadCostsByMonth');
   }
 });
 
@@ -2974,11 +2958,11 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("LineChartGenerator", {
+  return _c("div", [_vm.loaded ? _c("LineChartGenerator", {
     staticClass: "chart",
     attrs: {
       "chart-options": _vm.chartOptions,
-      "chart-data": _vm.chartData,
+      "chart-data": _vm.getStylistTakingsMonthByMonth,
       "chart-id": _vm.chartId,
       "dataset-id-key": _vm.datasetIdKey,
       plugins: _vm.plugins,
@@ -2987,7 +2971,7 @@ var render = function render() {
       width: _vm.width,
       height: _vm.height
     }
-  });
+  }) : _vm._e()], 1);
 };
 
 var staticRenderFns = [];
@@ -3183,6 +3167,7 @@ var render = function render() {
     staticClass: "table is-size-3"
   }, [_vm._m(0), _vm._v(" "), _vm._l(_vm.adaptedFigures, function (cost) {
     return _c("CostBreakDownItem", {
+      key: "cost.id",
       attrs: {
         cost: cost
       }
@@ -3498,14 +3483,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "store": () => (/* binding */ store)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/parseISO/index.js");
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+
+
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
   state: {
-    salon: "all",
+    salon: 'base',
+    stylist: 'beth',
     dateRange: {
       startDate: '2021-07-01',
       endDate: '2022-02-28'
@@ -3519,7 +3511,27 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     costsByCat: {},
     costsByDateRange: {}
   },
-  getters: {},
+  getters: {
+    getStylistTakingsMonthByMonth: function getStylistTakingsMonthByMonth(state) {
+      var stmbm = state.stylistTakingsMonthByMonth;
+      var res = {
+        datasets: [{
+          borderColor: '#3e95cd',
+          data: [],
+          fill: false,
+          label: state.stylist.charAt(0).toUpperCase() + state.stylist.slice(1)
+        }],
+        labels: []
+      };
+      Array.from(stmbm).forEach(function (el) {
+        return res.labels.push((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(el.month), 'LLL yy'));
+      });
+      Array.from(stmbm).forEach(function (el) {
+        return res.datasets[0].data.push(el.total);
+      });
+      return res;
+    }
+  },
   mutations: {
     LOAD_TAKINGS_BY_STYLIST: function LOAD_TAKINGS_BY_STYLIST(state, payload) {
       state.takingsByStylist = payload;
@@ -3553,33 +3565,31 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   actions: {
-    loadTakingsByStylist: function loadTakingsByStylist(_ref) {
+    loadStylistTakingsMonthByMonth: function loadStylistTakingsMonthByMonth(_ref) {
       var commit = _ref.commit;
-      axios.get("/api/takings-by-stylist/".concat(store.state.salon, "/").concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/stylist-takings-month-by-month/".concat(store.state.salon, "/").concat(store.state.stylist)).then(function (response) {
+        commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', response.data);
+      });
+    },
+    loadTakingsByStylist: function loadTakingsByStylist(_ref2) {
+      var commit = _ref2.commit;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/takings-by-stylist/".concat(store.state.salon, "/").concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TAKINGS_BY_STYLIST', data);
       });
     },
-    loadTakingsByDateRange: function loadTakingsByDateRange(_ref2) {
-      var commit = _ref2.commit;
-      axios.get("/api/takings-by-date-range/".concat(store.state.salon, "/").concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
+    loadTakingsByDateRange: function loadTakingsByDateRange(_ref3) {
+      var commit = _ref3.commit;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/takings-by-date-range/".concat(store.state.salon, "/").concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TAKINGS_BY_DATE_RANGE', data);
       });
     },
-    loadStylistTakingsMonthByMonth: function loadStylistTakingsMonthByMonth(_ref3) {
-      var commit = _ref3.commit;
-      axios.get("/api/stylist-takings-month-by-month/base/adam").then(function (r) {
-        return r.data;
-      }).then(function (data) {
-        commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', data);
-      });
-    },
     loadTotalsByDateRange: function loadTotalsByDateRange(_ref4) {
       var commit = _ref4.commit;
-      axios.get("/api/totals-by-date-range/".concat(store.state.dateRasnge.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/totals-by-date-range/".concat(store.state.dateRasnge.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TOTALS_BY_DATE_RANGE', data);
@@ -3587,7 +3597,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     loadCostsByCat: function loadCostsByCat(_ref5) {
       var commit = _ref5.commit;
-      axios.get("/api/costs-by-cat/".concat(store.state.salon, "/").concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/costs-by-cat/".concat(store.state.salon, "/").concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_CAT', data);
@@ -3595,7 +3605,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     loadCostsByDateRange: function loadCostsByDateRange(_ref6) {
       var commit = _ref6.commit;
-      axios.get("/api/costs-by-date-range/".concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/costs-by-date-range/".concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_DATE_RANGE', data);
@@ -3603,7 +3613,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     loadCostAndTakingsTotals: function loadCostAndTakingsTotals(_ref7) {
       var commit = _ref7.commit;
-      axios.get("/api/costs-and-takings-totals/".concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/costs-and-takings-totals/".concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_DATE_RANGE', data);
@@ -54875,6 +54885,18 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	
