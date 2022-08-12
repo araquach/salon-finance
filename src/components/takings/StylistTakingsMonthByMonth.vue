@@ -1,5 +1,34 @@
 <template>
   <div>
+    <div>
+      <div>
+        <br>
+        <b-dropdown aria-role="list">
+          <template #trigger="{ active }">
+            <b-button
+                label="Select Salon"
+                type="is-primary"
+                :icon-right="active ? 'menu-up' : 'menu-down'" />
+          </template>
+          <b-dropdown-item @click="selectSalon('jakata')" aria-role="listitem">Jakata</b-dropdown-item>
+          <b-dropdown-item @click="selectSalon('pk')" aria-role="listitem">PK</b-dropdown-item>
+          <b-dropdown-item @click="selectSalon('base')" aria-role="listitem">Base</b-dropdown-item>
+        </b-dropdown>
+
+        <b-dropdown v-if="salon" aria-role="list">
+          <template #trigger="{ active }">
+            <b-button
+                label="Select Stylist"
+                type="is-primary"
+                :icon-right="active ? 'menu-up' : 'menu-down'" />
+          </template>
+          <b-dropdown-item @click="selectStylist(stylist)" v-if="salon === 'jakata'" v-for="stylist in getJakataStylists" :key="stylist.id" aria-role="listitem">{{ stylist.first_name }}</b-dropdown-item>
+          <b-dropdown-item @click="selectStylist(stylist)" v-if="salon === 'pk'" v-for="stylist in getPKStylists" :key="stylist.id" aria-role="listitem">{{ stylist.first_name }}</b-dropdown-item>
+          <b-dropdown-item @click="selectStylist(stylist)" v-if="salon === 'base'" v-for="stylist in getBaseStylists" :key="stylist.id" aria-role="listitem">{{ stylist.first_name }}</b-dropdown-item>
+        </b-dropdown>
+      </div>
+    </div>
+    <br>
     <LineChartGenerator v-if="loaded"
                         class="chart"
                         :chart-options="chartOptions"
@@ -16,7 +45,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import {mapGetters, mapState} from "vuex"
 import { Line as LineChartGenerator } from 'vue-chartjs/legacy'
 
 import {
@@ -77,7 +106,6 @@ export default {
   },
   data() {
     return {
-      loaded: true,
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false
@@ -85,14 +113,34 @@ export default {
     }
   },
 
+  methods: {
+    selectSalon(i) {
+      this.$store.commit('UPDATE_SALON', i)
+    },
+
+    selectStylist(stylist) {
+      this.$store.commit('UPDATE_STYLIST', stylist)
+      this.$store.dispatch('loadStylistTakingsMonthByMonth')
+    }
+  },
+
   computed: {
+    ...mapState({
+      salon: state => state.salon,
+      loaded: state => state.loaded,
+      chosensStylist: state => state.stylist
+    }),
+
     ...mapGetters([
         'getStylistTakingsMonthByMonth',
+        'getJakataStylists',
+        'getPKStylists',
+        'getBaseStylists'
     ])
   },
 
   created() {
-    this.$store.dispatch('loadStylistTakingsMonthByMonth')
+    this.$store.dispatch('loadStylists')
   }
 }
 </script>

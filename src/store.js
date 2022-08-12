@@ -7,12 +7,14 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        salon: 'base',
-        stylist: 'beth',
+        salon : null,
+        stylists: [],
+        stylist: {},
         dateRange: {
-            startDate: '2021-12-01',
+            startDate: '2021-07-01',
             endDate: '2022-02-28',
         },
+        loaded: false,
         totalTurnover: 895304.00,
         totalCosts: null,
         takingsByStylist: {},
@@ -33,7 +35,7 @@ export const store = new Vuex.Store({
                         borderColor: '#3e95cd',
                         data: [],
                         fill: false,
-                        label: (state.stylist.charAt(0).toUpperCase() + state.stylist.slice(1)),
+                        label: state.stylist.first_name,
                     }
                 ],
                 labels: []
@@ -43,10 +45,26 @@ export const store = new Vuex.Store({
             Array.from(stmbm).forEach(el => res.datasets[0].data.push(el.total))
 
             return res
+        },
+
+        getJakataStylists(state) {
+            return state.stylists.filter(s => s.salon === 1)
+        },
+
+        getPKStylists(state) {
+            return state.stylists.filter(s => s.salon === 2)
+        },
+
+        getBaseStylists(state) {
+            return state.stylists.filter(s => s.salon === 3)
         }
     },
 
     mutations: {
+        LOAD_STYLISTS(state, payload) {
+            state.stylists = payload
+        },
+
         LOAD_TAKINGS_BY_STYLIST(state, payload) {
             state.takingsByStylist = payload
         },
@@ -75,6 +93,11 @@ export const store = new Vuex.Store({
             state.salon = payload
         },
 
+        UPDATE_STYLIST(state, payload) {
+            state.stylist = payload
+            state.loaded = true
+        },
+
         UPDATE_DATE_RANGE(state, payload) {
             state.dateRange = payload
         },
@@ -89,10 +112,17 @@ export const store = new Vuex.Store({
     },
 
     actions: {
-        loadStylistTakingsMonthByMonth({commit}) {
-            axios.get(`/api/stylist-takings-month-by-month/${store.state.dateRange.startDate}/${store.state.dateRange.endDate}/${store.state.stylist}`).then((response) => {
-                commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', response.data)
+        loadStylists({commit}) {
+            axios.get(`/api/team-members`).then((response) => {
+                commit('LOAD_STYLISTS', response.data)
             })
+        },
+
+        loadStylistTakingsMonthByMonth({commit}) {
+            axios.get(`/api/stylist-takings-month-by-month/${store.state.dateRange.startDate}/${store.state.dateRange.endDate}/${store.state.stylist.first_name}`)
+                .then((response) => {
+                commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', response.data)
+                })
         },
 
         loadTakingsByStylist({commit}) {
