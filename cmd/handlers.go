@@ -21,6 +21,20 @@ func index(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func apiGetStylists(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	var res []TeamMember
+
+	db.Find(&res)
+
+	json, err := json.Marshal(res)
+	if err != nil {
+		log.Println(err)
+	}
+	w.Write(json)
+}
+
 func apiStylistTakingsMonthByMonth(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -32,12 +46,22 @@ func apiStylistTakingsMonthByMonth(w http.ResponseWriter, r *http.Request) {
 	}
 
 	vars := mux.Vars(r)
-	s := vars["salon"]
+	start := vars["start"]
+	end := vars["end"]
 	st := vars["stylist"]
+
+	sd, err := time.Parse("2006-01-02", start)
+	if err != nil {
+		panic(err)
+	}
+	ed, err := time.Parse("2006-01-02", end)
+	if err != nil {
+		panic(err)
+	}
 
 	var res []result
 
-	db.Raw("SELECT DATE_TRUNC('month',date) AS  month, SUM(services) AS services, SUM(products) AS products, SUM(services) + SUM(products) AS total FROM takings WHERE salon = ? AND name ILIKE ? GROUP BY month ORDER BY month", s, st+" %").Scan(&res)
+	db.Raw("SELECT DATE_TRUNC('month',date) AS  month, SUM(services) AS services, SUM(products) AS products, SUM(services) + SUM(products) AS total FROM takings WHERE date >= ? AND date <= ? AND name ILIKE ? GROUP BY month ORDER BY month", sd, ed, st+"%").Scan(&res)
 
 	json, err := json.Marshal(res)
 	if err != nil {

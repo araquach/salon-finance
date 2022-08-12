@@ -1,5 +1,32 @@
 <template>
   <div>
+    <div>
+      <div>
+        <br>
+        <b-dropdown aria-role="list">
+          <template #trigger="{ active }">
+            <b-button
+                label="Select Salon"
+                type="is-primary"
+                :icon-right="active ? 'menu-up' : 'menu-down'" />
+          </template>
+          <b-dropdown-item @click="selectSalon('jakata')" aria-role="listitem">Jakata</b-dropdown-item>
+          <b-dropdown-item @click="selectSalon('pk')" aria-role="listitem">PK</b-dropdown-item>
+          <b-dropdown-item @click="selectSalon('base')" aria-role="listitem">Base</b-dropdown-item>
+        </b-dropdown>
+
+        <b-dropdown aria-role="list">
+          <template #trigger="{ active }">
+            <b-button
+                label="Select Stylist"
+                type="is-primary"
+                :icon-right="active ? 'menu-up' : 'menu-down'" />
+          </template>
+          <b-dropdown-item v-for="stylist in getJakataStylists" aria-role="listitem">{{ stylist.first_name }}</b-dropdown-item>
+
+        </b-dropdown>
+      </div>
+    </div>
     <LineChartGenerator v-if="loaded"
                         class="chart"
                         :chart-options="chartOptions"
@@ -16,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import {mapGetters, mapState} from "vuex"
 import { Line as LineChartGenerator } from 'vue-chartjs/legacy'
 
 import {
@@ -77,7 +104,7 @@ export default {
   },
   data() {
     return {
-      loaded: true,
+      loaded: false,
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false
@@ -85,13 +112,28 @@ export default {
     }
   },
 
+  methods: {
+    selectSalon(i) {
+      this.$store.commit('UPDATE_SALON', i)
+    }
+  },
+
   computed: {
+    ...mapState({
+      salons: state => state.salons,
+      salon: state => state.salon
+    }),
+
     ...mapGetters([
         'getStylistTakingsMonthByMonth',
+        'getJakataStylists',
+        'getPKStylists',
+        'getBaseStylists'
     ])
   },
 
   created() {
+    this.$store.dispatch('loadStylists')
     this.$store.dispatch('loadStylistTakingsMonthByMonth')
   }
 }

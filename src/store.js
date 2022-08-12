@@ -7,8 +7,9 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        salon: 'base',
-        stylist: 'beth',
+        salon : null,
+        stylists: [],
+        stylist: {},
         dateRange: {
             startDate: '2021-07-01',
             endDate: '2022-02-28',
@@ -43,10 +44,26 @@ export const store = new Vuex.Store({
             Array.from(stmbm).forEach(el => res.datasets[0].data.push(el.total))
 
             return res
+        },
+
+        getJakataStylists(state) {
+            return state.stylists.filter(s => s.salon === 1)
+        },
+
+        getPKStylists(state) {
+            return state.stylists.filter(s => s.salon === 2)
+        },
+
+        getBaseStylists(state) {
+            return state.stylists.filter(s => s.salon === 3)
         }
     },
 
     mutations: {
+        LOAD_STYLISTS(state, payload) {
+            state.stylists = payload
+        },
+
         LOAD_TAKINGS_BY_STYLIST(state, payload) {
             state.takingsByStylist = payload
         },
@@ -75,6 +92,10 @@ export const store = new Vuex.Store({
             state.salon = payload
         },
 
+        UPDATE_STYLIST(state, payload) {
+            state.stylist = payload
+        },
+
         UPDATE_DATE_RANGE(state, payload) {
             state.dateRange = payload
         },
@@ -89,8 +110,14 @@ export const store = new Vuex.Store({
     },
 
     actions: {
+        loadStylists({commit}) {
+            axios.get(`/api/team-members`).then((response) => {
+                commit('LOAD_STYLISTS', response.data)
+            })
+        },
+
         loadStylistTakingsMonthByMonth({commit}) {
-            axios.get(`/api/stylist-takings-month-by-month/${store.state.salon}/${store.state.stylist}`).then((response) => {
+            axios.get(`/api/stylist-takings-month-by-month/2022-01-01/2022-07-01/adam`).then((response) => {
                 commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', response.data)
             })
         },

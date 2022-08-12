@@ -2309,15 +2309,28 @@ chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_
   },
   data: function data() {
     return {
-      loaded: true,
+      loaded: false,
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false
       }
     };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['getStylistTakingsMonthByMonth'])),
+  methods: {
+    selectSalon: function selectSalon(i) {
+      this.$store.commit('UPDATE_SALON', i);
+    }
+  },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
+    salons: function salons(state) {
+      return state.salons;
+    },
+    salon: function salon(state) {
+      return state.salon;
+    }
+  })), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['getStylistTakingsMonthByMonth', 'getJakataStylists', 'getPKStylists', 'getBaseStylists'])),
   created: function created() {
+    this.$store.dispatch('loadStylists');
     this.$store.dispatch('loadStylistTakingsMonthByMonth');
   }
 });
@@ -2958,7 +2971,74 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_vm.loaded ? _c("LineChartGenerator", {
+  return _c("div", [_c("div", [_c("div", [_c("br"), _vm._v(" "), _c("b-dropdown", {
+    attrs: {
+      "aria-role": "list"
+    },
+    scopedSlots: _vm._u([{
+      key: "trigger",
+      fn: function fn(_ref) {
+        var active = _ref.active;
+        return [_c("b-button", {
+          attrs: {
+            label: "Select Salon",
+            type: "is-primary",
+            "icon-right": active ? "menu-up" : "menu-down"
+          }
+        })];
+      }
+    }])
+  }, [_vm._v(" "), _c("b-dropdown-item", {
+    attrs: {
+      "aria-role": "listitem"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.selectSalon("jakata");
+      }
+    }
+  }, [_vm._v("Jakata")]), _vm._v(" "), _c("b-dropdown-item", {
+    attrs: {
+      "aria-role": "listitem"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.selectSalon("pk");
+      }
+    }
+  }, [_vm._v("PK")]), _vm._v(" "), _c("b-dropdown-item", {
+    attrs: {
+      "aria-role": "listitem"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.selectSalon("base");
+      }
+    }
+  }, [_vm._v("Base")])], 1), _vm._v(" "), _c("b-dropdown", {
+    attrs: {
+      "aria-role": "list"
+    },
+    scopedSlots: _vm._u([{
+      key: "trigger",
+      fn: function fn(_ref2) {
+        var active = _ref2.active;
+        return [_c("b-button", {
+          attrs: {
+            label: "Select Stylist",
+            type: "is-primary",
+            "icon-right": active ? "menu-up" : "menu-down"
+          }
+        })];
+      }
+    }])
+  }, [_vm._v(" "), _vm._l(_vm.getJakataStylists, function (stylist) {
+    return _c("b-dropdown-item", {
+      attrs: {
+        "aria-role": "listitem"
+      }
+    }, [_vm._v(_vm._s(stylist.first_name))]);
+  })], 2)], 1)]), _vm._v(" "), _vm.loaded ? _c("LineChartGenerator", {
     staticClass: "chart",
     attrs: {
       "chart-options": _vm.chartOptions,
@@ -3496,8 +3576,9 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
   state: {
-    salon: 'base',
-    stylist: 'beth',
+    salon: null,
+    stylists: [],
+    stylist: {},
     dateRange: {
       startDate: '2021-07-01',
       endDate: '2022-02-28'
@@ -3530,9 +3611,27 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
         return res.datasets[0].data.push(el.total);
       });
       return res;
+    },
+    getJakataStylists: function getJakataStylists(state) {
+      return state.stylists.filter(function (s) {
+        return s.salon === 1;
+      });
+    },
+    getPKStylists: function getPKStylists(state) {
+      return state.stylists.filter(function (s) {
+        return s.salon === 2;
+      });
+    },
+    getBaseStylists: function getBaseStylists(state) {
+      return state.stylists.filter(function (s) {
+        return s.salon === 3;
+      });
     }
   },
   mutations: {
+    LOAD_STYLISTS: function LOAD_STYLISTS(state, payload) {
+      state.stylists = payload;
+    },
     LOAD_TAKINGS_BY_STYLIST: function LOAD_TAKINGS_BY_STYLIST(state, payload) {
       state.takingsByStylist = payload;
     },
@@ -3554,6 +3653,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     UPDATE_SALON: function UPDATE_SALON(state, payload) {
       state.salon = payload;
     },
+    UPDATE_STYLIST: function UPDATE_STYLIST(state, payload) {
+      state.stylist = payload;
+    },
     UPDATE_DATE_RANGE: function UPDATE_DATE_RANGE(state, payload) {
       state.dateRange = payload;
     },
@@ -3565,54 +3667,60 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     }
   },
   actions: {
-    loadStylistTakingsMonthByMonth: function loadStylistTakingsMonthByMonth(_ref) {
+    loadStylists: function loadStylists(_ref) {
       var commit = _ref.commit;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/stylist-takings-month-by-month/".concat(store.state.salon, "/").concat(store.state.stylist)).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/team-members").then(function (response) {
+        commit('LOAD_STYLISTS', response.data);
+      });
+    },
+    loadStylistTakingsMonthByMonth: function loadStylistTakingsMonthByMonth(_ref2) {
+      var commit = _ref2.commit;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/stylist-takings-month-by-month/2022-01-01/2022-07-01/adam").then(function (response) {
         commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', response.data);
       });
     },
-    loadTakingsByStylist: function loadTakingsByStylist(_ref2) {
-      var commit = _ref2.commit;
+    loadTakingsByStylist: function loadTakingsByStylist(_ref3) {
+      var commit = _ref3.commit;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/takings-by-stylist/".concat(store.state.salon, "/").concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TAKINGS_BY_STYLIST', data);
       });
     },
-    loadTakingsByDateRange: function loadTakingsByDateRange(_ref3) {
-      var commit = _ref3.commit;
+    loadTakingsByDateRange: function loadTakingsByDateRange(_ref4) {
+      var commit = _ref4.commit;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/takings-by-date-range/".concat(store.state.salon, "/").concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TAKINGS_BY_DATE_RANGE', data);
       });
     },
-    loadTotalsByDateRange: function loadTotalsByDateRange(_ref4) {
-      var commit = _ref4.commit;
+    loadTotalsByDateRange: function loadTotalsByDateRange(_ref5) {
+      var commit = _ref5.commit;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/totals-by-date-range/".concat(store.state.dateRasnge.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_TOTALS_BY_DATE_RANGE', data);
       });
     },
-    loadCostsByCat: function loadCostsByCat(_ref5) {
-      var commit = _ref5.commit;
+    loadCostsByCat: function loadCostsByCat(_ref6) {
+      var commit = _ref6.commit;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/costs-by-cat/".concat(store.state.salon, "/").concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_CAT', data);
       });
     },
-    loadCostsByDateRange: function loadCostsByDateRange(_ref6) {
-      var commit = _ref6.commit;
+    loadCostsByDateRange: function loadCostsByDateRange(_ref7) {
+      var commit = _ref7.commit;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/costs-by-date-range/".concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {
         commit('LOAD_COSTS_BY_DATE_RANGE', data);
       });
     },
-    loadCostAndTakingsTotals: function loadCostAndTakingsTotals(_ref7) {
-      var commit = _ref7.commit;
+    loadCostAndTakingsTotals: function loadCostAndTakingsTotals(_ref8) {
+      var commit = _ref8.commit;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/costs-and-takings-totals/".concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate)).then(function (r) {
         return r.data;
       }).then(function (data) {

@@ -48,9 +48,10 @@ func main() {
 	r := mux.NewRouter()
 	r.PathPrefix("/dist/").Handler(http.StripPrefix("/dist/", http.FileServer(http.Dir(dir))))
 	// API routes
+	r.HandleFunc("/api/team-members", apiGetStylists).Methods("GET")
 	r.HandleFunc("/api/takings-by-stylist/{salon}/{start}/{end}", apiTakingsByStylist).Methods("GET")
 	r.HandleFunc("/api/takings-by-date-range/{salon}/{start}/{end}", apiTakingsByDateRange).Methods("GET")
-	r.HandleFunc("/api/stylist-takings-month-by-month/{salon}/{stylist}", apiStylistTakingsMonthByMonth).Methods("GET")
+	r.HandleFunc("/api/stylist-takings-month-by-month/{start}/{end}/{stylist}", apiStylistTakingsMonthByMonth).Methods("GET")
 
 	r.HandleFunc("/api/totals-by-date-range/{start}/{end}", apiTotalsByDateRange).Methods("GET")
 	r.HandleFunc("/api/costs-by-cat/{salon}/{start}/{end}", apiCostsByCat).Methods("GET")
