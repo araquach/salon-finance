@@ -10,7 +10,7 @@ export const store = new Vuex.Store({
         salon: 'base',
         stylist: 'beth',
         dateRange: {
-            startDate: '2021-07-01',
+            startDate: '2021-12-01',
             endDate: '2022-02-28',
         },
         totalTurnover: 895304.00,
@@ -90,7 +90,7 @@ export const store = new Vuex.Store({
 
     actions: {
         loadStylistTakingsMonthByMonth({commit}) {
-            axios.get(`/api/stylist-takings-month-by-month/${store.state.salon}/${store.state.stylist}`).then((response) => {
+            axios.get(`/api/stylist-takings-month-by-month/${store.state.dateRange.startDate}/${store.state.dateRange.endDate}/${store.state.stylist}`).then((response) => {
                 commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', response.data)
             })
         },

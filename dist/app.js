@@ -3499,7 +3499,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     salon: 'base',
     stylist: 'beth',
     dateRange: {
-      startDate: '2021-07-01',
+      startDate: '2021-12-01',
       endDate: '2022-02-28'
     },
     totalTurnover: 895304.00,
@@ -3567,7 +3567,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
   actions: {
     loadStylistTakingsMonthByMonth: function loadStylistTakingsMonthByMonth(_ref) {
       var commit = _ref.commit;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/stylist-takings-month-by-month/".concat(store.state.salon, "/").concat(store.state.stylist)).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/stylist-takings-month-by-month/".concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate, "/").concat(store.state.stylist)).then(function (response) {
         commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', response.data);
       });
     },

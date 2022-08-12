@@ -32,12 +32,13 @@ func apiStylistTakingsMonthByMonth(w http.ResponseWriter, r *http.Request) {
 	}
 
 	vars := mux.Vars(r)
-	s := vars["salon"]
+	sd := vars["start"]
+	ed := vars["end"]
 	st := vars["stylist"]
 
 	var res []result
 
-	db.Raw("SELECT DATE_TRUNC('month',date) AS  month, SUM(services) AS services, SUM(products) AS products, SUM(services) + SUM(products) AS total FROM takings WHERE salon = ? AND name ILIKE ? GROUP BY month ORDER BY month", s, st+" %").Scan(&res)
+	db.Raw("SELECT DATE_TRUNC('month',date) AS  month, SUM(services) AS services, SUM(products) AS products, SUM(services) + SUM(products) AS total FROM takings WHERE date > ? and date < ? AND name ILIKE ? GROUP BY month ORDER BY month", sd, ed, st+" %").Scan(&res)
 
 	json, err := json.Marshal(res)
 	if err != nil {
