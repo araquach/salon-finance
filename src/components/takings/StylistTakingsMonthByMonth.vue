@@ -15,18 +15,20 @@
           <b-dropdown-item @click="selectSalon('base')" aria-role="listitem">Base</b-dropdown-item>
         </b-dropdown>
 
-        <b-dropdown aria-role="list">
+        <b-dropdown v-if="salon" aria-role="list">
           <template #trigger="{ active }">
             <b-button
                 label="Select Stylist"
                 type="is-primary"
                 :icon-right="active ? 'menu-up' : 'menu-down'" />
           </template>
-          <b-dropdown-item v-for="stylist in getJakataStylists" aria-role="listitem">{{ stylist.first_name }}</b-dropdown-item>
-
+          <b-dropdown-item @click="selectStylist(stylist)" v-if="salon === 'jakata'" v-for="stylist in getJakataStylists" :key="stylist.id" aria-role="listitem">{{ stylist.first_name }}</b-dropdown-item>
+          <b-dropdown-item @click="selectStylist(stylist)" v-if="salon === 'pk'" v-for="stylist in getPKStylists" :key="stylist.id" aria-role="listitem">{{ stylist.first_name }}</b-dropdown-item>
+          <b-dropdown-item @click="selectStylist(stylist)" v-if="salon === 'base'" v-for="stylist in getBaseStylists" :key="stylist.id" aria-role="listitem">{{ stylist.first_name }}</b-dropdown-item>
         </b-dropdown>
       </div>
     </div>
+    <br>
     <LineChartGenerator v-if="loaded"
                         class="chart"
                         :chart-options="chartOptions"
@@ -104,7 +106,6 @@ export default {
   },
   data() {
     return {
-      loaded: false,
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false
@@ -115,13 +116,19 @@ export default {
   methods: {
     selectSalon(i) {
       this.$store.commit('UPDATE_SALON', i)
+    },
+
+    selectStylist(stylist) {
+      this.$store.commit('UPDATE_STYLIST', stylist)
+      this.$store.dispatch('loadStylistTakingsMonthByMonth')
     }
   },
 
   computed: {
     ...mapState({
-      salons: state => state.salons,
-      salon: state => state.salon
+      salon: state => state.salon,
+      loaded: state => state.loaded,
+      chosensStylist: state => state.stylist
     }),
 
     ...mapGetters([
@@ -134,7 +141,6 @@ export default {
 
   created() {
     this.$store.dispatch('loadStylists')
-    this.$store.dispatch('loadStylistTakingsMonthByMonth')
   }
 }
 </script>

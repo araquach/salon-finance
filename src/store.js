@@ -14,6 +14,7 @@ export const store = new Vuex.Store({
             startDate: '2021-07-01',
             endDate: '2022-02-28',
         },
+        loaded: false,
         totalTurnover: 895304.00,
         totalCosts: null,
         takingsByStylist: {},
@@ -34,7 +35,7 @@ export const store = new Vuex.Store({
                         borderColor: '#3e95cd',
                         data: [],
                         fill: false,
-                        label: (state.stylist.charAt(0).toUpperCase() + state.stylist.slice(1)),
+                        label: state.stylist.first_name,
                     }
                 ],
                 labels: []
@@ -94,6 +95,7 @@ export const store = new Vuex.Store({
 
         UPDATE_STYLIST(state, payload) {
             state.stylist = payload
+            state.loaded = true
         },
 
         UPDATE_DATE_RANGE(state, payload) {
@@ -117,9 +119,10 @@ export const store = new Vuex.Store({
         },
 
         loadStylistTakingsMonthByMonth({commit}) {
-            axios.get(`/api/stylist-takings-month-by-month/2022-01-01/2022-07-01/adam`).then((response) => {
+            axios.get(`/api/stylist-takings-month-by-month/${store.state.dateRange.startDate}/${store.state.dateRange.endDate}/${store.state.stylist.first_name}`)
+                .then((response) => {
                 commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', response.data)
-            })
+                })
         },
 
         loadTakingsByStylist({commit}) {
