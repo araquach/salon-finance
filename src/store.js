@@ -11,8 +11,8 @@ export const store = new Vuex.Store({
         stylists: [],
         stylist: {},
         dateRange: {
-            startDate: '2021-07-01',
-            endDate: '2022-02-28',
+            startDate: '2018-07-01',
+            endDate: '2022-07-28',
         },
         loaded: false,
         totalTurnover: 895304.00,
