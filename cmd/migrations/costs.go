@@ -1,8 +1,10 @@
-package main
+package migrations
 
 import (
 	"bufio"
 	"encoding/csv"
+	"github.com/araquach/salon-finance/cmd/helpers"
+	"github.com/araquach/salon-finance/cmd/models"
 	"io"
 	"log"
 	"os"
@@ -33,9 +35,9 @@ func readDir(dir string) ([]string, error) {
 }
 
 // Import costs data into a struct
-func costData() []Cost {
+func costData() []models.Cost {
 	var err error
-	var costs []Cost
+	var costs []models.Cost
 
 	f, err := readDir("bank")
 	if err != nil {
@@ -57,11 +59,11 @@ func costData() []Cost {
 				log.Fatal(err)
 			}
 
-			date, _ := time.Parse("2006-01-02", dateFormat(col[0]))
+			date, _ := time.Parse("2006-01-02", helpers.DateFormat(col[0]))
 			debit, _ := strconv.ParseFloat(col[5], 8)
 
 			if col[5] != "" && col[1] != "TFR" && col[1] != "" {
-				costs = append(costs, Cost{
+				costs = append(costs, models.Cost{
 					Date:        date,
 					Type:        col[1],
 					Account:     col[3],
@@ -77,9 +79,9 @@ func costData() []Cost {
 }
 
 // import Paypal data into a struct
-func payPalData() []Cost {
+func payPalData() []models.Cost {
 	var err error
-	var paypal []Cost
+	var paypal []models.Cost
 
 	f, err := readDir("paypal")
 	if err != nil {
@@ -98,12 +100,12 @@ func payPalData() []Cost {
 				log.Fatal(err)
 			}
 
-			date, _ := time.Parse("2006-01-02", dateFormat(col[0]))
+			date, _ := time.Parse("2006-01-02", helpers.DateFormat(col[0]))
 			d := strings.Replace(col[5], ",", "", -1)
 			debit, _ := strconv.ParseFloat(d[1:], 8)
 
 			if col[11] != "" {
-				paypal = append(paypal, Cost{
+				paypal = append(paypal, models.Cost{
 					Date:        date,
 					Type:        "PAYPAL",
 					Account:     "06517160",
@@ -118,9 +120,9 @@ func payPalData() []Cost {
 	return paypal
 }
 
-func amazonData() []Cost {
+func amazonData() []models.Cost {
 	var err error
-	var amazon []Cost
+	var amazon []models.Cost
 
 	f, err := readDir("amazon")
 	if err != nil {
@@ -139,11 +141,11 @@ func amazonData() []Cost {
 				log.Fatal(err)
 			}
 
-			date, _ := time.Parse("2006-01-02", dateFormat(col[0]))
+			date, _ := time.Parse("2006-01-02", helpers.DateFormat(col[0]))
 			debit, _ := strconv.ParseFloat(col[24], 8)
 
 			if col[37] != "" {
-				amazon = append(amazon, Cost{
+				amazon = append(amazon, models.Cost{
 					Date:        date,
 					Type:        "AMAZON",
 					Account:     "06517160",
@@ -158,7 +160,7 @@ func amazonData() []Cost {
 	return amazon
 }
 
-func addCostCategories() []Cost {
+func addCostCategories() []models.Cost {
 	costs := costData()
 	cats := categories()
 
@@ -177,7 +179,7 @@ func addCostCategories() []Cost {
 	return costs
 }
 
-func addPayPalCategories() []Cost {
+func addPayPalCategories() []models.Cost {
 	pp := payPalData()
 	cats := paypalCats()
 
@@ -196,7 +198,7 @@ func addPayPalCategories() []Cost {
 	return pp
 }
 
-func addAmazonCategories() []Cost {
+func addAmazonCategories() []models.Cost {
 	amzn := amazonData()
 	cats := amazonCats()
 

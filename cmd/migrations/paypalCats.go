@@ -1,4 +1,4 @@
-package main
+package migrations
 
 func paypalCats() (c map[string]map[string][]string) {
 	c = map[string]map[string][]string{

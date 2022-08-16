@@ -26,6 +26,19 @@
           <b-dropdown-item @click="selectStylist(stylist)" v-if="salon === 'pk'" v-for="stylist in getPKStylists" :key="stylist.id" aria-role="listitem">{{ stylist.first_name }}</b-dropdown-item>
           <b-dropdown-item @click="selectStylist(stylist)" v-if="salon === 'base'" v-for="stylist in getBaseStylists" :key="stylist.id" aria-role="listitem">{{ stylist.first_name }}</b-dropdown-item>
         </b-dropdown>
+
+        <b-dropdown v-if="stylistSelected" aria-role="list">
+          <template #trigger="{ active }">
+            <b-button
+                label="Select Dates"
+                type="is-primary"
+                :icon-right="active ? 'menu-up' : 'menu-down'" />
+          </template>
+          <b-dropdown-item @click="selectDate('quarter')" aria-role="listitem">Last Quarter</b-dropdown-item>
+          <b-dropdown-item @click="selectDate('year')" aria-role="listitem">Year</b-dropdown-item>
+          <b-dropdown-item @click="selectDate('all')" aria-role="listitem">All Time</b-dropdown-item>
+          <b-dropdown-item @click="showDatePicker" aria-role="listitem">Date Range</b-dropdown-item>
+        </b-dropdown>
       </div>
     </div>
     <br>
@@ -109,7 +122,8 @@ export default {
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false
-      }
+      },
+      stylistSelected: false
     }
   },
 
@@ -121,21 +135,31 @@ export default {
     selectStylist(stylist) {
       this.$store.commit('UPDATE_STYLIST', stylist)
       this.$store.dispatch('loadStylistTakingsMonthByMonth')
+      this.stylistSelected = true
+    },
+
+    selectDate(d) {
+      this.$store.commit('UPDATE_DATE_RANGE_TYPE', d)
+      this.$store.dispatch('loadStylistTakingsMonthByMonth')
+    },
+
+    showDatePicker() {
+
     }
   },
 
   computed: {
     ...mapState({
       salon: state => state.salon,
-      loaded: state => state.loaded,
-      chosensStylist: state => state.stylist
+      loaded: state => state.loaded
     }),
 
     ...mapGetters([
         'getStylistTakingsMonthByMonth',
         'getJakataStylists',
         'getPKStylists',
-        'getBaseStylists'
+        'getBaseStylists',
+        'getChosenStylist'
     ])
   },
 

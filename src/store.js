@@ -7,12 +7,11 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        salon : null,
+        salon: null,
         stylists: [],
         stylist: {},
         dateRange: {
-            startDate: '2018-07-01',
-            endDate: '2022-07-28',
+            startDate: '2018-07-01', endDate: '2022-07-28',
         },
         loaded: false,
         totalTurnover: 895304.00,
@@ -30,15 +29,9 @@ export const store = new Vuex.Store({
             let stmbm = state.stylistTakingsMonthByMonth
 
             let res = {
-                datasets: [
-                    {
-                        borderColor: '#3e95cd',
-                        data: [],
-                        fill: false,
-                        label: state.stylist.first_name,
-                    }
-                ],
-                labels: []
+                datasets: [{
+                    borderColor: '#3e95cd', data: [], fill: false, label: state.stylist.first_name,
+                }], labels: []
             }
 
             Array.from(stmbm).forEach(el => res.labels.push(format(parseISO(el.month), 'LLL yy')))
@@ -57,6 +50,14 @@ export const store = new Vuex.Store({
 
         getBaseStylists(state) {
             return state.stylists.filter(s => s.salon === 3)
+        },
+
+        getChosenStylist(state) {
+            return state.stylist
+        },
+
+        stylistLink(state) {
+            return state.stylist.first_name + ' ' + state.stylist.last_name
         }
     },
 
@@ -102,6 +103,24 @@ export const store = new Vuex.Store({
             state.dateRange = payload
         },
 
+        UPDATE_DATE_RANGE_TYPE(state, payload) {
+            if (payload === 'quarter') {
+                this.state.dateRange = {
+                    startDate: '2022-05-01', endDate: '2022-07-31'
+                }
+            }
+            if (payload === 'year') {
+                this.state.dateRange = {
+                    startDate: '2021-07-31', endDate: '2022-07-31'
+                }
+            }
+            if (payload === 'all') {
+                this.state.dateRange = {
+                    startDate: '2016-07-01', endDate: '2022-07-31'
+                }
+            }
+        },
+
         SET_TOTAL_TURNOVER(state, payload) {
             state.totalTurnover = payload
         },
@@ -119,9 +138,9 @@ export const store = new Vuex.Store({
         },
 
         loadStylistTakingsMonthByMonth({commit}) {
-            axios.get(`/api/stylist-takings-month-by-month/${store.state.dateRange.startDate}/${store.state.dateRange.endDate}/${store.state.stylist.first_name}`)
+            axios.get(`/api/stylist-takings-month-by-month/${store.state.dateRange.startDate}/${store.state.dateRange.endDate}/${store.getters.stylistLink}`)
                 .then((response) => {
-                commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', response.data)
+                    commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', response.data)
                 })
         },
 

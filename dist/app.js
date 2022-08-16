@@ -2312,7 +2312,8 @@ chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false
-      }
+      },
+      stylistSelected: false
     };
   },
   methods: {
@@ -2322,7 +2323,13 @@ chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_
     selectStylist: function selectStylist(stylist) {
       this.$store.commit('UPDATE_STYLIST', stylist);
       this.$store.dispatch('loadStylistTakingsMonthByMonth');
-    }
+      this.stylistSelected = true;
+    },
+    selectDate: function selectDate(d) {
+      this.$store.commit('UPDATE_DATE_RANGE_TYPE', d);
+      this.$store.dispatch('loadStylistTakingsMonthByMonth');
+    },
+    showDatePicker: function showDatePicker() {}
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
     salon: function salon(state) {
@@ -2330,11 +2337,8 @@ chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_
     },
     loaded: function loaded(state) {
       return state.loaded;
-    },
-    chosensStylist: function chosensStylist(state) {
-      return state.stylist;
     }
-  })), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['getStylistTakingsMonthByMonth', 'getJakataStylists', 'getPKStylists', 'getBaseStylists'])),
+  })), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['getStylistTakingsMonthByMonth', 'getJakataStylists', 'getPKStylists', 'getBaseStylists', 'getChosenStylist'])),
   created: function created() {
     this.$store.dispatch('loadStylists');
   }
@@ -3073,7 +3077,58 @@ var render = function render() {
         }
       }
     }, [_vm._v(_vm._s(stylist.first_name))]) : _vm._e();
-  })], 2) : _vm._e()], 1)]), _vm._v(" "), _c("br"), _vm._v(" "), _vm.loaded ? _c("LineChartGenerator", {
+  })], 2) : _vm._e(), _vm._v(" "), _vm.stylistSelected ? _c("b-dropdown", {
+    attrs: {
+      "aria-role": "list"
+    },
+    scopedSlots: _vm._u([{
+      key: "trigger",
+      fn: function fn(_ref3) {
+        var active = _ref3.active;
+        return [_c("b-button", {
+          attrs: {
+            label: "Select Dates",
+            type: "is-primary",
+            "icon-right": active ? "menu-up" : "menu-down"
+          }
+        })];
+      }
+    }], null, false, 2308148145)
+  }, [_vm._v(" "), _c("b-dropdown-item", {
+    attrs: {
+      "aria-role": "listitem"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.selectDate("quarter");
+      }
+    }
+  }, [_vm._v("Last Quarter")]), _vm._v(" "), _c("b-dropdown-item", {
+    attrs: {
+      "aria-role": "listitem"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.selectDate("year");
+      }
+    }
+  }, [_vm._v("Year")]), _vm._v(" "), _c("b-dropdown-item", {
+    attrs: {
+      "aria-role": "listitem"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.selectDate("all");
+      }
+    }
+  }, [_vm._v("All Time")]), _vm._v(" "), _c("b-dropdown-item", {
+    attrs: {
+      "aria-role": "listitem"
+    },
+    on: {
+      click: _vm.showDatePicker
+    }
+  }, [_vm._v("Date Range")])], 1) : _vm._e()], 1)]), _vm._v(" "), _c("br"), _vm._v(" "), _vm.loaded ? _c("LineChartGenerator", {
     staticClass: "chart",
     attrs: {
       "chart-options": _vm.chartOptions,
@@ -3662,6 +3717,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
       return state.stylists.filter(function (s) {
         return s.salon === 3;
       });
+    },
+    getChosenStylist: function getChosenStylist(state) {
+      return state.stylist;
+    },
+    stylistLink: function stylistLink(state) {
+      return state.stylist.first_name + ' ' + state.stylist.last_name;
     }
   },
   mutations: {
@@ -3696,6 +3757,28 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     UPDATE_DATE_RANGE: function UPDATE_DATE_RANGE(state, payload) {
       state.dateRange = payload;
     },
+    UPDATE_DATE_RANGE_TYPE: function UPDATE_DATE_RANGE_TYPE(state, payload) {
+      if (payload === 'quarter') {
+        this.state.dateRange = {
+          startDate: '2022-05-01',
+          endDate: '2022-07-31'
+        };
+      }
+
+      if (payload === 'year') {
+        this.state.dateRange = {
+          startDate: '2021-07-31',
+          endDate: '2022-07-31'
+        };
+      }
+
+      if (payload === 'all') {
+        this.state.dateRange = {
+          startDate: '2016-07-01',
+          endDate: '2022-07-31'
+        };
+      }
+    },
     SET_TOTAL_TURNOVER: function SET_TOTAL_TURNOVER(state, payload) {
       state.totalTurnover = payload;
     },
@@ -3712,7 +3795,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
     },
     loadStylistTakingsMonthByMonth: function loadStylistTakingsMonthByMonth(_ref2) {
       var commit = _ref2.commit;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/stylist-takings-month-by-month/".concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate, "/").concat(store.state.stylist.first_name)).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/stylist-takings-month-by-month/".concat(store.state.dateRange.startDate, "/").concat(store.state.dateRange.endDate, "/").concat(store.getters.stylistLink)).then(function (response) {
         commit('LOAD_STYLIST_TAKINGS_MONTH_BY_MONTH', response.data);
       });
     },

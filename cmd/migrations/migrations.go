@@ -1,11 +1,11 @@
-package main
+package migrations
 
 import (
 	"encoding/csv"
 	"fmt"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
+	"github.com/araquach/salon-finance/cmd/db"
+	"github.com/araquach/salon-finance/cmd/helpers"
+	"github.com/araquach/salon-finance/cmd/models"
 	"io"
 	"io/ioutil"
 	"log"
@@ -16,24 +16,11 @@ import (
 	"time"
 )
 
-var db *gorm.DB
+func LoadCosts() {
+	var data []models.Cost
 
-func dbInit(dsn string) {
-	var err error
-
-	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info),
-	})
-	if err != nil {
-		log.Panic(err)
-	}
-}
-
-func loadCosts() {
-	var data []Cost
-
-	db.Migrator().DropTable(&Cost{})
-	db.AutoMigrate(&Cost{})
+	db.DB.Migrator().DropTable(&models.Cost{})
+	db.DB.AutoMigrate(&models.Cost{})
 
 	costs := addCostCategories()
 	pp := addPayPalCategories()
@@ -42,31 +29,31 @@ func loadCosts() {
 	for _, v := range costs {
 		sd := time.Date(2019, 01, 07, 0, 0, 0, 0, time.UTC)
 		if v.Category == "paypal" && sd.After(v.Date) {
-			data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
+			data = append(data, models.Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
 		}
 		if v.Category != "paypal" && v.Category != "amazon" {
-			data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
+			data = append(data, models.Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
 		}
 	}
 
 	for _, v := range pp {
-		data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
+		data = append(data, models.Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
 	}
 
 	for _, v := range amzn {
-		data = append(data, Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
+		data = append(data, models.Cost{Date: v.Date, Type: v.Type, Account: v.Account, Description: v.Description, Debit: v.Debit, Category: v.Category, SubCat: v.SubCat})
 	}
 
-	db.Create(&data)
+	db.DB.Create(&data)
 }
 
-func loadTakings() {
+func LoadTakings() {
 	var err error
 	var files []string
-	var takings []Taking
+	var takings []models.Taking
 
-	db.Migrator().DropTable(&Taking{})
-	err = db.AutoMigrate(&Taking{})
+	db.DB.Migrator().DropTable(&models.Taking{})
+	err = db.DB.AutoMigrate(&models.Taking{})
 	if err != nil {
 		panic(err)
 	}
@@ -151,9 +138,11 @@ func loadTakings() {
 				if len(record[0]) > 0 && !strings.Contains(record[0], "Page") && !strings.Contains(record[0], "Total") {
 					s, _ := strconv.ParseFloat(record[2], 8)
 					p, _ := strconv.ParseFloat(record[6], 8)
-					date, _ := time.Parse("2006-01-02", dateFormatYear(record[0]))
+					date, _ := time.Parse("2006-01-02", helpers.DateFormatYear(record[0]))
 
-					takings = append(takings, Taking{
+					stylist := helpers.ChangeName(stylist)
+
+					takings = append(takings, models.Taking{
 						Date:     date,
 						Name:     stylist,
 						Salon:    f[0],
@@ -165,7 +154,7 @@ func loadTakings() {
 		}
 	}
 	for _, t := range takings {
-		db.Create(&t)
+		db.DB.Create(&t)
 		if err != nil {
 			log.Println(err)
 		}
