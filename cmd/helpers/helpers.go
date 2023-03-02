@@ -46,13 +46,13 @@ func LongName(n string) (l string) {
 
 func ChangeName(stylist string) (n string) {
 
-	if stylist == "Michelle Railton" {
-		n = "Michelle Stevenson"
+	if stylist == "Michelle Stephenson" {
+		n = "Michelle Railton"
 	} else if stylist == "Jo Mahoney" {
 		n = "Jo Birchall"
 	} else if stylist == "Laura Crumplin" {
 		n = "Laura Hall"
-	} else if n == "Bradley Ryan" {
+	} else if stylist == "Bradley Ryan" {
 		n = "Brad Ryan"
 	} else {
 		n = stylist

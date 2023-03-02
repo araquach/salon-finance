@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/araquach/salon-finance/cmd/db"
 	"github.com/araquach/salon-finance/cmd/handlers"
+	"github.com/araquach/salon-finance/cmd/migrations"
 	"github.com/araquach/salon-finance/cmd/routes"
 	"github.com/joho/godotenv"
 	"html/template"
@@ -26,8 +27,8 @@ func main() {
 	dsn := os.Getenv("DATABASE_URL")
 	db.DBInit(dsn)
 
-	//migrations.LoadTakings()
-	//migrations.LoadCosts()
+	migrations.LoadTakings()
+	// migrations.LoadCosts()
 
 	port := os.Getenv("PORT")
 	if port == "" {
